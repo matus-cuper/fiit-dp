@@ -5,7 +5,7 @@
 %   PACKAGES AND DOCUMENT CONFIGURATION
 %-------------------------------------------------------------------------------
 
-\documentclass[a4paper,slovak,12pt]{article}
+\documentclass[a4paper,twoside,slovak,12pt]{article}
 
 \usepackage[slovak]{babel}                                                      % title in Slovak
 \usepackage[IL2]{fontenc}                                                       % support for word wrapping of special Slovak characters at the end of line on the end
@@ -52,18 +52,18 @@
 	{\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-5212-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-0000-73688 \par}
 	\vspace{7cm}
-  {\large Matúš Cuper \par}
+  {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Optimalizácia konfiguračných parametrov predikčných metód \par}
+	{\LARGE Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
 	\vspace{0.5cm}
-	{\large Bakalárska práca \par}
+	{\large Diplomová práca \par}
 	\vspace{7cm}
   \flushleft
 	{\large Vedúci práce: Ing. Marek Lóderer \par}
   \vspace{0.5cm}
-  {\large máj 2017 \par}
+  {\large máj 2019 \par}
 	\vfill
 \end{titlepage}
 
@@ -72,21 +72,21 @@
   {\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-5212-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-0000-73688 \par}
 	\vspace{7cm}
-  {\large Matúš Cuper \par}
+  {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Optimalizácia konfiguračných parametrov predikčných metód \par}
+	{\LARGE Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
 	\vspace{0.5cm}
-	{\large Bakalárska práca \\}
+	{\large Diplomová práca \\}
 	\vspace{7cm}
   \flushleft
-  {\normalsize Študijný program: Informatika \par}
-	{\normalsize Študijný odbor: 9.2.1 Informatika \par}
+  {\normalsize Študijný program: Inteligentné softvérové systémy \par}
+	{\normalsize Študijný odbor: 9.2.5 Softvérové inžinierstvo \par}
 	{\normalsize Miesto vypracovania: Ústav informatiky a softvérového inžinierstva, FIIT STU v Bratislave \par}
 	{\normalsize Vedúci práce: Ing. Marek Lóderer \par}
   \vspace{0.5cm}
-  {\normalsize máj 2017 \par}
+  {\normalsize máj 2019 \par}
 \end{titlepage}
 
 %-------------------------------------------------------------------------------
@@ -108,28 +108,13 @@
 \end{center}
 {Slovenská technická univerzita v Bratislave \par}
 {FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ \par}
-{Študijný program: Informatika \par}
-{Autor: Matúš Cuper \par}
-{Bakalárska práca: Optimalizácia konfiguračných parametrov predikčných metód \par}
+{Študijný program: Inteligentné softvérové systémy \par}
+{Autor: Bc. Matúš Cuper \par}
+{Bakalárska práca: Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
 {Vedúci práce: Ing. Marek Lóderer \par}
-{máj 2017 \\} \\
-V práci sme sa zamerali na problémy vznikajúce pri predikcii časových radov.
-V súčasnosti existuje veľké množstvo metód, ktoré nám zabezpečujú predpoveď
-sledovanej veličiny s prijateľne malou odchýlkou na krátke obdobie v blízkej
-budúcnosti. Cieľom bakalárskej práce bolo vytvoriť systém, ktorý používateľovi
-poskytne jednoduché rozhranie pre porovnanie jednotlivých predikčných
-algoritmov nad množinou dát, ktorú si sám zvolí. Hľadanie ich optimálneho
-nastavenia sa vykonáva pomocou optimalizačných algoritmov založených na
-správaní sa živočíchov v prírode.
-
-V práci sme analyzovali a opísali množinu predikčných a optimalizačných
-algoritmov. Navrhli sme systém na hľadanie optimálnych parametrov predikčných
-metód, čím sme výrazne ovplyvnili ich presnosť. Systém bol implementovaný
-v programovacom jazyku R a na vytvorenie používateľského rozhrania bola použitá
-knižnica Shiny. Optimalizácie sme vykonávali nad dátovými množinami v doméne
-energetiky. Výsledný systém umožňuje používateľovi využívať silu predikčných
-algoritmov a nájsť ich optimálne parametre pre zabezpečenie čo najpresnejšej
-predikcie.
+{máj 2019 \\} \\
+V práci sme sa zamerali
+% TODO write anotation
 \end{titlepage}
 
 \begin{titlepage}
@@ -145,26 +130,13 @@ predikcie.
 \end{center}
 {Slovak University of Technology Bratislava \par}
 {FACULTY OF INFORMATICS AND INFORMATION TECHNOLOGIES \par}
-{Degree Course: Computer Science \par}
-{Author: Matúš Cuper \par}
-{Bachelor thesis: Optimizing configuration parameters of prediction methods \par}
+{Degree Course: Intelligent software systems \par}
+{Author: Bc. Matúš Cuper \par}
+{Bachelor thesis: Identification of abnormal behavior of customers in the power grid \par}
 {Supervisor: Ing. Marek Lóderer \par}
-{May 2017 \\} \\
-In the thesis we focused on problems, which appear in time series prediction.
-In present there are many methods, which predict observed value with acceptable
-small deviation for short time period in near future. The aim of this bachelor
-thesis was creating system, which provides simple user interface to compare
-chosen prediction algorithms on dataset, which is chosen by user. Looking for
-their optimal setup is made by optimization algorithm based on nature-inspired
-behavior.
-
-In the thesis we analyzed and described set of prediction and optimization
-algorithms. We designed system for searching optimal parameters of prediction
-methods, which influence their accuracy significantly. System was implemented
-in programming language R and the user interface was created by Shiny library.
-Optimization was provided on datasets in energetics domain. The final
-system provides to user to use force of prediction algorithms and find out
-their optimal parameters for the most accurate prediction.
+{May 2019 \\} \\
+In the thesis we focused
+% TODO write anotation
 \end{titlepage}
 
 %-------------------------------------------------------------------------------
@@ -178,8 +150,8 @@ their optimal parameters for the most accurate prediction.
 \end{large}
 \vspace*{0.5cm}
 \noindent
-Čestne prehlasujem, že bakalársku prácu som vypracoval samostatne pod vedením
-vedúceho bakalárskej práce a s použitím odbornej literatúry, ktorá je uvedená
+Čestne prehlasujem, že diplomovú prácu som vypracoval samostatne pod vedením
+vedúceho diplomovej práce a s použitím odbornej literatúry, ktorá je uvedená
 v zozname použitej literatúry. \\
 \vspace*{0.5cm}\\
 \hspace*{10cm}............................\\
@@ -193,8 +165,8 @@ v zozname použitej literatúry. \\
 \end{large}
 \vspace*{0.5cm}
 \noindent
-Ďakujem vedúcemu bakalárskej práce Ing. Marekovi Lódererovi za odborné vedenie,
-cenné rady a pripomienky pri spracovaní bakalárskej práce.
+Ďakujem vedúcemu diplomovej práce Ing. Marekovi Lódererovi za odborné vedenie,
+cenné rady a pripomienky pri spracovaní diplomovej práce.
 \end{titlepage}
 
 %-------------------------------------------------------------------------------
@@ -455,7 +427,6 @@ potrebami na použitý model.
 
 \end{document}
 
-% TODO rozpracuj dalej
 % \subsubsection{Nájdenie anomálií}
 % \paragraph{Klasifikácia}
 % \paragraph{Identifikácia najbližším susedom}
