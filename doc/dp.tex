@@ -31,7 +31,7 @@
     postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}}
 }
 
-\graphicspath{ {images/} }                                                      % set path for figures
+\graphicspath{ {img/} }		                                                      % set path for figures
 
 \hypersetup{																																		% with default colours for links
     colorlinks,
@@ -341,7 +341,24 @@ a~identifikácia anomálií prebieha v testovacej vzorke dát~\cite{Chandola2009
 %   Time series classification
 %-------------------------------------------------------------------------------
 
-\subsection{Klasifikácia časových radov}
+\subsection{Zhlukovanie časových radov}
+Cieľom zhlukovania je rozdeliť dátové inštacie do \textit{k}~zhlukov na základe
+spoločných čŕt. V~prípade, že inštancie sú reprezentované nízkodimenzionálnym
+vektorom v~Euklidovskom priestore, môžu byť na zhlukovanie použité klasické
+techniky ako napr. \textit{k-means}. Ak sú inštancie reprezentujú časový rad,
+nasadenie takýchto prístupov je zriedkavé~\cite{Hautamaki2008}.
+
+Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
+3 skupín, založených na atribútoch, na modeloch a na tvare krivky. Pri
+atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
+základe, ktorého je vypočítaná Euklidovská vzdialenosť medzi jednotlivými
+inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
+časové rady. Vzdialenosťou je potom definovaná ako vzdialenosť medzi
+jednotlivými modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť
+výsledný tvar časového radu nelineárnym rozťahovaním a kontrakciou časových
+osí~\cite{Hautamaki2008}.
+
+% TODO add k-means, random swap and agglomerative clustering from Hautamaki
 
 \subsubsection{Semi-supervised learning}
 Časové rady sú charakteristické svojou vysokou dimenzionalitou, spojitou povahou
@@ -455,13 +472,13 @@ prípadne iba pri zvýšenej spotrebe. Identifikácia takýchto nelegálnych odb
 je náročná a~prípadná kontrola nemusí odhaliť manipuláciu s~meracím zariadením.
 
 Vďaka inteligentným meračom je možné detegovať nelegálne odbery omnoho
-rýchlejšie, najmä kvôli vysokej frekvencii zberania údajov. Tak sú
+rýchlejšie, najmä kvôli vysokej frekvencii zberania údajov. Takto sú
 identifikované aj také odbery, ktoré by sa pri klasických meraniach stratili
 v~týždenných alebo mesačných agregáciách. Úspešnosť detekcie nelegálnych odberov
 je výrazne vyššia najmä pri neštandardných spotrebách alebo ak sa jedná
 o~neopakujúcu sa udalosť. Problém vzniká ak odberateľ systematicky mení
-nelegálnu spotrebu a kopíruje vzory, ktoré vznikajú v~dátach pri legálnom
-odbere. Vtedy je potrebné mať k dispozícií väčšie množstvo dát a zároveň použiť
+nelegálnu spotrebu a~kopíruje vzory, ktoré vznikajú v~dátach pri legálnom
+odbere. Vtedy je potrebné mať k~dispozícií väčšie množstvo dát a~zároveň použiť
 zložitejšie algoritmy detekcie anomálií, ktoré sú popísané v~súvisiacej
 práci~\cite{Nikovski2013}.
 
@@ -469,11 +486,38 @@ V~súvisiacich prácach sa autori zaoberali určením netechnických strát
 v~elektrických distribučných sieťach s~použitím rôznych štatistických metód
 alebo strojového učenia. Dostupné dáta od distribútorov pochádzali najmä
 z~jedného zdroja, lokality a~zameriavali sa na jeden zdroj energie. Dáta, ktoré
-budeme mať k dispozícií disponujú podobnými vlastnosťami. V súvisiacej
+budeme mať k~dispozícií disponujú podobnými vlastnosťami. V súvisiacej
 práci~\cite{Coma-Puig2016} boli použité viaceré zdroje dát a~energie, následkom
 čoho bola zvýšená presnosť identifikácie anomálneho správania odberateľa.
 Ďalším zdrojom dát môžu byť agregované hodnoty meraní z~klasických meračov,
 prípadne spätná väzba zo samotných kontrol odberateľov.
+
+Typickou črtou netechnických strát je negatívny skok v spotrebe elektrickej
+energie. Nasleduje po poškodení inteligentného meracieho zariadenia alebo pri
+začatí nelegálneho odberu. Následkom je nižšia nameraná spotrebe energie
+v dlhšom horizonte. Zníženie spotreby môže byť čiastočné alebo úplne, ako môžeme
+vidieť na obrázkoch~\ref{fig:decrease-partial}
+a~\ref{fig:decrease-total}~\cite{Trevizan2015}.
+
+\begin{figure}[H]
+
+	\begin{minipage}{0.45\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.33]{decrease-partial.png}
+			\caption{Čiastočné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
+			\label{fig:decrease-partial}
+		\end{center}
+	\end{minipage}
+  \centering
+  \begin{minipage}{0.45\textwidth}
+    \begin{center}
+      \includegraphics[scale=0.33]{decrease-total.png}
+			\caption{Úplné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
+			\label{fig:decrease-total}
+    \end{center}
+  \end{minipage}\hfill
+
+\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Evaluation metrics
