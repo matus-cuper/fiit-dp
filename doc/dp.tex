@@ -255,6 +255,64 @@ náhodné lesy (angl. random forests), neurónové siete so spätnou propagácio
 (angl. neural networks with backpropagation) alebo metóda podporných vektorov
 (angl. support vector machine)~\cite{Coma-Puig2016}.
 
+\subsubsection{Semi-supervised learning}
+
+Časové rady sú charakteristické svojou vysokou dimenzionalitou, spojitou povahou
+a číselnou reprezentáciou. Prístupy používané na ich klasifikáciu preto možno
+rozdeliť do dvoch kategórií, podľa toho či sú založené na atribútoch (angl.
+feature-based) alebo samotných inštanciách (angl. instance-based). Zatiaľ čo
+prvý prístup pôvodné dáta transformuje do nového priestoru, kde môžu byť použité
+konvenčné klasifikátory, druhý sa zameriava na vytváranie klasifikátorov
+špeciálne navrhnutých pre časové rady. Tento prístup je založený na vhodnej
+reprezentácií časového radu a identifikácií podobnosti medzi
+nimi~\cite{Gonzalez2017}.
+
+% TODO how to translate semi-supervised classification
+Existuje niekoľko techník, používaných pri semi-supervised klasifikátoroch.
+Medzi naznámejšie prístupy patria cluster-then-label, prístupy založené na
+podobnosti nazývané aj geometrické párovanie šablón (angl. geometric template
+matching), rozšírenie klasických prístupov ako je súbor podporných vektorov
+alebo prístupy založené na grafoch. Ďalším prístupom sú samooznačovacie techniky
+(angl. self-labeled techniques), ktorých snahou je zväčšiť pôvodnú množinu
+označených dát o~neoznačené dáta, ktorým bola priradená najvyššia miera
+pravdepodobnosti výskytu v danej triede. Tie sa ďalej delia a~medzi
+najpopulárnejšie patria samotrénovacie (angl. self-training) techniky~a
+spolutrénovacie (angl. co-training) techniky~\cite{Gonzalez2017}.
+% TODO add maybe some other references
+
+Samotrénovacie techniky iteratívne klasifikujú neoznačené dáta za predpokladu,
+že vyššia prenosť predikcie má tendenciu byť správna. V~prípade, že k~dispozícii
+dostupné iba dáta z~jednej triedy, hovoríme o~pozitívnom neoznačenom učení.
+Algoritmus k-najbližších susedov je typicky používaný na klasifikáciu takýchto
+úloh. Naopak, spolutrénovacie semi-supervised klasifikátory potrebujú dva
+podmienene nezávislé pohľady, ktoré sú použité pri učení klasifikátora. Opäť sú
+neoznačené inštancie s~najvyššou mierou pravdepodobnosti označené a~použité pri
+trénovaní ďalšieho pohľadu. Keďže väčšina prípadov meraní spolú úzko koreluje,
+je náročné nájsť nezávislé pohľady na dáta~\cite{Gonzalez2017}.
+
+Samotrénovacie prístupy sa lýšia najmä v nasledujúcom:
+
+Najčastejšími \textbf{Mechanizmami pridávania} je inkrementovanie a~zmena.
+Zatiaľ čo prvý, krok po kroku označuje najpravdepodobnejšie inštancie, druhý
+usmerňuje už označené inštancie a~odznačuje tie, ktoré by mohli mohli v~tejto
+množine predstavovať šum~\cite{Gonzalez2017}.
+
+Samooznačovacie techniky môžu byť založené rôznych
+\textbf{klasifikačných modeloch}, ktoré pozostávajú z~jedného alebo viacerých
+klasifikátoroch. Tie určujú triedu neoznačených inštancií. Zatiaľ čo modely
+s~jedným klasifikátorom určia pre každú inštanciu triedu, do ktorej spadá,
+multi-klasifikátorové modely kombinujú hypotézy viacerých klasifikátorov
+a~triedu určujú kombináciou ich výsledkov. S~tým súvisí aj
+\textbf{prístup k učeniu}, ktorý môže byť single learning approach alebo
+multi learning approach, ktorý je aplikovateľný iba pri multi-klasifikátorových
+modeloch, kde každý klasifikátor vychádza z~iného pristúpu~\cite{Gonzalez2017}.
+% TODO explain single and multi learning approach it
+
+\textbf{Ukončovacie kritérium} predstavuje mechanizmus, ktorý zabraňuje
+samooznačovaciemu procesu v~označovaní inštancií, ktorým bola pridelená nízka
+miera pravdepodobnosti. Často je ukončovacím kritériom iba počet iterácií.
+Ďalším kritériom môže byť výskyt nemeniacich sa hypotéz počas trénovacieho
+procesu~\cite{Gonzalez2017}.
 
 Pri identifikácii anomálií je najskôr potrebné zamyslieť sa nad nasledovnými
 problémami:
