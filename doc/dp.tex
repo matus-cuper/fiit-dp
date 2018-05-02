@@ -110,7 +110,7 @@
 {FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ \par}
 {Študijný program: Inteligentné softvérové systémy \par}
 {Autor: Bc. Matúš Cuper \par}
-{Bakalárska práca: Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
+{Bakalárska práca: Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
 {Vedúci práce: Ing. Marek Lóderer \par}
 {máj 2019 \\} \\
 V práci sme sa zamerali
@@ -249,14 +249,14 @@ získaných dát.
 %   Time series analysis
 %-------------------------------------------------------------------------------
 
-\subsubsection{Analýza časových radov}
+% \subsubsection{Analýza časových radov}
 % TODO add analysis from BP
 
 %-------------------------------------------------------------------------------
 %   Time series components
 %-------------------------------------------------------------------------------
 
-\subsubsection{Zložky časových radov}
+% \subsubsection{Zložky časových radov}
 % TODO add analysis from BP
 
 %-------------------------------------------------------------------------------
@@ -315,11 +315,12 @@ problémami~\cite{Chandola2009}:
 \end{itemize}
 
 Na detekciu anomálií sú používané aj algoritmy určené na klasifikáciu, ako je
-napríklad naivný Bayesovský klasifikátor (angl. Naive Bayes), k-najbližší
-susedia (angl. k-nearest neighbors), rozhodovacie stromy (angl. decision tree),
-náhodné lesy (angl. random forests), neurónové siete so spätnou propagáciou
-(angl. neural networks with backpropagation) alebo metóda podporných vektorov
-(angl. support vector machine)~\cite{Coma-Puig2016}.
+napríklad naivný Bayesovský klasifikátor (angl. \textit{Naive Bayes}),
+k-najbližší susedia (angl. \textit{k-nearest neighbors}), rozhodovacie stromy
+(angl. \textit{decision tree}), náhodné lesy (angl. \textit{random forests}),
+neurónové siete so spätnou propagáciou (angl. \textit{neural networks with
+backpropagation}) alebo metóda podporných vektorov (angl. \textit{support vector
+machine})~\cite{Coma-Puig2016}.
 
 %-------------------------------------------------------------------------------
 %   Types of anomalies
@@ -387,9 +388,9 @@ inštanciami a~tými neštandardnými. Často je označovanie inštancií vykon�
 manuálne ľudskými expertmi drahé a~neefektívne. Taktiež proces spätnej väzby
 môže byť zdĺhavý a~nepraktický. Z~toho dôvodu je dôležité zvoliť správny
 prístup pri identifikácií anomálií. V~súčasnosti existujú 3~prístupy, a~to
-detekcia anomálií s~učiteľom (angl. supervised learning), bez učiteľa (angl.
-unsupervised learning) a~ich kombinácia (angl. semi-supervised
-learning)~\cite{Chandola2009}.
+detekcia anomálií s~učiteľom (angl. \textit{supervised learning}), bez učiteľa
+(angl. \textit{unsupervised learning}) a~ich kombinácia (angl.
+\textit{semi-supervised learning})~\cite{Chandola2009}.
 
 \paragraph{Detekcia bez učiteľa} nepotrebuje označené trénovacie dáta, vďaka
 čomu je široko aplikovateľná a~často používaná. Vychádza z~predpokladu, že
@@ -464,7 +465,7 @@ učenia~\cite{Chandola2009}.
 Posledná kategória pracuje s~predpokladom, že normálne inštancie sú súčasťou
 veľkých a~hustých zhlukov, na druhej strane anomálie patria do malých a~riedkych
 zhlukov. Používanými algoritmami sú napr. CBLOF
-(\textit{angl. Cluster-Based Local Outlier Factor}) alebo \textit{k-d} stromy.
+(angl. \textit{Cluster-Based Local Outlier Factor}) alebo \textit{k-d} stromy.
 V~princípe algoritmy najskôr vytvárajú zhluky a~až potom určujú, na základe ich
 hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený iba
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
@@ -587,11 +588,11 @@ vzdialené~\cite{Dzeroski2007}.
 
 % TODO add some figure
 \paragraph{Dynamické deformovanie času}
-Ide o~metódu (angl. Dynamic Time Warping), ktorá dokáže zachytiť nelineárne
-skreslenie medzi časovými radmi vďaka prideleniu viacerých hodnôt časového radu
-$X$~druhému časovému radu $Y$. Takto metóda viac zodpovedá ľudskej intuícii.
-$D_{DTW}$~je vypočítané pomocou dynamického programovania a~vyjadrené pomocou
-vzorca~\ref{eq:dtw-distance}~\cite{Dzeroski2007}.
+Ide o~metódu (angl. \textit{Dynamic Time Warping}), ktorá dokáže zachytiť
+nelineárne skreslenie medzi časovými radmi vďaka prideleniu viacerých hodnôt
+časového radu $X$~druhému časovému radu $Y$. Takto metóda viac zodpovedá ľudskej
+intuícii. $D_{DTW}$~je vypočítané pomocou dynamického programovania a~vyjadrené
+pomocou vzorca~\ref{eq:dtw-distance}~\cite{Dzeroski2007}.
 % TODO add ref from Flexible Dynamic Time Warping for Time Series Classification
 \begin{equation}
 	\label{eq:dtw-distance}
@@ -665,7 +666,7 @@ vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
 \end{equation}
 
 \paragraph{Vzdialenosť medzi krátkymi časovými radmi}
-Metóda (angl. Short time series) meria vzdialenosť ako sumu štvorcových
+Metóda (angl. \textit{Short time series}) meria vzdialenosť ako sumu štvorcových
 rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiadúcich
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
 vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
@@ -906,3 +907,6 @@ potrebami na použitý model.
 % \paragraph{Štatistické metódy}
 % \paragraph{Hybridné prístupy}
 % \paragraph{Spektrálna analýza}
+
+% https://github.com/numenta/NAB
+% http://odds.cs.stonybrook.edu/
