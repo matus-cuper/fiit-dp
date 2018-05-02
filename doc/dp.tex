@@ -266,24 +266,21 @@ získaných dát.
 % TODO add some figures
 \subsubsection{Delenie časových radov}
 Výraznými vlastnosťami časových radov sú aj periodicita a~synchrónnosť. Vznikajú
-tak 4 nasledujúce kategórie.
+tak 4 nasledujúce kategórie~\cite{Teng2010}:
+\begin{itemize}
+	\item \textbf{Periodické a synchrónne časové rady} predstavujú najjednoduchšiu
+	kombináciu, keďže každý časový rad má konštantnú časovú periódu a~zároveň sú
+	všetky časové rady časovo zarovnané na konkrétny časový bod.
 
-\paragraph{Periodické a synchrónne časové rady}
-Ide o~najjednoduchšiu kombináciu, keďže každý časový rad má konštantnú časovú
-periódu a~zároveň sú všetky časové rady časovo zarovnané na konkrétny časový
-bod~\cite{Teng2010}.
+	\item \textbf{Neperiodické a synchrónne časové rady} nemajú žiadnu periodicitu,
+	ale opäť sú časovo zarovnané.
 
-\paragraph{Neperiodické a synchrónne časové rady}
-Časové rady nemajú žiadnu periodicitu, ale opäť sú časovo
-zarovnané~\cite{Teng2010}.
+	\item \textbf{Periodické a asynchrónne časové rady} nie sú časovo zarovnané, ale
+	obsahujú periodicitu, čiže 	začiatok periódy v~každom časovo rade je iný.
 
-\paragraph{Periodické a asynchrónne časové rady}
-Tentokrát nie sú časové rady časovo zarovnané, ale obsahujú periodicitu, čiže
-začiatok periódy v~každom časovo rade je iný~\cite{Teng2010}
-
-\paragraph{Neperiodické a asynchrónne časové rady}
-Jedná sa o~skupinu, do ktorej spadajú ostatné časové rady, ktoré obsahujú
-periodicitu a~ani synchrónnosť~\cite{Teng2010}.
+	\item \textbf{Neperiodické a asynchrónne časové rady} predstavujú skupinu, do ktorej
+	spadajú ostatné časové rady, ktoré neobsahujú	periodicitu a~ani synchrónnosť.
+\end{itemize}
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection
@@ -297,19 +294,24 @@ anomália zodpovedá meraniu, ktoré sa nenachádza v~oblasti normálnych dát.
 Pri identifikácii anomálií je najskôr potrebné zamyslieť sa nad nasledovnými
 problémami~\cite{Chandola2009}:
 \begin{itemize}
-\item \textbf{Definovanie oblasti normálnych dát} je veľmi náročné, nakoľko
-hranica medzi normálnymi dátami a~anomáliami je nepresná a~môže tak dojsť
-k~nesprávnemu označeniu meraní.
-\item \textbf{Anomálie vytvorené škodlivou činnosťou} sa javia ako normálne
-dáta, čo sťažuje definíciu normálneho správania.
-\item \textbf{Evolúcia dát} spôsobuje, že definícia normálneho správania sa môže
-časom zmeniť.
-\item \textbf{Presná predstava o anomálii} je často rôzna naprieč viacerými
-odbormi, a~preto neexistuje univerzálny spôsob na určovanie anomálií.
-\item \textbf{Dostupnosť označených dát} zlepšuje presnosť identifikácie anomálií,
-avšak často takéto dáta neexistujú alebo ich je potrebné označiť.
-\item \textbf{Biely šum} vyskytujúci sa v~dátach má tendenciu skresľovať
-normálne dáta, ktorých identifikácia je následne zložitá.
+	\item \textbf{Definovanie oblasti normálnych dát} je veľmi náročné, nakoľko
+	hranica medzi normálnymi dátami a~anomáliami je nepresná a~môže tak dojsť
+	k~nesprávnemu označeniu meraní.
+
+	\item \textbf{Anomálie vytvorené škodlivou činnosťou} sa javia ako normálne
+	dáta, čo sťažuje definíciu normálneho správania.
+
+	\item \textbf{Evolúcia dát} spôsobuje, že definícia normálneho správania sa
+	môže časom zmeniť.
+
+	\item \textbf{Presná predstava o anomálii} je často rôzna naprieč viacerými
+	odbormi, a~preto neexistuje univerzálny spôsob na určovanie anomálií.
+
+	\item \textbf{Dostupnosť označených dát} zlepšuje presnosť identifikácie
+	anomálií, avšak často takéto dáta neexistujú alebo ich je potrebné označiť.
+
+	\item \textbf{Biely šum} vyskytujúci sa v~dátach má tendenciu skresľovať
+	normálne dáta, ktorých identifikácia je následne zložitá.
 \end{itemize}
 
 Na detekciu anomálií sú používané aj algoritmy určené na klasifikáciu, ako je
