@@ -5,7 +5,7 @@
 %   PACKAGES AND DOCUMENT CONFIGURATION
 %-------------------------------------------------------------------------------
 
-\documentclass[a4paper,twoside,slovak,12pt]{article}
+\documentclass[a4paper,twoside,slovak,12pt,appendix]{article}
 
 \usepackage[slovak]{babel}                                                      % title in Slovak
 \usepackage[IL2]{fontenc}                                                       % support for word wrapping of special Slovak characters at the end of line on the end
@@ -22,6 +22,7 @@
 \usepackage{listings}                                                           % source code syntax highlighting
 \usepackage{courier}																														% monospace in listings
 \usepackage{caption}																														% enable caption centering
+\usepackage[titletoc]{appendix} 																								% appendix in toc with word appendix
 \usepackage[a4paper, centering,
 											left=35mm, top=25mm, right=20mm, bottom=25mm]{geometry}		% set page margins
 
@@ -113,8 +114,24 @@
 {Bakalárska práca: Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
 {Vedúci práce: Ing. Marek Lóderer \par}
 {máj 2019 \\} \\
-V práci sme sa zamerali
-% TODO write anotation
+V práci sme sa zamerali na identifikáciu anomálií v~energetických časových
+radoch. Anomálie môžu vznikať na základe neštandardného správania odberateľov
+alebo poruchy inteligentného merača spotreby elektrickej energie. Cieľom
+diplomovej práce je identifikovať oba takéto prípady a~znížiť tak straty
+distribučnej spoločnosti. Zároveň je nutné identifikovať iba také prípady, kedy
+sa jedná o~dočasnú zmenu v~správaní, či už je to dôsledkom zmeny počtu
+obyvateľov, počasia alebo výnimočnou udalosťou. So vznikajúcimi technológiami
+sa postupne mení aj profil spotreby odberateľov, a~preto je nutné správne
+identifikovať aj nové trendy v~dátach.
+
+Analyzovali sme časové rady, anomálie a~používané metódy na ich identifikáciu.
+Opísali sme problémy, ktoré vznikajú pri identifikácií anomálií v~doméne
+energetiky, a~ktorým musí čeliť aj naša metóda. Bližšie sme sa zamerali na
+zhlukovanie časových radov, ktoré prináša nové prístupy do zhlukovania
+vysokodimenzionálnych dát, medzi ktoré patrí aj vyhladzovanie, redukcia dimenzií
+alebo selekcia atribútov. Navrhovaná metóda zlúči diskretizované vyhladené
+časové rady a~následne sú identifikované anomálie na základe vytvorených zhlukov
+a~rozloženia profilu používateľa v~zhlukoch.
 \end{titlepage}
 
 \begin{titlepage}
@@ -135,8 +152,24 @@ V práci sme sa zamerali
 {Bachelor thesis: Identification of abnormal behavior of customers in the power grid \par}
 {Supervisor: Ing. Marek Lóderer \par}
 {May 2019 \\} \\
-In the thesis we focused
-% TODO write anotation
+In the thesis we focused on anomaly identification in energy time series.
+Anomalies can be caused by abnormal behavior of customers or failure of
+intelligent meter of electricity load. The aim of this master thesis is to
+identify these mentioned cases and reduce electricity loss of distribution
+company. Also it is necessary to identify only cases, when the behavioral change
+is temporal, whether it is result of different number of residents, weather or
+an exceptional occasion. Nowadays, electricity load profile of customers is
+changing as the new technologies are involved and therefore it is necessary to
+correctly identify new trends in data.
+
+We also analyzed time series, anomalies and methods used for their
+identification. We described problems linked to identifications of anomalies in
+domain of electricity, while our method is facing these problems as well. We
+focused on time series clustering, which brings new approaches to clustering of
+multidimensional data, which includes also smoothing, dimension reduction and
+attribute selection. Proposed method clusters discretized smoothed time series
+and then, based on created clusters and layout of customers profile in cluster,
+identifies anomalies.
 \end{titlepage}
 
 %-------------------------------------------------------------------------------
@@ -896,6 +929,85 @@ potrebami na použitý model.
 \newpage
 \bibliographystyle{iso-690/slovakiso}
 \bibliography{bibliography}
+
+%-------------------------------------------------------------------------------
+%   Appendix
+%-------------------------------------------------------------------------------
+
+\begin{appendices}
+\newpage
+\section{Plán do zimného semestra}
+\pagenumbering{Roman}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{||l|p{0.65\textwidth}||}
+    \hline \hline
+    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v~zimnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
+    \hline
+    1. týždeň    &  dokončenie analýzy literatúry, špecifikácie, výber vhodných metód na experimenty					\\ \hline
+    2. týždeň    &  nájdenie viacerých vhodných zdrojov dát, analýza datasetov		                            \\ \hline
+    3. týždeň    &  analýza datasetov, doplnenie datasetov dátami z~iných zdrojov										          \\ \hline
+    4. týždeň    &  výber atribútov, spojenie dát, príprava prostredia pre dáta a~manipuláciu s nimi			    \\ \hline
+    5. týždeň    &  hlbšia analýza zvolených datasetov, agregácia časových radov, výber technológií           \\ \hline
+    6. týždeň    &  vyhladenie a~diskretizácia časových radov															                    \\ \hline
+    7. týždeň    &  tvorba prototypu modelu zhlukujúceho časové rady	                                        \\ \hline
+    8. týždeň    &  prvé zhlukovacie experimenty, skúmanie vytvorených zhlukov	                              \\ \hline
+    9. týždeň    &  tvorba identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov     \\ \hline
+    10. týždeň   &  tvorba prototypu modelu identifikujúceho anomálie v~rámci zhlukov                         \\ \hline
+    11. týždeň   &  prvé experimenty, skúmanie identifikovaných anomálií                                      \\ \hline
+		12. týždeň   &  tvorba prezentácie a~príprava na obhajoby					                                        \\ \hline
+    \hline
+  \end{tabular}
+\end{table}
+
+\noindent
+Počas zimného semestra budú analyzované dostupné datasety. Následne budú
+spracované a~upravené do formátu potrebného pre model. Po vytvorení protypu
+modelu budú čo najskôr evaluované výsledky. Na základe nich budú ďalej
+spracovávané dáta a~menené datasety. Taktiež sa bližšie pozrieme na
+identifikované anomálie dáta a~určíme ich pôvod na základe dostupných
+vysvetľujúcich premenných. V~závere semestra budú prebiehať prípravy na obhajoby
+tvorbou prezentácie a~súvisiacich materiálov.
+
+
+\newpage
+\section{Plán do letného semestra}
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{||l|p{0.65\textwidth}||}
+    \hline \hline
+    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v letnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
+    \hline
+    1. týždeň    &  vytvorenie validačného modelu pre zhlukovanie na základe vysvetľujúcich premenných        \\ \hline
+    2. týždeň    &  použitie rôznych metrík pri určovaní podobnosti jednotlivých časových radov               \\ \hline
+    3. týždeň    &  výber a~použtie iných atribútov pre trénovacie dáta pre zhlukovací model					        \\ \hline
+    4. týždeň    &  použitie rôznych diskretizačných okien pre trénovací model 																\\ \hline
+    5. týždeň    &  optimalizácia modelu a~výpočtov, vyhodnotenie experimentov				                        \\ \hline
+    6. týždeň    &  porovnanie výsledkov z~experimentov s~naštudovanou literatúrou, overenie výsledkov        \\ \hline
+    7. týždeň    &  vytvorenie článku na študentskú konferenciu, dokončovanie experimentov                    \\ \hline
+    8. týždeň    &  príprava na študentskú vedeckú konferenciu, vizualizácia dosiahnutých výsledkov						\\ \hline
+    9. týždeň    &  zapracovanie pripomienok z~konferencie, návrh ďalších experimentov                        \\ \hline
+    10. týždeň   &  písanie technickej dokumentácie k~softvérovému dielu, posledné experimentovanie           \\ \hline
+    11. týždeň   &  vyhodnotenie experimentov, evaluácia riešenia, zhodnotenie výsledkov                      \\ \hline
+		12. týždeň   &  tvorba prezentácie a~príprava na obhajobu projektu                                        \\ \hline
+    \hline
+  \end{tabular}
+\end{table}
+
+\noindent
+V~úvode semestra bude vytvorený ďalší zhlukovací model, ktorý bude vytvárať
+zhluky iba na základe vysvetľujúcich premenných. Cieľom bude overiť vytvorené
+zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie. Ďalšie
+navrhované vylepšenia budú zapracované na základe vlastností dát a~dosiahnutých
+výsledkov. V~prípade veľkej časovej náročnosti budú optimalizované jednotlivé
+procesy pri manipulácií dát. Na konci semestra sa koná študentská konferencia,
+do ktorej by sme chceli prispieť článkom a~získať tak dôležitú spätnú väzbu.
+Na záver by sme chceli zapracovať jednotlivé pripomienky a~znova vyhodnotiť
+výsledky, ktoré budú použité pri obhajobe projektu
+
+
+\end{appendices}
 
 \end{document}
 
