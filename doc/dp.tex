@@ -89,7 +89,7 @@
 	\vspace{7cm}
   \flushleft
   {\normalsize Študijný program: Inteligentné softvérové systémy \par}
-	{\normalsize Študijný odbor: 9.2.5 Softvérové inžinierstvo \par}
+	{\normalsize Študijný odbor: 9.2.5 Softvérové inžinierstvo, 9.2.8 Umelá inteligencia \par}
 	{\normalsize Miesto vypracovania: Ústav informatiky a softvérového inžinierstva, FIIT STU v Bratislave \par}
 	{\normalsize Vedúci práce: Ing. Marek Lóderer \par}
   \vspace{0.5cm}
@@ -784,7 +784,21 @@ vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 %-------------------------------------------------------------------------------
 
 \subsection{Redukcia dimenzií a výber atribútov}
-% TODO add something
+Najčastejšie používanými vysvetľujúcimi premennými sú:
+\begin{itemize}
+  \item geografická poloha
+  \item voltáž distribučnej siete
+  \item tarifná skupina
+  \item energetická sebestačnosť
+  \item pravidelnosť platieb
+  \item priemerná spotreba
+  \item používané elektrospotrebiče
+  \item veľkosť a~typ objektu
+\end{itemize}
+Ďalšou premennou, ktorá vysvetľuje krátkodobé zmeny v~správaní jednotlivých
+odberateľov je počasie. To je pre viacerých odberateľov rovnaké a~viaže sa na
+konkrétny región, v ktorom sa nachádza meteorologická stanica. Dáta z~nich sú
+väčšinou verejne dostupné~\cite{Stankovic2014}.
 
 \subsubsection{Výber atribútov}
 Väčšina dát pochádzajúcich z~inteligentných meračov obsahuje iba stĺpce
@@ -810,7 +824,7 @@ neštandardné~\cite{Cody2015}.
 %   Identification of abnormal behavior
 %-------------------------------------------------------------------------------
 
-\subsection{Identifikácia abnormálneho správania}
+\subsection{Anomálie v~energetických časových radoch}
 V~distribučných sieťach vznikajú straty, ktoré vo všeobecnosti môžeme rozdeliť
 na technické a netechnické straty. Technické straty sú spôsobené vlastnosťami
 obvodu ako napr. odporom materiálu či únikmi cez poškodenú izoláciu a~môžu sa
@@ -821,6 +835,15 @@ pravidelne kontrolovať odberateľov tak, aby sa predišlo nelegálnemu odberu,
 je potrebné znížiť počet podozrivých odberateľov na minimum a~zároveň
 maximalizovať pravdepodobnosť, s~ktorou budú kontrolovaní iba odberatelia
 s~neštandardnými odbermi~\cite{Coma-Puig2016,Sahoo2015}.
+
+Pri identifikácií anomálií je spravidla najskôr definovaná oblasť, ktorej
+inštancie považujeme za normálne. Za anomálie považujeme inštancie nachádzajúce
+sa mimo oblasti, alebo na jej okraji. V~prípade, že na trénovanie modelu máme
+k~dispozícií označené iba anomálne dáta, je najskôr definovaná oblasť anomálnych
+dát a~až následne normálna oblasť. Pri identifikácií anomálií v~časových radoch
+v~doméne energetiky je takýto prístup len ťažko aplikovateľný nakoľko podobné
+časové rady pri rôznych domácnostiach môžu, ale nemusia predstavovať normálne
+správanie~\cite{Spiric2015}.
 
 Najčastejšími metódami používanými pri nelegálnom odbere je obídenie meračov
 spotreby energie či samotná manipulácia s~nimi. Merače tak poskytujú nesprávne
@@ -856,10 +879,12 @@ prípadne spätná väzba zo samotných kontrol odberateľov.
 
 Typickou črtou netechnických strát je negatívny skok v spotrebe elektrickej
 energie. Nasleduje po poškodení inteligentného meracieho zariadenia alebo pri
-začatí nelegálneho odberu. Následkom je nižšia nameraná spotrebe energie
-v dlhšom horizonte. Zníženie spotreby môže byť čiastočné alebo úplne, ako môžeme
+začatí nelegálneho odberu. Pokles môže byť zapríčinený aj zmenou počtom ľudí,
+miestností prípadne ich funkcie alebo zvýšením energetickej sebestačnosti.
+Následkom je nižšia nameraná spotrebe energie v dlhšom horizonte. Zníženie
+spotreby môže byť čiastočné alebo úplne, ako môžeme
 vidieť na obrázkoch~\ref{fig:decrease-partial}
-a~\ref{fig:decrease-total}~\cite{Trevizan2015}.
+a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
 \begin{figure}[]
 
@@ -880,6 +905,18 @@ a~\ref{fig:decrease-total}~\cite{Trevizan2015}.
   \end{minipage}\hfill
 
 \end{figure}
+
+Z~pohľadu výskytu anomálie môžu nastať nasledovné scenáre:
+\begin{itemize}
+  \item Anomália vznikne neodborným pripojením odberateľa do energetickej siete alebo existuje ešte pred tým ako nastane zber dát inteligentnými meračmi.
+        Keďže celý časový rad pozostáva z~chybných dát, odhalenie anomálie je neprevdepodobné.
+  \item Anomália vznikne v~priebehu sledovaného intervalu a~zároveň je odhalená a~ďalej sa už nevyskytuje.
+  \item Anomália vznikne v~priebehu sledovaného intervalu a~nie je odhalená. Táto skupina ja predmetom celej práce.
+\end{itemize}
+Prvý prípad anomálií je možné odhaliť iba na základe vysvetľujúcich premenných,
+ktoré nemusia byť pravdivé, ak sú dodané samotným odberateľom. Druhú skupinu je
+potrebné v~dátach označiť, prípadne anomálne merania vynechať pri ďalšom
+klasifikovaní~\cite{Spiric2015}.
 
 %-------------------------------------------------------------------------------
 %   Evaluation metrics
