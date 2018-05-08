@@ -516,7 +516,7 @@ daného zhluku~\cite{Salvador2005}.
 %   Time series classification
 %-------------------------------------------------------------------------------
 
-\subsection{Zhlukovanie časových radov}
+\subsection{Metódy zhlukovania časových radov}
 Cieľom zhlukovania je rozdeliť dátové inštancie do \textit{k}~zhlukov na základe
 spoločných čŕt. V~prípade, že inštancie sú reprezentované nízkodimenzionálnym
 vektorom v~Euklidovskom priestore, môžu byť na zhlukovanie použité klasické
@@ -525,17 +525,28 @@ techniky spomenuté v~\ref{c-analysis-techniques}. Ak inštancie reprezentujú
 zriedkavé~\cite{Hautamaki2008}.
 
 % TODO explain different approaches add examples
-Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
-3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
-atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
-základe, ktorého je vypočítaná Euklidovská vzdialenosť medzi jednotlivými
-inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
-časové rady. Vzdialenosťou je potom definovaná ako vzdialenosť medzi
-jednotlivými modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť
-výsledný tvar časového radu nelineárnym rozťahovaním a~kontrakciou časových
-osí~\cite{Hautamaki2008}.
+Metódy používané na zhlukovanie časových radov môžeme rozdeliť do 3~skupín, na
+základe reprezentácie dát, s~ktorými pracujú. Prvá skupina predpokladá surové
+dáta, druhá pracuje s~extrahovanými vlastnosťami z~dát a~posledná metóda
+pristupuje k~dátam pomocou vytvoreného modelu. Rozdelenie môžeme vizualizovať
+pomocou obrázka~\ref{}. Prístupy sú opísané v~nasledujúcich
+podkapitolách~\cite{Rani2012}.
 
-\subsubsection{Hierarchické zhlukovanie}
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{clustering_approaches.png}
+  \caption{Prístupy k~zhlukovaniu založené na a) dočasnej blízkosti, b) reprezentácie, c) modely.}
+  \label{fig:clustering-approaches}
+\end{figure}
+
+\subsubsection{Zhlukovanie na základe dočasnej blízkosti}
+Metóda (angl. \textit{Temporal-Proximity based clustering approach}) pracuje
+priamo so surovými, neupravenými dátami, kvôli čomu sa zvykne nazývať aj
+zhlukovanie na základe surových dát (angl. \textit{Raw data based clustering
+approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných alebo
+podobnostných metrík pre použité časové rady~\cite{Rani2012}.
+
+\paragraph{Hierarchické zhlukovanie}
 \label{c:hierarchical-clustering}
 Táto metóda produkuje vnorenú hierarchiu skupín podobných časových radov na
 základe vzdialenostných matíc jednotlivých inštancií. Výhodou je, že nie je
@@ -570,11 +581,22 @@ je možné zmeniť delenie zhluku, ktoré už bolo vykonané. Na meranie vzdiale
 môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
+% TODO all algorithms in own sections?
+% TODO Add k-means / dbscan
+% TODO Add random swap
 % TODO Add agglomerative clustering 		something more
 % TODO Add divisive clustering     			something more
 
+\subsubsection{Zhlukovanie na základe reprezentácie}
+Keďže manipulácia so surovými dátami je často náročná a~dáta navyše obsahujú
+nadbytočné informácie, táto metóda (angl. \textit{Representation based
+clustering approach}) najskôr transformuje dáta do vektoru vlastností až
+následne sú aplikované zhlukovacie algoritmy. V~literatúre sa zvykne označovať
+aj ako zhlukovanie na základe vlastností (angl. \textit{Feature based clustering
+approach})~\cite{Rani2012}.
+
 % TODO add equation ???
-\subsubsection{Samoorganizované mapy}
+\paragraph{Samoorganizované mapy}
 Trieda neurónových sietí, kde neuróny sú usporiadané v~nízkodimenzionálnej
 štruktúre a~trénované iteratívne a~bez učiteľa. Trénovací proces začína
 pridelením náhodných hodnôt váhovým vektorom $w$. Každá iterácia trénovania
@@ -586,6 +608,34 @@ ostatných neurónov sú aktualizované v~závislosti od vzdialenosti od neurón
 Nevýhodou je opäť náročné spracovanie časových radov rôznych dĺžok, keďže dĺžka
 časového radu definuje aj dĺžku váhového vektora
 $w$~\cite{Kohonen2001,WarrenLiao2005}.
+
+\subsubsection{Zhlukovanie na základe modelu}
+Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každý
+časový rad je generovaný nejakým modelom alebo pravdepodobnostnou distribúciou.
+Časové rady sú považované za podobné ak aj modely charakterizujúce jednotlivé
+časové rady sú si podobné~\cite{Rani2012}.
+
+\paragraph{ARIMA}
+V~práci~\cite{Xiong2002} autori navrhli metódu zhlukujúcu jednorozmerné časové
+rady. Predpokladali, že časové rady sú vygenerované $k$ rôznymi ARIMA modelmi.
+Algoritmus na maximalizáciu očakávaní (angl. \textit{expectation maximalization
+algorithm}) sa naučil správne určiť koeficienty a~parametre jednotlivých
+komponentov tak, že počet zhlukov nebolo nutné určiť, ale algoritmus automaticky
+určil počet modelov $k$.
+
+\subsubsection{Ďalšie prístupy k~zhlukovaniu}
+Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
+clustering approach}. V~diskretizovaných časových radoch sú nasledné
+identifikované anomálne úseky. Nevýhodou metódy je náročnosť voľby správnej
+veľkosti okna tak, aby zachytila anomáliu a~jej výpočtová
+zložitosť~\cite{Teng2010}.
+
+Prístup založený na skrytých Markovských modeloch (angl. \textit{Hidden Markov
+models based approach}) je reprezentovaný výkonným konečným stavovým strojom.
+Vychádza z~predpokladu, že existuje skrytý proces, ktorý je Markovský a~zároveň
+generuje normálne časové rady. Nevýhodou je, že techniká zlyháva v~prípade, že
+takýto proces neexistuje. Na základe vytvoreného Markovského modelu sú merania,
+skupina meraní alebo celý časový rad označené za anomálie~\cite{Teng2010}.
 
 %-------------------------------------------------------------------------------
 %   Distance metrics
@@ -601,6 +651,17 @@ týchto klasických metód nízka, keďže nameraná vzdialenosť zachytáva aj 
 škálu v~dátach. Pri porovnávaní časových radov nás spravidla zaujíma zmena
 krivky časového radu a~rovnaká dĺžka porovnávaných časových
 radov~\cite{Dzeroski2007,WarrenLiao2005}.
+
+% TODO explain different approaches add examples
+Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
+3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
+atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
+základe, ktorého je vypočítaná napr. Euklidovská vzdialenosť medzi jednotlivými
+inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
+časové rady. Vzdialenosť je potom definovaná ako vzdialenosť medzi jednotlivými
+modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledný tvar
+časového radu nelineárnym rozťahovaním a~kontrakciou časových
+osí~\cite{Hautamaki2008}.
 
 % TODO add some figure
 \paragraph{Korelácia}
