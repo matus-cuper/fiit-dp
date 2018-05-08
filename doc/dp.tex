@@ -17,14 +17,20 @@
 \usepackage{amssymb}                                                            % real numbers sign
 \usepackage{algorithm, algpseudocode}                                           % pseudocode writting
 \usepackage{graphicx}                                                           % figures
+\usepackage{multirow}																														% table with multirows
 \usepackage{threeparttable}                                                     % table with footnotes
 \usepackage{url}                                                                % url in references
 \usepackage{listings}                                                           % source code syntax highlighting
 \usepackage{courier}																														% monospace in listings
 \usepackage{caption}																														% enable caption centering
+\usepackage{regexpatch}																													% fix slovak in table with multirows
 \usepackage[titletoc]{appendix} 																								% appendix in toc with word appendix
 \usepackage[a4paper, centering,
 											left=35mm, top=25mm, right=20mm, bottom=25mm]{geometry}		% set page margins
+
+\makeatletter
+\xpatchparametertext\@cline{-}{\cA-}{}{}																				% in slovak babel - is active character, it is necessary to escape it
+\makeatother
 
 \lstset{
     basicstyle=\ttfamily,
@@ -53,7 +59,7 @@
 	{\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-0000-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-XXXX-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
@@ -73,7 +79,7 @@
   {\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-0000-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-XXXX-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
@@ -822,17 +828,18 @@ a~\ref{fig:decrease-total}~\cite{Trevizan2015}.
 \subsection{Vyhodnocovacie metriky}
 Za predpokladu, že získané dáta budú obsahovať aj označené inštancie, prípadne
 budú označené dodatočne na základe výpočtov, môžeme na vyhodnotenie úspešnosti
-použiť aj CONFUSION MATRIX. V~takom prípade budeme musieť predpovedať triedu
+použiť aj maticu zámen. V~takom prípade budeme musieť predpovedať triedu
 jednotlivých inštancií, a~teda či sa jedná o~normálneho alebo anomálneho
 odberateľa. Jednoduchý klasifikátor označí prvých \textit{n} odberateľov,
 ktorých miera pravdepodobnosti výskytu čierneho odberu je najvyššia, za
-anomálnych. Pri použití CONFUSION MATRIX potom riadky predstavujú predpovedanú
-triedu a~stĺpce skutočnú. Vznikajú tak 4~kategórie, ktoré sú označované ako
+anomálnych. Pri vyjadrení matice zámen pomocou
+tabuľky~\ref{tab:confusion-matrix} potom riadky predstavujú predpovedanú triedu
+a~stĺpce skutočnú. Vznikajú tak 4~kategórie, ktoré sú označované ako
 \textit{TRUE POSITIVE} (správne označení podozriví odberatelia),
 \textit{FALSE POSITIVE} (nesprávne označení podozriví odberatelia),
 \textit{TRUE NEGATIVE} (nesprávne označený normálny odberatelia)
 a~\textit{FALSE NEGATIVE} (správne označený normálny odberatelia). Kvalitu
-klasifikácie potom môžeme zmerať pomocou presnosti a citlivosti. Presnosť
+klasifikácie potom môžeme zmerať pomocou presnosti a~pokrytia. Presnosť
 vypočítame vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených
 anomálií a~celkový počet označených anomálií. Tým vypočítame percento
 odberateľov, ktorých sme správne klasifikovali ako podozrivých.
@@ -840,22 +847,35 @@ odberateľov, ktorých sme správne klasifikovali ako podozrivých.
 	\label{eq:precision}
   \text{Presnosť} = \frac{TP}{TP + FP}
 \end{equation}
-Citlivosť označuje pomer správne označených anomálií a~celkový počet skutočných
+Pokrytie označuje pomer správne označených anomálií a~celkový počet skutočných
 anomálií. Vyjadríme ju pomocou vzorca~\ref{eq:recall}.
 \begin{equation}
 	\label{eq:recall}
-  \text{Citlivosť} = \frac{TP}{TP + FN}
+  \text{Pokrytie} = \frac{TP}{TP + FN}
 \end{equation}
 Aby sa predišlo situácií, kedy sa v~dátach nachádza iba malý počet anomálnych
 odberateľov a~pre model by tak bolo výhodnejšie označovať iba tých, s~ktorými si
 je takmer istý, je dôležité brať do úvahy aj túto metriku. Obe metriky sú
 vyjadrené v~percentách~\cite{Trevizan2015}.
 
+\begin{table}[]
+	\centering
+	\caption{Matica zámen}
+	\label{tab:confusion-matrix}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\multicolumn{2}{|c|}{\multirow{2}{*}{}} 									 & \multicolumn{2}{c|}{skutočnosť} 							 \\ \cline{3-4}
+		\multicolumn{2}{|c|}{}       									      			 &  anomálna kategória   &  normálna kategória   \\ \hline
+		\multirow{2}{*}[1.2pt]{predikcia}   &  anomálna kategória  &  TP (true positive)   &  FP (false positive)  \\ \cline{2-4}
+																				&  normálna kategória  &  FN (false negative)  &  TN (true negative)   \\ \hline
+	\end{tabular}
+\end{table}
+
 Ďalšou používanou metrikou je aj tzv. F-skóre, ktoré obsahuje informácie oboch
 predchádzajúcich metrík. Keďže ide o~súčet metrík, tiež je vyjadrené
 v~percentách. Cieľom práce je maximalizovať túto metriku. F-skóre vyjadríme
 pomocou vzorca~\ref{eq:f-score}, kde $P$~predstavuje presnosť a~$C$ predstavuje
-citlivosť~\cite{Trevizan2015}.
+pokrytie~\cite{Trevizan2015}.
 \begin{equation}
 	\label{eq:f-score}
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
@@ -905,22 +925,22 @@ na nevýrazne zmeny a~trendy v~dátach.\\
 
 \newpage
 \section{Špecifikácia požiadaviek}
-\section{Rozpracovanie problému}
-Pomocou metód strojového učenia a~dátovej analytiky sa zameriame na identifikáciu
-anomálií v~oblasti distribučných spoločností. Na základe dát, ktoré máme
-k~dispozícií zvolíme vhodnú metódu detekcie anomálií. Keďže dáta sú z~domény
-distribúcie elektrickej energie, ich označenie by bolo finančne aj časovo
-náročné. Rovnako aj spätná väzba pri identifikácií anomálií je časovo náročná
-a~jej spracovanie môže trvať niekoľko týždňov až mesiacov.
+Pomocou metód strojového učenia a~dátovej analytiky sa zameriame na
+identifikáciu anomálií v~časových radoch v~oblasti distribučných spoločností. Na
+základe neagregovaných dát, ktoré budeme mať k~dispozícií môžu nastať dva rôzne
+scenáre. Ak dataset bude obsahovať iba časovú známku a~spotrebu elektrickej
+energie daného zákazníka, zhlukovanie bude možné iba na základe časového radu
+spotreby a~výsledky budú evaluované pomocou vzdialeností medzi jednotlivými
+časovými radmi vo vnútri zhlukov. Naopak, ak dataset bude obsahovať viaceré
+vysvetľujúce premenné, potom je možné vytvoriť ďalší model, ktorý tiež bude
+zhlukovať odberateľov. Tak bude zabezpečená evaluácia pôvodného zhlukovacieho
+modelu.
 
-Zameriavať sa budeme najmä na identifikáciu anomálií v~časových radoch, čo spadá
-pod skupinové a~kontextové typy anomálií. Úlohou bude taktiež identifikovať
-výhody a~nevýhody uplatnenia jednotlivých prístupov k~identifikácií. Zároveň
-vzniká potreba nájsť najvhodnejšie techniky detekcií anomálií pre dáta zbierané
-z~distribučných sietí pomocou inteligentných meračov. Najmä z~dôvodu, že každá
-doména, v~ktorej je potrebné identifikovať anomálie sa vyznačuje špecifickými
-potrebami na použitý model.
-
+Vo vytvorených zhlukoch sa budeme zameriavať na identifikáciu anomálií, resp.
+intervalov s~neštandardným správaním odberateľa. Tiež budeme považovať
+diskretizované časové rady za anomálie v~prípade ak sa nenachádzajú v~rámci
+zhlukov, do ktorých spadajú ostatné diskretizované časové rady daného
+odberateľa.
 
 %-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
