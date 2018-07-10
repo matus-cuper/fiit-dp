@@ -378,7 +378,7 @@ transakcia výrazne väčšieho objemu peňazí predstavuje podvod, zatiaľ čo 
 transakcie, nachádzajúce sa v~normálnom rozsahu predstavujú normálne dáta, ktoré
 nie sú anomáliou~\cite{Chandola2009}.
 
-\paragraph{Kontextové anomálie} predstavujú o~inštancie, ktoré sa nachádzajú
+\paragraph{Kontextové anomálie} predstavujú inštancie, ktoré sa nachádzajú
 v~oblasti normálnych dát, ale v~špecifickom kontexte sú považované za anomáliu.
 Kontext je daný kontextovými atribútmi v~dátach, na základe ktorých sa určujú
 susedné inštancie. Nekontextové atribúty, nazývané aj behaviorálne, reprezentujú
@@ -456,10 +456,10 @@ v~testovacej vzorke dát~\cite{Chandola2009}.
 \label{c-analysis-techniques}
 Detegovať anomálie rôznych typov môžeme niekoľkými spôsobmi, čo závisí aj od
 samotných dát. Ich úplnosť, množstvo a~oblasť, v~ktorej boli zozbierané sú
-kritické pre správny výber techniky, pomocou ktorej budú identifikované
-anomálie. Nás budú zaujímať najmä detekcie anomálií v~časových radoch. Popísané
-metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale pre úplnosť
-sú spomenuté aj iné používané metódy.
+kritické pre správny výber techniky, pomocou ktorej budú anomálie
+identifikované. Nás budú zaujímať najmä detekcie anomálií v~časových radoch.
+Popísané metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale pre
+úplnosť sú spomenuté aj iné používané metódy.
 
 \paragraph{Klasifikácia}
 Pomocou naučeného modelu, nazývaného aj klasifikátor, sú rozoznávané triedy
@@ -529,8 +529,8 @@ Metódy používané na zhlukovanie časových radov môžeme rozdeliť do 3~sku
 základe reprezentácie dát, s~ktorými pracujú. Prvá skupina predpokladá surové
 dáta, druhá pracuje s~extrahovanými vlastnosťami z~dát a~posledná metóda
 pristupuje k~dátam pomocou vytvoreného modelu. Rozdelenie môžeme vizualizovať
-pomocou obrázka~\ref{}. Prístupy sú opísané v~nasledujúcich
-podkapitolách~\cite{Rani2012}.
+pomocou obrázka~\ref{fig:clustering-approaches}. Prístupy sú opísané
+v~nasledujúcich podkapitolách~\cite{Rani2012}.
 
 \begin{figure}[]
   \centering
@@ -551,8 +551,8 @@ podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 Táto metóda produkuje vnorenú hierarchiu skupín podobných časových radov na
 základe vzdialenostných matíc jednotlivých inštancií. Výhodou je, že nie je
 nutné zadávať počet zhlukov, ktoré ideme identifikovať. Nevýhodou je obmedzenie
-výpočtu iba na menšie datasety, keďže táto výpočtová zložitosť tejto
-metódy je kvadratická~\cite{Dzeroski2007}.
+výpočtu iba na menšie datasety, keďže výpočtová zložitosť tejto metódy je
+kvadratická~\cite{Dzeroski2007}.
 
 Metóda hierarchického zhlukovania zoskupuje časové rady do stromu zhlukov. Vo
 všeobecnosti existujú dva typy týchto metód, aglomeratívne a~deliace.
@@ -568,7 +568,7 @@ techniky~\cite{WarrenLiao2005}.
 Vzdialenosť medzi dvoma zhlukmi je meraná pomocou dvojice najbližších časových
 radov umiestnených v~rôznych zhlukoch, ktoré sú potencionálnymi kandidátmi na
 zlúčenie. Podobnosť môže určovať aj
-\textit{Wardov algoritmus minimálnej variance}, ktorý zlúči zhluky
+\textit{Wardov algoritmus minimálnej variancie}, ktorý zlúči zhluky
 s~najmenším nárastom variancie. V~každom kroku sú tak vyskúšané všetky
 kombinácie dvojíc zhlukov, až potom je vybrané minimum. Porovnávané časové rady
 nemusia mať vždy rovnakú dĺžku. Nevýhodou metódy je najmä vysoký počet operácií,
@@ -625,11 +625,13 @@ určil počet modelov $k$.
 
 \subsubsection{Ďalšie prístupy k~zhlukovaniu}
 Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
-clustering approach}. V~diskretizovaných časových radoch sú nasledné
+clustering approach}). V~diskretizovaných časových radoch sú nasledné
 identifikované anomálne úseky. Nevýhodou metódy je náročnosť voľby správnej
 veľkosti okna tak, aby zachytila anomáliu a~jej výpočtová
 zložitosť~\cite{Teng2010}.
 
+% TODO add another paragraph
+% TODO make hidden Markov model paragraph
 Prístup založený na skrytých Markovských modeloch (angl. \textit{Hidden Markov
 models based approach}) je reprezentovaný výkonným konečným stavovým strojom.
 Vychádza z~predpokladu, že existuje skrytý proces, ktorý je Markovský a~zároveň
@@ -647,9 +649,9 @@ Kľúčovou záležitosťou pri zhlukovaní časových radov na základe ich pod
 je meranie vzdialenosti medzi nimi. Rovnako ako pri zhlukovaní bodových
 inštancií je potrebné definovať si metódy merania vzdialenosti. Najčastejšími
 metrikami sú Euklidovská a~Manhattanovská vzdialenosť. Vhodnosť aplikovania
-týchto klasických metód nízka, keďže nameraná vzdialenosť zachytáva aj použitú
-škálu v~dátach. Pri porovnávaní časových radov nás spravidla zaujíma zmena
-krivky časového radu a~rovnaká dĺžka porovnávaných časových
+týchto klasických metód je nízka, keďže nameraná vzdialenosť zachytáva aj
+použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla zaujíma
+zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
 radov~\cite{Dzeroski2007,WarrenLiao2005}.
 
 % TODO explain different approaches add examples
@@ -666,21 +668,24 @@ osí~\cite{Hautamaki2008}.
 % TODO add some figure
 \paragraph{Korelácia}
 Korelačný koeficient $r(X, Y)$ meria stupeň lineárnej závislosti medzi dvoma
-časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlation}. Korelácia
-blízka $-1$ znamená, že nárast kriviek časových radov je zrkadlový, pri
-korelácií rovnej $0$ hovoríme o~rozdielnych časových radoch a~pri hodnote $1$
-o~podobných. Na základe hodnoty korelácie, potom môžeme vyjadriť vzdialenosť
-vzorcom~\ref{eq:correlation-distance}. Nevýhodou je, ak máme k~dispozícií iba
-malú, prípadne krátku časť datasetu, podobnosť touto metrikou sa určuje len
-ťažko. Keďže korelácia zachytáva iba lineárnu podobnosť časových radov, pri
-aplikovaní metriky na dva nelineárne podobné časové rady, sú vyhodnotené ako
-vzdialené~\cite{Dzeroski2007}.
+časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlation}.
+
 \begin{equation}
 	\label{eq:correlation}
   r \left( X, Y \right) = \frac
   {E \left[ \left( X - E \left[ X \right] \right) \cdot \left( Y - E \left[ Y \right] \right) \right]}
   {E \left[ \left( X - E \left[ X \right] \right)^2 \right] \cdot E \left[ \left( Y - E \left[ Y \right] \right)^2 \right]}
 \end{equation}
+
+Korelácia blízka $-1$ znamená, že nárast kriviek časových radov je zrkadlový,
+pri korelácií rovnej $0$ hovoríme o~rozdielnych časových radoch a~pri hodnote
+$1$ o~podobných. Na základe hodnoty korelácie, potom môžeme vyjadriť vzdialenosť
+vzorcom~\ref{eq:correlation-distance}. Nevýhodou je, ak máme k~dispozícií iba
+malú, prípadne krátku časť datasetu, podobnosť touto metrikou sa určuje len
+ťažko. Keďže korelácia zachytáva iba lineárnu podobnosť časových radov, pri
+aplikovaní metriky na dva nelineárne podobné časové rady, sú vyhodnotené ako
+vzdialené~\cite{Dzeroski2007}.
+
 \begin{equation}
 	\label{eq:correlation-distance}
   D_r \left( X, Y \right) = \sqrt{0.5 \cdot \left( 1 - r \left( X, Y \right) \right)}
@@ -990,7 +995,7 @@ Ako už bolo spomenuté v~\ref{c-analysis-techniques}, úlohou algoritmu k-means
 namapovať existujúce inštancie do \textit{k} zhlukov. Aj keď metóda náhodnej
 výmeny je obmedzená na zhlukovacie problémy v~Euklidovskom priestore, bola
 použitá aj pri zhlukovaní časových radov a~zabraňuje zaseknutiu zhluku
-v~lokálnom minime. V~princípe je náhodne vybraný zhluk, ktorý bude vymazaná a~za
+v~lokálnom minime. V~princípe je náhodne vybraný zhluk, ktorý bude vymazaný a~za
 centroid bude vybraný jeden časový rad z~neho. Ak takéto riešenie je lepšie ako
 bez rozpustenia zhluku je nahradené pôvodným. Ako bolo spomenuté
 v~\ref{c:hierarchical-clustering} cieľom aglomeratívneho zhlukovania je všetky
