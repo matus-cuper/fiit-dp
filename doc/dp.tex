@@ -283,20 +283,140 @@ získaných dát.
 %-------------------------------------------------------------------------------
 
 \subsection{Časové rady}
+Merania časových radov predstavujú množinu dátových bodov, usporiadané
+v~chronologickom poradí. Takúto množinu môžeme definovať ako množinu vektorov
+$x(t)$, kde premenná $x$ predstavuje časový rad a~$t$ čas, kedy bolo meranie
+vykonané. Časové rady pozostávajúce z~meraní jednej veličiny sa nazývajú
+jednorozmerné, pri meraní viacerých veličín sa jedná o~viacrozmerné časové rady.
+Tiež ich môžeme rozdeliť na spojité a~diskrétne. Spojité časové rady merajú
+pozorovanú veličiny v~každej jednotke času. Môže sa jednať napr. o~počasie,
+veľkosť prietoku rieky alebo koncentráciu látok pri chemických procesoch.
+Diskrétne časové rady sú pozorované spravidla v~rovnakých časových intervaloch,
+napr. rokoch, dňoch či minútach. Stretnúť sa s~nimi môžeme pri kurzoch mien,
+produkcii štátov či spotrebe elektrikej energie~\cite{Agrawal2013}.
 
 %-------------------------------------------------------------------------------
 %   Time series analysis
 %-------------------------------------------------------------------------------
 
-% \subsubsection{Analýza časových radov}
-% TODO add analysis from BP
+\subsubsection{Analýza časových radov}
+Časové rady môžeme reprezentovať pomocou matematického modelu, ktorého parametre
+sú dané nameranými dátami. Parametre sú určené na základe dátovej analýzy
+nazhromaždených dát. Cieľom je určiť parametre tak, aby predikcia výsledneho
+modelu bola čo najpresnejšia. Proces analýzy a~úpravy parametrov je možné
+opakovať pokiaľ model nedosahuje dostatočne uspokojivé
+výsledky~\cite{Agrawal2013}.
+
+Premenná $\hat{x}$ vo vzorci~\ref{eq:time-series} predstavuje predikovanú
+hodnotu časového radu $x$. Cieľom je nájsť funkciu $f(x)$, ktorá predikuje
+budúce hodnoty časového radu $x$ tak, aby boli čo najpresnejšie, konzistentné
+a~objektívne~\cite{Sapankevych2009}.
+
+\begin{equation}
+  \hat{x}(t+\Delta_t) = f(x(t-a), x(t-b), x(t-c), ...)
+  \label{eq:time-series}
+\end{equation}
 
 %-------------------------------------------------------------------------------
 %   Time series components
 %-------------------------------------------------------------------------------
 
-% \subsubsection{Zložky časových radov}
-% TODO add analysis from BP
+\subsubsection{Zložky časových radov}
+Na vývoj časových radov vplývajú ich jednotlivé komponenty, z~ktorých
+pozostávajú. Ich vývoj je ovplyvnení rôznymi faktormi, či už ekonomickými,
+ekologickými, počasím, sviatkami alebo kultúrou. Priebehy grafou jednotlivých
+komponentov potom môžu byť cyklické, rastúce, klesajúce alebo stagnujúce
+v~závislosti od toho, či existuje zmena, ktorá je trvalá alebo opakujúca.
+Taktiež aj veľkosť periódy tohto cyklu môže byť rôzna, a~to niekoľko dní,
+mesiacov či rokov. Keďže prostredie, v~ktorom meriame predpovedanú veličinu sa
+vyvýja, rovnako sa vyvýja aj správanie pozorovanej veličiny. Preto je potrebné
+pri modelovaní správania uvažovať jednotlivé komponenty časového radu.
+V~literatúre sa najčastejšie stretávame s~rozdelením do 4~komponentov, a~to
+trendová, cyklická, sezónna a~reziduálna zložka~\cite{Grmanova2016}.
+
+\paragraph{Trendová zložka} zastupuje dlhodobé správanie časového radu. Ide
+o~dlhodobé klesanie, rast alebo stagnáciu časového radu. Príkladom môže byť
+neustále predlžovanie priemernej doby dožitia alebo aj rast svetovej populácie.
+Priebeh dekompovanej trendovej zložky môžeme vidieť na
+obrázku~\ref{fig:trend-component}~\cite{Agrawal2013}.
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.8\textwidth]{trend_component.pdf}
+  \caption{Príklad trendovej zložky časového radu.}
+  \label{fig:trend-component}
+\end{figure}
+
+\paragraph{Cyklická zložka} predstavuje strednodobú opakujúcu sa zmenu.
+Najčastejšie sa pri tom jedná o~obdobie 2~a~viac rokov. Táto zložka býva výrazne
+zastúpená pri ekonomických a~finančných časových radoch. Príkladom môže byť
+aj podnikateľský cyklus, ktorý pozostáva zo 4~opakujúcich sa
+fáz~\cite{Agrawal2013}.
+
+\paragraph{Sezónna zložka} kolísa počas roka a~predstavuje tak striedanie
+ročných období. Priebeh funkcie je ovplyvňovaný najmä podnebnými podmienkami
+a~počasím, ale aj kultúrou, náboženstvom či tradíciami. Príkladom môže byť
+predaj sezónnych výrobkov, ktorý sa počas roka výrazne mení. Priebeh funkcie
+dekomponovanej zložky môžeme vidieť na
+obrázku~\ref{fig:seasonal-component}~\cite{Agrawal2013}.
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.8\textwidth]{season_component.pdf}
+  \caption{Príklad sezónnej zložky časového radu.}
+  \label{fig:seasonal-component}
+\end{figure}
+
+\paragraph{Reziduálna zložka} v~literatúre často označovaná aj ako náhodná
+zložka alebo biely šum, predstavuje nepredvídateľnú veličinu, ktorá
+nesystematicky ovplyvňuje pozorovaný časový rad. Metóda jej merania zatiaľ nie
+je v štatistike definovaná. Priebeh funkcie nemá žiadny vzor a~môže vznikať na
+základe prírodných katastrof, ale aj nepredvídateľnej zhody náhod. Príklad
+priebehu môže byť aj graf znázornený na
+obrázku~\ref{fig:random-component}~\cite{Agrawal2013}.
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.8\textwidth]{random_component.pdf}
+  \caption{Príklad reziduálnej zložky časového radu.}
+  \label{fig:random-component}
+\end{figure}
+
+\subsubsection{Typy modelov časových radov}
+Kombináciou komponentov časových radov identifikovaných v~predchádzajúcej
+kapitole vznikajú 2~typy modelov, aditívny a~multiplikatívny.
+
+\begin{equation}
+  \begin{split}
+    Y(t) = T(t) \times S(t) \times C(t) \times I(t)
+    \\
+    Y(t) = T(t) + S(t) + C(t) + I(t)
+  \end{split}
+  \label{eq:time-series-models}
+\end{equation}
+
+Vo vzorci~\ref{eq:time-series-models}, $Y(t)$ predstavuje meranie pozorovanej
+veličiny v~čase $t$. Ostatné premenné $T$, $S$, $C$ a $I$ reprezentujú trendový,
+sezónny, cyklický a~reziduálny komponent. Veličiny multiplikatívneho modelu sa
+môžu vzájomne ovplyvňovať, zatiaľ čo pri aditívnom modely predpokladáme ich
+nezávislosť. Multiplikatívny model je znázornený na
+obrázku~\ref{fig:multi-time-series-model} a~aditívny na
+obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
+
+\begin{figure}[!ht]
+  \centering
+	\captionsetup{justification=centering}
+  \includegraphics[width=\textwidth]{multi_model.jpg}
+  \caption[Príklad multiplikatívneho modelu.]{Príklad multiplikatívneho modelu, index stavebnej produkcie Slovenska, Eurostat.}
+  \label{fig:multi-time-series-model}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\textwidth]{add_model.pdf}
+  \caption{Príklad aditívneho modelu.}
+  \label{fig:add-time-series-model}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Division of time series
