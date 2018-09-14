@@ -989,6 +989,67 @@ radoch, čo môže sťažiť identifikáciu náhlej zmeny správania odberateľo
 viesť k~nesprávnemu označeniu správania odberateľa za
 neštandardné~\cite{Cody2015}.
 
+\subsubsection{Redukcia dát}
+% TODO add figure
+Jednou z~najjednoduchších metód používaných pri redukcií dát je práve
+vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
+predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť medzi
+jednotlivými sa zväčšuje, no medzi všetkými inštanciami je rovnaká. Nevýhodou
+je, že tvar výsledného časového radu je oproti pôvodnému skreslený~\cite{Fu2011}.
+
+Lepšie výsledky dostaneme ak pri vzorkovaní budeme priemerovať hodnoty vo
+vzniknutých intervaloch. Táto metóda sa zvykne nazývať aj po častiach agregovaná
+aproximácia (angl. \textit{piecewise aggregate approximation}), skrátene PAA.
+Vylepšenou verziou je metóda APCA, kedy vzniknuté intervaly majú rôznu dĺžku,
+v~závislosti od tvaru časového radu~\cite{ }. % TODO pridaj Keogh et al. (2000).1 Keogh et al. (2001a)
+
+Ďalšou metódou je aproximácia pomocou rovných čiar, kde hlavnými kategóriami sú
+lineárna interpolácia a~lineárna regresia. Bežnou metódou pri interpolácií je
+použiť po častiach lineárnu aproximáciu (angl. \textit{piecewise linear
+approximation}). Algoritmus začína vytvorením odhadu časového radu, ktorý
+používa polovicu vytvorených intervalov. Tie sú následne zlučované, pokiaľ nie
+je splnené ukončovacie kritérium, napr. celkový počet intervalov. Poradie
+zlučovania je určené na základe ceny zlužovania~\cite{Fu2011}.
+
+% TODO add figure
+Žiadúcim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
+Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
+important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
+prvý, posledný a~bod, ktorý je od týchto dvoch najvzdialenejší. Ďalšie body sú
+určované na základe maximálnej vertikálnej vzdialenosti medzi dvoma susednými
+bodmi PIP. Proces pokračuje pokiaľ nie sú zoradené podľa dôležitosti všetky
+pôvodné body~\cite{Fu2011}.
+
+Ďalší prístup používaný pri reprezentovaní časových radov je ich konvertovanie
+z PAA do symbolickej formy. Najskôr sú diskretizované do intervalov, ktoré sú
+následne konvertované do symbolov. Táto metóda sa nazýva symbolická agregovaná
+aproximácia (angl. \textit{symbolic aggregate approximation}), skrátene SAX.
+Algoritmus rozdelí obor hodnôt na regióny a~každý z~nich je namapovaný na iný
+symbol~\cite{Fu2011}.
+
+Ďalšou metódou je analýza hlavných komponentov (angl. \textit{principal
+component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu menej
+významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
+aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
+
+Podobným problémom ako DTW je aj hľadanie najdlhšej spoločnej podpostupnosti
+(angl. \textit{longest common subsequence}), skrátene LCSS. Ide o~variáciu
+editačnej vzdialenosti a~spájania dvoch sekvencií, ktoré sa môžu natiahnuť
+a~vynechať tak niektoré elementy, bez toho aby sa menilo ich poradie v~rámci
+postupnosti. Narozdiel od DTW, výstupy nie sú skreslené anomáliami
+v~dátach~\cite{Fu2011}.
+
+\subsubsection{Segmentácia časových radov}
+Časové rady sú charakteristické súvislým priebehom a~preto pri ich segmentácii
+je nutné čeliť viacerým problémom. Najjednoduchším prístupom je rozdeliť časový
+rad pomocou okna fixnej dĺžky do segmentov, z~ktorých vzniakjú jednoduché vzory.
+Jedinou úlohou je správne zvoliť dĺžku okna. Pri použití tejto metódy existujú
+dva hlavné problémy. Typycké vzory môžu mať variabilnú dĺžku a~ich výskyt môže
+byť rôzny. Práve preto je vhodnejšie použiť dynamický prístup, ktorý rozdeľuje
+časový rad práve v~bodoch, ktoré zachovávajú cyklicky vyskytujúce sa vzory
+a~vznikajú tak segmenty s~rôznymi dĺžkami~\cite{Fu2011}.
+
+
 %TODO for NN \subsubsection{Normalizácia číselných vektorov}
 
 
