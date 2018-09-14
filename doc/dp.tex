@@ -927,6 +927,7 @@ vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 %-------------------------------------------------------------------------------
 
 \subsection{Redukcia dimenzií a výber atribútov}
+%TODO \subsection{Predspracovanie dát}
 Najčastejšie používanými vysvetľujúcimi premennými sú:
 \begin{itemize}
   \item geografická poloha
@@ -943,6 +944,18 @@ odberateľov je počasie. To je pre viacerých odberateľov rovnaké a~viaže sa
 konkrétny región, v ktorom sa nachádza meteorologická stanica. Dáta z~nich sú
 väčšinou verejne dostupné~\cite{Stankovic2014}.
 
+\subsubsection{Predspracovanie dát}
+%TODO \subsection{Data/Customer filtering}
+Dáta z~inteligentných meračov bývajú často nekompletné a~s~chýbajúcimi
+hodnotami. Väčšina algoritmov nedokáže spracovať takéto dáta a~všetky časové
+rady musia byť rovnakej dĺžky. Rovnako sú nepoužiteľné dáta, ktoré boli
+poškodené pri samotnom zbere dát, nie však pri meraní. Zatiaľ čo chybné meracie
+zariadenia môžu spadať do detekcie anomálií a~zaujímajú nás, dáta ktoré boli
+zduplikované alebo inak poškodené až pri ukladaní môžeme vylúčiť z~datasetu.
+Prípady, kedy zákazník bol zapojený do siete až v~priebehu meraní, musíme
+ošetrovať špeciálne, najčastejšie vynechaním alebo orezaním na najbližšiu menšiu
+dĺžku posuvného okna~\cite{Nagi2009}.
+
 \subsubsection{Výber atribútov}
 Väčšina dát pochádzajúcich z~inteligentných meračov obsahuje iba stĺpce
 s~časovou známkou a~momentálnou spotrebou daného uzlu v~sieti. Z~týchto
@@ -953,6 +966,19 @@ identifikovať takéto atribúty. Otestovanie všetkých kombinácií by bolo č
 a~výpočtovo náročné. Najjednoduchším spôsobom je vytvorenie korelačnej matice
 jednotlivých vysvetľujúcich premenných a~sledovanej veličiny~\cite{Cody2015}.
 
+\subsubsection{Feature extraction}
+Ďalšou technikou používanou pri príprave dát je vytvorenie tvorba nových
+atribútov založených na pôvodných, surových dátach. V~súvisiacom
+článku~\cite{Nagi2009} ide napr. o~vytvorenie hodinového priemeru pre každého
+zákazníka. Vzťah priemernej spotreby $x_h$ môžeme definovať rôzne, v~našom
+prípade ide o~podiel mesačnej priemernej spotreby nasledujúceho mesiaca
+$P_{h+1}$~a~rozdielu dennej spotreby v~aktuálnom a~nasledujúcom mesiaci
+$D_{h+1} - D_{h}$, čo zapíšeme vzorcom~\ref{eq:feature-extraction}
+\begin{equation}
+	\label{eq:feature-extraction}
+  x_h = \frac{P_{h+1}}{D_{h+1} - D_{h}}
+\end{equation}
+
 \subsubsection{Agregácia dát}
 Dáta z~meračov sú dostupné v~pravidelných intervaloch. Pre jednoduchšiu
 manipuláciu s~časovými radmi a~redukciu dimenzií môžu byť dáta agregované do
@@ -962,6 +988,9 @@ chýbajúcich hodnôt. Agregácia dát tiež vyhladzuje malé odchýlky v~časov
 radoch, čo môže sťažiť identifikáciu náhlej zmeny správania odberateľov. To môže
 viesť k~nesprávnemu označeniu správania odberateľa za
 neštandardné~\cite{Cody2015}.
+
+%TODO for NN \subsubsection{Normalizácia číselných vektorov}
+
 
 %-------------------------------------------------------------------------------
 %   Identification of abnormal behavior
@@ -1283,227 +1312,3 @@ výsledky, ktoré budú použité pri obhajobe projektu
 
 % https://github.com/numenta/NAB
 % http://odds.cs.stonybrook.edu/
-
-
-
-
-
-
-%-------------------------------------------------------------------------------
-
-\subsubsection{Kombinované učenie}
-Časové rady sú charakteristické svojou vysokou dimenzionalitou, spojitou povahou
-a~číselnou reprezentáciou. Prístupy používané na ich klasifikáciu preto možno
-rozdeliť do dvoch kategórií, podľa toho či sú založené na atribútoch (angl.
-feature-based) alebo samotných inštanciách (angl. instance-based). Zatiaľ čo
-prvý prístup pôvodné dáta transformuje do nového priestoru, kde môžu byť použité
-konvenčné klasifikátory, druhý sa zameriava na vytváranie klasifikátorov
-špeciálne navrhnutých pre časové rady. Tento prístup je založený na vhodnej
-reprezentácií časového radu a identifikácií podobnosti medzi
-nimi~\cite{Gonzalez2017}.
-
-Existuje niekoľko techník, používaných pri klasifikátoroch s~kombinovaným učením.
-Medzi naznámejšie prístupy patria cluster-then-label, prístupy založené na
-podobnosti nazývané aj geometrické párovanie šablón (angl. geometric template
-matching), rozšírenie klasických prístupov ako je súbor podporných vektorov
-alebo prístupy založené na grafoch. Ďalším prístupom sú samooznačovacie techniky
-(angl. self-labeled techniques), ktorých snahou je zväčšiť pôvodnú množinu
-označených dát o~neoznačené dáta, ktorým bola priradená najvyššia miera
-pravdepodobnosti výskytu v~danej triede. Tie sa ďalej delia a~medzi
-najpopulárnejšie patria samotrénovacie (angl. self-training) techniky
-a~samotrénovacie techniky s~kooperáciou (angl. co-training) techniky~\cite{Gonzalez2017}.
-% TODO add maybe some other references
-
-Samotrénovacie techniky iteratívne klasifikujú neoznačené dáta za predpokladu,
-že vyššia prenosť predikcie má tendenciu byť správna. V~prípade, že k~dispozícii
-dostupné iba dáta z~jednej triedy, hovoríme o~pozitívnom neoznačenom učení.
-Algoritmus k-najbližších susedov je typicky používaný na klasifikáciu takýchto
-úloh. Naopak, spolutrénovacie semi-supervised klasifikátory potrebujú dva
-podmienene nezávislé pohľady, ktoré sú použité pri učení klasifikátora. Opäť sú
-neoznačené inštancie s~najvyššou mierou pravdepodobnosti označené a~použité pri
-trénovaní ďalšieho pohľadu. Keďže väčšina prípadov meraní spolú úzko koreluje,
-je náročné nájsť nezávislé pohľady na dáta~\cite{Gonzalez2017}.
-
-Samotrénovacie prístupy sa lýšia najmä v nasledujúcom:
-
-Najčastejšími \textbf{mechanizmami pridávania} je inkrementovanie a~zmena.
-Zatiaľ čo prvý, krok po kroku označuje najpravdepodobnejšie inštancie, druhý
-usmerňuje už označené inštancie a~odznačuje tie, ktoré by mohli mohli v~tejto
-množine predstavovať šum~\cite{Gonzalez2017}.
-
-Samooznačovacie techniky môžu byť založené rôznych
-\textbf{klasifikačných modeloch}, ktoré pozostávajú z~jedného alebo viacerých
-klasifikátoroch. Tie určujú triedu neoznačených inštancií. Zatiaľ čo modely
-s~jedným klasifikátorom určia pre každú inštanciu triedu, do ktorej spadá,
-multi-klasifikátorové modely kombinujú hypotézy viacerých klasifikátorov
-a~triedu určujú kombináciou ich výsledkov. S~tým súvisí aj
-\textbf{prístup k učeniu}, ktorý môže byť jednoduchý alebo viacnásobný, ktorý je
-aplikovateľný iba pri multi-klasifikátorových
-modeloch, kde každý klasifikátor vychádza z~iného pristúpu~\cite{Gonzalez2017}.
-% TODO explain single and multi learning approach
-
-\textbf{Ukončovacie kritérium} predstavuje mechanizmus, ktorý zabraňuje
-samooznačovaciemu procesu v~označovaní inštancií, ktorým bola pridelená nízka
-miera pravdepodobnosti. Často je ukončovacím kritériom iba počet iterácií.
-Ďalším kritériom môže byť výskyt nemeniacich sa hypotéz počas trénovacieho
-procesu~\cite{Gonzalez2017}.
-
-%-------------------------------------------------------------------------------
-
-\paragraph{exogenous variable}
-V~prípade, že by boli k~dispozícií všetky parametre distribučnej sieti, bolo by
-možné vypočítať aj presné množstvo technických strat. Medzi parametrami by
-museli byť aj jednotlivé body pripojenia všetkých zákazníkov, topológia siete,
-ale aj nameraný odpor medzi jednotlivými uzlami v~sieti či odber energie
-zákazníkov. Táketo pokrytie parametrov je v~praxi ekonomicky extrémne náročné.
-Aj keď inteligentné merače sa stávajú čoraz viac rozšírenými, ich prípadná
-porucha vnáša do sieti nové premenné, ktoré nie je možné zmerať. Aj z~tohto
-dôvodu nie je ľahké jednoznačne oddeliť technické a~netechnické straty v~sieti.
-V~práci sa preto ďalej budeme zameriavať na anomálie vo všeobecnosti, nezávisle
-na tom, či sú spôsobené poškodením meracích zariadení alebo neoprávnenou
-manipuláciou zákazníka~\cite{Nikovski2013}.
-
-%-------------------------------------------------------------------------------
-
-Na detekciu anomálií sú používané nasledujúce metódy~\cite{Spiric2015}.
-- Detection technique based on classification.
-- The nearest neighbor technique.
-- Clustering technique.
-- Statistical technique.
-- Information theoretic technique.
-- Spectral technique.
-- Handling contextual anomalies.
-- Handling collective anomalies.
-
-%-------------------------------------------------------------------------------
-
-\subsubsection{Premiestňovanie zhlukov}
-Algoritmus pozostáva z~nasledujúcich 3~krokov:
-1. Začnime s~počiatočným zhlukovaním $C$, ktoré má predpísané konečný počte
-zhlukov $k$
-2. Pre každý časový rad vypočítajme maticu rozdieľnosti, výsledok si uložme
-a~vypočítajme trajektóriu podobnosti
-3. Vytvorme zhlukovanie $C'$, ktoré bude lepšie ako $C$ na základe používanej
-metriky z~\ref{c:distance-metrics}, ak takéto zhlukovanie neexistuje,
-nepokračujeme, inak prepíšeme pôvodné zhlukovanie a~skočíme na krok 1
-Zhlukovanie $C'$ vzniká z~pôvodného zhlukovania $C$ presunom časových radov
-medzi jednotlivými zhlukmi alebo ich výmenou. Algoritmus je aplikovatľný iba na
-časové rady rovnakej dĺžky, keďže vzdialenosť na priereze časových radov nie je
-definovaná~\cite{WarrenLiao2005}.
-
-%-------------------------------------------------------------------------------
-
-% TODO add figure
-Jednou z~najjednoduchších metód používaných pri redukcií dát je práve
-vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
-predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť medzi
-jednotlivými sa zväčšuje, no medzi všetkými inštanciami je rovnaká. Nevýhodou
-je, že tvar výsledného časového radu je oproti pôvodnému skreslený~\cite{Fu2011}.
-
-Lepšie výsledky dostaneme ak pri vzorkovaní budeme priemerovať hodnoty vo
-vzniknutých intervaloch. Táto metóda sa zvykne nazývať aj po častiach agregovaná
-aproximácia (angl. \textit{piecewise aggregate approximation}), skrátene PAA.
-Vylepšenou verziou je metóda APCA, kedy vzniknuté intervaly majú rôznu dĺžku,
-v~závislosti od tvaru časového radu~\cite{ }. % TODO pridaj Keogh et al. (2000).1 Keogh et al. (2001a)
-
-Ďalšou metódou je aproximácia pomocou rovných čiar, kde hlavnými kategóriami sú
-lineárna interpolácia a~lineárna regresia. Bežnou metódou pri interpolácií je
-použiť po častiach lineárnu aproximáciu (angl. \textit{piecewise linear
-approximation}). Algoritmus začína vytvorením odhadu časového radu, ktorý
-používa polovicu vytvorených intervalov. Tie sú následne zlučované, pokiaľ nie
-je splnené ukončovacie kritérium, napr. celkový počet intervalov. Poradie
-zlučovania je určené na základe ceny zlužovania~\cite{Fu2011}.
-
-% TODO add figure
-Žiadúcim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
-Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
-important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
-prvý, posledný a~bod, ktorý je od týchto dvoch najvzdialenejší. Ďalšie body sú
-určované na základe maximálnej vertikálnej vzdialenosti medzi dvoma susednými
-bodmi PIP. Proces pokračuje pokiaľ nie sú zoradené podľa dôležitosti všetky
-pôvodné body~\cite{Fu2011}.
-
-Ďalší prístup používaný pri reprezentovaní časových radov je ich konvertovanie
-z PAA do symbolickej formy. Najskôr sú diskretizované do intervalov, ktoré sú
-následne konvertované do symbolov. Táto metóda sa nazýva symbolická agregovaná
-aproximácia (angl. \textit{symbolic aggregate approximation}), skrátene SAX.
-Algoritmus rozdelí obor hodnôt na regióny a~každý z~nich je namapovaný na iný
-symbol~\cite{Fu2011}.
-
-Ďalšou metódou je analýza hlavných komponentov (angl. \textit{principal
-component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu menej
-významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
-aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
-
-Podobným problémom ako DTW je aj hľadanie najdlhšej spoločnej podpostupnosti
-(angl. \textit{longest common subsequence}), skrátene LCSS. Ide o~variáciu
-editačnej vzdialenosti a~spájania dvoch sekvencií, ktoré sa môžu natiahnuť
-a~vynechať tak niektoré elementy, bez toho aby sa menilo ich poradie v~rámci
-postupnosti. Narozdiel od DTW, výstupy nie sú skreslené anomáliami
-v~dátach~\cite{Fu2011}.
-
-Časové rady sú charakteristické súvislým priebehom a~preto pri ich segmentácii
-je nutné čeliť viacerým problémom. Najjednoduchším prístupom je rozdeliť časový
-rad pomocou okna fixnej dĺžky do segmentov, z~ktorých vzniakjú jednoduché vzory.
-Jedinou úlohou je správne zvoliť dĺžku okna. Pri použití tejto metódy existujú
-dva hlavné problémy. Typycké vzory môžu mať variabilnú dĺžku a~ich výskyt môže
-byť rôzny. Práve preto je vhodnejšie použiť dynamický prístup, ktorý rozdeľuje
-časový rad práve v~bodoch, ktoré zachovávajú cyklicky vyskytujúce sa vzory
-a~vznikajú tak segmenty s~rôznymi dĺžkami~\cite{Fu2011}.
-
-Cieľom dolovania v~dátach je odhaliť skryté informácie z~pôvodných alebo
-transformovaných časových radov. Najčastejšou úlohou je identifikácia vzorov
-v~časových radoch, ale aj ich zhlukovanie, klasifikácia alebo
-sumarizácia~\cite{Fu2011}.
-
-%-------------------------------------------------------------------------------
-
-
-@article{Gonzalez2017,
-  author = {Gonz{\'{a}}lez, Mabel and Bergmeir, Christoph and Triguero, Isaac and Rodr{\'{i}}guez, Yanet and Ben{\'{i}}tez, Jos{\'{e}} M.},
-  doi = {10.1007/s10115-017-1090-9},
-  issn = {02193116},
-  journal = {Knowledge and Information Systems},
-  keywords = {Self-labeled,Self-training,Semi-supervised classification,Semi-supervised learning,Time series classification,check,later},
-  pages = {1--36},
-  publisher = {Springer London},
-  title = {{Self-labeling techniques for semi-supervised time series classification: an empirical study}},
-  year = {2017},
-}
-
-
-@article{Fu2011,
-  author = {Fu, Tak Chung},
-  doi = {10.1016/j.engappai.2010.09.007},
-  isbn = {2472061331},
-  issn = {09521976},
-  journal = {Engineering Applications of Artificial Intelligence},
-  number = {1},
-  pages = {164--181},
-  pmid = {1000285846},
-  publisher = {Elsevier},
-  title = {{A review on time series data mining}},
-  url = {http://dx.doi.org/10.1016/j.engappai.2010.09.007},
-  volume = {24},
-  year = {2011},
-}
-
-@article{Hooper2010,
-  author = {Hooper, Andrew and Bekaert, David and Spaans, Karsten},
-  pages = {14201},
-  title = {{Recent advances in time series InSAR}},
-  volume = {12},
-  year = {2010},
-}
-
-@article{Wei2006,
-  author = {Wei, Li and Keogh, Eamonn},
-  doi = {10.1145/1150402.1150498},
-  isbn = {1595933395},
-  issn = {01651684},
-  journal = {Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining  - KDD '06},
-  pages = {748},
-  title = {{Semi-supervised time series classification}},
-  url = {http://portal.acm.org/citation.cfm?doid=1150402.1150498},
-  year = {2006},
-}
