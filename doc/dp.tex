@@ -424,22 +424,39 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 
 % TODO add some figures
 \subsubsection{Delenie časových radov}
-Výraznými vlastnosťami časových radov sú aj periodicita a~synchrónnosť. Vznikajú
-tak 4 nasledujúce kategórie~\cite{Teng2010}:
+Výraznými vlastnosťami časových radov sú aj synchrónnosť a~periodicita,
+znázornená na
+obrázkoch~\ref{fig:periodic-time-series}~a~\ref{fig:non-periodic-time-series}.
+Vznikajú tak 4 nasledujúce kategórie~\cite{Teng2010}:
 \begin{itemize}
 	\item \textbf{Periodické a synchrónne časové rady} predstavujú najjednoduchšiu
 	kombináciu, keďže každý časový rad má konštantnú časovú periódu a~zároveň sú
 	všetky časové rady časovo zarovnané na konkrétny časový bod.
 
-	\item \textbf{Neperiodické a synchrónne časové rady} nemajú žiadnu periodicitu,
-	ale opäť sú časovo zarovnané.
+	\item \textbf{Neperiodické a synchrónne časové rady} nemajú žiadnu
+	periodicitu, ale opäť sú časovo zarovnané.
 
-	\item \textbf{Periodické a asynchrónne časové rady} nie sú časovo zarovnané, ale
-	obsahujú periodicitu, čiže 	začiatok periódy v~každom časovo rade je iný.
+	\item \textbf{Periodické a asynchrónne časové rady} nie sú časovo zarovnané,
+	ale obsahujú periodicitu, čiže začiatok periódy v~každom časovo rade je iný.
 
-	\item \textbf{Neperiodické a asynchrónne časové rady} predstavujú skupinu, do ktorej
-	spadajú ostatné časové rady, ktoré neobsahujú	periodicitu a~ani synchrónnosť.
+	\item \textbf{Neperiodické a asynchrónne časové rady} predstavujú skupinu, do
+	ktorej spadajú ostatné časové rady, ktoré neobsahujú periodicitu a~ani
+	synchrónnosť.
 \end{itemize}
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{periodic_time_series.png}
+  \caption{Príklad periodických časových radov~\cite{Perea2015}.}
+  \label{fig:periodic-time-series}
+\end{figure}
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{non_periodic_time_series.png}
+  \caption{Príklad neperiodických časových radov~\cite{Perea2015}.}
+  \label{fig:non-periodic-time-series}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection
