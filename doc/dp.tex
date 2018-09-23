@@ -515,6 +515,13 @@ transakcia výrazne väčšieho objemu peňazí predstavuje podvod, zatiaľ čo 
 transakcie, nachádzajúce sa v~normálnom rozsahu predstavujú normálne dáta, ktoré
 nie sú anomáliou~\cite{Chandola2009}.
 
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{point_anomalies.png}
+  \caption{Príklad bodových anomálií~\cite{Chandola2009}.}
+  \label{fig:point-anomalies}
+\end{figure}
+
 \paragraph{Kontextové anomálie} predstavujú inštancie, ktoré sa nachádzajú
 v~oblasti normálnych dát, ale v~špecifickom kontexte sú považované za anomáliu.
 Kontext je daný kontextovými atribútmi v~dátach, na základe ktorých sa určujú
@@ -536,6 +543,13 @@ Zatiaľ čo v~niektorých prípadoch je definovanie kontextu priamočiare, exist
 domény, kde to jednoduché nie je. Dôležité je aby kontextové atribúty boli
 zmysluplne určené v~cieľovej doméne ich aplikácie~\cite{Chandola2009}.
 
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{contextual_anomalies.png}
+  \caption{Príklad kontextových anomálií~\cite{Chandola2009}.}
+  \label{fig:contextual-anomalies}
+\end{figure}
+
 \paragraph{Skupinové anomálie} sa nachádzajú v~oblasti normálnych dát, ale
 skupina týchto inštancií tvorí spolu anomáliu. Vzniknutá anomália obsahuje
 sekvenciu inštancií, ktorá by pri inom zoradení nepredstavovala anomáliu.
@@ -552,6 +566,13 @@ a~skupinových anomálií je možné transformovať na problém detekcie kontext
 anomálií, v~prípade, že sa prihliada na kontext jednotlivých inštancií. Techniky
 používané pri detekcii skupinových anomálií sa značne líšia od techník
 používaných pri bodových a~kontextových anomáliách~\cite{Chandola2009}.
+
+\begin{figure}[]
+  \centering
+  \includegraphics[width=0.9\textwidth]{collective_anomalies.png}
+  \caption{Príklad skupinových anomálií~\cite{Chandola2009}.}
+  \label{fig:collective-anomalies}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection approaches
