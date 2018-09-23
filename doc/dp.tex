@@ -340,7 +340,7 @@ neustále predlžovanie priemernej doby dožitia alebo aj rast svetovej populác
 Priebeh dekompovanej trendovej zložky môžeme vidieť na
 obrázku~\ref{fig:trend-component}~\cite{Agrawal2013}.
 
-\begin{figure}[]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{trend_component.pdf}
   \caption{Príklad trendovej zložky časového radu.}
@@ -360,7 +360,7 @@ predaj sezónnych výrobkov, ktorý sa počas roka výrazne mení. Priebeh funkc
 dekomponovanej zložky môžeme vidieť na
 obrázku~\ref{fig:seasonal-component}~\cite{Agrawal2013}.
 
-\begin{figure}[]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{season_component.pdf}
   \caption{Príklad sezónnej zložky časového radu.}
@@ -375,7 +375,7 @@ základe prírodných katastrof, ale aj nepredvídateľnej zhody náhod. Príkla
 priebehu môže byť aj graf znázornený na
 obrázku~\ref{fig:random-component}~\cite{Agrawal2013}.
 
-\begin{figure}[]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{random_component.pdf}
   \caption{Príklad reziduálnej zložky časového radu.}
@@ -403,7 +403,7 @@ nezávislosť. Multiplikatívny model je znázornený na
 obrázku~\ref{fig:multi-time-series-model} a~aditívny na
 obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
 	\captionsetup{justification=centering}
   \includegraphics[width=\textwidth]{multi_model.jpg}
@@ -411,7 +411,7 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
   \label{fig:multi-time-series-model}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{add_model.pdf}
   \caption{Príklad aditívneho modelu.}
@@ -444,14 +444,14 @@ Vznikajú tak 4 nasledujúce kategórie~\cite{Teng2010}:
 	synchrónnosť.
 \end{itemize}
 
-\begin{figure}[]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{periodic_time_series.png}
   \caption{Príklad periodických časových radov~\cite{Perea2015}.}
   \label{fig:periodic-time-series}
 \end{figure}
 
-\begin{figure}[]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{non_periodic_time_series.png}
   \caption{Príklad neperiodických časových radov~\cite{Perea2015}.}
@@ -558,6 +558,13 @@ Príkladom môžu byť systémové volania operačného systému, ktoré sú v~p
 dodržania určitej postupnosti označené ako činnosť škodlivého
 softvéru~\cite{Chandola2009}.\\
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{collective_anomalies.png}
+  \caption{Príklad skupinových anomálií~\cite{Chandola2009}.}
+  \label{fig:collective-anomalies}
+\end{figure}
+
 Zatiaľ čo bodové anomálie sa môžu vyskytovať v~každom datasete, skupinové sa
 vyskytujú iba v~datasetoch, kde existuje medzi inštanciami vzťah. Pri
 kontextových anomáliách je potrebné určiť kontextové atribúty, ktoré sa
@@ -566,13 +573,6 @@ a~skupinových anomálií je možné transformovať na problém detekcie kontext
 anomálií, v~prípade, že sa prihliada na kontext jednotlivých inštancií. Techniky
 používané pri detekcii skupinových anomálií sa značne líšia od techník
 používaných pri bodových a~kontextových anomáliách~\cite{Chandola2009}.
-
-\begin{figure}[]
-  \centering
-  \includegraphics[width=0.9\textwidth]{collective_anomalies.png}
-  \caption{Príklad skupinových anomálií~\cite{Chandola2009}.}
-  \label{fig:collective-anomalies}
-\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection approaches
@@ -776,10 +776,12 @@ Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každ
 \paragraph{ARIMA}
 V~práci~\cite{Xiong2002} autori navrhli metódu zhlukujúcu jednorozmerné časové
 rady. Predpokladali, že časové rady sú vygenerované $k$ rôznymi ARIMA modelmi.
-Algoritmus na maximalizáciu očakávaní (angl. \textit{expectation maximalization
-algorithm}) sa naučil správne určiť koeficienty a~parametre jednotlivých
-komponentov tak, že počet zhlukov nebolo nutné určiť, ale algoritmus automaticky
-určil počet modelov $k$.
+Vylepšili algoritmus na maximalizáciu očakávaní (angl. \textit{expectation
+maximalization algorithm}) tak, že sa naučil správne určiť koeficienty
+a~parametre jednotlivých modelov zvyšovaním počtu modelov až do momentu, kedy
+vznikol redundantný model. Algoritmus zkonvergoval v~prípade, že počet modelov
+nebol väčší ako aktuálny počet zhlukov. Na záver boli odstránené podobné modely,
+čím sa ešte zmenšil výsledný počet zhlukov $k$.
 
 \subsubsection{Ďalšie prístupy k~zhlukovaniu}
 Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
