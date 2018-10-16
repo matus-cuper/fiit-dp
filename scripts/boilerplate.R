@@ -1,3 +1,16 @@
+# install.packages("devtools")
+# devtools::install_github("twitter/AnomalyDetection")
+# install.packages("zoo")
+
+library(AnomalyDetection)
+library(dplyr)
+library(lubridate)
+library(zoo)
+
+
+WEEK <- 7
+
+
 loadDatasetFromDDC <- function(pathToFile) {
   train <- read.csv2(pathToFile, sep = ',')
 
@@ -8,7 +21,6 @@ loadDatasetFromDDC <- function(pathToFile) {
   tmp <- data.frame(train$Values, index(1:nrow(train)))
   tmp <- na.approx(tmp, maxgap = 100)
   tmp <- data.frame(tmp)
-  tmp$train.Values[is.na(tmp$train.Values)] <- -1
 
   train$Values <- tmp$train.Values
   colnames(train) <- c("timestamp", "load")
