@@ -13,7 +13,7 @@ WEEK <- 7
 
 loadDatasetFromDDC <- function(pathToFile) {
   train <- read.csv2(pathToFile, sep = ',')
-  train$Values <- as.numeric(train$Values)
+  train$Values <- as.double(as.character(train$Values))
   train$Timestamp <- as.POSIXlt(train$Timestamp)
 
   # For some reason, missing values are identified as 1, not NA
@@ -44,7 +44,7 @@ loadDatasetFromSchool <- function(pathToFile) {
   train$dayId <- NULL
   train$holiday <- NULL
 
-  train$load <- as.numeric(train$load)
+  train$load <- as.double(as.character(train$load))
   train$dateTime <- as.POSIXlt(train$dateTime)
 
   colnames(train) <- c("timestamp", "load")
