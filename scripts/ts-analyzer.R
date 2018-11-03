@@ -6,14 +6,15 @@ for (f in c("38_9792.csv", "38_52481.csv", "38_52477.csv", "38_52476.csv", "38_5
   }
 
   train <- loadDataset(f)
+  print(f)
 
   train$date <- strftime(train$timestamp, "%Y-%m-%d")
   freq <- max(aggregate(load ~ date, data = train, FUN = length)$load)
   train$date <- NULL
 
   start <- 1
-  step <- freq * WEEK * 3
-  end <- freq * WEEK * 2
+  step <- freq * WEEK * 2
+  end <- freq * WEEK * 3
 
   while (end < nrow(train) && start > 0) {
     res = AnomalyDetectionVec(train$load[start:end], max_anoms = 0.1, direction = "both", plot = TRUE, period = freq, longterm_period = freq * WEEK)

@@ -52,8 +52,6 @@ loadDatasetFromSchool <- function(pathToFile) {
 }
 
 loadDataset <- function(pathToFile, groupBy = 1) {
-  pathToFile <- "~/r/fiit-dp/data/ddc/data/electricity/2.csv"
-  groupBy <- 2
   if (grepl("electricity", pathToFile)) {
     train <- loadDatasetFromDDC(pathToFile)
   } else if (grepl("summarized", pathToFile)) {
