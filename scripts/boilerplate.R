@@ -70,12 +70,17 @@ loadDataset <- function(pathToFile, groupBy = 1) {
   train <- train[!is.na(train$load), ]
   train$date <- strftime(train$timestamp, "%Y-%m-%d")
 
-  # Find day period and remove uncomplete days
-  freq <- max(aggregate(load ~ date, data = train, FUN = length)$load)
-  agg <- aggregate(cbind(load) ~ date, data = train, length)
-  train <- train[train$date != agg[freq != agg$load,]$date, ]
-  #train[seconds_to_period(diff(as.POSIXct(train$date))) > period(seconds(86400)), ]
+  # Make temporary dataset more readable
+  agg <- aggregate(load ~ date, data = train, FUN = length)
+  agg$date <- strptime(agg$date, "%Y-%m-%d")
+  agg$freq <- agg$load
+  agg$load <- NULL
 
+  # Find day period and remove uncomplete days
+  freq <- max(agg$freq)
+
+  # Filter unused rows and columns
+  train <- train[train$date %in% agg[freq == agg$freq,]$date, ]
   train$date <- NULL
 
   if (groupBy > 1) {
