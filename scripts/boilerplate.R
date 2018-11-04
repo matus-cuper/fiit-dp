@@ -86,7 +86,7 @@ loadDataset <- function(pathToFile, groupBy = 1) {
   if (groupBy > 1) {
     train$id <- ceiling(c(1:nrow(train)) / groupBy)
     agg <- aggregate(cbind(load) ~ id, data = train, sum)
-    timestamps <- train$timestamp[seq(1, nrow(train), groupBy)]
+    timestamps <- train$timestamp[seq(1 + ceiling((groupBy / 2) - 1), nrow(train), groupBy)]
     train <- data.frame(timestamps, agg$load)
   }
 
