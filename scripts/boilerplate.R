@@ -25,10 +25,11 @@ loadDatasetFromDDC <- function(pathToFile) {
   train$Values <- approximation$train.Values
 
   train$date <- as.factor(strftime(train$Timestamp, "%Y-%m-%d"))
+  train$time <- as.factor(strftime(train$Timestamp, "%H:%M:%S"))
   train$day <- as.integer(as.POSIXlt(train$date)$wday + 1)
   train$holiday <- as.integer(0)
 
-  colnames(train) <- c("timestamp", "load", "date", "day", "holiday")
+  colnames(train) <- c("timestamp", "load", "date", "time", "day", "holiday")
   return(train)
 }
 
@@ -42,14 +43,13 @@ loadDatasetFromDDCSummarized <- function(pathToFile) {
 loadDatasetFromSchool <- function(pathToFile) {
   train <- read.csv2(pathToFile)
   train$id <- NULL
-  train$time <- NULL
   train$dayId <- NULL
 
   train$load <- as.double(as.character(train$load))
   train$dateTime <- as.POSIXlt(train$dateTime)
 
-  colnames(train) <- c("timestamp", "date", "day", "holiday", "load")
-  train <- train[, c(1, 5, 2, 3, 4)]
+  colnames(train) <- c("timestamp", "date", "time", "day", "holiday", "load")
+  train <- train[, c(1, 6, 2, 3, 4, 5)]
   return(train)
 }
 
