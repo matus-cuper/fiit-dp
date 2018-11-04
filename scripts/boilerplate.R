@@ -24,7 +24,11 @@ loadDatasetFromDDC <- function(pathToFile) {
   approximation <- data.frame(na.approx(approximation, maxgap = 100))
   train$Values <- approximation$train.Values
 
-  colnames(train) <- c("timestamp", "load")
+  train$date <- as.factor(strftime(train$Timestamp, "%Y-%m-%d"))
+  train$day <- as.integer(as.POSIXlt(train$date)$wday + 1)
+  train$holiday <- as.integer(0)
+
+  colnames(train) <- c("timestamp", "load", "date", "day", "holiday")
   return(train)
 }
 
@@ -38,16 +42,14 @@ loadDatasetFromDDCSummarized <- function(pathToFile) {
 loadDatasetFromSchool <- function(pathToFile) {
   train <- read.csv2(pathToFile)
   train$id <- NULL
-  train$date <- NULL
   train$time <- NULL
-  train$dayOfWeek <- NULL
   train$dayId <- NULL
-  train$holiday <- NULL
 
   train$load <- as.double(as.character(train$load))
   train$dateTime <- as.POSIXlt(train$dateTime)
 
-  colnames(train) <- c("timestamp", "load")
+  colnames(train) <- c("timestamp", "date", "day", "holiday", "load")
+  train <- train[, c(1, 5, 2, 3, 4)]
   return(train)
 }
 
@@ -66,9 +68,8 @@ loadDataset <- function(pathToFile, groupBy = 1) {
     return(NULL)
   }
 
-  # First create date column
+  # Remove NA values
   train <- train[!is.na(train$load), ]
-  train$date <- strftime(train$timestamp, "%Y-%m-%d")
 
   # Make temporary dataset more readable
   agg <- aggregate(load ~ date, data = train, FUN = length)
@@ -79,9 +80,8 @@ loadDataset <- function(pathToFile, groupBy = 1) {
   # Find day period and remove uncomplete days
   freq <- max(agg$freq)
 
-  # Filter unused rows and columns
+  # Filter unused rows
   train <- train[train$date %in% agg[freq == agg$freq,]$date, ]
-  train$date <- NULL
 
   if (groupBy > 1) {
     train$id <- ceiling(c(1:nrow(train)) / groupBy)
@@ -90,6 +90,5 @@ loadDataset <- function(pathToFile, groupBy = 1) {
     train <- data.frame(timestamps, agg$load)
   }
 
-  colnames(train) <- c("timestamp", "load")
   return(train)
 }
