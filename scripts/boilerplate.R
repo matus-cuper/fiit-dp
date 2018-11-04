@@ -92,3 +92,25 @@ loadDataset <- function(pathToFile, groupBy = 1) {
 
   return(train)
 }
+
+groupBy <- function(dataset, groupSize) {
+  dataset$group <- c(1:nrow(dataset)) %% groupSize + 1
+  return(dataset)
+}
+
+visualizeDataset <- function(dataset, days = WEEK, sleepTime = 0.5) {
+  freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
+  datasetSize <- freq * days
+
+  plot(ts(dataset$load[1:datasetSize]))
+  for (i in 1:(nrow(dataset) / datasetSize)) {
+    lines(ts(dataset$load[((i * datasetSize) + 1):((1 + i) * datasetSize)]))
+    Sys.sleep(sleepTime)
+  }
+
+  dataset <- groupBy(dataset, datasetSize)
+  mea <- aggregate(load ~ group, data = dataset, FUN = mean)
+  med <- aggregate(load ~ group, data = dataset, FUN = median)
+  lines(mea, col = "red")
+  lines(med, col = "green")
+}
