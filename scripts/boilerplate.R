@@ -83,17 +83,26 @@ loadDataset <- function(pathToFile, groupBy = 1) {
   # Filter unused rows
   train <- train[train$date %in% agg[freq == agg$freq,]$date, ]
 
-  if (groupBy > 1) {
-    train$id <- ceiling(c(1:nrow(train)) / groupBy)
-    agg <- aggregate(cbind(load) ~ id, data = train, sum)
-    timestamps <- train$timestamp[seq(1 + ceiling((groupBy / 2) - 1), nrow(train), groupBy)]
-    train <- data.frame(timestamps, agg$load)
-  }
+  if (groupBy > 1)
+    train <- groupByAggregate(train, groupBy)
 
   return(train)
 }
 
-groupBy <- function(dataset, groupSize) {
+groupByAggregate <- function(dataset, groupSize) {
+  # Sum load by generated group
+  dataset$id <- ceiling(c(1:nrow(dataset)) / groupSize)
+  agg <- aggregate(cbind(load) ~ id, data = dataset, sum)
+
+  # Join dataset and rename columns
+  dataset <- dataset[seq(1 + ceiling((groupSize / 2) - 1), nrow(dataset), groupSize), c("timestamp", "date", "time", "day", "holiday") ]
+  dataset$load <- agg$load
+  dataset <- dataset[, c(1, 6, 2, 3, 4, 5)]
+
+  return(dataset)
+}
+
+groupByAddColumn <- function(dataset, groupSize) {
   dataset$group <- c(1:nrow(dataset)) %% groupSize + 1
   return(dataset)
 }
@@ -111,6 +120,75 @@ visualizeDataset <- function(dataset, days = WEEK, sleepTime = 0.5) {
   dataset <- groupBy(dataset, datasetSize)
   mea <- aggregate(load ~ group, data = dataset, FUN = mean)
   med <- aggregate(load ~ group, data = dataset, FUN = median)
-  lines(mea, col = "red")
-  lines(med, col = "green")
+  lines(mea, col = "red", lwd = 2)
+  lines(med, col = "green", lwd = 2)
+}
+
+findAnomaliesSum <- function(dataset, days = 4 * WEEK, aggregations = c(0, 1, 2, 3, 4)) {
+  freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
+  datasetSize <- freq * days
+
+  dataset <- dataset[1:datasetSize, ]
+  anomalies <- data.frame(matrix(0, nrow = nrow(dataset), ncol = length(aggregations)))
+
+  for (a in aggregations) {
+    ratio <- 2**a
+    # TODO create new func
+    train <- groupByAggregate(dataset, ratio)
+    train <- train[1:(datasetSize / ratio), ]
+
+    res <- AnomalyDetectionVec(
+      train$load,
+      max_anoms=0.1,
+      direction='both',
+      plot=TRUE,
+      period = freq / ratio,
+      longterm_period = freq * WEEK / ratio
+    )
+
+    print(paste("period", freq / ratio))
+    print(paste("long period", freq * WEEK / ratio))
+
+    plot(ts(train$load, frequency = freq / ratio))
+    # plot(res$plot)
+    Sys.sleep(1)
+    plot(res$plot)
+    Sys.sleep(2)
+
+    for (j in 1:ratio) {
+      anomalies[res$anoms$index * ratio + j, i + 1] <- 1
+    }
+  }
+
+  anomalies$score <- apply(anomalies, 1, FUN = function(x) sum(x))
+  return(anomalies)
+}
+
+visualizeDataset <- function(dataset, days = WEEK, sleepTime = 0.5) {
+  dataset <- c
+  freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
+  datasetSize <- freq * days
+
+  plot(ts(dataset$load[1:datasetSize]))
+
+  res <- AnomalyDetectionVec(
+    dataset$load[1:datasetSize],
+    max_anoms=0.1,
+    direction='both',
+    plot=TRUE,
+    period = freq,
+    longterm_period = freq * WEEK
+  )
+
+
+  for (i in 1:(nrow(dataset) / datasetSize)) {
+    lines(ts(dataset$load[((i * datasetSize) + 1):((1 + i) * datasetSize)]))
+    Sys.sleep(sleepTime)
+  }
+
+  dataset <- groupBy(dataset, datasetSize)
+  mea <- aggregate(load ~ group, data = dataset, FUN = mean)
+  med <- aggregate(load ~ group, data = dataset, FUN = median)
+  lines(mea, col = "red", lwd = 2)
+  lines(med, col = "green", lwd = 2)
 }
