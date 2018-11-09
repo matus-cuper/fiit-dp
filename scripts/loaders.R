@@ -75,3 +75,30 @@ loadDataset <- function(pathToFile, groupBy = 1) {
 
   return(train)
 }
+
+
+loadWholeDataset <- function(targetDirectory, weeks = 10) {
+  result <- data.frame()
+
+  for (f in list.files(targetDirectory)) {
+    # Load new file for processing
+    pathToFile <- paste(targetDirectory, f, sep = "/")
+    dataset <- loadDataset(pathToFile)
+    print(paste("Start processing", pathToFile))
+
+    # Filter rows and columns
+    freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
+    dataset <- dataset[1:(freq * WEEK * weeks), ]
+    dataset <- dataset[, c("timestamp", "load")]
+    colnames(dataset) <- c("timestamp", f)
+    dataset$timestamp <- as.character(dataset$timestamp)
+
+    # Merge dataframes
+    if (length(result) > 0)
+      result <- merge(result, dataset)
+    else
+      result <- dataset
+  }
+
+  return(result)
+}
