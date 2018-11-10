@@ -77,14 +77,16 @@ loadDataset <- function(pathToFile, groupBy = 1) {
 }
 
 
-loadWholeDataset <- function(targetDirectory, weeks = 10) {
+loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
   result <- data.frame()
+  counter <- 0
 
   for (f in list.files(targetDirectory)) {
     # Load new file for processing
     pathToFile <- paste(targetDirectory, f, sep = "/")
     dataset <- loadDataset(pathToFile)
     print(paste("Start processing", pathToFile))
+    counter <- counter + 1
 
     # Filter rows and columns
     freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
@@ -98,6 +100,9 @@ loadWholeDataset <- function(targetDirectory, weeks = 10) {
       result <- merge(result, dataset)
     else
       result <- dataset
+
+    if (counter > fileCount)
+      break
   }
 
   return(result)

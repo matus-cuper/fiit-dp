@@ -1,10 +1,25 @@
-# install.packages("devtools")
-# devtools::install_github("twitter/AnomalyDetection")
-# install.packages("zoo")
+if (!require("cluster")) install.packages("cluster")
+if (!require("clusterCrit")) install.packages("clusterCrit")
+if (!require("data.table")) install.packages("data.table")
+if (!require("devtools")) install.packages("devtools")
+if (!require("dplyr")) install.packages("dplyr")
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("lubridate")) install.packages("lubridate")
+if (!require("plotly")) install.packages("plotly")
+if (!require("TSrepr")) install.packages("TSrepr")
+if (!require("zoo")) install.packages("zoo")
+
+devtools::install_github("twitter/AnomalyDetection", quiet = TRUE)
 
 library(AnomalyDetection)
+library(cluster)
+library(clusterCrit)
+library(data.table)
 library(dplyr)
+library(ggplot2)
 library(lubridate)
+library(plotly)
+library(TSrepr)
 library(zoo)
 
 
