@@ -12,15 +12,6 @@ if (!require("zoo")) install.packages("zoo")
 devtools::install_github("twitter/AnomalyDetection", quiet = TRUE)
 
 library(AnomalyDetection)
-library(cluster)
-library(clusterCrit)
-library(data.table)
-library(dplyr)
-library(ggplot2)
-library(lubridate)
-library(plotly)
-library(TSrepr)
-library(zoo)
 
 
 WEEK <- 7
@@ -30,6 +21,7 @@ source("~/r/fiit-dp/scripts/loaders.R")
 source("~/r/fiit-dp/scripts/aggregators.R")
 source("~/r/fiit-dp/scripts/visualizators.R")
 source("~/r/fiit-dp/scripts/analyzators.R")
+source("~/r/fiit-dp/scripts/clusteringByLaurinec.R")
 
 
 
