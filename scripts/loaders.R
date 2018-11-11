@@ -101,7 +101,7 @@ loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
     else
       result <- dataset
 
-    if (counter > fileCount)
+    if (counter >= fileCount)
       break
   }
 
