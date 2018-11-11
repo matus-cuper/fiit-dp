@@ -20,7 +20,7 @@ analyzeDataset <- function(dataset, windowStart = 1, windowEnd = freq * WEEK * 2
     plot(result$plot)
     Sys.sleep(0)
 
-    input <- readline(prompt="Press [enter] to continue")
+    input <- readline(prompt="Press [enter] to continue ")
 
     if (input == "n") {
       windowStart <- windowStart + windowSize
@@ -55,8 +55,6 @@ analyzeDataset <- function(dataset, windowStart = 1, windowEnd = freq * WEEK * 2
     windowStart <- windowStart + windowSize
     windowEnd <- windowEnd + windowSize
   }
-  if (exists("input") && input == "q" )
-    break
 }
 
 getFrequency <- function(dataset) {

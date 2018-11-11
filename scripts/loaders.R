@@ -41,6 +41,9 @@ loadDatasetFromSchool <- function(pathToFile) {
 }
 
 loadDataset <- function(pathToFile, groupBy = 1) {
+  if (!file.exists(pathToFile))
+    return(NULL)
+  
   if (grepl("electricity", pathToFile)) {
     train <- loadDatasetFromDDC(pathToFile)
   } else if (grepl("summarized", pathToFile)) {
@@ -51,9 +54,8 @@ loadDataset <- function(pathToFile, groupBy = 1) {
     train <- loadDatasetFromSchool(pathToFile)
   }
 
-  if (!exists("train")) {
+  if (!exists("train"))
     return(NULL)
-  }
 
   # Remove NA values
   train <- train[!is.na(train$load), ]
@@ -75,7 +77,6 @@ loadDataset <- function(pathToFile, groupBy = 1) {
 
   return(train)
 }
-
 
 loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
   result <- data.frame()
