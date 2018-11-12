@@ -1,4 +1,4 @@
-findAnomaliesSumScore <- function(dataset, days = 4 * WEEK, aggregations = c(0, 1, 2, 3, 4), sleepTime = 1.5) {
+findAnomaliesSumScore <- function(dataset, days = 4 * WEEK, aggregations = c(0, 1, 2, 3, 4), sleepTime = 0.0) {
   freq <- getFrequency(dataset)
   datasetSize <- freq * days
 
@@ -29,10 +29,16 @@ findAnomaliesSumScore <- function(dataset, days = 4 * WEEK, aggregations = c(0, 
     Sys.sleep(2*sleepTime)
 
     for (j in 1:ratio) {
-      anomalies[res$anoms$index * ratio + j, i + 1] <- 1
+      anomalies[res$anoms$index * ratio + j, a + 1] <- 1
     }
   }
 
+  dataset$id <- c(1:nrow(dataset))
   anomalies$score <- apply(anomalies, 1, FUN = function(x) sum(x))
-  return(anomalies)
+  anomalies$id <- c(1:nrow(anomalies))
+
+  result <- merge(dataset, anomalies, by = "id")
+  result$id <- NULL
+
+  return(result)
 }
