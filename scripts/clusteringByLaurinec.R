@@ -1,3 +1,5 @@
+# Expected input dataset should contains file names stored as column names, data should represents load
+
 clusteringLaurinecByMean <- function(dataset, clusterRangeMin = 2, clusterRangeMax = 7) {
   freq <- getFrequency(dataset)
 

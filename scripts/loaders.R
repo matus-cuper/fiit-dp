@@ -20,6 +20,7 @@ loadDatasetFromDDC <- function(pathToFile) {
   return(train)
 }
 
+# Load in this kind of time series constatnly grow, two data points in neighbourhood are subtracted
 loadDatasetFromDDCSummarized <- function(pathToFile) {
   train <- loadDatasetFromDDC(pathToFile)
   train$load <- diff(train$load)[1:nrow(train)]
@@ -29,55 +30,54 @@ loadDatasetFromDDCSummarized <- function(pathToFile) {
 
 loadDatasetFromSchool <- function(pathToFile) {
   train <- read.csv2(pathToFile)
-  train$id <- NULL
-  train$dayId <- NULL
 
-  train$load <- as.double(as.character(train$load))
-  train$dateTime <- as.POSIXlt(train$dateTime)
+  df <- data.frame(list(
+    timestamp = as.POSIXlt(train$dateTime),
+    load = as.double(as.character(train$load)),
+    date = train$date,
+    time = train$time,
+    day = train$dayOfWeek,
+    holiday = train$holiday
+  ))
 
-  colnames(train) <- c("timestamp", "date", "time", "day", "holiday", "load")
-  train <- train[, c(1, 6, 2, 3, 4, 5)]
-  return(train)
+  return(df)
 }
 
-loadDataset <- function(pathToFile, groupBy = 1) {
+# Create data.frame from given file
+loadDatasetFromFile <- function(pathToFile) {
+  pathToFile <- "~/r/fiit-dp/data/ireland/3788.csv"
   if (!file.exists(pathToFile))
     return(NULL)
   
   if (grepl("electricity", pathToFile)) {
-    train <- loadDatasetFromDDC(pathToFile)
+    df <- loadDatasetFromDDC(pathToFile)
   } else if (grepl("summarized", pathToFile)) {
-    train <- loadDatasetFromDDCSummarized(pathToFile)
+    df <- loadDatasetFromDDCSummarized(pathToFile)
   } else if (grepl("slovakia", pathToFile)) {
-    train <- loadDatasetFromSchool(pathToFile)
+    df <- loadDatasetFromSchool(pathToFile)
   } else if (grepl("ireland", pathToFile)) {
-    train <- loadDatasetFromSchool(pathToFile)
+    df <- loadDatasetFromSchool(pathToFile)
   }
 
-  if (!exists("train"))
+  if (!exists("df"))
     return(NULL)
 
   # Remove NA values
-  train <- train[!is.na(train$load), ]
+  df <- df[!is.na(df$load), ]
 
-  # Make temporary dataset more readable
-  agg <- aggregate(load ~ date, data = train, FUN = length)
+  # Create temporary dataset
+  agg <- aggregate(load ~ date, data = df, FUN = length)
   agg$date <- strptime(agg$date, "%Y-%m-%d")
-  agg$freq <- agg$load
-  agg$load <- NULL
+  agg$count <- agg$load
 
   # Find day period and remove uncomplete days
-  freq <- max(agg$freq)
+  freq <- getFrequency(df)
+  df <- df[df$date %in% agg[freq == agg$count,]$date, ]
 
-  # Filter unused rows
-  train <- train[train$date %in% agg[freq == agg$freq,]$date, ]
-
-  if (groupBy > 1)
-    train <- groupByAggregate(train, groupBy)
-
-  return(train)
+  return(df)
 }
 
+# Create data.frame from whole directory, loads are stored as column
 loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
   result <- data.frame()
   counter <- 0
@@ -85,22 +85,21 @@ loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
   for (f in list.files(targetDirectory)) {
     # Load new file for processing
     pathToFile <- paste(targetDirectory, f, sep = "/")
-    dataset <- loadDataset(pathToFile)
+    df <- loadDatasetFromFile(pathToFile)
     print(paste("Start processing", pathToFile))
     counter <- counter + 1
 
     # Filter rows and columns
-    freq <- max(aggregate(load ~ date, data = dataset, FUN = length)$load)
-    dataset <- dataset[1:(freq * WEEK * weeks), ]
-    dataset <- dataset[, c("timestamp", "load")]
-    colnames(dataset) <- c("timestamp", f)
-    dataset$timestamp <- as.character(dataset$timestamp)
+    freq <- getFrequency(df)
+    df <- df[1:(freq * WEEK * weeks), c("timestamp", "load")]
+    colnames(df) <- c("timestamp", f)
+    df$timestamp <- as.character(df$timestamp)
 
     # Merge dataframes
     if (length(result) > 0)
-      result <- merge(result, dataset)
+      result <- merge(result, df)
     else
-      result <- dataset
+      result <- df
 
     if (counter >= fileCount)
       break

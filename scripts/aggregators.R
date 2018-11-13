@@ -1,3 +1,4 @@
+# Groups data points next to each other and aggregate load
 groupByAggregate <- function(dataset, groupSize) {
   # Sum load by generated group
   dataset$id <- ceiling(c(1:nrow(dataset)) / groupSize)
@@ -11,7 +12,8 @@ groupByAggregate <- function(dataset, groupSize) {
   return(dataset)
 }
 
-groupByAddColumn <- function(dataset, groupSize) {
-  dataset$group <- c(1:nrow(dataset)) %% groupSize + 1
+# Add new column with group ID, where same group ID refers to first value of each window
+groupByAddColumn <- function(dataset, windowSize) {
+  dataset$group <- c(1:nrow(dataset)) %% windowSize + 1
   return(dataset)
 }

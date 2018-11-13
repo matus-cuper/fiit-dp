@@ -1,27 +1,31 @@
-visualizeDataset <- function(dataset, days = WEEK, sleepTime = 0.5) {
-  freq <- getFrequency(dataset)
-  datasetSize <- freq * days
+# Visualize whole dataset in one plot with mean and median
+visualizeDatasetStats <- function(dataset, windowLength = WEEK, sleepTime = 0.0) {
+  windowSize <- getFrequency(dataset) * windowLength
 
-  plot(ts(dataset$load[1:datasetSize]))
-
-  for (i in 1:(nrow(dataset) / datasetSize)) {
-    lines(ts(dataset$load[((i * datasetSize) + 1):((1 + i) * datasetSize)]))
+  plot(ts(dataset$load[1:windowSize]))
+  for (i in 1:(nrow(dataset) / windowSize)) {
+    lines(ts(dataset$load[((i * windowSize) + 1):((1 + i) * windowSize)]))
     Sys.sleep(sleepTime)
   }
 
-  dataset <- groupByAddColumn(dataset, datasetSize)
+  dataset <- groupByAddColumn(dataset, windowSize)
   mea <- aggregate(load ~ group, data = dataset, FUN = mean)
   med <- aggregate(load ~ group, data = dataset, FUN = median)
+
   lines(mea, col = "red", lwd = 2)
   lines(med, col = "green", lwd = 2)
 }
 
+# Visualize whole dataset in one plot with anomaly scores
 visualizeDatasetAnomalies <- function(dataset) {
-  dataset$points <- dataset$load
-  dataset$points[dataset$score <= 0] <- NA
-  dataset$timestamp <- as.character(result$timestamp)
+  df <- data.frame(list(
+    timestamp = as.character(result$timestamp),
+    load = dataset$load,
+    score = dataset$score
+  ))
+  df$load[df$score <= 0] <- NA
 
-  p <- plot_ly(dataset, x = ~timestamp, y = ~load, name = 'load', type = 'scatter', mode = 'lines') %>%
+  p <- plot_ly(df, x = ~timestamp, y = ~load, name = 'load', type = 'scatter', mode = 'lines') %>%
     add_trace(y = ~points, name = 'anomalies', mode = 'markers', color = ~score)
 
   print(p)
