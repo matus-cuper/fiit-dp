@@ -56,13 +56,3 @@ analyzeDataset <- function(dataset, windowStart = 1, windowEnd = freq * WEEK * 2
     windowEnd <- windowEnd + windowSize
   }
 }
-
-getFrequency <- function(dataset) {
-  agg <- data.frame(matrix(0, nrow = nrow(dataset), ncol = 0))
-  
-  agg$timestamp <- as.POSIXlt(dataset$timestamp)
-  agg$date <- as.character(strptime(agg$timestamp, "%Y-%m-%d"))
-  agg$timestamp <- as.character(agg$timestamp)
-  
-  return(max(aggregate(timestamp ~ date, data = agg, FUN = length)$timestamp))
-}
