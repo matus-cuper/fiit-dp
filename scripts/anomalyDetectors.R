@@ -1,44 +1,40 @@
-findAnomaliesSumScore <- function(dataset, days = 4 * WEEK, aggregations = c(0, 1, 2, 3, 4), sleepTime = 0.0) {
+# Find anomalies for given dataset
+findAnomalies <- function(dataset) {
   freq <- getFrequency(dataset)
-  datasetSize <- freq * days
 
-  dataset <- dataset[1:datasetSize, ]
+  res <- AnomalyDetectionVec(
+    dataset$load,
+    max_anoms = 0.1,
+    direction = 'both',
+    period = freq,
+    longterm_period = freq * WEEK
+  )
+
+  return(data.frame(list(
+    index = res$anoms$index,
+    value = res$anoms$anoms
+  )))
+}
+
+# Find anomalies for different aggregations of data and append these scores to input dataset
+findAnomaliesSumScore <- function(dataset, aggregations = c(0, 1, 2, 3, 4)) {
+  freq <- getFrequency(dataset)
   anomalies <- data.frame(matrix(0, nrow = nrow(dataset), ncol = length(aggregations)))
 
   for (a in aggregations) {
     ratio <- 2**a
-    # TODO create new func
-    train <- groupByAggregate(dataset, ratio)
-    train <- train[1:(datasetSize / ratio), ]
-
-    res <- AnomalyDetectionVec(
-      train$load,
-      max_anoms=0.1,
-      direction='both',
-      plot=TRUE,
-      period = freq / ratio,
-      longterm_period = freq * WEEK / ratio
-    )
-
-    print(paste("period", freq / ratio))
-    print(paste("long period", freq * WEEK / ratio))
-
-    plot(ts(train$load, frequency = freq / ratio))
-    Sys.sleep(sleepTime)
-    plot(res$plot)
-    Sys.sleep(2*sleepTime)
-
-    for (j in 1:ratio) {
-      anomalies[res$anoms$index * ratio + j, a + 1] <- 1
-    }
+    anoms <- findAnomalies(groupByAggregate(dataset, ratio))
+    anomalies[unlist(lapply(anoms$index, function(x) (x * 4) + c(1:ratio) )), a + 1] <- 1
   }
 
-  dataset$id <- c(1:nrow(dataset))
   anomalies$score <- apply(anomalies, 1, FUN = function(x) sum(x))
   anomalies$id <- c(1:nrow(anomalies))
+  dataset$id <- c(1:nrow(dataset))
 
   result <- merge(dataset, anomalies, by = "id")
   result$id <- NULL
 
   return(result)
 }
+
+# TODO: Add visualization of these process if it is really needed
