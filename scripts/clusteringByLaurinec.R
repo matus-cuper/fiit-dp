@@ -46,7 +46,7 @@ clusteringLaurinecByMean <- function(dataset, clusterRangeMin = 2, clusterRangeM
   return(result)
 }
 
-clusteringLaurinecByGAM <- function(dataset, clusterRangeMin = 2, clusterRangeMax = 7) {
+clusteringLaurinecByGAM <- function(dataset, clusterRangeMin = 2, clusterRangeMax = 7, windowSize = 7) {
   freq <- getFrequency(dataset)
 
   dataset$timestamp <- NULL
@@ -55,7 +55,7 @@ clusteringLaurinecByGAM <- function(dataset, clusterRangeMin = 2, clusterRangeMa
   dataset <- t(dataset)
 
   # Normalize dataset
-  data_gam <- repr_matrix(dataset, func = repr_gam, args = list(freq = c(freq, freq*WEEK)), normalise = TRUE, func_norm = norm_z)
+  data_gam <- repr_matrix(dataset, func = repr_gam, args = list(freq = c(freq, freq * windowSize)), normalise = TRUE, func_norm = norm_z)
 
   # Find optimal number of clusters
   clusterings <- lapply(c(clusterRangeMin:clusterRangeMax), function(x) pam(data_gam, x))

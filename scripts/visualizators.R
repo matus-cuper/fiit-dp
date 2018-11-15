@@ -1,6 +1,6 @@
 # Visualize whole dataset in one plot with mean and median
-visualizeDatasetStats <- function(dataset, windowLength = WEEK, sleepTime = 0.0) {
-  windowSize <- getFrequency(dataset) * windowLength
+visualizeDatasetStats <- function(dataset, windowTotalLength = 10, windowSize = 7, sleepTime = 0.0) {
+  windowSize <- getFrequency(df) * windowSize * windowTotalLength
 
   plot(ts(dataset$load[1:windowSize]))
   for (i in 1:(nrow(dataset) / windowSize)) {

@@ -44,7 +44,7 @@ loadDatasetFromSchool <- function(pathToFile) {
 }
 
 # Create data.frame from given file
-loadDatasetFromFile <- function(pathToFile) {
+loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength = 10, windowSize = 7) {
   pathToFile <- "~/r/fiit-dp/data/ireland/3788.csv"
   if (!file.exists(pathToFile))
     return(NULL)
@@ -74,26 +74,30 @@ loadDatasetFromFile <- function(pathToFile) {
   freq <- getFrequency(df)
   df <- df[df$date %in% agg[freq == agg$count,]$date, ]
 
+  # Filter rows and columns
+  df <- df[(windowOffset + 1):(windowOffset + freq * windowSize * windowTotalLength)]
+
   return(df)
 }
 
 # Create data.frame from whole directory, loads are stored as column
-loadWholeDataset <- function(targetDirectory, weeks = 10, fileCount = Inf) {
+loadWholeDataset <- function(targetDirectory, windowOffset = 0, windowTotalLength = 10, windowSize = 7, fileCount = Inf) {
   result <- data.frame()
   counter <- 0
 
   for (f in list.files(targetDirectory)) {
     # Load new file for processing
     pathToFile <- paste(targetDirectory, f, sep = "/")
-    df <- loadDatasetFromFile(pathToFile)
+    df <- loadDatasetFromFile(pathToFile, windowOffset = windowOffset, windowTotalLength = windowTotalLength, windowSize = windowSize)
     print(paste("Start processing", pathToFile))
     counter <- counter + 1
 
     # Filter rows and columns
-    freq <- getFrequency(df)
-    df <- df[1:(freq * WEEK * weeks), c("timestamp", "load")]
+    df <- data.frame(list(
+      timestamp = as.character(df$timestamp),
+      load = df$load
+    ))
     colnames(df) <- c("timestamp", f)
-    df$timestamp <- as.character(df$timestamp)
 
     # Merge dataframes
     if (length(result) > 0)

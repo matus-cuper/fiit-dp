@@ -1,5 +1,5 @@
 # Find anomalies for given dataset
-findAnomalies <- function(dataset) {
+findAnomalies <- function(dataset, windowSize = 7) {
   freq <- getFrequency(dataset)
 
   res <- AnomalyDetectionVec(
@@ -7,7 +7,7 @@ findAnomalies <- function(dataset) {
     max_anoms = 0.1,
     direction = 'both',
     period = freq,
-    longterm_period = freq * WEEK
+    longterm_period = freq * windowSize
   )
 
   return(data.frame(list(
