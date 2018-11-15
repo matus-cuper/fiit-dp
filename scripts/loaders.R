@@ -30,6 +30,7 @@ loadDatasetFromDDCSummarized <- function(pathToFile) {
 
 loadDatasetFromSchool <- function(pathToFile) {
   train <- read.csv2(pathToFile)
+  # TODO: add nrows
 
   df <- data.frame(list(
     timestamp = as.POSIXlt(train$dateTime),
@@ -45,7 +46,6 @@ loadDatasetFromSchool <- function(pathToFile) {
 
 # Create data.frame from given file
 loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength = 10, windowSize = 7) {
-  pathToFile <- "~/r/fiit-dp/data/ireland/3788.csv"
   if (!file.exists(pathToFile))
     return(NULL)
   
@@ -75,7 +75,7 @@ loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength 
   df <- df[df$date %in% agg[freq == agg$count,]$date, ]
 
   # Filter rows and columns
-  df <- df[(windowOffset + 1):(windowOffset + freq * windowSize * windowTotalLength)]
+  df <- df[(windowOffset + 1):(windowOffset + freq * windowSize * windowTotalLength), ]
 
   return(df)
 }
