@@ -14,6 +14,6 @@ groupByAggregate <- function(dataset, groupSize) {
 
 # Add new column with group ID, where same group ID refers to first value of each window
 groupByAddColumn <- function(dataset, windowSize) {
-  dataset$group <- c(1:nrow(dataset)) %% windowSize + 1
+  dataset$group <- c(0:(nrow(dataset) - 1)) %% windowSize + 1
   return(dataset)
 }
