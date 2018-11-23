@@ -75,7 +75,7 @@ loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength 
   df <- df[df$date %in% agg[freq == agg$count,]$date, ]
 
   # Filter rows and columns
-  df <- df[(windowOffset + 1):(windowOffset + freq * windowSize * windowTotalLength), ]
+  df <- df[(windowOffset + 1):min(windowOffset + freq * windowSize * windowTotalLength, nrow(df)), ]
 
   return(df)
 }
@@ -83,13 +83,15 @@ loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength 
 # Create data.frame from whole directory, loads are stored as column
 loadWholeDataset <- function(targetDirectory, windowOffset = 0, windowTotalLength = 10, windowSize = 7, fileCount = Inf) {
   result <- data.frame()
+  pb <- txtProgressBar(min = 0, max = fileCount, style = 3)
   counter <- 0
 
   for (f in list.files(targetDirectory)) {
     # Load new file for processing
     pathToFile <- paste(targetDirectory, f, sep = "/")
     df <- loadDatasetFromFile(pathToFile, windowOffset = windowOffset, windowTotalLength = windowTotalLength, windowSize = windowSize)
-    print(paste("Start processing", pathToFile))
+
+    setTxtProgressBar(pb, counter)
     counter <- counter + 1
 
     # Filter rows and columns
@@ -109,5 +111,6 @@ loadWholeDataset <- function(targetDirectory, windowOffset = 0, windowTotalLengt
       break
   }
 
+  close(pb)
   return(result)
 }
