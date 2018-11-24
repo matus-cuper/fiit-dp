@@ -1,105 +1,47 @@
-loadDatasetFromDDC <- function(pathToFile) {
-  train <- read.csv2(pathToFile, sep = ',')
-  train$Values <- as.double(as.character(train$Values))
-  train$Timestamp <- as.POSIXlt(train$Timestamp)
+# Load number of rows from Ireland dataset
+loadIrelandDataset <- function(pathToFile, windowOffset = 0, windowsCount = 10) {
+  df <- read.csv2(
+    pathToFile,
+    col.names = c("id", "timestamp", "date", "time", "day", "holiday", "dayId", "load"),
+    nrows = 48 * 7 * windowsCount + windowOffset,
+    stringsAsFactors = FALSE
+  )
 
-  # For some reason, missing values are identified as 1, not NA
-  train$Values[train$Values == 1] <- NA
+  df$id <- NULL
+  df$dayId <- NULL
+  df <- df[(windowOffset + 1):min(48 * 7 * windowsCount + windowOffset, nrow(df)), ]
+  df$load <- as.double(df$load)
 
-  # Approximate missing values
-  approximation <- data.frame(train$Values, index(1:nrow(train)))
-  approximation <- data.frame(na.approx(approximation, maxgap = 100))
-  train$Values <- approximation$train.Values
-
-  train$date <- as.factor(strftime(train$Timestamp, "%Y-%m-%d"))
-  train$time <- as.factor(strftime(train$Timestamp, "%H:%M:%S"))
-  train$day <- as.integer(as.POSIXlt(train$date)$wday + 1)
-  train$holiday <- as.integer(0)
-
-  colnames(train) <- c("timestamp", "load", "date", "time", "day", "holiday")
-  return(train)
-}
-
-# Load in this kind of time series constatnly grow, two data points in neighbourhood are subtracted
-loadDatasetFromDDCSummarized <- function(pathToFile) {
-  train <- loadDatasetFromDDC(pathToFile)
-  train$load <- diff(train$load)[1:nrow(train)]
-
-  return(train)
-}
-
-loadDatasetFromSchool <- function(pathToFile) {
-  train <- read.csv2(pathToFile)
-  # TODO: add nrows
-
-  df <- data.frame(list(
-    timestamp = as.POSIXlt(train$dateTime),
-    load = as.double(as.character(train$load)),
-    date = train$date,
-    time = train$time,
-    day = train$dayOfWeek,
-    holiday = train$holiday
+  return(list(
+    dataset = df,
+    frequency = 48
   ))
-
-  return(df)
 }
 
-# Create data.frame from given file
-loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength = 10, windowSize = 7) {
-  if (!file.exists(pathToFile))
-    return(NULL)
-  
-  if (grepl("electricity", pathToFile)) {
-    df <- loadDatasetFromDDC(pathToFile)
-  } else if (grepl("summarized", pathToFile)) {
-    df <- loadDatasetFromDDCSummarized(pathToFile)
-  } else if (grepl("slovakia", pathToFile)) {
-    df <- loadDatasetFromSchool(pathToFile)
-  } else if (grepl("ireland", pathToFile)) {
-    df <- loadDatasetFromSchool(pathToFile)
-  }
+# Load number of rows from Ireland dataset in aggregated form
+loadIrelandDatasetAggregated <- function(pathToFile, windowOffset = 0, windowsCount = 10, fun = mean) {
+  df <- loadIrelandDataset(pathToFile, windowOffset = windowOffset, windowsCount = windowsCount)
 
-  if (!exists("df"))
-    return(NULL)
-
-  # Remove NA values
-  df <- df[!is.na(df$load), ]
-
-  # Create temporary dataset
-  agg <- aggregate(load ~ date, data = df, FUN = length)
-  agg$date <- strptime(agg$date, "%Y-%m-%d")
-  agg$count <- agg$load
-
-  # Find day period and remove uncomplete days
-  freq <- getFrequency(df)
-  df <- df[df$date %in% agg[freq == agg$count,]$date, ]
-
-  # Filter rows and columns
-  df <- df[(windowOffset + 1):min(windowOffset + freq * windowSize * windowTotalLength, nrow(df)), ]
-
-  return(df)
+  return(aggregate(load ~ day + time, df$dataset, FUN = fun))
 }
 
-# Create data.frame from whole directory, loads are stored as column
-loadWholeDataset <- function(targetDirectory, windowOffset = 0, windowTotalLength = 10, windowSize = 7, fileCount = Inf) {
-  result <- data.frame()
-  pb <- txtProgressBar(min = 0, max = fileCount, style = 3)
+# Load number of rows from Ireland dataset directory in aggregated form
+loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount = 10, fun = NULL, fileCount = Inf) {
   counter <- 0
+  result <- data.frame()
+  allFiles <- list.files(targetDirectory)
+  bar <- txtProgressBar(min = 0, max = min(fileCount, length(allFiles)), style = 3)
 
-  for (f in list.files(targetDirectory)) {
+  for (filename in allFiles) {
     # Load new file for processing
-    pathToFile <- paste(targetDirectory, f, sep = "/")
-    df <- loadDatasetFromFile(pathToFile, windowOffset = windowOffset, windowTotalLength = windowTotalLength, windowSize = windowSize)
+    if (is.null(fun)) {
+      df <- loadIrelandDataset(paste(targetDirectory, filename, sep = "/"), windowOffset = windowOffset, windowsCount = windowsCount)
+      df <- df$dataset
+    }
+    else
+      df <- loadIrelandDatasetAggregated(paste(targetDirectory, filename, sep = "/"), windowOffset = windowOffset, windowsCount = windowsCount, fun = fun)
 
-    setTxtProgressBar(pb, counter)
-    counter <- counter + 1
-
-    # Filter rows and columns
-    df <- data.frame(list(
-      timestamp = as.character(df$timestamp),
-      load = df$load
-    ))
-    colnames(df) <- c("timestamp", f)
+    names(df)[names(df) == "load"] <- filename
 
     # Merge dataframes
     if (length(result) > 0)
@@ -107,10 +49,35 @@ loadWholeDataset <- function(targetDirectory, windowOffset = 0, windowTotalLengt
     else
       result <- df
 
+    # Utilities such as progress bar and file counter
+    counter <- counter + 1
+    setTxtProgressBar(bar, counter)
     if (counter >= fileCount)
       break
   }
 
-  close(pb)
+  close(bar)
   return(result)
+}
+
+# Create data.frame from given file
+loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength = 10, windowSize = 7) {
+  if (!file.exists(pathToFile))
+    return(NULL)
+
+  if (grepl("electricity", pathToFile)) {
+    df <- loadDatasetFromDDC(pathToFile)
+  } else if (grepl("summarized", pathToFile)) {
+    df <- loadDatasetFromDDCSummarized(pathToFile)
+  } else if (grepl("slovakia", pathToFile)) {
+    df <- loadDatasetFromSchool(pathToFile)
+  } else if (grepl("ireland", pathToFile)) {
+    irelandData <- loadIrelandDataset(pathToFile, windowOffset = windowOffset, windowsCount = windowTotalLength)
+  } else
+    return(NULL)
+
+  # Filter rows
+  irelandData$dataset <- irelandData$dataset[(windowOffset + 1):min(windowOffset + irelandData$frequency * windowSize * windowTotalLength, nrow(irelandData$dataset)), ]
+
+  return(irelandData)
 }
