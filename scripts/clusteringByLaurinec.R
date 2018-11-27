@@ -1,9 +1,8 @@
 # Expected input dataset should contains file names stored as column names, data should represents load
 
-clusteringLaurinecByMean <- function(dataset, clusterRangeMin = 2, clusterRangeMax = 7) {
+clusteringLaurinecByMean <- function(dataset, clusterRangeMin = 2, clusterRangeMax = 7, clustersCount = NULL) {
   freq <- getFrequency(dataset)
 
-  dataset$timestamp <- NULL
   result <- data.frame(matrix(0, nrow = length(colnames(dataset)), ncol = 0))
   result$filename <- colnames(dataset)
   dataset <- t(dataset)
@@ -21,8 +20,9 @@ clusteringLaurinecByMean <- function(dataset, clusterRangeMin = 2, clusterRangeM
          geom_point(size = 3) +
          theme_bw())
 
-  input <- readline(prompt="Enter number of clusters ")
-  numberOfCluster <- as.numeric(input)
+  if (is.null(clustersCount))
+    clustersCount <- readline(prompt="Enter number of clusters ")
+  numberOfCluster <- as.numeric(clustersCount)
   result$clusterId <- clusterings[[numberOfCluster]]$clustering
 
   # prepare data for plotting

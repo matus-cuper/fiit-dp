@@ -18,12 +18,14 @@ visualizeDatasetStats <- function(dataset, windowTotalLength = 10, windowSize = 
 
 # Visualize whole dataset in one plot with anomaly scores
 visualizeDatasetAnomalies <- function(dataset) {
+  dataset <- df.3778.stats
   df <- data.frame(list(
-    timestamp = as.character(result$timestamp),
+    timestamp = as.character(dataset$timestamp),
     load = dataset$load,
+    points = dataset$load,
     score = dataset$score
-  ))
-  df$load[df$score <= 0] <- NA
+  ), stringsAsFactors = FALSE)
+  df$points[df$score <= 0] <- NA
 
   p <- plot_ly(df, x = ~timestamp, y = ~load, name = 'load', type = 'scatter', mode = 'lines') %>%
     add_trace(y = ~points, name = 'anomalies', mode = 'markers', color = ~score)
