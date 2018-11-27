@@ -428,21 +428,19 @@ Výraznými vlastnosťami časových radov sú aj synchrónnosť a~periodicita,
 znázornená na
 obrázkoch~\ref{fig:periodic-time-series}~a~\ref{fig:non-periodic-time-series}.
 Vznikajú tak 4 nasledujúce kategórie~\cite{Teng2010}:
-\begin{itemize}
-	\item \textbf{Periodické a synchrónne časové rady} predstavujú najjednoduchšiu
-	kombináciu, keďže každý časový rad má konštantnú časovú periódu a~zároveň sú
-	všetky časové rady časovo zarovnané na konkrétny časový bod.
-
-	\item \textbf{Neperiodické a synchrónne časové rady} nemajú žiadnu
+\begin{description}
+  \item[$\bullet$ Periodické a synchrónne časové rady] predstavujú
+	najjednoduchšiu kombináciu, keďže každý časový rad má konštantnú časovú
+	periódu a~zároveň sú všetky časové rady časovo zarovnané na konkrétny časový
+	bod.
+  \item[$\bullet$ Neperiodické a synchrónne časové rady] nemajú žiadnu
 	periodicitu, ale opäť sú časovo zarovnané.
-
-	\item \textbf{Periodické a asynchrónne časové rady} nie sú časovo zarovnané,
+  \item[$\bullet$ Periodické a asynchrónne časové rady] nie sú časovo zarovnané,
 	ale obsahujú periodicitu, čiže začiatok periódy v~každom časovo rade je iný.
-
-	\item \textbf{Neperiodické a asynchrónne časové rady} predstavujú skupinu, do
-	ktorej spadajú ostatné časové rady, ktoré neobsahujú periodicitu a~ani
+  \item[$\bullet$ Neperiodické a asynchrónne časové rady] predstavujú skupinu,
+	do ktorej spadajú ostatné časové rady, ktoré neobsahujú periodicitu a~ani
 	synchrónnosť.
-\end{itemize}
+\end{description}
 
 \begin{figure}[H]
   \centering
@@ -469,26 +467,21 @@ anomália zodpovedá meraniu, ktoré sa nenachádza v~oblasti normálnych dát.
 
 Pri identifikácii anomálií je najskôr potrebné zamyslieť sa nad nasledovnými
 problémami~\cite{Chandola2009}:
-\begin{itemize}
-	\item \textbf{Definovanie oblasti normálnych dát} je veľmi náročné, nakoľko
+\begin{description}
+	\item[$\bullet$ Definovanie oblasti normálnych dát] je veľmi náročné, nakoľko
 	hranica medzi normálnymi dátami a~anomáliami je nepresná a~môže tak dojsť
 	k~nesprávnemu označeniu meraní.
-
-	\item \textbf{Anomálie vytvorené škodlivou činnosťou} sa javia ako normálne
+	\item[$\bullet$ Anomálie vytvorené škodlivou činnosťou] sa javia ako normálne
 	dáta, čo sťažuje definíciu normálneho správania.
-
-	\item \textbf{Evolúcia dát} spôsobuje, že definícia normálneho správania sa
+	\item[$\bullet$ Evolúcia dát] spôsobuje, že definícia normálneho správania sa
 	môže časom zmeniť.
-
-	\item \textbf{Presná predstava o anomálii} je často rôzna naprieč viacerými
+	\item[$\bullet$ Presná predstava o anomálii] je často rôzna naprieč viacerými
 	odbormi, a~preto neexistuje univerzálny spôsob na určovanie anomálií.
-
-	\item \textbf{Dostupnosť označených dát} zlepšuje presnosť identifikácie
+	\item[$\bullet$ Dostupnosť označených dát] zlepšuje presnosť identifikácie
 	anomálií, avšak často takéto dáta neexistujú alebo ich je potrebné označiť.
-
-	\item \textbf{Biely šum} vyskytujúci sa v~dátach má tendenciu skresľovať
+	\item[$\bullet$ Biely šum] vyskytujúci sa v~dátach má tendenciu skresľovať
 	normálne dáta, ktorých identifikácia je následne zložitá.
-\end{itemize}
+\end{description}
 
 Na detekciu anomálií sú používané aj algoritmy určené na klasifikáciu, ako je
 napríklad naivný Bayesovský klasifikátor (angl. \textit{Naive Bayes}),
