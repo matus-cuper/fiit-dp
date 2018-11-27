@@ -17,3 +17,11 @@ groupByAddColumn <- function(dataset, windowSize) {
   dataset$group <- c(0:(nrow(dataset) - 1)) %% windowSize + 1
   return(dataset)
 }
+
+# Normalize dataset
+normalizeDataset <- function(df, fun = norm_z) {
+  df <- data.frame(df[, grepl("day|time|timestamp", names(df))], lapply(df[, grepl(".*.csv", names(df))], fun))
+  names(df) <- gsub("X(.*.csv)", "\\1", names(df))
+
+  return(df)
+}
