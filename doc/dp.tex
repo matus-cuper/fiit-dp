@@ -1291,20 +1291,59 @@ na nevýrazne zmeny a~trendy v~dátach.\\
 \section{Špecifikácia požiadaviek}
 Pomocou metód strojového učenia a~dátovej analytiky sa zameriame na
 identifikáciu anomálií v~časových radoch v~oblasti distribučných spoločností. Na
-základe neagregovaných dát, ktoré budeme mať k~dispozícií môžu nastať dva rôzne
-scenáre. Ak dataset bude obsahovať iba časovú známku a~spotrebu elektrickej
-energie daného zákazníka, zhlukovanie bude možné iba na základe časového radu
-spotreby a~výsledky budú evaluované pomocou vzdialeností medzi jednotlivými
-časovými radmi vo vnútri zhlukov. Naopak, ak dataset bude obsahovať viaceré
-vysvetľujúce premenné, potom je možné vytvoriť ďalší model, ktorý tiež bude
-zhlukovať odberateľov. Tak bude zabezpečená evaluácia pôvodného zhlukovacieho
+základe súrových dát, ktoré máme k~dispozícií môžu nastať dva rôzne scenáre. Ak
+dataset bude obsahovať iba časovú známku a~spotrebu elektrickej energie daného
+zákazníka, zhlukovanie bude možné iba na základe časového radu spotreby
+a~výsledky budú evaluované pomocou vzdialeností medzi jednotlivými časovými
+radmi vo vnútri zhlukov. Naopak, ak dataset bude obsahovať viaceré vysvetľujúce
+premenné, potom je možné vytvoriť model, ktorý bude zhlukovať odberateľov na
+základe týchto atribútov. Tak bude zabezpečená evaluácia pôvodného zhlukovacieho
 modelu.
 
-Vo vytvorených zhlukoch sa budeme zameriavať na identifikáciu anomálií, resp.
-intervalov s~neštandardným správaním odberateľa. Tiež budeme považovať
-diskretizované časové rady za anomálie v~prípade ak sa nenachádzajú v~rámci
-zhlukov, do ktorých spadajú ostatné diskretizované časové rady daného
-odberateľa.
+Vytvorené zhluky tvoria dve skupiny zhlukov, deliacim kritériom je hustota
+vytvorených zhlukov. Primárne sa budeme zameriavať na analýzu časových radov,
+ktoré spadajú do riedkych zhlukov. Cieľom je v~takýchto časových radoch
+identifikovať intervaly s~neštandardným správaním odberateľa. Musíme pri tom
+brať ohľad najmä na cyklus dní a~týždňov, no zároveň pristupovať k~zvykom
+odberateľov jednotlivo a~zvážiť ich pri označení intervalu. Samotné
+diskretizované časové rady môžeme považovať za anomálie, ale zameriavame sa
+najmä na lokalizáciu problému a~minimalizáciu identifikovaného intervalu.
+
+Zvýšiť presnosť odhaľovania anomálií je možné aj osobitným prístupom
+k~jednotlivým odberateľom. Práve vďaka identifikácií zlomov v~časových radoch je
+možné presnejšie určiť správanie odberateľa. Zároveň algoritmus poskytuje ďalší
+mechanizmus na určovanie intervalu, v ktorom sa vyskytuje anomália.
+
+Výstupom opísaného procesu sú podozrivé a~anomálne časové rady a~jednotlivé
+merania v~nich, ktoré sú taktiež považované za anomálie. Na výstupe sa môže
+podielať viacero algoritmov, čo je potrebné zohľadniť pri vytváraní výsledného
+skóre. Na záver je potrebné zlúčiť jednotlivé merania do intervalov, ktoré
+svojim skôre opisujú mieru istoty, že označený interval obshauje anomáliu.
+Výhodou takéhoto spracovania je univerzálnosť riešenia, jednoduchá vizualizácia,
+ale najmä klasifikácia rôznych typov anomálií. Zatiaľ čo lokálne anomálie sú
+výsledkom krátkodobej zmeny správania odberateľa a~može sa jednať aj o~výsledok
+náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmenu
+a~môže byť predmetom záujmu distribútorov elektrickej energie.
+
+\noindent
+\paragraph{Funkcionálne požiadavky:}
+\begin{description}
+  \item[$\bullet$ vizualizácia anomálií] je potrebná najmä pre pochopenie
+	dôvodov, pre ktoré vznikli anomálie
+  \item[$\bullet$ validácia výsledkov] prebieha na viacerých úrovniach procesu
+\end{description}
+
+\noindent
+\paragraph{Nefunkcionálne požiadavky:}
+\begin{description}
+  \item[$\bullet$ univerzálnosť] riešenia je výsledkom detekcie anomálií bez
+	učiteľa z~časových radov, ktoré sa spoliehajú na minimálny počet dostupných
+	atribútov
+	\item[$\bullet$ robustnosť] implementácie je kľúčová vzhľadom na rôznorodosť
+	vstupných dát
+  \item[$\bullet$ konfigurovateľnosť] aplikácie zabezpečujú viacere rozhrania
+
+\end{description}
 
 %-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
