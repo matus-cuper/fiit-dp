@@ -7,6 +7,9 @@ dp.toc
 dp.blg
 dp.lof
 dp.lot
+dp.synctex.gz
+dp.fls
+dp.fdb_latexmk
 
 # Notes from meetings, not supposed to be publicly available
 notes.md
@@ -16,4 +19,3 @@ data
 
 # Python environment
 .env
-
