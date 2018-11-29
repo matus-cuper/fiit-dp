@@ -956,11 +956,16 @@ vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 \end{equation}
 
 %-------------------------------------------------------------------------------
-%   Data attributes and their reduction
+%   Preprocessing data
 %-------------------------------------------------------------------------------
 
-\subsection{Redukcia dimenzií a výber atribútov}
-%TODO \subsection{Predspracovanie dát}
+\subsection{Predspracovanie dát}
+Pri metódach založených na dátovej analytike a~strojovom určení je nesmierne
+dôležité zvoliť vhodnú reprezentáciu dát, vybrať atribúty, ktoré sú relevantné
+pre zvolený problém a~často krát aj odstrániť chýbajúce alebo nekompletné časové
+rady. Znalosť vstupných dát a~špecifickosť danej domény prináša
+k~predspracovaniu dát ďalšie prístupy, ktoré zvyšujú správnosť použitých úprav.
+
 Najčastejšie používanými vysvetľujúcimi premennými sú:
 \begin{itemize}
   \item geografická poloha
@@ -977,8 +982,7 @@ odberateľov je počasie. To je pre viacerých odberateľov rovnaké a~viaže sa
 konkrétny región, v ktorom sa nachádza meteorologická stanica. Dáta z~nich sú
 väčšinou verejne dostupné~\cite{Stankovic2014}.
 
-\subsubsection{Predspracovanie dát}
-%TODO \subsection{Data/Customer filtering}
+\subsubsection{Filtrovanie odberateľov}
 Dáta z~inteligentných meračov bývajú často nekompletné a~s~chýbajúcimi
 hodnotami. Väčšina algoritmov nedokáže spracovať takéto dáta a~všetky časové
 rady musia byť rovnakej dĺžky. Rovnako sú nepoužiteľné dáta, ktoré boli
@@ -999,14 +1003,14 @@ identifikovať takéto atribúty. Otestovanie všetkých kombinácií by bolo č
 a~výpočtovo náročné. Najjednoduchším spôsobom je vytvorenie korelačnej matice
 jednotlivých vysvetľujúcich premenných a~sledovanej veličiny~\cite{Cody2015}.
 
-\subsubsection{Feature extraction}
-Ďalšou technikou používanou pri príprave dát je vytvorenie tvorba nových
-atribútov založených na pôvodných, surových dátach. V~súvisiacom
-článku~\cite{Nagi2008} ide napr. o~vytvorenie hodinového priemeru pre každého
-zákazníka. Vzťah priemernej spotreby $x_h$ môžeme definovať rôzne, v~našom
-prípade ide o~podiel mesačnej priemernej spotreby nasledujúceho mesiaca
-$P_{h+1}$~a~rozdielu dennej spotreby v~aktuálnom a~nasledujúcom mesiaci
-$D_{h+1} - D_{h}$, čo zapíšeme vzorcom~\ref{eq:feature-extraction}
+\subsubsection{Extrakcia čŕt}
+Ďalšou technikou používanou pri príprave dát je tvorba nových atribútov
+založených na pôvodných, surových dátach. V~súvisiacom článku~\cite{Nagi2008}
+ide napr. o~vytvorenie hodinového priemeru pre každého zákazníka. Vzťah
+priemernej spotreby $x_h$ môžeme definovať rôzne, v~našom prípade ide o~podiel
+mesačnej priemernej spotreby nasledujúceho mesiaca $P_{h+1}$~a~rozdielu dennej
+spotreby v~aktuálnom a~nasledujúcom mesiaci $D_{h+1} - D_{h}$, čo zapíšeme
+vzorcom~\ref{eq:feature-extraction}
 \begin{equation}
 	\label{eq:feature-extraction}
   x_h = \frac{P_{h+1}}{D_{h+1} - D_{h}}
@@ -1021,6 +1025,12 @@ chýbajúcich hodnôt. Agregácia dát tiež vyhladzuje malé odchýlky v~časov
 radoch, čo môže sťažiť identifikáciu náhlej zmeny správania odberateľov. To môže
 viesť k~nesprávnemu označeniu správania odberateľa za
 neštandardné~\cite{Cody2015}.
+
+Cieľom agregácie časových radov môže byť aj redukcia na priemer, prípadne
+median, dňa alebo týždňa. So zredukovanými dátami je potom možné pracovať rýchlo
+a~efektívne, keďže ich pamäťová náročnosť je iba zlomkom oproti pôvodnej.
+Zároveň však vzniká priestor na stratenie informácie o~anomálne aktivite
+odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
 
 \subsubsection{Redukcia dát}
 % TODO add figure
