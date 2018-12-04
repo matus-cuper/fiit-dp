@@ -1367,43 +1367,24 @@ a~môže byť predmetom záujmu distribútorov elektrickej energie.
 %   Appendix
 %-------------------------------------------------------------------------------
 
-\begin{appendices}
 \newpage
 \section{Plán do zimného semestra}
 \pagenumbering{Roman}
 
-\begin{table}[!h]
-  \centering
-  \begin{tabular}{||l|p{0.65\textwidth}||}
-    \hline \hline
-    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v~zimnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
-    \hline
-    1. týždeň    &  dokončenie analýzy literatúry, špecifikácie, výber vhodných metód na experimenty					\\ \hline
-    2. týždeň    &  nájdenie viacerých vhodných zdrojov dát, analýza datasetov		                            \\ \hline
-    3. týždeň    &  analýza datasetov, doplnenie datasetov dátami z~iných zdrojov										          \\ \hline
-    4. týždeň    &  výber atribútov, spojenie dát, príprava prostredia pre dáta a~manipuláciu s nimi			    \\ \hline
-    5. týždeň    &  hlbšia analýza zvolených datasetov, agregácia časových radov, výber technológií           \\ \hline
-    6. týždeň    &  vyhladenie a~diskretizácia časových radov															                    \\ \hline
-    7. týždeň    &  tvorba prototypu modelu zhlukujúceho časové rady	                                        \\ \hline
-    8. týždeň    &  prvé zhlukovacie experimenty, skúmanie vytvorených zhlukov	                              \\ \hline
-    9. týždeň    &  tvorba identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov     \\ \hline
-    10. týždeň   &  tvorba prototypu modelu identifikujúceho anomálie v~rámci zhlukov                         \\ \hline
-    11. týždeň   &  prvé experimenty, skúmanie identifikovaných anomálií                                      \\ \hline
-		12. týždeň   &  tvorba prezentácie a~príprava na obhajoby					                                        \\ \hline
-    \hline
-  \end{tabular}
-\end{table}
 
-\noindent
-Počas zimného semestra budú analyzované dostupné datasety. Následne budú
-spracované a~upravené do formátu potrebného pre model. Po vytvorení protypu
-modelu budú čo najskôr evaluované výsledky. Na základe nich budú ďalej
-spracovávané dáta a~menené datasety. Taktiež sa bližšie pozrieme na
-identifikované anomálie dáta a~určíme ich pôvod na základe dostupných
-vysvetľujúcich premenných. V~závere semestra budú prebiehať prípravy na obhajoby
-tvorbou prezentácie a~súvisiacich materiálov.
+%-------------------------------------------------------------------------------
+%   Chapter 8 - Bibliography
+%-------------------------------------------------------------------------------
 
+\newpage
+\bibliographystyle{iso-690/slovakiso}
+\bibliography{bibliography}
 
+%-------------------------------------------------------------------------------
+%   Appendix
+%-------------------------------------------------------------------------------
+
+\begin{appendices}
 \newpage
 \section{Plán do letného semestra}
 \begin{table}[!h]
@@ -1412,12 +1393,12 @@ tvorbou prezentácie a~súvisiacich materiálov.
     \hline \hline
     \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v letnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
     \hline
-    1. týždeň    &  vytvorenie validačného modelu pre zhlukovanie na základe vysvetľujúcich premenných        \\ \hline
-    2. týždeň    &  použitie rôznych metrík pri určovaní podobnosti jednotlivých časových radov               \\ \hline
-    3. týždeň    &  výber a~použtie iných atribútov pre trénovacie dáta pre zhlukovací model					        \\ \hline
-    4. týždeň    &  použitie rôznych diskretizačných okien pre trénovací model 																\\ \hline
-    5. týždeň    &  optimalizácia modelu a~výpočtov, vyhodnotenie experimentov				                        \\ \hline
-    6. týždeň    &  porovnanie výsledkov z~experimentov s~naštudovanou literatúrou, overenie výsledkov        \\ \hline
+    1. týždeň    &  vytvorenie validačného modelu pre zhlukovanie časových radov                              \\ \hline
+    2. týždeň    &  výber hyperparametrov a~metrík vzdialenosti pre použité zhlukovacie algoritmy             \\ \hline
+    3. týždeň    &  použitie rôznych diskretizačných okien a~validácia použitých metrík      					        \\ \hline
+    4. týždeň    &  použitie identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov   \\ \hline
+    5. týždeň    &  porovnanie výsledkov z~experimentov s~naštudovanou literatúrou, overenie výsledkov        \\ \hline
+    6. týždeň    &  optimalizácia modelu a~výpočtov, vyhodnotenie experimentov                                \\ \hline
     7. týždeň    &  vytvorenie článku na študentskú konferenciu, dokončovanie experimentov                    \\ \hline
     8. týždeň    &  príprava na študentskú vedeckú konferenciu, vizualizácia dosiahnutých výsledkov						\\ \hline
     9. týždeň    &  zapracovanie pripomienok z~konferencie, návrh ďalších experimentov                        \\ \hline
@@ -1429,15 +1410,19 @@ tvorbou prezentácie a~súvisiacich materiálov.
 \end{table}
 
 \noindent
-V~úvode semestra bude vytvorený ďalší zhlukovací model, ktorý bude vytvárať
-zhluky iba na základe vysvetľujúcich premenných. Cieľom bude overiť vytvorené
-zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie. Ďalšie
-navrhované vylepšenia budú zapracované na základe vlastností dát a~dosiahnutých
-výsledkov. V~prípade veľkej časovej náročnosti budú optimalizované jednotlivé
-procesy pri manipulácií dát. Na konci semestra sa koná študentská konferencia,
-do ktorej by sme chceli prispieť článkom a~získať tak dôležitú spätnú väzbu.
-Na záver by sme chceli zapracovať jednotlivé pripomienky a~znova vyhodnotiť
-výsledky, ktoré budú použité pri obhajobe projektu
+V~úvode semestra bude vytvorený validačný mechanizmus pre model, zhlukujúci
+analyzované časové rady na základe podobnosti priebehov. Cieľom bude overiť
+vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie.
+Dôležitý je aj výber hyperparametrov pre algoritmi strojového učenia, ale aj
+vhodná dĺžka posuvného okna, prípadne metrika použitá na meranie podobnosti
+jednotlivých časových radov. Z~analyzovaných riešení je potrebné vybrať
+najvhodnejšie pre náš problém. Ďalšie navrhované vylepšenia budú zapracované na
+základe vlastností dát a~dosiahnutých výsledkov. V~prípade veľkej časovej
+náročnosti budú optimalizované jednotlivé procesy pri manipulácií dát. Na konci
+semestra sa koná študentská konferencia, do ktorej by sme chceli prispieť
+článkom a~získať tak dôležitú spätnú väzbu. Na záver by sme chceli zapracovať
+jednotlivé pripomienky a~znova vyhodnotiť výsledky, ktoré budú použité pri
+obhajobe projektu.
 
 
 \end{appendices}
