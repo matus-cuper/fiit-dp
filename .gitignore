@@ -10,6 +10,7 @@ dp.lot
 dp.synctex.gz
 dp.fls
 dp.fdb_latexmk
+texput.log
 
 # Notes from meetings, not supposed to be publicly available
 notes.md

@@ -1294,35 +1294,38 @@ amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nie je ci
 na nevýrazne zmeny a~trendy v~dátach.\\
 
 %-------------------------------------------------------------------------------
-%   Chapter 3 - Requirements specification
+
+%-------------------------------------------------------------------------------
+%   Chapter 3 - Solution design
 %-------------------------------------------------------------------------------
 
 \newpage
-\section{Špecifikácia požiadaviek}
+\section{Návrh riešenia}
 Pomocou metód strojového učenia a~dátovej analytiky sa zameriame na
 identifikáciu anomálií v~časových radoch v~oblasti distribučných spoločností. Na
-základe súrových dát, ktoré máme k~dispozícií môžu nastať dva rôzne scenáre. Ak
-dataset bude obsahovať iba časovú známku a~spotrebu elektrickej energie daného
-zákazníka, zhlukovanie bude možné iba na základe časového radu spotreby
-a~výsledky budú evaluované pomocou vzdialeností medzi jednotlivými časovými
-radmi vo vnútri zhlukov. Naopak, ak dataset bude obsahovať viaceré vysvetľujúce
-premenné, potom je možné vytvoriť model, ktorý bude zhlukovať odberateľov na
-základe týchto atribútov. Tak bude zabezpečená evaluácia pôvodného zhlukovacieho
-modelu.
+základe dostupných dát môžu nastať dva rôzne scenáre. Ak dataset bude obsahovať
+iba časovú známku a~spotrebu elektrickej energie daného zákazníka, zhlukovanie
+je možné iba na základe časového radu spotreby a~výsledky budú evaluované
+pomocou vzdialeností medzi jednotlivými časovými radmi vo vnútri zhlukov.
+Naopak, ak dataset obsahuje viaceré vysvetľujúce premenné, potom je možné
+vytvoriť model, ktorý bude zhlukovať odberateľov na základe týchto atribútov.
+Tak bude zabezpečená evaluácia pôvodného zhlukovacieho modelu. Dáta, ktoré máme
+k~dispozícií obsahujú iba časovú známku, množstvo odoberanej elektrickej energie
+a~príznak označujúci dni, ktoré sú svitky.
 
-Vytvorené zhluky tvoria dve skupiny zhlukov, deliacim kritériom je hustota
-vytvorených zhlukov. Primárne sa budeme zameriavať na analýzu časových radov,
-ktoré spadajú do riedkych zhlukov. Cieľom je v~takýchto časových radoch
-identifikovať intervaly s~neštandardným správaním odberateľa. Musíme pri tom
+Z~experimentov môžeme predpokladať, že zhlukovacie algoritmi vytvárajú husté
+a~riedke zhluky. Primárne sa budeme zameriavať na analýzu časových radov,
+ktoré spadajú do riedkych zhlukov a~už ony samotné môžu predstavovať anomálie.
+Cieľom je v~takýchto časových radoch, čo najpresnejšie identifikovať
+a~lokalizovať intervaly s~neštandardným správaním odberateľa. Musíme pri tom
 brať ohľad najmä na cyklus dní a~týždňov, no zároveň pristupovať k~zvykom
-odberateľov jednotlivo a~zvážiť ich pri označení intervalu. Samotné
-diskretizované časové rady môžeme považovať za anomálie, ale zameriavame sa
-najmä na lokalizáciu problému a~minimalizáciu identifikovaného intervalu.
+odberateľov jednotlivo a~zvážiť ich pri označovaní anomálneho intervalu.
 
 Zvýšiť presnosť odhaľovania anomálií je možné aj osobitným prístupom
 k~jednotlivým odberateľom. Práve vďaka identifikácií zlomov v~časových radoch je
 možné presnejšie určiť správanie odberateľa. Zároveň algoritmus poskytuje ďalší
-mechanizmus na určovanie intervalu, v ktorom sa vyskytuje anomália.
+mechanizmus na určovanie intervalu, v~ktorom sa mení správanie odberateľa, ktoré
+môžeme považovať za anomáliu.
 
 Výstupom opísaného procesu sú podozrivé a~anomálne časové rady a~jednotlivé
 merania v~nich, ktoré sú taktiež považované za anomálie. Na výstupe sa môže
@@ -1335,41 +1338,12 @@ výsledkom krátkodobej zmeny správania odberateľa a~može sa jednať aj o~vý
 náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmenu
 a~môže byť predmetom záujmu distribútorov elektrickej energie.
 
-\noindent
-\paragraph{Funkcionálne požiadavky:}
-\begin{description}
-  \item[$\bullet$ vizualizácia anomálií] je potrebná najmä pre pochopenie
-	dôvodov, pre ktoré vznikli anomálie
-  \item[$\bullet$ validácia výsledkov] prebieha na viacerých úrovniach procesu
-\end{description}
+% %-------------------------------------------------------------------------------
+% %   Chapter 4 - Implementation
+% %-------------------------------------------------------------------------------
 
-\noindent
-\paragraph{Nefunkcionálne požiadavky:}
-\begin{description}
-  \item[$\bullet$ univerzálnosť] riešenia je výsledkom detekcie anomálií bez
-	učiteľa z~časových radov, ktoré sa spoliehajú na minimálny počet dostupných
-	atribútov
-	\item[$\bullet$ robustnosť] implementácie je kľúčová vzhľadom na rôznorodosť
-	vstupných dát
-  \item[$\bullet$ konfigurovateľnosť] aplikácie zabezpečujú viacere rozhrania
-
-\end{description}
-
-%-------------------------------------------------------------------------------
-%   Chapter 8 - Bibliography
-%-------------------------------------------------------------------------------
-
-\newpage
-\bibliographystyle{iso-690/slovakiso}
-\bibliography{bibliography}
-
-%-------------------------------------------------------------------------------
-%   Appendix
-%-------------------------------------------------------------------------------
-
-\newpage
-\section{Plán do zimného semestra}
-\pagenumbering{Roman}
+% \newpage
+% \section{Implementácia}
 
 
 %-------------------------------------------------------------------------------
