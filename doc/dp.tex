@@ -1209,15 +1209,15 @@ odberateľa. Jednoduchý klasifikátor označí prvých \textit{n} odberateľov,
 ktorých miera pravdepodobnosti výskytu čierneho odberu je najvyššia, za
 anomálnych. Pri vyjadrení matice zámen pomocou
 tabuľky~\ref{tab:confusion-matrix} potom riadky predstavujú predpovedanú triedu
-a~stĺpce skutočnú. Vznikajú tak 4~kategórie, ktoré sú označované ako
-\textit{TRUE POSITIVE} (správne označení podozriví odberatelia),
-\textit{FALSE POSITIVE} (nesprávne označení podozriví odberatelia),
-\textit{TRUE NEGATIVE} (nesprávne označený normálny odberatelia)
-a~\textit{FALSE NEGATIVE} (správne označený normálny odberatelia). Kvalitu
-klasifikácie potom môžeme zmerať pomocou presnosti a~pokrytia. Presnosť
-vypočítame vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených
-anomálií a~celkový počet označených anomálií. Tým vypočítame percento
-odberateľov, ktorých sme správne klasifikovali ako podozrivých.
+a~stĺpce skutočnú. Vznikajú tak 4~kategórie, správne označení podozriví 
+odberatelia (angl. \textit{TRUE POSITIVE}), nesprávne označení podozriví 
+odberatelia (angl. \textit{FALSE POSITIVE}), nesprávne označený normálny 
+odberatelia (angl. \textit{TRUE NEGATIVE}) a~správne označený normálny 
+odberatelia (angl. \textit{FALSE NEGATIVE}). Kvalitu klasifikácie potom môžeme 
+zmerať pomocou presnosti a~pokrytia. Presnosť vypočítame 
+vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených anomálií 
+a~celkový počet označených anomálií. Tým vypočítame percento odberateľov, 
+ktorých sme správne klasifikovali ako podozrivých.
 \begin{equation}
 	\label{eq:precision}
   \text{Presnosť} = \frac{TP}{TP + FP}
