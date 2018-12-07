@@ -236,7 +236,7 @@ detekcia neštandardného správania odberateľov. Jej úlohou je identifikovať
 profily zákazníkov, ktorí svojím správaním porušujú stanovené podmienky
 a~manipulujú s~hodnotami nameranými meračmi za cieľom obohatenia sa. Samozrejme
 tiež dochádza k~prípadom, kedy je presnosť meracieho zariadenia nižšia aj bez
-zapríčinenia zákazníka. Oba prípady sú pre distribučnú spoločnosť nežiadúce a~je
+zapríčinenia zákazníka. Oba prípady sú pre distribučnú spoločnosť nežiaduce a~je
 v~záujme zníženia strát ich, čo najskôr identifikovať. Obvykle sú za týmto
 účelom vykonávané náhodné kontroly, ktoré pokrývajú iba nízky počet zákazníkov
 s~anomálnym správaním. Na základe množstva dát získavaných z~inteligentných
@@ -293,7 +293,7 @@ pozorovanú veličiny v~každej jednotke času. Môže sa jednať napr. o~počas
 veľkosť prietoku rieky alebo koncentráciu látok pri chemických procesoch.
 Diskrétne časové rady sú pozorované spravidla v~rovnakých časových intervaloch,
 napr. rokoch, dňoch či minútach. Stretnúť sa s~nimi môžeme pri kurzoch mien,
-produkcii štátov či spotrebe elektrikej energie~\cite{Agrawal2013}.
+produkcii štátov či spotrebe elektrickej energie~\cite{Agrawal2013}.
 
 %-------------------------------------------------------------------------------
 %   Time series analysis
@@ -302,7 +302,7 @@ produkcii štátov či spotrebe elektrikej energie~\cite{Agrawal2013}.
 \subsubsection{Analýza časových radov}
 Časové rady môžeme reprezentovať pomocou matematického modelu, ktorého parametre
 sú dané nameranými dátami. Parametre sú určené na základe dátovej analýzy
-nazhromaždených dát. Cieľom je určiť parametre tak, aby predikcia výsledneho
+nazhromaždených dát. Cieľom je určiť parametre tak, aby predikcia výsledného
 modelu bola čo najpresnejšia. Proces analýzy a~úpravy parametrov je možné
 opakovať pokiaľ model nedosahuje dostatočne uspokojivé
 výsledky~\cite{Agrawal2013}.
@@ -324,12 +324,12 @@ a~objektívne~\cite{Sapankevych2009}.
 \subsubsection{Zložky časových radov}
 Na vývoj časových radov vplývajú ich jednotlivé komponenty, z~ktorých
 pozostávajú. Ich vývoj je ovplyvnení rôznymi faktormi, či už ekonomickými,
-ekologickými, počasím, sviatkami alebo kultúrou. Priebehy grafou jednotlivých
+ekologickými, počasím, sviatkami alebo kultúrou. Priebehy grafov jednotlivých
 komponentov potom môžu byť cyklické, rastúce, klesajúce alebo stagnujúce
 v~závislosti od toho, či existuje zmena, ktorá je trvalá alebo opakujúca.
 Taktiež aj veľkosť periódy tohto cyklu môže byť rôzna, a~to niekoľko dní,
 mesiacov či rokov. Keďže prostredie, v~ktorom meriame predpovedanú veličinu sa
-vyvýja, rovnako sa vyvýja aj správanie pozorovanej veličiny. Preto je potrebné
+vyvíja, rovnako sa vyvíja aj správanie pozorovanej veličiny. Preto je potrebné
 pri modelovaní správania uvažovať jednotlivé komponenty časového radu.
 V~literatúre sa najčastejšie stretávame s~rozdelením do 4~komponentov, a~to
 trendová, cyklická, sezónna a~reziduálna zložka~\cite{Grmanova2016}.
@@ -353,7 +353,7 @@ zastúpená pri ekonomických a~finančných časových radoch. Príkladom môž
 aj podnikateľský cyklus, ktorý pozostáva zo 4~opakujúcich sa
 fáz~\cite{Agrawal2013}.
 
-\paragraph{Sezónna zložka} kolísa počas roka a~predstavuje tak striedanie
+\paragraph{Sezónna zložka} sa počas roka mení a~predstavuje tak striedanie
 ročných období. Priebeh funkcie je ovplyvňovaný najmä podnebnými podmienkami
 a~počasím, ale aj kultúrou, náboženstvom či tradíciami. Príkladom môže byť
 predaj sezónnych výrobkov, ktorý sa počas roka výrazne mení. Priebeh funkcie
@@ -469,7 +469,7 @@ Pri identifikácii anomálií je najskôr potrebné zamyslieť sa nad nasledovn�
 problémami~\cite{Chandola2009}:
 \begin{description}
 	\item[$\bullet$ Definovanie oblasti normálnych dát] je veľmi náročné, nakoľko
-	hranica medzi normálnymi dátami a~anomáliami je nepresná a~môže tak dojsť
+	hranica medzi normálnymi dátami a~anomáliami je nepresná a~môže tak dôjsť
 	k~nesprávnemu označeniu meraní.
 	\item[$\bullet$ Anomálie vytvorené škodlivou činnosťou] sa javia ako normálne
 	dáta, čo sťažuje definíciu normálneho správania.
@@ -498,7 +498,6 @@ machine})~\cite{Coma-Puig2016}.
 \subsubsection{Typy anomálií}
 Dôležitým aspektom pri uplatnení detekcie anomálií je charakter anomálie. Z~toho
 dôvodu môžeme anomálie rozdeliť do nasledujúcich troch skupín.
-% TODO add some figures for each group
 
 \paragraph{Bodové anomálie} predstavujú inštancie, ktoré sa nenachádzajú
 v~oblasti normálnych dát a~je možné ich detegovať jednotlivo. Jedná sa
@@ -566,6 +565,14 @@ a~skupinových anomálií je možné transformovať na problém detekcie kontext
 anomálií, v~prípade, že sa prihliada na kontext jednotlivých inštancií. Techniky
 používané pri detekcii skupinových anomálií sa značne líšia od techník
 používaných pri bodových a~kontextových anomáliách~\cite{Chandola2009}.
+
+%-------------------------------------------------------------------------------
+%   Range of occurrences anomalies
+%-------------------------------------------------------------------------------
+
+\subsubsection{Rozsah výskytu anomálií}
+% TODO add local anomalies
+% TODO add global anomalies
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection approaches
@@ -662,6 +669,7 @@ v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centr
 daného zhluku~\cite{Salvador2005}.
 
 % TODO \paragraph{K-means}
+% TODO \paragraph{S-H-ESD}
 
 %-------------------------------------------------------------------------------
 %   Time series classification
@@ -675,7 +683,6 @@ techniky spomenuté v~\ref{c-analysis-techniques}. Ak inštancie reprezentujú
 časový rad, nasadenie takýchto štandardných prístupov je
 zriedkavé~\cite{Hautamaki2008}.
 
-% TODO explain different approaches add examples
 Metódy používané na zhlukovanie časových radov môžeme rozdeliť do 3~skupín, na
 základe reprezentácie dát, s~ktorými pracujú. Prvá skupina predpokladá surové
 dáta, druhá pracuje s~extrahovanými vlastnosťami z~dát a~posledná metóda
@@ -683,20 +690,14 @@ pristupuje k~dátam pomocou vytvoreného modelu. Rozdelenie môžeme vizualizova
 pomocou obrázka~\ref{fig:clustering-approaches}. Prístupy sú opísané
 v~nasledujúcich podkapitolách~\cite{Rani2012}.
 
-\begin{figure}[]
-  \centering
-  \includegraphics[width=0.9\textwidth]{clustering_approaches.png}
-  \caption{Prístupy k~zhlukovaniu založené na a) dočasnej blízkosti, b) reprezentácie, c) modely.}
-  \label{fig:clustering-approaches}
-\end{figure}
-
-\subsubsection{Zhlukovanie na základe dočasnej blízkosti}
+\subsubsection{Zhlukovanie na základe dočasnej susednosti}
 Metóda (angl. \textit{Temporal-Proximity based clustering approach}) pracuje
 priamo so surovými, neupravenými dátami, kvôli čomu sa zvykne nazývať aj
 zhlukovanie na základe surových dát (angl. \textit{Raw data based clustering
 approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných alebo
 podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 
+% TODO add figure from real dataset
 \paragraph{Hierarchické zhlukovanie}
 \label{c:hierarchical-clustering}
 Táto metóda produkuje vnorenú hierarchiu skupín podobných časových radov na
@@ -717,7 +718,7 @@ techniky~\cite{WarrenLiao2005}.
 
 \paragraph{Aglomeratívne zhlukovanie}
 Vzdialenosť medzi dvoma zhlukmi je meraná pomocou dvojice najbližších časových
-radov umiestnených v~rôznych zhlukoch, ktoré sú potencionálnymi kandidátmi na
+radov umiestnených v~rôznych zhlukoch, ktoré sú potenciálnymi kandidátmi na
 zlúčenie. Podobnosť môže určovať aj
 \textit{Wardov algoritmus minimálnej variancie}, ktorý zlúči zhluky
 s~najmenším nárastom variancie. V~každom kroku sú tak vyskúšané všetky
@@ -732,7 +733,6 @@ je možné zmeniť delenie zhluku, ktoré už bolo vykonané. Na meranie vzdiale
 môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
-% TODO all algorithms in own sections?
 % TODO Add k-means / dbscan
 % TODO Add random swap
 % TODO Add agglomerative clustering 		something more
@@ -772,24 +772,22 @@ rady. Predpokladali, že časové rady sú vygenerované $k$ rôznymi ARIMA mode
 Vylepšili algoritmus na maximalizáciu očakávaní (angl. \textit{expectation
 maximalization algorithm}) tak, že sa naučil správne určiť koeficienty
 a~parametre jednotlivých modelov zvyšovaním počtu modelov až do momentu, kedy
-vznikol redundantný model. Algoritmus zkonvergoval v~prípade, že počet modelov
+vznikol redundantný model. Algoritmus skonvergoval v~prípade, že počet modelov
 nebol väčší ako aktuálny počet zhlukov. Na záver boli odstránené podobné modely,
 čím sa ešte zmenšil výsledný počet zhlukov $k$.
 
 \subsubsection{Ďalšie prístupy k~zhlukovaniu}
 Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
-clustering approach}). V~diskretizovaných časových radoch sú nasledné
+clustering approach}). V~diskretizovaných časových radoch sú následne
 identifikované anomálne úseky. Nevýhodou metódy je náročnosť voľby správnej
 veľkosti okna tak, aby zachytila anomáliu a~jej výpočtová
 zložitosť~\cite{Teng2010}.
 
-% TODO add another paragraph
-% TODO make hidden Markov model paragraph
-Prístup založený na skrytých Markovských modeloch (angl. \textit{Hidden Markov
+Prístup založený na skrytých Markovovych modeloch (angl. \textit{Hidden Markov
 models based approach}) je reprezentovaný výkonným konečným stavovým strojom.
 Vychádza z~predpokladu, že existuje skrytý proces, ktorý je Markovský a~zároveň
-generuje normálne časové rady. Nevýhodou je, že techniká zlyháva v~prípade, že
-takýto proces neexistuje. Na základe vytvoreného Markovského modelu sú merania,
+generuje normálne časové rady. Nevýhodou je, že technika zlyháva v~prípade, že
+takýto proces neexistuje. Na základe vytvoreného Markovovho modelu sú merania,
 skupina meraní alebo celý časový rad označené za anomálie~\cite{Teng2010}.
 
 %-------------------------------------------------------------------------------
@@ -807,7 +805,7 @@ použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla z
 zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
 radov~\cite{Dzeroski2007,WarrenLiao2005}.
 
-% TODO explain different approaches add examples
+% TODO explain different approaches add figure from real dataset
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
 3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
@@ -818,7 +816,7 @@ modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledn
 časového radu nelineárnym rozťahovaním a~kontrakciou časových
 osí~\cite{Hautamaki2008}.
 
-% TODO add some figure
+
 \paragraph{Korelácia}
 Korelačný koeficient $r(X, Y)$ meria stupeň lineárnej závislosti medzi dvoma
 časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlation}.
@@ -852,7 +850,7 @@ nelineárne skreslenie medzi časovými radmi vďaka prideleniu viacerých hodn�
 intuícii. Na obrázku~\ref{fig:warping-distance} si môžeme všimnúť, že sú
 porovnávané hodnoty, ktoré by sme intuitívne zvolili pri zarovnaní časových
 radov podľa tvaru krivky. $D_{DTW}$~je vypočítané pomocou dynamického
-programovania, práve kvôli množstvu existujúcih kombinácií. Rekurzia je
+programovania, práve kvôli množstvu existujúcich kombinácií. Rekurzia je
 vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
 % TODO add ref from Flexible Dynamic Time Warping for Time Series Classification
 \begin{equation}
@@ -877,7 +875,10 @@ vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
   \label{fig:warping-distance}
 \end{figure}
 
-% TODO add some figure
+% TODO Add GAK
+% TODO Add SBD
+
+
 \paragraph{Kvalitatívna vzdialenosť}
 Metóda je založená na kvalitatívnom porovnávaní tvaru dvoch časových radov.
 Pre časové rady $X$~a~$Y$~vyberieme dvojicu bodov $i$~a~$j$,~ktoré označujú
@@ -898,6 +899,8 @@ závislosť~\cite{Dzeroski2007}.
   {N \cdot \left( N - 1 \right)}
 \end{equation}
 
+
+% TODO compare euclidian and manhattan distance metrics
 \paragraph{Euklidovská vzdialenosť}
 Je používaná najmä pri klasických zhlukovacích problémoch. Ak zvolený časový rad
 má dĺžku $n$, vzdialenosť vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
@@ -943,7 +946,7 @@ vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
 
 \paragraph{Vzdialenosť medzi krátkymi časovými radmi}
 Metóda (angl. \textit{Short time series}) meria vzdialenosť ako sumu štvorcových
-rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiadúcich
+rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiaducich
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
 vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 čas~\cite{WarrenLiao2005}.
@@ -1027,7 +1030,7 @@ viesť k~nesprávnemu označeniu správania odberateľa za
 neštandardné~\cite{Cody2015}.
 
 Cieľom agregácie časových radov môže byť aj redukcia na priemer, prípadne
-median, dňa alebo týždňa. So zredukovanými dátami je potom možné pracovať rýchlo
+medián, dňa alebo týždňa. So zredukovanými dátami je potom možné pracovať rýchlo
 a~efektívne, keďže ich pamäťová náročnosť je iba zlomkom oproti pôvodnej.
 Zároveň však vzniká priestor na stratenie informácie o~anomálne aktivite
 odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
@@ -1052,10 +1055,10 @@ použiť po častiach lineárnu aproximáciu (angl. \textit{piecewise linear
 approximation}). Algoritmus začína vytvorením odhadu časového radu, ktorý
 používa polovicu vytvorených intervalov. Tie sú následne zlučované, pokiaľ nie
 je splnené ukončovacie kritérium, napr. celkový počet intervalov. Poradie
-zlučovania je určené na základe ceny zlužovania~\cite{Fu2011}.
+zlučovania je určené na základe ceny zlučovania~\cite{Fu2011}.
 
 % TODO add figure
-Žiadúcim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
+Žiaducim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
 Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
 important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
 prvý, posledný a~bod, ktorý je od týchto dvoch najvzdialenejší. Ďalšie body sú
@@ -1085,15 +1088,15 @@ v~dátach~\cite{Fu2011}.
 \subsubsection{Segmentácia časových radov}
 Časové rady sú charakteristické súvislým priebehom a~preto pri ich segmentácii
 je nutné čeliť viacerým problémom. Najjednoduchším prístupom je rozdeliť časový
-rad pomocou okna fixnej dĺžky do segmentov, z~ktorých vzniakjú jednoduché vzory.
+rad pomocou okna fixnej dĺžky do segmentov, z~ktorých vznikajú jednoduché vzory.
 Jedinou úlohou je správne zvoliť dĺžku okna. Pri použití tejto metódy existujú
-dva hlavné problémy. Typycké vzory môžu mať variabilnú dĺžku a~ich výskyt môže
+dva hlavné problémy. Typické vzory môžu mať variabilnú dĺžku a~ich výskyt môže
 byť rôzny. Práve preto je vhodnejšie použiť dynamický prístup, ktorý rozdeľuje
 časový rad práve v~bodoch, ktoré zachovávajú cyklicky vyskytujúce sa vzory
 a~vznikajú tak segmenty s~rôznymi dĺžkami~\cite{Fu2011}.
 
-
-%TODO for NN \subsubsection{Normalizácia číselných vektorov}
+\subsubsection{Normalizácia číselných vektorov}
+%TODO add znorm
 
 
 %-------------------------------------------------------------------------------
@@ -1185,7 +1188,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 Z~pohľadu výskytu anomálie môžu nastať nasledovné scenáre:
 \begin{itemize}
   \item Anomália vznikne neodborným pripojením odberateľa do energetickej siete alebo existuje ešte pred tým ako nastane zber dát inteligentnými meračmi.
-        Keďže celý časový rad pozostáva z~chybných dát, odhalenie anomálie je neprevdepodobné.
+        Keďže celý časový rad pozostáva z~chybných dát, odhalenie anomálie je nepravdepodobné.
   \item Anomália vznikne v~priebehu sledovaného intervalu a~zároveň je odhalená a~ďalej sa už nevyskytuje.
   \item Anomália vznikne v~priebehu sledovaného intervalu a~nie je odhalená. Táto skupina ja predmetom celej práce.
 \end{itemize}
@@ -1255,6 +1258,9 @@ pokrytie~\cite{Trevizan2015}.
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
 \end{equation}
 
+% TODO add evaluation with syntetic dataset
+% TODO add evaluation with clustering TS
+
 %-------------------------------------------------------------------------------
 %   Related work
 %-------------------------------------------------------------------------------
@@ -1311,9 +1317,9 @@ Naopak, ak dataset obsahuje viaceré vysvetľujúce premenné, potom je možné
 vytvoriť model, ktorý bude zhlukovať odberateľov na základe týchto atribútov.
 Tak bude zabezpečená evaluácia pôvodného zhlukovacieho modelu. Dáta, ktoré máme
 k~dispozícií obsahujú iba časovú známku, množstvo odoberanej elektrickej energie
-a~príznak označujúci dni, ktoré sú svitky.
+a~príznak označujúci dni, ktoré sú sviatky.
 
-Z~experimentov môžeme predpokladať, že zhlukovacie algoritmi vytvárajú husté
+Z~experimentov môžeme predpokladať, že zhlukovacie algoritmy vytvárajú husté
 a~riedke zhluky. Primárne sa budeme zameriavať na analýzu časových radov,
 ktoré spadajú do riedkych zhlukov a~už ony samotné môžu predstavovať anomálie.
 Cieľom je v~takýchto časových radoch, čo najpresnejšie identifikovať
@@ -1329,12 +1335,12 @@ môžeme považovať za anomáliu.
 
 Výstupom opísaného procesu sú podozrivé a~anomálne časové rady a~jednotlivé
 merania v~nich, ktoré sú taktiež považované za anomálie. Na výstupe sa môže
-podielať viacero algoritmov, čo je potrebné zohľadniť pri vytváraní výsledného
+podieľať viacero algoritmov, čo je potrebné zohľadniť pri vytváraní výsledného
 skóre. Na záver je potrebné zlúčiť jednotlivé merania do intervalov, ktoré
-svojim skôre opisujú mieru istoty, že označený interval obshauje anomáliu.
+svojim skóre opisujú mieru istoty, že označený interval obsahuje anomáliu.
 Výhodou takéhoto spracovania je univerzálnosť riešenia, jednoduchá vizualizácia,
 ale najmä klasifikácia rôznych typov anomálií. Zatiaľ čo lokálne anomálie sú
-výsledkom krátkodobej zmeny správania odberateľa a~može sa jednať aj o~výsledok
+výsledkom krátkodobej zmeny správania odberateľa a~môže sa jednať aj o~výsledok
 náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmenu
 a~môže byť predmetom záujmu distribútorov elektrickej energie.
 
@@ -1386,8 +1392,8 @@ a~môže byť predmetom záujmu distribútorov elektrickej energie.
 \noindent
 V~úvode semestra bude vytvorený validačný mechanizmus pre model, zhlukujúci
 analyzované časové rady na základe podobnosti priebehov. Cieľom bude overiť
-vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie.
-Dôležitý je aj výber hyperparametrov pre algoritmi strojového učenia, ale aj
+vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej energie.
+Dôležitý je aj výber hyperparametrov pre algoritmy strojového učenia, ale aj
 vhodná dĺžka posuvného okna, prípadne metrika použitá na meranie podobnosti
 jednotlivých časových radov. Z~analyzovaných riešení je potrebné vybrať
 najvhodnejšie pre náš problém. Ďalšie navrhované vylepšenia budú zapracované na
