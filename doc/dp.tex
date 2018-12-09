@@ -1094,8 +1094,18 @@ byť rôzny. Práve preto je vhodnejšie použiť dynamický prístup, ktorý ro
 a~vznikajú tak segmenty s~rôznymi dĺžkami~\cite{Fu2011}.
 
 \subsubsection{Normalizácia číselných vektorov}
-\%TODO add znorm\\
-
+Rozsahy nameraných hodnôt inteligentnými meračmi sa môžu líšiť, pri jednotlivých
+odberateľoch dokonca aj rádovo. Pri zhlukovaní takýchto časových radov je preto
+potrebná najskôr ich normalizácia, v~prípade zhlukovania na základe tvaru
+priebehov. Existuje viacero druhov normalizácií, no v~práci budeme používať
+najmä štandardné skóre, nazývané aj z-skóre (angl. \textit{z-score}). Hodnotu
+vypočítame ako podiel rozdielu hodnoty a~priemeru a~štandardnej odchýlky.
+Normalizáciu vyjadríme nasledujúcim
+vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
+\begin{equation}
+	\label{eq:z-score}
+  z = \frac{x-\mu}{\sigma}
+\end{equation}
 
 %-------------------------------------------------------------------------------
 %   Identification of abnormal behavior
