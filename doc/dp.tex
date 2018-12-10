@@ -244,9 +244,9 @@ meračov je možné modelovať správanie zákazníkov. Distribučné spoločnos
 môžu znižovať svoje straty a~preverovať iba odberateľov, ktorí svojím profilom
 nezapadajú medzi odberateľov so štandardným správaním.
 
-\% TODO dopíš niečo o anomáliách a predpovediach časových radov\\
-\% TODO výsledky práce\\
-\% TODO členenie práce\\
+% TODO dopíš niečo o anomáliách a predpovediach časových radov
+% TODO výsledky práce
+% TODO členenie práce
 
 %-------------------------------------------------------------------------------
 %   Chapter 2 - Problem analysis
@@ -422,7 +422,7 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 %   Division of time series
 %-------------------------------------------------------------------------------
 
-\% TODO add some figures\\
+% TODO add some figures
 \subsubsection{Delenie časových radov}
 Výraznými vlastnosťami časových radov sú aj synchrónnosť a~periodicita,
 znázornená na
@@ -571,8 +571,24 @@ používaných pri bodových a~kontextových anomáliách~\cite{Chandola2009}.
 %-------------------------------------------------------------------------------
 
 \subsubsection{Rozsah výskytu anomálií}
-\% TODO add local anomalies\\
-\% TODO add global anomalies\\
+Za anomáliu v~našej doméne považujeme správanie odberateľa, ktoré sa výrazne
+líši od ostatných odberateľov. Anomáliou môže byť celé pozorované obdobie alebo
+iba jeho určitá časť. Keďže datasety, ktoré máme k~dispozícií obsahujú konečný
+počet meraní a~teda nie sú spojité, anomália môže byť reprezentovaná aj jediným
+meraním. Anomálie môžme taktiež rozdeliť na pozitívne a~negatívne, v~závislosti
+od toho, aké sú očakávané a~reálne hodnoty. Ak je ich rozdiel kladný budeme
+hovoriť o~pozitívnych anomáliách, inak o~negatívnych~\cite{Kejariwal2015}.
+
+Intervaly jednotlivých časových radov, ktoré metóda označí ako anomálne, môžeme
+ďalej rozdeliť na lokálne a~globálne anomálie. Delenie vzniká na základe
+dekompozície časových radov, kde globálne anomálie sú porovnávané so
+sezónnou zložkou a~lokálne anomálie sú identifikované vnútri sezónnych vzorov.
+Zatiaľ čo globálne anomálie sú identifikované zväčša na základe porovnávania
+očakávaných a~reálnych hodnôt, identifikácia lokálnych anomálií je náročnejšia
+ak má byť navrhované riešenie robustné. Opäť vychádzame z~porovnávania
+očakávaných a~reálnych hodnôt, no jedná sa o~menšie intervaly, ktorých sa môže
+vyskytovať rádovo viac. Robustné riešenie to musí zohľadniť a~identifikovať iba
+signifikantné anomálie~\cite{Kejariwal2015}.
 
 %-------------------------------------------------------------------------------
 %   Anomaly detection approaches
@@ -668,8 +684,8 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
-\% TODO \paragraph K-means\\
-\% TODO \paragraph S-H-ESD\\
+% TODO \paragraph K-means
+% TODO \paragraph S-H-ESD
 
 %-------------------------------------------------------------------------------
 %   Time series classification
@@ -697,7 +713,7 @@ zhlukovanie na základe surových dát (angl. \textit{Raw data based clustering
 approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných alebo
 podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 
-\% TODO add figure from real dataset\\
+% TODO add figure from real dataset
 \paragraph{Hierarchické zhlukovanie}
 \label{c:hierarchical-clustering}
 Táto metóda produkuje vnorenú hierarchiu skupín podobných časových radov na
@@ -733,8 +749,8 @@ je možné zmeniť delenie zhluku, ktoré už bolo vykonané. Na meranie vzdiale
 môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
-\% TODO Add k-means / dbscan\\
-\% TODO Add random swap\\
+% TODO Add k-means / dbscan
+% TODO Add random swap
 
 \subsubsection{Zhlukovanie na základe reprezentácie}
 Keďže manipulácia so surovými dátami je často náročná a~dáta navyše obsahujú
@@ -744,7 +760,7 @@ následne sú aplikované zhlukovacie algoritmy. V~literatúre sa zvykne označo
 aj ako zhlukovanie na základe vlastností (angl. \textit{Feature based clustering
 approach})~\cite{Rani2012}.
 
-\% TODO add equation ???\\
+% TODO add equation ???
 \paragraph{Samoorganizované mapy}
 Trieda neurónových sietí, kde neuróny sú usporiadané v~nízkodimenzionálnej
 štruktúre a~trénované iteratívne a~bez učiteľa. Trénovací proces začína
@@ -803,7 +819,7 @@ použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla z
 zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
 radov~\cite{Dzeroski2007,WarrenLiao2005}.
 
-\% TODO explain different approaches add figure from real dataset\\
+% TODO explain different approaches add figure from real dataset
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
 3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
@@ -850,7 +866,7 @@ porovnávané hodnoty, ktoré by sme intuitívne zvolili pri zarovnaní časový
 radov podľa tvaru krivky. $D_{DTW}$~je vypočítané pomocou dynamického
 programovania, práve kvôli množstvu existujúcich kombinácií. Rekurzia je
 vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
-\% TODO add ref from Flexible Dynamic Time Warping for Time Series Classification\\
+% TODO add ref from Flexible Dynamic Time Warping for Time Series Classification
 \begin{equation}
 	\label{eq:dtw-distance}
   D_{DTW} \left( i, j \right) =
@@ -873,8 +889,8 @@ vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
   \label{fig:warping-distance}
 \end{figure}
 
-\% TODO Add GAK\\
-\% TODO Add SBD\\
+% TODO Add GAK
+% TODO Add SBD
 
 
 \paragraph{Kvalitatívna vzdialenosť}
@@ -898,7 +914,7 @@ závislosť~\cite{Dzeroski2007}.
 \end{equation}
 
 
-\% TODO compare euclidian and manhattan distance metrics\\
+% TODO compare euclidian and manhattan distance metrics
 \paragraph{Euklidovská vzdialenosť}
 Je používaná najmä pri klasických zhlukovacích problémoch. Ak zvolený časový rad
 má dĺžku $n$, vzdialenosť vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
@@ -920,7 +936,7 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
 Je rovnako ako Euklidovská vzdialenosť používaná najmä pri klasických
 zhlukovacích problémoch. Výpočet je tiež veľmi podobný, môžeme ho vyjadriť
 vzorcom~\ref{eq:distance-manhattan}
-\% TODO add som refference\\
+% TODO add som refference
 \begin{equation}
 	\label{eq:distance-manhattan}
   D_M \left( X, Y \right) = \sum_{k=1}^{n} \lvert X_{ik} - Y_{jk} \rvert
@@ -1034,7 +1050,7 @@ Zároveň však vzniká priestor na stratenie informácie o~anomálne aktivite
 odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
 
 \subsubsection{Redukcia dát}
-\% TODO add figure\\
+% TODO add figure
 Jednou z~najjednoduchších metód používaných pri redukcií dát je práve
 vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
 predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť medzi
@@ -1055,7 +1071,7 @@ používa polovicu vytvorených intervalov. Tie sú následne zlučované, pokia
 je splnené ukončovacie kritérium, napr. celkový počet intervalov. Poradie
 zlučovania je určené na základe ceny zlučovania~\cite{Fu2011}.
 
-\% TODO add figure\\
+% TODO add figure
 Žiaducim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
 Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
 important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
@@ -1209,7 +1225,7 @@ klasifikovaní~\cite{Spiric2015}.
 %   Evaluation metrics
 %-------------------------------------------------------------------------------
 
-\% TODO add confusion matrix table\\
+% TODO add confusion matrix table
 \subsection{Vyhodnocovacie metriky}
 Za predpokladu, že získané dáta budú obsahovať aj označené inštancie, prípadne
 budú označené dodatočne na základe výpočtov, môžeme na vyhodnotenie úspešnosti
@@ -1266,8 +1282,8 @@ pokrytie~\cite{Trevizan2015}.
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
 \end{equation}
 
-\% TODO add evaluation with syntetic dataset\\
-\% TODO add evaluation with clustering TS\\
+% TODO add evaluation with syntetic dataset
+% TODO add evaluation with clustering TS
 
 %-------------------------------------------------------------------------------
 %   Related work
