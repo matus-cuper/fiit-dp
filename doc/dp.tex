@@ -684,8 +684,17 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
+Do rovnakej kategórie môžeme zaradiť aj metódu sezónny hybridný ESD (angl.
+\textit{Seasonal Hybrid Extreme Studentized Deviation}), ktorá podobne ako
+\textit{S-ESD} používa dekompozíciu časových radov, kde anomálie sú detegované
+práve na sezónnej zložke. Tie sú identifikované pomocou priemeru
+a~štandardnej odchýlky. Metóda \textit{S-ESD} je veľmi citlivá pre niektoré typy
+dát, kde anomálií značné množstvo. Preto bola navrhnutá metóda \textit{S-H-ESD},
+ktorá namiesto toho používa absolútnu odchýlku mediánu. Cenou za to je vyššia
+výpočtová náročnosť metódy, na druhej strane sú hodnoty F-skóre takmer až o~30\%
+vyššie~\cite{Hochenbaum2005}.
+
 % TODO \paragraph K-means
-% TODO \paragraph S-H-ESD
 
 %-------------------------------------------------------------------------------
 %   Time series classification
