@@ -1290,8 +1290,45 @@ pokrytie~\cite{Trevizan2015}.
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
 \end{equation}
 
+Na evaluáciu zhlukovania časových radov sú používané viaceré validačné indexy.
+V~práci použijeme iba niektoré z~nich, napr. Randov, Jaccardov alebo
+Fowlkes-Mallowsov index. Naivným prístupom je porovnávanie zhlukov a~počítanie
+dvojíc inštancií, ktoré sa nachádzajú v~rovnakom zhluku. Maticu zámen tak
+môžeme prepísať do tabuľky~\ref{tab:validation-matrix}. Časové rady nachádzajúce
+sa v~rovnakom zhluku pri rôznych zhlukovaniach \textit{X} a~\textit{Y} sa
+nachádzajú v~kategórií \textit{TRUE POSITIVE}~\cite{Bilgic2018}.
+
+\begin{table}[]
+	\centering
+	\caption{Validačná matica zhlukovania časových radov}
+	\label{tab:validation-matrix}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 																		&  Rovnaké v množine \textit{Y}   &  Rôzne v množine \textit{Y}   \\ \hline
+		Rovnaké v množine \textit{X}  			&  TP (true positive)   					&  FP (false positive)  				\\ \hline
+		Rôzne v množine \textit{X}  				&  FN (false negative)  					&  TN (true negative)   				\\ \hline
+	\end{tabular}
+\end{table}
+
+Spomínané validačné indexy môžeme vyjadriť nasledujúcimi vzorcami, a~to Randov
+index vzorcom~\ref{eq:rand}, Jaccardov index vzorcom~\ref{eq:jaccard}
+a~Fowlkes-Mallowsov index vzorcom~\ref{eq:fowlkes}. Indexy sú bližšie popísané
+v~práci~\cite{Bilgic2018}.
+% TODO add missing journal for citation
+\begin{equation}
+	\label{eq:rand}
+  \text{RI} = \frac{TP}{FP + FN + TP}
+\end{equation}
+\begin{equation}
+	\label{eq:jaccard}
+  \text{J} = \frac{TP + TN}{FP + FN + TP + TN}
+\end{equation}
+\begin{equation}
+	\label{eq:fowlkes}
+  \text{FM} = \frac{TP}{\sqrt{(TP + FP)(TP + FN)}}
+\end{equation}
+
 % TODO add evaluation with syntetic dataset
-% TODO add evaluation with clustering TS
 
 %-------------------------------------------------------------------------------
 %   Related work
