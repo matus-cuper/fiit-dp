@@ -702,8 +702,7 @@ zriedkavé~\cite{Hautamaki2008}.
 Metódy používané na zhlukovanie časových radov môžeme rozdeliť do 3~skupín, na
 základe reprezentácie dát, s~ktorými pracujú. Prvá skupina predpokladá surové
 dáta, druhá pracuje s~extrahovanými vlastnosťami z~dát a~posledná metóda
-pristupuje k~dátam pomocou vytvoreného modelu. Rozdelenie môžeme vizualizovať
-pomocou obrázka~\ref{fig:clustering-approaches}. Prístupy sú opísané
+pristupuje k~dátam pomocou vytvoreného modelu. Prístupy sú opísané
 v~nasledujúcich podkapitolách~\cite{Rani2012}.
 
 \subsubsection{Zhlukovanie na základe dočasnej susednosti}
@@ -1324,6 +1323,43 @@ amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nie je ci
 na nevýrazne zmeny a~trendy v~dátach.\\
 
 %-------------------------------------------------------------------------------
+%   Analysis evaluation
+%-------------------------------------------------------------------------------
+
+\subsection{Zhodnotenie analýzy}
+Narastajúce množstvo zbieraných dát v~doméne energetiky z~monitorovaných
+systémov predstavuje množstvo skrytých znalostí. Vzniká potreba vydolovať ich
+a~následne využiť na optimalizáciu procesov, zníženie prevádzkových nákladov
+alebo predpovedanie budúcej záťaže energetických sietí. Na základe
+nepredvídateľných udalostí alebo náhodného správania odberateľov vznikajú
+v~datasetoch intervaly, ktoré nezodpovedajú štandardnému správaniu. Tie
+označujeme ako intervaly s~výskytom anomálií. Cieľom našej práce ich bude nájsť
+a~zmenšiť dĺžku nájdeného intervalu tak, aby bol čo najmenší, no zároveň v~sebe
+zahŕňal identifikované anomálie.
+
+Identifikácia anomálií v~časových radoch prináša so sebou viacero výziev, tými
+najčastejšími je vysoká dimenzionalita dát, definícia normálneho správania, ale
+najmä absencia označených dát. Označenie dát je navyše náročné pre ľudského
+experta a~taktiež sa veľmi líši definícia anomálie pri rôznych doménach. Ani
+normálne správanie nie je možné jednoznačne a~jednoducho určiť, keďže tisíce
+odberateľov sa správa unikátne. Z~dostupných dát však vieme po normalizácií
+extrahovať vzory, ktoré po následnom zhlukovaní predstavujú rádovo menej skupín,
+s~ktorými ďalej pracujeme ako s~definíciou normálneho správania. Väčšina článkov
+zaoberajúca sa zhlukovaním, sa zameriava na nízkorozmerné dáta. Pri
+vysokodimenzionálnych dátach sú metriky podobnosti inštancií zamerané na tvary
+jednotlivých priebehov, než na absolútne hodnoty pozorovaní.
+
+Cieľom našej práce je pomocou zhlukovania časových radov vhodne zadefinovať
+normálne správanie odberateľov a~presnejšie identifikovať intervaly obsahujúce
+anomálie. Pri zhlukovaní časových radov experimentálne overíme vhodnosť voľby
+hyperparametrov ako je napr. počet zhlukov, vzdialenostná metrika alebo veľkosť
+použitého posuvného okna. Riedke zhluky budeme považovať za anomálne a~budú
+podrobené ďalšej analýze, kedy budú identifikované zlomy, lokálne a~globálne
+anomálie.
+
+Vzhľadom na to, že dostupné dáta neobsahujú informáciu o~anomáliách, budeme pri
+evaluácií riešenia používať syntetický dataset, ktorý bude vytvorený na základe
+dostupných dát a~znalostí o~anomáliách.
 
 %-------------------------------------------------------------------------------
 %   Chapter 3 - Solution design
