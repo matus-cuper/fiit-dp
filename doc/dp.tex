@@ -12,6 +12,7 @@
 \usepackage[utf8]{inputenc}                                                     % support for special Slovak characters
 \usepackage{enumitem}																														% support for itemize
 \usepackage{times}																															% Times New Roman
+\usepackage[hyphens]{url}                                                       % url in references
 \usepackage[unicode]{hyperref}																									% hyperreferences in table of content
 \usepackage{amsmath}                                                            % math fractions
 \usepackage{amssymb}                                                            % real numbers sign
@@ -19,12 +20,12 @@
 \usepackage{graphicx}                                                           % figures
 \usepackage{multirow}																														% table with multirows
 \usepackage{threeparttable}                                                     % table with footnotes
-\usepackage{url}                                                                % url in references
 \usepackage{listings}                                                           % source code syntax highlighting
 \usepackage{courier}																														% monospace in listings
 \usepackage{caption}																														% enable caption centering
 \usepackage{regexpatch}																													% fix slovak in table with multirows
 \usepackage[titletoc]{appendix} 																								% appendix in toc with word appendix
+\usepackage{dirtree}                                                            % directory tree in appendix
 \usepackage[a4paper, centering,
 											left=35mm, top=25mm, right=20mm, bottom=25mm]{geometry}		% set page margins
 
@@ -63,7 +64,7 @@
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
+	{\LARGE Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
 	\vspace{0.5cm}
 	{\large Diplomový projekt II \par}
 	\vspace{7cm}
@@ -73,6 +74,7 @@
   {\large december 2018 \par}
 	\vfill
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 \begin{titlepage}
 	\centering
@@ -83,7 +85,7 @@
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Identifikácia neštandardného správania odberateľov v energetickej sieti \par}
+	{\LARGE Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
 	\vspace{0.5cm}
 	{\large Diplomový projekt II \\}
 	\vspace{7cm}
@@ -95,6 +97,7 @@
   \vspace{0.5cm}
   {\normalsize december 2018 \par}
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   ANOTATION
@@ -139,6 +142,7 @@ alebo selekcia atribútov. Navrhovaná metóda zlúči diskretizované vyhladen�
 časové rady a~následne sú identifikované anomálie na základe vytvorených zhlukov
 a~rozloženia profilu používateľa v~zhlukoch.
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 \begin{titlepage}
 \begin{center}
@@ -177,6 +181,7 @@ attribute selection. Proposed method clusters discretized smoothed time series
 and then, based on created clusters and layout of customers profile in cluster,
 identifies anomalies.
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Declaration
@@ -196,6 +201,7 @@ v zozname použitej literatúry. \\
 \hspace*{10cm}............................\\
 \hspace*{10.7cm} Matúš Cuper
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 \begin{titlepage}
 \vspace*{15cm}
@@ -207,6 +213,7 @@ v zozname použitej literatúry. \\
 Ďakujem vedúcemu diplomovej práce Ing. Marekovi Lódererovi za odborné vedenie,
 cenné rady a pripomienky pri spracovaní diplomovej práce.
 \end{titlepage}
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Table of contents
@@ -228,7 +235,7 @@ cenné rady a pripomienky pri spracovaní diplomovej práce.
 %   Chapter 1 - Introduction
 %-------------------------------------------------------------------------------
 
-\newpage
+\newpage\null\thispagestyle{empty}\newpage
 \setcounter{page}{1}
 \section{Úvod}
 Jedným z~problémov, ktorým v~súčasnosti čelia distribučné spoločnosti, je
@@ -247,6 +254,7 @@ nezapadajú medzi odberateľov so štandardným správaním.
 % TODO dopíš niečo o anomáliách a predpovediach časových radov
 % TODO výsledky práce
 % TODO členenie práce
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Chapter 2 - Problem analysis
@@ -413,7 +421,7 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{add_model.pdf}
+  \includegraphics[width=0.7\textwidth]{add_model.pdf}
   \caption{Príklad aditívneho modelu.}
   \label{fig:add-time-series-model}
 \end{figure}
@@ -1477,6 +1485,7 @@ je vylepšiť proces prvotnej selekcie podozrivých časových radov.
 \newpage
 \bibliographystyle{iso-690/slovakiso}
 \bibliography{bibliography}
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Appendix
@@ -1521,6 +1530,32 @@ semestra sa koná študentská konferencia, do ktorej by sme chceli prispieť
 článkom a~získať tak dôležitú spätnú väzbu. Na záver by sme chceli zapracovať
 jednotlivé pripomienky a~znova vyhodnotiť výsledky, ktoré budú použité pri
 obhajobe projektu.
+
+
+\newpage\null\thispagestyle{empty}\newpage
+\section{Obsah elektronického média}
+\dirtree{%
+  .1 CD nosič.
+  .2 \textbf{doc}.
+	.3 DP\_MATUS\_CUPER.pdf.
+  .2 \textbf{src}.
+  .3 aggregators.R.
+  .3 analyzators.R.
+  .3 anomalyDetectors.R.
+  .3 boilerplate.R.
+  .3 filters.R.
+  .3 loaders.R.
+  .3 oneliners.sh.
+  .3 presentation.R.
+  .3 ts-sample-decomposition.R.
+  .3 utilities.R.
+  .3 visualizators.R.
+}
+
+\begin{description}
+  \item[$\bullet$ doc] dokumentácia, obrázky použité v nej a zdrojové súbory pre LaTeX
+  \item[$\bullet$ src] skripty, prototypy a časti zdrojových kódov, ktoré boli použité pri experimentoch
+\end{description}
 
 
 \end{appendices}
