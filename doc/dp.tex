@@ -122,7 +122,8 @@
 {Autor: Bc. Matúš Cuper \par}
 {Bakalárska práca: Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
 {Vedúci práce: Ing. Marek Lóderer \par}
-{máj 2019 \\} \\
+{máj 2019 \par}
+\bigskip
 V práci sme sa zamerali na identifikáciu anomálií v~energetických časových
 radoch. Anomálie môžu vznikať na základe neštandardného správania odberateľov
 alebo poruchy inteligentného merača spotreby elektrickej energie. Cieľom
@@ -161,7 +162,8 @@ a~rozloženia profilu používateľa v~zhlukoch.
 {Author: Bc. Matúš Cuper \par}
 {Bachelor thesis: Identification of abnormal behavior of customers in the power grid \par}
 {Supervisor: Ing. Marek Lóderer \par}
-{May 2019 \\} \\
+{May 2019 \par}
+\bigskip
 In the thesis we focused on anomaly identification in energy time series.
 Anomalies can be caused by abnormal behavior of customers or failure of
 intelligent meter of electricity load. The aim of this master thesis is to
@@ -515,7 +517,7 @@ transakcia výrazne väčšieho objemu peňazí predstavuje podvod, zatiaľ čo 
 transakcie, nachádzajúce sa v~normálnom rozsahu predstavujú normálne dáta, ktoré
 nie sú anomáliou~\cite{Chandola2009}.
 
-\begin{figure}[]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{point_anomalies.png}
   \caption{Príklad bodových anomálií~\cite{Chandola2009}.}
@@ -543,7 +545,7 @@ Zatiaľ čo v~niektorých prípadoch je definovanie kontextu priamočiare, exist
 domény, kde to jednoduché nie je. Dôležité je aby kontextové atribúty boli
 zmysluplne určené v~cieľovej doméne ich aplikácie~\cite{Chandola2009}.
 
-\begin{figure}[]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{contextual_anomalies.png}
   \caption{Príklad kontextových anomálií~\cite{Chandola2009}.}
@@ -556,7 +558,7 @@ sekvenciu inštancií, ktorá by pri inom zoradení nepredstavovala anomáliu.
 Taktiež sa jednotlivé inštancie môžu nachádzať v~rozsahu normálnych dát.
 Príkladom môžu byť systémové volania operačného systému, ktoré sú v~prípade
 dodržania určitej postupnosti označené ako činnosť škodlivého
-softvéru~\cite{Chandola2009}.\\
+softvéru~\cite{Chandola2009}.
 
 \begin{figure}[H]
   \centering
@@ -565,6 +567,7 @@ softvéru~\cite{Chandola2009}.\\
   \label{fig:collective-anomalies}
 \end{figure}
 
+\noindent
 Zatiaľ čo bodové anomálie sa môžu vyskytovať v~každom datasete, skupinové sa
 vyskytujú iba v~datasetoch, kde existuje medzi inštanciami vzťah. Pri
 kontextových anomáliách je potrebné určiť kontextové atribúty, ktoré sa
@@ -702,6 +705,7 @@ ktorá namiesto toho používa absolútnu odchýlku mediánu. Cenou za to je vy�
 výpočtová náročnosť metódy, na druhej strane sú hodnoty F-skóre takmer až o~30\%
 vyššie~\cite{Hochenbaum2005}.
 
+% TODO \paragraph Štatistické metódy
 % TODO \paragraph K-means
 
 %-------------------------------------------------------------------------------
@@ -898,7 +902,7 @@ vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
   \end{cases}
 \end{equation}
 
-\begin{figure}[]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{warping-distance.png}
   \caption{Príklad porovnávania časových radov pomocou dynamickej deformácií času~\cite{Malinowski2017}.}
@@ -941,7 +945,7 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
   D_E \left( X, Y \right) = \sqrt{\sum_{k=1}^{n} \left( X_{ik} - Y_{jk} \right)^2 }
 \end{equation}
 
-\begin{figure}[]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{euclidean-distance.png}
   \caption{Príklad porovnávania časových radov pomocou Euklidovskej vzdialenosti~\cite{Malinowski2017}.}
@@ -1077,7 +1081,7 @@ Lepšie výsledky dostaneme ak pri vzorkovaní budeme priemerovať hodnoty vo
 vzniknutých intervaloch. Táto metóda sa zvykne nazývať aj po častiach agregovaná
 aproximácia (angl. \textit{piecewise aggregate approximation}), skrátene PAA.
 Vylepšenou verziou je metóda APCA, kedy vzniknuté intervaly majú rôznu dĺžku,
-	v~závislosti od tvaru časového radu~\cite{Keogh2002}.
+v~závislosti od tvaru časového radu~\cite{Keogh2002}.
 
 Ďalšou metódou je aproximácia pomocou rovných čiar, kde hlavnými kategóriami sú
 lineárna interpolácia a~lineárna regresia. Bežnou metódou pri interpolácií je
@@ -1205,7 +1209,7 @@ spotreby môže byť čiastočné alebo úplne, ako môžeme
 vidieť na obrázkoch~\ref{fig:decrease-partial}
 a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
-\begin{figure}[]
+\begin{figure}[htbp]
 
 	\begin{minipage}{0.45\textwidth}
 		\begin{center}
@@ -1251,14 +1255,14 @@ odberateľa. Jednoduchý klasifikátor označí prvých \textit{n} odberateľov,
 ktorých miera pravdepodobnosti výskytu čierneho odberu je najvyššia, za
 anomálnych. Pri vyjadrení matice zámen pomocou
 tabuľky~\ref{tab:confusion-matrix} potom riadky predstavujú predpovedanú triedu
-a~stĺpce skutočnú. Vznikajú tak 4~kategórie, správne označení podozriví 
-odberatelia (angl. \textit{TRUE POSITIVE}), nesprávne označení podozriví 
-odberatelia (angl. \textit{FALSE POSITIVE}), nesprávne označený normálny 
-odberatelia (angl. \textit{TRUE NEGATIVE}) a~správne označený normálny 
-odberatelia (angl. \textit{FALSE NEGATIVE}). Kvalitu klasifikácie potom môžeme 
-zmerať pomocou presnosti a~pokrytia. Presnosť vypočítame 
-vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených anomálií 
-a~celkový počet označených anomálií. Tým vypočítame percento odberateľov, 
+a~stĺpce skutočnú. Vznikajú tak 4~kategórie, správne označení podozriví
+odberatelia (angl. \textit{TRUE POSITIVE}), nesprávne označení podozriví
+odberatelia (angl. \textit{FALSE POSITIVE}), nesprávne označený normálny
+odberatelia (angl. \textit{TRUE NEGATIVE}) a~správne označený normálny
+odberatelia (angl. \textit{FALSE NEGATIVE}). Kvalitu klasifikácie potom môžeme
+zmerať pomocou presnosti a~pokrytia. Presnosť vypočítame
+vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených anomálií
+a~celkový počet označených anomálií. Tým vypočítame percento odberateľov,
 ktorých sme správne klasifikovali ako podozrivých.
 \begin{equation}
 	\label{eq:precision}
@@ -1275,7 +1279,7 @@ odberateľov a~pre model by tak bolo výhodnejšie označovať iba tých, s~ktor
 je takmer istý, je dôležité brať do úvahy aj túto metriku. Obe metriky sú
 vyjadrené v~percentách~\cite{Trevizan2015,Wei2006}.
 
-\begin{table}[]
+\begin{table}[htbp]
 	\centering
 	\caption{Matica zámen}
 	\label{tab:confusion-matrix}
@@ -1306,7 +1310,7 @@ môžeme prepísať do tabuľky~\ref{tab:validation-matrix}. Časové rady nach�
 sa v~rovnakom zhluku pri rôznych zhlukovaniach \textit{X} a~\textit{Y} sa
 nachádzajú v~kategórií \textit{TRUE POSITIVE}~\cite{Bilgic2018}.
 
-\begin{table}[]
+\begin{table}[htbp]
 	\centering
 	\caption{Validačná matica zhlukovania časových radov}
 	\label{tab:validation-matrix}
@@ -1355,8 +1359,10 @@ bez rozpustenia zhluku je nahradené pôvodným. Ako bolo spomenuté
 v~\ref{c:hierarchical-clustering} cieľom aglomeratívneho zhlukovania je všetky
 časové rady označiť ako zhluky a~následne ich iteratívne zhlukovať. V~momente,
 keď je vytvorených \textit{k} zhlukov, je vypočítaný centroid zhluku a~určená
-hierarchia zhlukov.\\
+hierarchia zhlukov.
+\medskip
 
+\noindent
 V~práci~\cite{Cody2015} boli pri určovaní podozrivých aktivít odberateľov
 úspešne aplikované rozhodovacie stromy. Po vytvorení trénovacej a~testovacej
 množiny boli vygenerované rozhodovacie pravidlá reprezentujúce model normálnej
@@ -1365,8 +1371,10 @@ a~testovacie dáta pomocou štatistickej metódy RMSE. Výsledkom experimentov j
 dostatočne presná predikcia spotreby energie vypočítaná iba na základe atribútov
 extrahovaných z~časovej známky. Prekročením stanovej hranice boli inštancie
 považované za anomálne.  Počas experimentov boli použité M5P rozhodovacie učiace
-stromy.\\
+stromy.
+\medskip
 
+\noindent
 Predmetom článku~\cite{Tagaris2002} bolo navrhnúť novú vlnovú techniku na
 reprezentovanie viacerých vlastností meraných dát. Tiež vytvorili nový model,
 ktorý v~sebe zahŕňa viacero modelov, čím je pridávanie ďalších komponentov do
@@ -1374,7 +1382,8 @@ detekčného systému jednoduché. Navrhovaná metóda je citlivá na lokálne z
 vzore dát. Taktiež dosiahli s~relatívne malým množstvom meraní presnosť až 78\%
 na trénovacej množine a~70\% na testovacej množine. Metóda je citlivá na zmeny
 amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nie je citlivý
-na nevýrazne zmeny a~trendy v~dátach.\\
+na nevýrazne zmeny a~trendy v~dátach.
+\medskip
 
 %-------------------------------------------------------------------------------
 %   Analysis evaluation
@@ -1463,7 +1472,7 @@ obrázku~\ref{fig:state-diagram}. Navyše je pridaná evaluácia vytvorených zh
 a~aj hyperparametrov, ktoré slúžia na nastavenia zhlukovacích algoritmov. Cieľom
 je vylepšiť proces prvotnej selekcie podozrivých časových radov.
 
-\begin{figure}[]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.65\textwidth]{state_diagram.pdf}
   \caption{Stavový diagram procesu identifikácií anomálií.}
@@ -1493,46 +1502,6 @@ je vylepšiť proces prvotnej selekcie podozrivých časových radov.
 
 \begin{appendices}
 \newpage
-\section{Plán do letného semestra}
-\begin{table}[!h]
-  \centering
-  \begin{tabular}{||l|p{0.65\textwidth}||}
-    \hline \hline
-    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v letnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
-    \hline
-    1. týždeň    &  vytvorenie validačného modelu pre zhlukovanie časových radov                              \\ \hline
-    2. týždeň    &  výber hyperparametrov a~metrík vzdialenosti pre použité zhlukovacie algoritmy             \\ \hline
-    3. týždeň    &  použitie rôznych diskretizačných okien a~validácia použitých metrík      					        \\ \hline
-    4. týždeň    &  použitie identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov   \\ \hline
-    5. týždeň    &  porovnanie výsledkov z~experimentov s~naštudovanou literatúrou, overenie výsledkov        \\ \hline
-    6. týždeň    &  optimalizácia modelu a~výpočtov, vyhodnotenie experimentov                                \\ \hline
-    7. týždeň    &  vytvorenie článku na študentskú konferenciu, dokončovanie experimentov                    \\ \hline
-    8. týždeň    &  príprava na študentskú vedeckú konferenciu, vizualizácia dosiahnutých výsledkov						\\ \hline
-    9. týždeň    &  zapracovanie pripomienok z~konferencie, návrh ďalších experimentov                        \\ \hline
-    10. týždeň   &  písanie technickej dokumentácie k~softvérovému dielu, posledné experimentovanie           \\ \hline
-    11. týždeň   &  vyhodnotenie experimentov, evaluácia riešenia, zhodnotenie výsledkov                      \\ \hline
-		12. týždeň   &  tvorba prezentácie a~príprava na obhajobu projektu                                        \\ \hline
-    \hline
-  \end{tabular}
-\end{table}
-
-\noindent
-V~úvode semestra bude vytvorený validačný mechanizmus pre model, zhlukujúci
-analyzované časové rady na základe podobnosti priebehov. Cieľom bude overiť
-vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej energie.
-Dôležitý je aj výber hyperparametrov pre algoritmy strojového učenia, ale aj
-vhodná dĺžka posuvného okna, prípadne metrika použitá na meranie podobnosti
-jednotlivých časových radov. Z~analyzovaných riešení je potrebné vybrať
-najvhodnejšie pre náš problém. Ďalšie navrhované vylepšenia budú zapracované na
-základe vlastností dát a~dosiahnutých výsledkov. V~prípade veľkej časovej
-náročnosti budú optimalizované jednotlivé procesy pri manipulácií dát. Na konci
-semestra sa koná študentská konferencia, do ktorej by sme chceli prispieť
-článkom a~získať tak dôležitú spätnú väzbu. Na záver by sme chceli zapracovať
-jednotlivé pripomienky a~znova vyhodnotiť výsledky, ktoré budú použité pri
-obhajobe projektu.
-
-
-\newpage\null\thispagestyle{empty}\newpage
 \section{Obsah elektronického média}
 \dirtree{%
   .1 CD nosič.
