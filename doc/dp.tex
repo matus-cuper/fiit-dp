@@ -1069,19 +1069,29 @@ a~efektívne, keďže ich pamäťová náročnosť je iba zlomkom oproti pôvodn
 Zároveň však vzniká priestor na stratenie informácie o~anomálne aktivite
 odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
 
-\subsubsection{Redukcia dát}
-% TODO add figure
+\subsubsection{Redukcia dimenzií}
 Jednou z~najjednoduchších metód používaných pri redukcií dát je práve
 vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
-predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť medzi
-jednotlivými sa zväčšuje, no medzi všetkými inštanciami je rovnaká. Nevýhodou
-je, že tvar výsledného časového radu je oproti pôvodnému skreslený~\cite{Fu2011}.
+predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť sa medzi
+jednotlivými inštanciami zväčšuje, no zároveň je rovnaká medzi všetkými
+inštanciami. Nevýhodou je, že tvar výsledného časového radu je oproti pôvodnému
+skreslený, čo môžeme vidieť na obrázkoch~\ref{fig:data-reduction-orig}
+a~\ref{fig:data-reduction-agg}~\cite{Fu2011}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{data_reduction_orig.png}
+  \caption{Časový rad bez úprav}
+  \label{fig:data-reduction-orig}
+\end{figure}
 
 Lepšie výsledky dostaneme ak pri vzorkovaní budeme priemerovať hodnoty vo
 vzniknutých intervaloch. Táto metóda sa zvykne nazývať aj po častiach agregovaná
 aproximácia (angl. \textit{piecewise aggregate approximation}), skrátene PAA.
-Vylepšenou verziou je metóda APCA, kedy vzniknuté intervaly majú rôznu dĺžku,
-v~závislosti od tvaru časového radu~\cite{Keogh2002}.
+Vylepšenou verziou je metóda APCA, kde vzniknuté intervaly majú rôznu dĺžku,
+v~závislosti od tvaru časového radu. Taktiež môžeme okrem priemeru použiť medián
+zvoleného intervalu. Obe metódy môžeme vidieť na
+obrázku~\ref{fig:data-reduction-agg}~\cite{Keogh2002}.
 
 Ďalšou metódou je aproximácia pomocou rovných čiar, kde hlavnými kategóriami sú
 lineárna interpolácia a~lineárna regresia. Bežnou metódou pri interpolácií je
@@ -1091,14 +1101,23 @@ používa polovicu vytvorených intervalov. Tie sú následne zlučované, pokia
 je splnené ukončovacie kritérium, napr. celkový počet intervalov. Poradie
 zlučovania je určené na základe ceny zlučovania~\cite{Fu2011}.
 
-% TODO add figure
 Žiaducim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
 Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
 important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
 prvý, posledný a~bod, ktorý je od týchto dvoch najvzdialenejší. Ďalšie body sú
 určované na základe maximálnej vertikálnej vzdialenosti medzi dvoma susednými
 bodmi PIP. Proces pokračuje pokiaľ nie sú zoradené podľa dôležitosti všetky
-pôvodné body~\cite{Fu2011}.
+pôvodné body. Na obrázkoch~\ref{fig:data-reduction-orig}
+a~\ref{fig:data-reduction-agg} môžeme vidieť, že tvar kriviek pôvodného časového
+radu a~redukovaného je mierne odlišný, čo je spôsobené roztiahnutím alebo
+zúžením podintervalov v~redukovanom časovom rade~\cite{Fu2011}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{data_reduction_agg.png}
+  \caption{Redukované časové rady}
+  \label{fig:data-reduction-agg}
+\end{figure}
 
 Ďalší prístup používaný pri reprezentovaní časových radov je ich konvertovanie
 z PAA do symbolickej formy. Najskôr sú diskretizované do intervalov, ktoré sú
@@ -1112,11 +1131,11 @@ component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu men
 významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
 aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
 
-Podobným problémom ako DTW je aj hľadanie najdlhšej spoločnej podpostupnosti
-(angl. \textit{longest common subsequence}), skrátene LCSS. Ide o~variáciu
-editačnej vzdialenosti a~spájania dvoch sekvencií, ktoré sa môžu natiahnuť
-a~vynechať tak niektoré elementy, bez toho aby sa menilo ich poradie v~rámci
-postupnosti. Narozdiel od DTW, výstupy nie sú skreslené anomáliami
+Na podobnom princípe ako DTW je založené aj hľadanie najdlhšej spoločnej
+podpostupnosti (angl. \textit{longest common subsequence}), skrátene LCSS. Ide
+o~variáciu editačnej vzdialenosti a~spájania dvoch sekvencií, ktoré sa môžu
+natiahnuť a~vynechať tak niektoré elementy, bez toho aby sa menilo ich poradie
+v~rámci postupnosti. Narozdiel od DTW, výstupy nie sú skreslené anomáliami
 v~dátach~\cite{Fu2011}.
 
 \subsubsection{Segmentácia časových radov}
