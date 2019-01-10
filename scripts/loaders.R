@@ -60,6 +60,26 @@ loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount
   return(result)
 }
 
+# Load number of rows from Ireland dataset directory in aggregated form
+loadIrelandDirectoryMovingWindow <- function(targetDirectory,
+                                             windowOffset = 0, windowsSize = 10, clusterCount = 10, windowsCount = 10,
+                                             fun = mean, norm_fun = norm_z, agg_fun = NULL, fileCount = Inf) {
+  df <- data.frame()
+  for (i in 0:windowsCount) {
+    agg <- loadIrelandDirectory(targetDirectory = targetDirectory,
+                                windowOffset = windowOffset + i,
+                                windowsCount = windowsSize,
+                                fun = fun,
+                                fileCount = fileCount
+    )
+
+    df <- rbind(df, computeCVI(agg, clusterCount))
+  }
+  names(df) <- names(cvi)
+
+  return(df)
+}
+
 # Create data.frame from given file
 loadDatasetFromFile <- function(pathToFile, windowOffset = 0, windowTotalLength = 10, windowSize = 7) {
   if (!file.exists(pathToFile))
