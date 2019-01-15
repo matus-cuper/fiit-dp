@@ -1,4 +1,4 @@
-computeCVI <- function(df, clusterCount = 10, ) {
+computeCVI <- function(df, clusterCount = 10) {
   clu <- tsclust(
     t(data.frame(lapply(df[, -1:-2], norm_fun))),
     k = clusterCount,
