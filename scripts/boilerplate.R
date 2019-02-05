@@ -7,9 +7,11 @@ if (!require("dtwclust")) install.packages("dtwclust")
 if (!require("ggplot2")) install.packages("ggplot2")
 if (!require("lubridate")) install.packages("lubridate")
 if (!require("plotly")) install.packages("plotly")
+if (!require("rngtools")) install.packages("rngtools")
 if (!require("stringr")) install.packages("stringr")
 if (!require("TSrepr")) install.packages("TSrepr")
 if (!require("zoo")) install.packages("zoo")
+
 
 devtools::install_github("twitter/AnomalyDetection", quiet = TRUE)
 devtools::install_github("twitter/BreakoutDetection", quiet = TRUE)
