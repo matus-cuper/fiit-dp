@@ -20,6 +20,7 @@ library(AnomalyDetection)
 library(BreakoutDetection)
 
 
+MPD <- 48
 WEEK <- 7
 
 
@@ -32,3 +33,4 @@ source("~/r/fiit-dp/scripts/anomalyDetectors.R")
 source("~/r/fiit-dp/scripts/utilities.R")
 source("~/r/fiit-dp/scripts/filters.R")
 source("~/r/fiit-dp/scripts/agg-functions.R")
+source("~/r/fiit-dp/scripts/env.R")

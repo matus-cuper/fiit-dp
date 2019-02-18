@@ -32,3 +32,38 @@ visualizeDatasetAnomalies <- function(dataset) {
 
   print(p)
 }
+
+# Visualize CVI
+visualizeCVIToFile <- function(df, graphName, pathToFile = "/tmp") {
+  actualTime <- as.character(format(as.POSIXct(Sys.time()), "%Y%m%d%H%M"))
+  legendTitle <- list(yref = "paper", xref = "paper", y = 1.05, x = 1.09, text = 'Veľkosť okna', showarrow = FALSE)
+
+  plotData <- data.frame(list(
+    Sil = df$Sil,
+    CH = df$CH,
+    DB = df$DB,
+    DBstar = df$DBstar,
+    D = df$D,
+    COP = df$COP,
+    wsize = str_match(df$var, "cvi.([0-9])")[,2],
+    nclus = as.numeric(str_match(df$var, "cvi.[0-9].(.*)")[,2])
+  ))
+
+  graphTitles <- list(
+    Sil = 'Silhouettov index (max.)',
+    CH = 'Calinski-Harabaszov index (max.)',
+    DB = 'Davies-Bouldinov index (min.)',
+    DBstar = 'Modifikovaný Davies-Bouldinov index (min.)',
+    D = 'Dunnov index (max.)',
+    COP = 'COP index (min.)'
+  )
+
+  for(index in names(graphTitles)) {
+    tmp <- plotData[c(index, "wsize", "nclus")]
+    names(tmp) <- c("val", "wsize", "nclus")
+
+    plot <- plot_ly(data = tmp, x = ~nclus, y = ~val, color = ~wsize, marker = list(size = 10), mode = "markers+lines", type = "scatter") %>%
+      layout(xaxis = list(title = 'Počet zhlukov'), yaxis = list(title = 'Hodnota indexu'), title = graphTitles[index], showlegend = TRUE, annotations = legendTitle)
+    plotly_IMAGE(plot, format = "png", out_file = paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''))
+  }
+}

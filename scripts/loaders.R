@@ -1,32 +1,38 @@
-# Load number of rows from Ireland dataset
+# Load number of rows from Ireland dataset, result is stored in same format as is read from CSV
 loadIrelandDataset <- function(pathToFile, windowOffset = 0, windowsCount = 10) {
   df <- read.csv2(
     pathToFile,
     col.names = c("id", "timestamp", "date", "time", "day", "holiday", "dayId", "load"),
-    nrows = 48 * 7 * windowsCount + windowOffset,
+    nrows = MPD * WEEK * windowsCount + windowOffset,
     stringsAsFactors = FALSE
   )
 
   df$id <- NULL
   df$dayId <- NULL
-  df <- df[(windowOffset + 1):min(48 * 7 * windowsCount + windowOffset, nrow(df)), ]
+  df <- df[(windowOffset + 1):min(MPD * WEEK * windowsCount + windowOffset, nrow(df)), ]
   df$load <- as.double(df$load)
 
   return(list(
     dataset = df,
-    frequency = 48
+    frequency = MPD
   ))
 }
 
 # Load number of rows from Ireland dataset in aggregated form
-loadIrelandDatasetAggregated <- function(pathToFile, windowOffset = 0, windowsCount = 10, fun = mean) {
+loadIrelandDatasetAggregated <- function(pathToFile, windowOffset = 0, windowsCount = 10, fun = mean, granularity = "weekly") {
   df <- loadIrelandDataset(pathToFile, windowOffset = windowOffset, windowsCount = windowsCount)
 
-  return(aggregate(load ~ day + time, df$dataset, FUN = fun))
+  if (granularity == "weekly") {
+    return(aggregate(load ~ day + time, df$dataset, FUN = fun))
+  } else if (granularity == "dailyWork") {
+    return(aggregate(load ~ time, filterHolidays(filterWeekdays(df$dataset)), FUN = fun))
+  } else {
+    return(NULL)
+  }
 }
 
 # Load number of rows from Ireland dataset directory in aggregated form
-loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount = 10, fun = NULL, fileCount = Inf) {
+loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount = 10, fun = NULL, fileCount = Inf, granularity = "weekly") {
   counter <- 0
   result <- data.frame()
   allFiles <- list.files(targetDirectory)
@@ -39,7 +45,7 @@ loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount
       df <- df$dataset
     }
     else
-      df <- loadIrelandDatasetAggregated(paste(targetDirectory, filename, sep = "/"), windowOffset = windowOffset, windowsCount = windowsCount, fun = fun)
+      df <- loadIrelandDatasetAggregated(paste(targetDirectory, filename, sep = "/"), windowOffset = windowOffset, windowsCount = windowsCount, fun = fun, granularity = granularity)
 
     names(df)[names(df) == "load"] <- filename
 
@@ -63,14 +69,15 @@ loadIrelandDirectory <- function(targetDirectory, windowOffset = 0, windowsCount
 # Load number of rows from Ireland dataset directory in aggregated form
 loadIrelandDirectoryMovingWindow <- function(targetDirectory,
                                              windowOffset = 0, windowsSize = 10, clusterCount = 10, windowsCount = 10,
-                                             fun = mean, norm_fun = norm_z, fileCount = Inf) {
+                                             fun = mean, norm_fun = norm_z, fileCount = Inf, granularity = "weekly") {
   df <- data.frame()
   for (i in 0:windowsCount) {
     agg <- loadIrelandDirectory(targetDirectory = targetDirectory,
                                 windowOffset = windowOffset + i,
                                 windowsCount = windowsSize,
                                 fun = fun,
-                                fileCount = fileCount
+                                fileCount = fileCount,
+                                granularity = granularity
     )
 
     clu <- tsclust(
