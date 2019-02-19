@@ -695,6 +695,26 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
+\paragraph{Štatistické metódy}
+Ide o~súbor metód, ktoré na základe vypočítaných hodnôt priemeru, odchýlky, atď.
+označujú jednotlivé anomálne inštancie. V~práci budeme používať najmä metódu
+extrémnej študentizovanej odchýlky (angl. \textit{Extreme Studentized
+Deviation}) a~jej ďalšie derivácie. Metóda \textit{ESD} slúži na detekciu
+viacerých anomálnych inštancií. Jediným vstupným parametrom metódy je najväčší
+možný počet podozrivých inštancií v~danom datasete. Generalizovaná ESD sa snaží
+maximalizovať odchýlku datasetu $|x_i - \tilde{x}|$ pre $s$ inštancií. Počet
+inštancií, sa postupne znižuje, pokiaľ nie je dosiahnutá stanovená hranica. Pre
+každý odobraný počet inštancií sú overované všetky kombinácie. Tento vzťah
+môžeme zapísať jednoduchou rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
+inštancií~\cite{Kuppusamy2013,Rosner1983}.
+
+\begin{equation}
+	\label{eq:gesd}
+  R_i = \frac
+  {max_i |x_i - \tilde{x}|}
+  {n - i}
+\end{equation}
+
 Do rovnakej kategórie môžeme zaradiť aj metódu sezónny hybridný ESD (angl.
 \textit{Seasonal Hybrid Extreme Studentized Deviation}), ktorá podobne ako
 \textit{S-ESD} používa dekompozíciu časových radov, kde anomálie sú detegované
@@ -705,8 +725,6 @@ ktorá namiesto toho používa absolútnu odchýlku mediánu. Cenou za to je vy�
 výpočtová náročnosť metódy, na druhej strane sú hodnoty F-skóre takmer až o~30\%
 vyššie~\cite{Hochenbaum2005}.
 
-% TODO \paragraph Štatistické metódy
-% TODO \paragraph K-means
 
 %-------------------------------------------------------------------------------
 %   Time series classification
