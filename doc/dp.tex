@@ -432,7 +432,6 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 %   Division of time series
 %-------------------------------------------------------------------------------
 
-% TODO add some figures
 \subsubsection{Delenie časových radov}
 Výraznými vlastnosťami časových radov sú aj synchrónnosť a~periodicita,
 znázornená na
@@ -1339,8 +1338,16 @@ pokrytie~\cite{Trevizan2015}.
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
 \end{equation}
 
-Na evaluáciu zhlukovania časových radov sú používané viaceré validačné indexy.
-V~práci použijeme iba niektoré z~nich, napr. Randov, Jaccardov alebo
+% TODO add evaluation with syntetic dataset
+\subsubsection{Zhlukovacie validačné indexy}
+Zhlukovanie je metóda, ktorej cieľom je určiť skupinu, do ktorej spadá daná
+inštancia. Triedenia prebieha na základe atribútov inštancie. Keďže sa jedná
+o~učenie bez učiteľa, je potrebná validácia výsledného zhlukovania. V~praxi sa
+používajú validačné indexy zhlukov (angl. \textit{cluster validity indeces}).
+Indexy sa delia na externé a~interné, v~závislosti od dostupnosti skutočných
+tried zhlukovaného datasetu~\cite{Arbelaitz2013}.
+
+\paragraph{Externé indexy zhlukov} v~sebe zahŕňajú napr. Randov, Jaccardov alebo
 Fowlkes-Mallowsov index. Naivným prístupom je porovnávanie zhlukov a~počítanie
 dvojíc inštancií, ktoré sa nachádzajú v~rovnakom zhluku. Maticu zámen tak
 môžeme prepísať do tabuľky~\ref{tab:validation-matrix}. Časové rady nachádzajúce
@@ -1377,7 +1384,34 @@ v~práci~\cite{Bilgic2018}.
   \text{FM} = \frac{TP}{\sqrt{(TP + FP)(TP + FN)}}
 \end{equation}
 
-% TODO add evaluation with syntetic dataset
+\paragraph{Interné indexy zhlukov} predstavujú jedinú metriku, ktorou je možné
+overiť zhlukovanie pri dátach, ktoré neobsahujú skutočné triedy inštancií. Medzi
+používané indexy patria napr. Dunnov index, Calinski-Harabasov index, Gamma
+index, C-index, Davies-Bouldinov index, Silhouetteov index a~mnoho ďalších.
+V~práci~\cite{Arbelaitz2013} autori analyzovali a~porovnali 30 rôznych
+validačných indexov na rôznych datasetoch. Na syntetických datasetoch sa najviac
+osvedčili Silhouetteov index, modifikovaný Davies-Bouldinov index
+a~Calinski-Harabasov index. Pri reálnych datasetoch boli výsledky podobné, čiže
+indexy s~horšími výsledkami dosiahnutými pri syntetických datasetoch ich
+dosahovali aj na reálnych dátach. Vyššie spomenuté 3 indexy dosiahli však horšie
+skóre ako skórovacia funkcia, generalizované Dunnove indexy a~COP index.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{shaffer_test.png}
+  \caption{Výsledky Shafferovho testu so stupňom dôležitosti 10\%~\cite{Arbelaitz2013}.}
+  \label{fig:shaffer-test}
+\end{figure}
+
+V~závere autori vyhodnotili výsledky svojich experimentov a~graficky ich
+interpretovali pomocou Shafferovho testu~\ref{fig:shaffer-test}. Nižší rank
+predstavuje lepšie výsledky validačného indexu na rôznych datasoch. Zároveň
+neexistuje výrazný štatistický rozdiel medzi jednotlivými indexami
+nachádzajúcich sa v~rovnakej skupine. Aj keď nie je možné jednoznačne určiť
+objektívne najlepší validačný index, autori odporúčajú indexy nachádzajúce sa
+v~prvej skupine indexov a~to napr. Silhouetteov index, modifikovaný
+Davies-Bouldinov index, Calinski-Harabasov index,  Davies-Bouldinov index,
+generalizovaný Dunnov index a~COP index~\cite{Arbelaitz2013}.
 
 %-------------------------------------------------------------------------------
 %   Related work
