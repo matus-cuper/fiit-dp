@@ -645,30 +645,30 @@ identifikované. Nás budú zaujímať najmä detekcie anomálií v~časových r
 Popísané metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale pre
 úplnosť sú spomenuté aj iné používané metódy.
 
-\paragraph{Klasifikácia}
-Pomocou naučeného modelu, nazývaného aj klasifikátor, sú rozoznávané triedy
-jednotlivých inštancií. Pri detekcii anomálneho správania, klasifikátor
-rozlišuje iba medzi dvoma triedami, triedou normálnych dát a~anomálií. Vzhľadom
-na to, že na natrénovanie klasifikátora sú potrebné označené dáta, ide o~učenie
-s~učiteľom. Na implementovanie klasifikátora môžeme použiť techniky založené na
-rôznych typoch neurónových sietí, Bayesových sieťach, pravidlových systémoch či
-metóde podporných vektorov~\cite{Chandola2009,Tan2005}.
+\paragraph{Klasifikácia} na základe naučeného modelu, nazývaného aj
+klasifikátor, rozoznáva triedy jednotlivých inštancií. Pri detekcii anomálneho
+správania, klasifikátor rozlišuje iba medzi dvoma triedami, triedou normálnych
+dát a~anomálií. Vzhľadom na to, že na natrénovanie klasifikátora sú potrebné
+označené dáta, ide o~učenie s~učiteľom. Na implementovanie klasifikátora môžeme
+použiť techniky založené na rôznych typoch neurónových sietí, Bayesových
+sieťach, pravidlových systémoch či metóde podporných
+vektorov~\cite{Chandola2009,Tan2005}.
 
-\paragraph{Analýza najbližšieho suseda}
-Metóda určí na základe vzdialenosti alebo podobnosti medzi dátovými inštanciami,
-či sa jedná o~normálnu inštanciu alebo anomáliu. To je vypočítané pomocou
-vzdialeností medzi testovanou inštanciou a~všetkými bodmi, alebo iba \textit{k}
-najbližšími bodmi. Pri viacrozmerných dátach je vzdialenosť určovaná pre
-každú dimenziu zvlášť. Metóda je založená na predpoklade, že zatiaľ čo normálne
-inštancie sa nachádzajú pri sebe a~sú husto usporiadané, anomálie sú
-vzdialenejšie, prípadne na okraji vzniknutých oblastí. Aplikácia je možná
-pomocou techník založených na relatívnej hustote alebo vzdialenosti najbližších
-\textit{k} susedných inštancií~\cite{Chandola2009,Tan2005}.
+\paragraph{Analýza najbližšieho suseda} určí na základe vzdialenosti alebo
+podobnosti medzi dátovými inštanciami, či sa jedná o~normálnu inštanciu alebo
+anomáliu. To je vypočítané pomocou vzdialeností medzi testovanou inštanciou
+a~všetkými bodmi, alebo iba \textit{k} najbližšími bodmi. Pri viacrozmerných
+dátach je vzdialenosť určovaná pre každú dimenziu zvlášť. Metóda je založená na
+predpoklade, že zatiaľ čo normálne inštancie sa nachádzajú pri sebe a~sú husto
+usporiadané, anomálie sú vzdialenejšie, prípadne na okraji vzniknutých oblastí.
+Aplikácia je možná pomocou techník založených na relatívnej hustote alebo
+vzdialenosti najbližších \textit{k} susedných
+inštancií~\cite{Chandola2009,Tan2005}.
 
-\paragraph{Zhlukovanie}
-Jedná sa o~učenie bez učiteľa, keďže zhluky inštancií sú vytvorené na základe
-ich vzdialenosti či podobnosti. Techniky ďalej delíme do kategórií na základe
-predpokladu o~dátových inštanciách~\cite{Chandola2009,Tan2005}.
+\paragraph{Zhlukovanie} predstavuje učenie bez učiteľa, keďže zhluky inštancií
+sú vytvorené na základe ich vzdialenosti či podobnosti. Techniky ďalej delíme do
+kategórií na základe predpokladu o~dátových
+inštanciách~\cite{Chandola2009,Tan2005}.
 
 Prvá kategória predpokladá, že normálne inštancie patria do zhluku, zatiaľ čo
 anomálne nepatria do žiadneho. Používané sú zhlukovacie algoritmy ako DBSCAN
@@ -694,17 +694,17 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
-\paragraph{Štatistické metódy}
-Ide o~súbor metód, ktoré na základe vypočítaných hodnôt priemeru, odchýlky, atď.
-označujú jednotlivé anomálne inštancie. V~práci budeme používať najmä metódu
-extrémnej študentizovanej odchýlky (angl. \textit{Extreme Studentized
-Deviation}) a~jej ďalšie derivácie. Metóda \textit{ESD} slúži na detekciu
-viacerých anomálnych inštancií. Jediným vstupným parametrom metódy je najväčší
-možný počet podozrivých inštancií v~danom datasete. Generalizovaná ESD sa snaží
-maximalizovať odchýlku datasetu $|x_i - \tilde{x}|$ pre $s$ inštancií. Počet
-inštancií, sa postupne znižuje, pokiaľ nie je dosiahnutá stanovená hranica. Pre
-každý odobraný počet inštancií sú overované všetky kombinácie. Tento vzťah
-môžeme zapísať jednoduchou rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
+\paragraph{Štatistické metódy} predstavujú súbor metód, ktoré na základe
+vypočítaných hodnôt priemeru, odchýlky, atď. označujú jednotlivé anomálne
+inštancie. V~práci budeme používať najmä metódu extrémnej študentizovanej
+odchýlky (angl. \textit{Extreme Studentized Deviation}) a~jej ďalšie derivácie.
+Metóda \textit{ESD} slúži na detekciu viacerých anomálnych inštancií. Jediným
+vstupným parametrom metódy je najväčší možný počet podozrivých inštancií v~danom
+datasete. Generalizovaná ESD sa snaží maximalizovať odchýlku datasetu
+$|x_i - \tilde{x}|$ pre $s$ inštancií. Počet inštancií, sa postupne znižuje,
+pokiaľ nie je dosiahnutá stanovená hranica. Pre každý odobraný počet inštancií
+sú overované všetky kombinácie. Tento vzťah môžeme zapísať jednoduchou
+rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
 inštancií~\cite{Kuppusamy2013,Rosner1983}.
 
 \begin{equation}
@@ -751,13 +751,12 @@ approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných aleb
 podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 
 % TODO add figure from real dataset
-\paragraph{Hierarchické zhlukovanie}
 \label{c:hierarchical-clustering}
-Táto metóda produkuje vnorenú hierarchiu skupín podobných časových radov na
-základe vzdialenostných matíc jednotlivých inštancií. Výhodou je, že nie je
-nutné zadávať počet zhlukov, ktoré ideme identifikovať. Nevýhodou je obmedzenie
-výpočtu iba na menšie datasety, keďže výpočtová zložitosť tejto metódy je
-kvadratická~\cite{Dzeroski2007}.
+\paragraph{Hierarchické zhlukovanie} produkuje vnorenú hierarchiu skupín
+podobných časových radov na základe vzdialenostných matíc jednotlivých
+inštancií. Výhodou je, že nie je nutné zadávať počet zhlukov, ktoré ideme
+identifikovať. Nevýhodou je obmedzenie výpočtu iba na menšie datasety, keďže
+výpočtová zložitosť tejto metódy je kvadratická~\cite{Dzeroski2007}.
 
 Metóda hierarchického zhlukovania zoskupuje časové rady do stromu zhlukov. Vo
 všeobecnosti existujú dva typy týchto metód, aglomeratívne a~deliace.
@@ -769,21 +768,19 @@ a~umiestňované do hierarchického stromu. Na zlepšenie kvality zhlukovania pr
 hierarchickom zhlukovaní sú používané bežné zhlukovacie
 techniky~\cite{WarrenLiao2005}.
 
-\paragraph{Aglomeratívne zhlukovanie}
-Vzdialenosť medzi dvoma zhlukmi je meraná pomocou dvojice najbližších časových
-radov umiestnených v~rôznych zhlukoch, ktoré sú potenciálnymi kandidátmi na
-zlúčenie. Podobnosť môže určovať aj
-\textit{Wardov algoritmus minimálnej variancie}, ktorý zlúči zhluky
-s~najmenším nárastom variancie. V~každom kroku sú tak vyskúšané všetky
+\paragraph{Aglomeratívne zhlukovanie} na základe vzdialenosti medzi dvoma
+zhlukmi nameranej pomocou dvojice najbližších časových radov umiestnených
+v~rôznych zhlukoch, predstavujú potenciálnych kandidátov na zlúčenie. Podobnosť
+môže určovať aj \textit{Wardov algoritmus minimálnej variancie}, ktorý zlúči
+zhluky s~najmenším nárastom variancie. V~každom kroku sú tak vyskúšané všetky
 kombinácie dvojíc zhlukov, až potom je vybrané minimum. Porovnávané časové rady
 nemusia mať vždy rovnakú dĺžku. Nevýhodou metódy je najmä vysoký počet operácií,
 ale aj neschopnosť spätne zmeniť rozhodnutie zlúčiť
 zhluky~\cite{WarrenLiao2005}.
 
-\paragraph{Deliace zhlukovanie}
-Algoritmus nie je obmedzený iba na časové rady rovnakej dĺžky. Zároveň tiež nie
-je možné zmeniť delenie zhluku, ktoré už bolo vykonané. Na meranie vzdialenosti
-môžu byť použité metriky opísané
+\paragraph{Deliace zhlukovanie} nie je obmedzené iba na časové rady rovnakej
+dĺžky. Zároveň tiež nie je možné zmeniť delenie zhluku, ktoré už bolo vykonané.
+Na meranie vzdialenosti môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
 % TODO Add k-means / dbscan
@@ -798,18 +795,17 @@ aj ako zhlukovanie na základe vlastností (angl. \textit{Feature based clusteri
 approach})~\cite{Rani2012}.
 
 % TODO add equation ???
-\paragraph{Samoorganizované mapy}
-Trieda neurónových sietí, kde neuróny sú usporiadané v~nízkodimenzionálnej
-štruktúre a~trénované iteratívne a~bez učiteľa. Trénovací proces začína
-pridelením náhodných hodnôt váhovým vektorom $w$. Každá iterácia trénovania
-pozostáva z~3~krokov a~to náhodného výberu vstupného vektoru z~trénovacej
-množiny, evaluácie siete a~aktualizovaní váhových vektorov. Po natrénovaní je
-vypočítaná Euklidovská vzdialenosť medzi vstupným vzorom a~váhovým vektorom.
-Následne je neurón s~najmenšou vzdialenosťou označený ako $t$ a~ostatné váhy
-ostatných neurónov sú aktualizované v~závislosti od vzdialenosti od neuróna $t$.
-Nevýhodou je opäť náročné spracovanie časových radov rôznych dĺžok, keďže dĺžka
-časového radu definuje aj dĺžku váhového vektora
-$w$~\cite{Kohonen2001,WarrenLiao2005}.
+\paragraph{Samoorganizované mapy} predstavujú triedu neurónových sietí, kde
+neuróny sú usporiadané v~nízkodimenzionálnej štruktúre a~trénované iteratívne
+a~bez učiteľa. Trénovací proces začína pridelením náhodných hodnôt váhovým
+vektorom $w$. Každá iterácia trénovania pozostáva z~3~krokov a~to náhodného
+výberu vstupného vektoru z~trénovacej množiny, evaluácie siete a~aktualizovaní
+váhových vektorov. Po natrénovaní je vypočítaná Euklidovská vzdialenosť medzi
+vstupným vzorom a~váhovým vektorom. Následne je neurón s~najmenšou vzdialenosťou
+označený ako $t$ a~ostatné váhy ostatných neurónov sú aktualizované v~závislosti
+od vzdialenosti od neuróna $t$. Nevýhodou je opäť náročné spracovanie časových
+radov rôznych dĺžok, keďže dĺžka časového radu definuje aj dĺžku váhového
+vektora $w$~\cite{Kohonen2001,WarrenLiao2005}.
 
 \subsubsection{Zhlukovanie na základe modelu}
 Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každý
@@ -817,15 +813,14 @@ Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každ
 Časové rady sú považované za podobné ak aj modely charakterizujúce jednotlivé
 časové rady sú si podobné~\cite{Rani2012}.
 
-\paragraph{ARIMA}
-V~práci~\cite{Xiong2002} autori navrhli metódu zhlukujúcu jednorozmerné časové
-rady. Predpokladali, že časové rady sú vygenerované $k$ rôznymi ARIMA modelmi.
-Vylepšili algoritmus na maximalizáciu očakávaní (angl. \textit{expectation
-maximalization algorithm}) tak, že sa naučil správne určiť koeficienty
-a~parametre jednotlivých modelov zvyšovaním počtu modelov až do momentu, kedy
-vznikol redundantný model. Algoritmus skonvergoval v~prípade, že počet modelov
-nebol väčší ako aktuálny počet zhlukov. Na záver boli odstránené podobné modely,
-čím sa ešte zmenšil výsledný počet zhlukov $k$.
+\paragraph{ARIMA} model navrhnutý v~práci~\cite{Xiong2002} zhlukuje
+jednorozmerné časové rady. Predpokladali, že časové rady sú vygenerované $k$
+rôznymi ARIMA modelmi. Vylepšili algoritmus na maximalizáciu očakávaní (angl.
+\textit{expectation maximalization algorithm}) tak, že sa naučil správne určiť
+koeficienty a~parametre jednotlivých modelov zvyšovaním počtu modelov až do
+momentu, kedy vznikol redundantný model. Algoritmus skonvergoval v~prípade, že
+počet modelov nebol väčší ako aktuálny počet zhlukov. Na záver boli odstránené
+podobné modely, čím sa ešte zmenšil výsledný počet zhlukov $k$.
 
 \subsubsection{Ďalšie prístupy k~zhlukovaniu}
 Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
@@ -868,9 +863,8 @@ modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledn
 osí~\cite{Hautamaki2008}.
 
 
-\paragraph{Korelácia}
-Korelačný koeficient $r(X, Y)$ meria stupeň lineárnej závislosti medzi dvoma
-časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlation}.
+\paragraph{Korelačný koeficient} $r(X, Y)$ meria stupeň lineárnej závislosti
+medzi dvoma časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlation}.
 
 \begin{equation}
 	\label{eq:correlation}
@@ -894,15 +888,15 @@ vzdialené~\cite{Dzeroski2007}.
 \end{equation}
 
 
-\paragraph{Dynamické deformovanie času}
-Ide o~metódu (angl. \textit{Dynamic Time Warping}), ktorá dokáže zachytiť
-nelineárne skreslenie medzi časovými radmi vďaka prideleniu viacerých hodnôt
-časového radu $X$~druhému časovému radu $Y$. Takto metóda viac zodpovedá ľudskej
-intuícii. Na obrázku~\ref{fig:warping-distance} si môžeme všimnúť, že sú
-porovnávané hodnoty, ktoré by sme intuitívne zvolili pri zarovnaní časových
-radov podľa tvaru krivky. $D_{DTW}$~je vypočítané pomocou dynamického
-programovania, práve kvôli množstvu existujúcich kombinácií. Rekurzia je
-vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
+\paragraph{Dynamické deformovanie času} predstavuje metódu (angl.
+\textit{Dynamic Time Warping}), ktorá dokáže zachytiť nelineárne skreslenie
+medzi časovými radmi vďaka prideleniu viacerých hodnôt časového radu $X$~druhému
+časovému radu $Y$. Takto metóda viac zodpovedá ľudskej intuícii. Na
+obrázku~\ref{fig:warping-distance} si môžeme všimnúť, že sú porovnávané hodnoty,
+ktoré by sme intuitívne zvolili pri zarovnaní časových radov podľa tvaru krivky.
+$D_{DTW}$~je vypočítané pomocou dynamického programovania, práve kvôli množstvu
+existujúcich kombinácií. Rekurzia je vyjadrená
+vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
 % TODO add ref from Flexible Dynamic Time Warping for Time Series Classification
 \begin{equation}
 	\label{eq:dtw-distance}
@@ -930,12 +924,11 @@ vyjadrená vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
 % TODO Add SBD
 
 
-\paragraph{Kvalitatívna vzdialenosť}
-Metóda je založená na kvalitatívnom porovnávaní tvaru dvoch časových radov.
-Pre časové rady $X$~a~$Y$~vyberieme dvojicu bodov $i$~a~$j$,~ktoré označujú
-zmenu premennej v~danom časovom rade. Tak vznikajú 3~možnosti, hodnoty
-v~časovom rade rastú ($X_i < X_j$), nemenia sa ($X_i \approx X_j$) alebo klesajú
-($X_i > X_j$). Vzdialenosť potom vyjadríme
+\paragraph{Kvalitatívna vzdialenosť} je metóda založená na kvalitatívnom
+porovnávaní tvaru dvoch časových radov. Pre časové rady $X$~a~$Y$~vyberieme
+dvojicu bodov $i$~a~$j$,~ktoré označujú zmenu premennej v~danom časovom rade.
+Tak vznikajú 3~možnosti, hodnoty v~časovom rade rastú ($X_i < X_j$), nemenia sa
+($X_i \approx X_j$) alebo klesajú ($X_i > X_j$). Vzdialenosť potom vyjadríme
 vzorcom~\ref{eq:qualitative-distance}, pomocou ktorého spočítame počet zhôd
 v~raste časových radov. Práve funkcia $Diff(q_1, q_2)$ vyjadruje rozdiel v~zmene
 rastu. Metóda nemá nevýhody, ktoré vznikali pri korelácií, na druhú stranu je
@@ -952,9 +945,9 @@ závislosť~\cite{Dzeroski2007}.
 
 
 % TODO compare euclidian and manhattan distance metrics
-\paragraph{Euklidovská vzdialenosť}
-Je používaná najmä pri klasických zhlukovacích problémoch. Ak zvolený časový rad
-má dĺžku $n$, vzdialenosť vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
+\paragraph{Euklidovská vzdialenosť} je používaná najmä pri klasických
+zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenosť
+vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
 obrázku~\ref{fig:euclidean-distance} sú vždy porovnávané hodnoty vyskytujúce sa
 v~rovnakom časte $t$~\cite{WarrenLiao2005}.
 \begin{equation}
@@ -969,20 +962,19 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
   \label{fig:euclidean-distance}
 \end{figure}
 
-\paragraph{Manhattanovská vzdialenosť}
-Je rovnako ako Euklidovská vzdialenosť používaná najmä pri klasických
-zhlukovacích problémoch. Výpočet je tiež veľmi podobný, môžeme ho vyjadriť
-vzorcom~\ref{eq:distance-manhattan}
+\paragraph{Manhattanovská vzdialenosť} je rovnako ako Euklidovská vzdialenosť
+používaná najmä pri klasických zhlukovacích problémoch. Výpočet je tiež veľmi
+podobný, môžeme ho vyjadriť vzorcom~\ref{eq:distance-manhattan}
 % TODO add som refference
 \begin{equation}
 	\label{eq:distance-manhattan}
   D_M \left( X, Y \right) = \sum_{k=1}^{n} \lvert X_{ik} - Y_{jk} \rvert
 \end{equation}
 
-\paragraph{Pearsonov korelačný koeficient}
-Vo vzorci~\ref{eq:distance-pearson} reprezentuje $\widetilde{X}$~aritmetický
-priemer časového radu $X$. Koeficient je používaný pri výpočte vzdialenosti,
-ktorá je založená na vzájomnej korelácií. Vzdialenosť vyjadríme
+\paragraph{Pearsonov korelačný koeficient} je používaný pri výpočte
+vzdialenosti, ktorá je založená na vzájomnej korelácií. Vo
+vzorci~\ref{eq:distance-pearson} reprezentuje $\widetilde{X}$~aritmetický
+priemer časového radu $X$. Vzdialenosť vyjadríme
 vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
 \begin{equation}
 	\label{eq:distance-pearson}
@@ -995,8 +987,8 @@ vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
   D_P \left( X, Y \right) = 2 \cdot \left( 1 - r \left( X, Y \right) \right)
 \end{equation}
 
-\paragraph{Vzdialenosť medzi krátkymi časovými radmi}
-Metóda (angl. \textit{Short time series}) meria vzdialenosť ako sumu štvorcových
+\paragraph{Vzdialenosť medzi krátkymi časovými radmi} je metóda (angl.
+\textit{Short time series}), ktorá meria vzdialenosť ako sumu štvorcových
 rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiaducich
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
 vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
