@@ -754,9 +754,18 @@ podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 \label{c:hierarchical-clustering}
 \paragraph{Hierarchické zhlukovanie} produkuje vnorenú hierarchiu skupín
 podobných časových radov na základe vzdialenostných matíc jednotlivých
-inštancií. Výhodou je, že nie je nutné zadávať počet zhlukov, ktoré ideme
-identifikovať. Nevýhodou je obmedzenie výpočtu iba na menšie datasety, keďže
-výpočtová zložitosť tejto metódy je kvadratická~\cite{Dzeroski2007}.
+inštancií. Hierarchia je graficky reprezentovaná pomocou dendrogramu, príkladom
+môže byť graf~\ref{fig:hierarchical-clustering}. Výhodou je, že nie je nutné
+zadávať počet zhlukov, ktoré ideme identifikovať. Nevýhodou je obmedzenie
+výpočtu iba na menšie datasety, keďže výpočtová zložitosť tejto metódy je
+kvadratická~\cite{Dzeroski2007}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{hierarchical_clustering.pdf}
+  \caption{Príklad reprezentácie vytvorených zhlukov pomocou dendrogramu.}
+  \label{fig:hierarchical-clustering}
+\end{figure}
 
 Metóda hierarchického zhlukovania zoskupuje časové rady do stromu zhlukov. Vo
 všeobecnosti existujú dva typy týchto metód, aglomeratívne a~deliace.
