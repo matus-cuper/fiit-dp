@@ -1,0 +1,21 @@
+load("~/Downloads/2019-02-25.RData")
+
+
+cvi.dtw_basic.workdays_sparse <- aggregate(. ~ var, bind_rows(list(cvi.2.15 = cvi.2.15.dtw_basic.workdays, cvi.2.20 = cvi.2.20.dtw_basic.workdays, cvi.2.25 = cvi.2.25.dtw_basic.workdays, cvi.3.15 = cvi.3.15.dtw_basic.workdays, cvi.3.20 = cvi.3.20.dtw_basic.workdays, cvi.3.25 = cvi.3.25.dtw_basic.workdays, cvi.4.15 = cvi.4.15.dtw_basic.workdays, cvi.4.20 = cvi.4.20.dtw_basic.workdays, cvi.4.25 = cvi.4.25.dtw_basic.workdays, cvi.5.15 = cvi.5.15.dtw_basic.workdays, cvi.5.20 = cvi.5.20.dtw_basic.workdays, cvi.5.25 = cvi.5.25.dtw_basic.workdays), .id = 'var'), mean)
+cvi.dtw_basic.workdays_dense <- aggregate(. ~ var, bind_rows(list(cvi.2.11 = cvi.2.11.dtw_basic.workdays, cvi.2.12 = cvi.2.12.dtw_basic.workdays, cvi.2.13 = cvi.2.13.dtw_basic.workdays, cvi.2.14 = cvi.2.14.dtw_basic.workdays, cvi.2.15 = cvi.2.15.dtw_basic.workdays, cvi.2.16 = cvi.2.16.dtw_basic.workdays, cvi.2.17 = cvi.2.17.dtw_basic.workdays, cvi.2.18 = cvi.2.18.dtw_basic.workdays, cvi.2.19 = cvi.2.19.dtw_basic.workdays, cvi.2.20 = cvi.2.20.dtw_basic.workdays, cvi.2.21 = cvi.2.21.dtw_basic.workdays, cvi.2.22 = cvi.2.22.dtw_basic.workdays, cvi.2.23 = cvi.2.23.dtw_basic.workdays, cvi.2.24 = cvi.2.24.dtw_basic.workdays, cvi.2.25 = cvi.2.25.dtw_basic.workdays, cvi.2.26 = cvi.2.26.dtw_basic.workdays, cvi.2.27 = cvi.2.27.dtw_basic.workdays, cvi.2.28 = cvi.2.28.dtw_basic.workdays, cvi.2.29 = cvi.2.29.dtw_basic.workdays, cvi.2.30 = cvi.2.30.dtw_basic.workdays, cvi.3.11 = cvi.3.11.dtw_basic.workdays, cvi.3.12 = cvi.3.12.dtw_basic.workdays, cvi.3.13 = cvi.3.13.dtw_basic.workdays, cvi.3.14 = cvi.3.14.dtw_basic.workdays, cvi.3.15 = cvi.3.15.dtw_basic.workdays, cvi.3.16 = cvi.3.16.dtw_basic.workdays, cvi.3.17 = cvi.3.17.dtw_basic.workdays, cvi.3.18 = cvi.3.18.dtw_basic.workdays, cvi.3.19 = cvi.3.19.dtw_basic.workdays, cvi.3.20 = cvi.3.20.dtw_basic.workdays, cvi.3.21 = cvi.3.21.dtw_basic.workdays, cvi.3.22 = cvi.3.22.dtw_basic.workdays, cvi.3.23 = cvi.3.23.dtw_basic.workdays, cvi.3.24 = cvi.3.24.dtw_basic.workdays, cvi.3.25 = cvi.3.25.dtw_basic.workdays, cvi.3.26 = cvi.3.26.dtw_basic.workdays, cvi.3.27 = cvi.3.27.dtw_basic.workdays, cvi.3.28 = cvi.3.28.dtw_basic.workdays, cvi.3.29 = cvi.3.29.dtw_basic.workdays, cvi.3.30 = cvi.3.30.dtw_basic.workdays), .id = 'var'), mean)
+
+cvi.dtw_basic <- aggregate(. ~ var, bind_rows(list(cvi.2.20.dtw_basic = cvi.2.20.dtw_basic.workdays, cvi.3.20.dtw_basic = cvi.3.20.dtw_basic.workdays, cvi.4.20.dtw_basic = cvi.4.20.dtw_basic.workdays, cvi.5.20.dtw_basic = cvi.5.20.dtw_basic.workdays), .id = 'var'), mean)
+cvi.dtw_lb <- aggregate(. ~ var, bind_rows(list(cvi.2.20.dtw_lb = cvi.2.20.dtw_lb.workdays, cvi.3.20.dtw_lb = cvi.3.20.dtw_lb.workdays, cvi.4.20.dtw_lb = cvi.4.20.dtw_lb.workdays, cvi.5.20.dtw_lb = cvi.5.20.dtw_lb.workdays), .id = 'var'), mean)
+cvi.gak <- aggregate(. ~ var, bind_rows(list(cvi.2.20.gak = cvi.2.20.gak.workdays, cvi.3.20.gak = cvi.3.20.gak.workdays, cvi.4.20.gak = cvi.4.20.gak.workdays, cvi.5.20.gak = cvi.5.20.gak.workdays), .id = 'var'), mean)
+cvi.lbi <- aggregate(. ~ var, bind_rows(list(cvi.2.20.lbi = cvi.2.20.lbi.workdays, cvi.3.20.lbi = cvi.3.20.lbi.workdays, cvi.4.20.lbi = cvi.4.20.lbi.workdays, cvi.5.20.lbi = cvi.5.20.lbi.workdays), .id = 'var'), mean)
+cvi.lbk <- aggregate(. ~ var, bind_rows(list(cvi.2.20.lbk = cvi.2.20.lbk.workdays, cvi.3.20.lbk = cvi.3.20.lbk.workdays, cvi.4.20.lbk = cvi.4.20.lbk.workdays, cvi.5.20.lbk = cvi.5.20.lbk.workdays), .id = 'var'), mean)
+
+cvi.dtw_basic.windows <- aggregate(. ~ var, bind_rows(list(cvi.2.20.workdays = cvi.2.20.dtw_basic.workdays, cvi.2.20.workdaysByDay = cvi.2.20.dtw_basic.workdaysByDay, cvi.2.20.weeks = cvi.2.20.dtw_basic.weeks), .id = 'var'), mean)
+
+visualizeCVISameMetric(cvi.dtw_basic.workdays_sparse, "dtw_basic_workdays_sparse", "/home/mcuper/r/fiit-dp/doc/img/cvi/dtw_basic_workdays_sparse")
+visualizeCVISameMetric(cvi.dtw_basic.workdays_dense, "dtw_basic_workdays_dense", "/home/mcuper/r/fiit-dp/doc/img/cvi/dtw_basic_workdays_dense")
+
+visualizeCVIDiffMetric(rbind(cvi.dtw_basic, cvi.dtw_lb, cvi.gak, cvi.lbi, cvi.lbk), "metric_comparison", "/home/mcuper/r/fiit-dp/doc/img/cvi/metric_comparison")
+
+visualizeCVIDiffWindow(cvi.dtw_basic.windows, "window_comparison", "/home/mcuper/r/fiit-dp/doc/img/cvi/window_comparison")
+
