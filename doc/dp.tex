@@ -750,7 +750,6 @@ zhlukovanie na základe surových dát (angl. \textit{Raw data based clustering
 approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných alebo
 podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 
-% TODO add figure from real dataset
 \label{c:hierarchical-clustering}
 \paragraph{Hierarchické zhlukovanie} produkuje vnorenú hierarchiu skupín
 podobných časových radov na základe vzdialenostných matíc jednotlivých
@@ -930,6 +929,7 @@ vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
 \end{figure}
 
 % TODO Add GAK
+\label{c:distance-metrics-gak}
 % TODO Add SBD
 
 
@@ -1167,6 +1167,7 @@ byť rôzny. Práve preto je vhodnejšie použiť dynamický prístup, ktorý ro
 a~vznikajú tak segmenty s~rôznymi dĺžkami~\cite{Fu2011}.
 
 \subsubsection{Normalizácia číselných vektorov}
+\label{c:z-score}
 Rozsahy nameraných hodnôt inteligentnými meračmi sa môžu líšiť, pri jednotlivých
 odberateľoch dokonca aj rádovo. Pri zhlukovaní takýchto časových radov je preto
 potrebná najskôr ich normalizácia, v~prípade zhlukovania na základe tvaru
@@ -1341,6 +1342,7 @@ pokrytie~\cite{Trevizan2015}.
 
 % TODO add evaluation with syntetic dataset
 \subsubsection{Zhlukovacie validačné indexy}
+\label{c:cluster-validity-indeces}
 Zhlukovanie je metóda, ktorej cieľom je určiť skupinu, do ktorej spadá daná
 inštancia. Triedenia prebieha na základe atribútov inštancie. Keďže sa jedná
 o~učenie bez učiteľa, je potrebná validácia výsledného zhlukovania. V~praxi sa
@@ -1512,7 +1514,7 @@ Naopak, ak dataset obsahuje viaceré vysvetľujúce premenné, potom je možné
 vytvoriť model, ktorý bude zhlukovať odberateľov na základe týchto atribútov.
 Tak bude zabezpečená evaluácia pôvodného zhlukovacieho modelu. Dáta, ktoré máme
 k~dispozícií obsahujú iba časovú známku, množstvo odoberanej elektrickej energie
-a~príznak označujúci dni, ktoré sú sviatky.
+a~príznak označujúci dni pracovného pokoja.
 
 Z~experimentov môžeme predpokladať, že zhlukovacie algoritmy vytvárajú husté
 a~riedke zhluky. Primárne sa budeme zameriavať na analýzu časových radov,
@@ -1522,11 +1524,11 @@ a~lokalizovať intervaly s~neštandardným správaním odberateľa. Musíme pri 
 brať ohľad najmä na cyklus dní a~týždňov, no zároveň pristupovať k~zvykom
 odberateľov jednotlivo a~zvážiť ich pri označovaní anomálneho intervalu.
 
-Zvýšiť presnosť odhaľovania anomálií je možné aj osobitným prístupom
-k~jednotlivým odberateľom. Práve vďaka identifikácií zlomov v~časových radoch je
-možné presnejšie určiť správanie odberateľa. Zároveň algoritmus poskytuje ďalší
-mechanizmus na určovanie intervalu, v~ktorom sa mení správanie odberateľa, ktoré
-môžeme považovať za anomáliu.
+% Zvýšiť presnosť odhaľovania anomálií je možné aj osobitným prístupom
+% k~jednotlivým odberateľom. Práve vďaka identifikácií zlomov v~časových radoch je
+% možné presnejšie určiť správanie odberateľa. Zároveň algoritmus poskytuje ďalší
+% mechanizmus na určovanie intervalu, v~ktorom sa mení správanie odberateľa, ktoré
+% môžeme považovať za anomáliu.
 
 Výstupom opísaného procesu sú podozrivé a~anomálne časové rady a~jednotlivé
 merania v~nich, ktoré sú taktiež považované za anomálie. Na výstupe sa môže
@@ -1540,9 +1542,8 @@ náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmen
 a~môže byť predmetom záujmu distribútorov elektrickej energie.
 
 Pre lepšie znázornenie je opísaný postup vizualizovaný stavovým diagramom na
-obrázku~\ref{fig:state-diagram}. Navyše je pridaná evaluácia vytvorených zhlukov
-a~aj hyperparametrov, ktoré slúžia na nastavenia zhlukovacích algoritmov. Cieľom
-je vylepšiť proces prvotnej selekcie podozrivých časových radov.
+obrázku~\ref{fig:state-diagram}. Jednotlivé kroky sú ďalej rozpísané
+v~nasledujúcich kapitolách.
 
 \begin{figure}[htbp]
   \centering
@@ -1551,13 +1552,122 @@ je vylepšiť proces prvotnej selekcie podozrivých časových radov.
   \label{fig:state-diagram}
 \end{figure}
 
-% %-------------------------------------------------------------------------------
-% %   Chapter 4 - Implementation
-% %-------------------------------------------------------------------------------
+Dáta sú po načítaní rozdelené do dvoch skupín. Prvá skupina obsahuje iba
+pracovné dni, druhá víkendy a~sviatky. Cieľom je zachytiť podobné správanie
+odberateľov do jednej skupiny tak, aby sa neprekrývalo. Vzniknuté časové rady je
+nutné pred ďalším spracovaním normalizovať, napr. pomocou z-skóre. Normalizácia
+je potrebná kvôli použitým metrikám podobnosti časových radov, ktoré porovnávajú
+inštancie na základe tvaru krivky a~nie ich absolútnych hodnôt ako je to napr.
+pri Euklidovskej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
+početnosti jednotlivých skupín na majoritné a~minoritné. Z~majoritnej skupiny sú
+vybrané časové rady nachádzajúce sa na okraji zhluku. Časové rady z~oboch skupín
+sú následne analyzované pomocou SHESD metódy, čím vznikájú jednotlivé merania
+v~časových radoch označené ako anomálie. Vzniknutým bodom je pridelené skóre,
+ktoré opisuje mieru istoty, že dané meranie je anomálne. Body je následné nutné
+zlúčiť do intervalov, ktoré sú roztriedené do skupín.
 
-% \newpage
-% \section{Implementácia}
+% TODO Výsledné skupiny sú ďalej analyzované????
+% TODO zmenit mozno nazov, kedze data nie su nijak spracovavane pred vytvaranim zhlukov aj ked data su predspracovane tak ze sa filtruj
+% TODO pridat zbezny popis myslienky
 
+\subsection{Vytvorenie zhlukov}
+Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
+je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
+parametre ako je veľkosť a~veľkosť kroku posuvného okna. Výhody a~nevýhody
+metrík vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}, kritériami
+na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
+rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť existujúce
+anomálie do takej miery, že by neboli identifikované. Na druhej strane agregácia
+zabezpečuje elimináciu lokálnych anomálií. Cieľom práce je identifikovať najmä
+rozsiahlejšie anomálie v~správaní odberateľov. Veľkosť kroku posuvného okna je
+nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
+
+%-------------------------------------------------------------------------------
+%   Chapter 4 - Experimental verification
+%-------------------------------------------------------------------------------
+
+\newpage
+\section{Experimentálne overenie}
+% TODO add something
+
+\subsection{Výber hyperparametrov zhlukovania}
+Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
+zhlukovanie, jeho kvalitu alebo časovú náročnosť. Pri práci sme sa zamerali
+najmä na dosahovanú presnosť, ktorú sme merali pomocou zhlukovacích validačných
+indexov, bližšie opísaných v~kapitole~\ref{c:cluster-validity-indeces}. Niektoré
+hyperparametre sme testovali iba na požadovanom rozmedzí. Veľkosť posuvného okna
+by nemala presahovať 4-5 týždňov, aby okno neobsahovalo sezónnosť jednotlivých
+ročných období. Všetky výsledky experimentov sa nachádzajú v~prílohe
+v~kapitole~\ref{c:clustering-hyperparameters-experiments}. Z~vybraných
+grafov~\ref{fig:cvi-sparse-sil} a~\ref{fig:cvi-dense-db} je zrejmé, že najlepším
+nastavením hyperparametrov je práve nízky počet okien, ktoré budú agregované.
+Výsledný počet zhlukov by mal byť približne 25. Ostatné grafy podporujú naše
+tvrdenie, prípadne neposkytujú dostatočnú výpovednú hodnotu, keďže rozdiel
+medzi jednotlivými pokusmi je minimálny.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+	\label{fig:cvi-sparse-sil}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+	\label{fig:cvi-dense-db}
+\end{figure}
+
+Ďalším testovaným hyperparametrom sú vzdialenostné metriky, ktoré sú použité
+implementované v~knižnici \textit{dtwclust}~\cite{dtwclust2018}. Metriky sú
+bližšie popísané v~kapitole~\ref{c:distance-metrics}.
+Z~kapitoly~\ref{c:cluster-validity-indeces} je zrejmé, že najlepšiu informáciu
+o~kvalite zhlukovania poskytujú práve Silhouetteov index
+a~modifikovaný Davies-Bouldinov index, vizualizované na
+grafoch~\ref{fig:cvi-metric-sil} a~\ref{fig:cvi-metric-dbs}. Najvhodnejšími
+vzdialenostnými metrikami sú potom GAK a~DTW, pri ďalších experimentoch preto
+budeme používať GAK~\ref{c:distance-metrics-gak}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+	\label{fig:cvi-metric-sil}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+	\label{fig:cvi-metric-dbs}
+\end{figure}
+
+Dôležitým nastavením posuvného okna je jeho tvar a~posun. Pri výbere tvaru sme
+sa zamerali najmä na pracovné dni, no na porovnanie sme vykonali experimenty aj
+s~celými týždňami. Predpokladali sme, že zhlukovanie vytvorené iba z~pracovných
+dní bude kvalitnejšie. Na grafe~\ref{fig:cvi-window-sil} si môžeme všimnúť
+približne rovnaké výsledky zhlukovania s~posuvným oknom nad pracovnými dňami.
+Pri veľkosti posunu sme porovnávali iba experimenty vykonané nad pracovnými
+dňami. Výsledky experimentov nie sú signifikantne rozdielne, preto sme zvolili
+časovo menej náročný výpočet s~posunom po týždňoch. Beh zhlukovania s~dňovým
+posunom trval 5-krát dlhšie oproti týždňovému posunu.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
+  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+	\label{fig:cvi-window-sil}
+\end{figure}
+
+Predspracovanie dataset pozostáva aj z~normalizácie dát pomocou z-skóre, ktoré
+je bližšie opísané v~kapitole~\ref{c:z-score}. Použitá knižnica
+\textit{dtwclust}~\cite{dtwclust2018} v~jazyku R~poskytuje taktiež
+predspracovanie vstupnej množiny dát pomocou rovnakej normalizácie. Preto sme
+vykonali niekoľko experimentov pre porovnanie časovej náročnosti a~presnosti
+výsledného zhlukovania, pri použití vstavanej a~externej normalizácie. Časová
+náročnosť pri použití oboch normalizácií súčasne alebo iba jednej z~nich bola
+približne rovnaká. Rozdiel bol vo výsledkoch, ktoré nepoužívali externú
+normalizáciu. V~prípade použitia oboch súčasne alebo iba externej normalizácie
+sú dosahované výsledky porovnateľné.
 
 %-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
@@ -1597,6 +1707,98 @@ je vylepšiť proces prvotnej selekcie podozrivých časových radov.
   \item[$\bullet$ doc] dokumentácia, obrázky použité v nej a zdrojové súbory pre LaTeX
   \item[$\bullet$ src] skripty, prototypy a časti zdrojových kódov, ktoré boli použité pri experimentoch
 \end{description}
+
+
+\newpage
+\section{Vizualizácie experimentov pre výber hyperparametrov}
+\label{c:clustering-hyperparameters-experiments}
+Každý index obsahuje aj informáciu o~jeho optimálnych hodnotách. Pri indexoch,
+ktoré obsahujú $(max.)$ znamenajú väčšie hodnoty lepšie výsledné zhlukovanie.
+Pri indexoch s~$(min.)$ nižšie hodnoty znamenajú lepšie výsledky zhlukovania.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-CH-dtw_basic_workdays_sparse.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DB-dtw_basic_workdays_sparse.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DBstar-dtw_basic_workdays_sparse.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-Sil-dtw_basic_workdays_dense.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-CH-dtw_basic_workdays_dense.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DBstar-dtw_basic_workdays_dense.png}
+  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-CH-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DB-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
+  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
+  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-CH-window_comparison.png}
+  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DBstar-window_comparison.png}
+  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DB-window_comparison.png}
+  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+\end{figure}
 
 
 \end{appendices}
