@@ -714,16 +714,57 @@ inštancií~\cite{Kuppusamy2013,Rosner1983}.
   {n - i}
 \end{equation}
 
-Do rovnakej kategórie môžeme zaradiť aj metódu sezónny hybridný ESD (angl.
-\textit{Seasonal Hybrid Extreme Studentized Deviation}), ktorá podobne ako
-\textit{S-ESD} používa dekompozíciu časových radov, kde anomálie sú detegované
-práve na sezónnej zložke. Tie sú identifikované pomocou priemeru
-a~štandardnej odchýlky. Metóda \textit{S-ESD} je veľmi citlivá pre niektoré typy
-dát, kde anomálií značné množstvo. Preto bola navrhnutá metóda \textit{S-H-ESD},
-ktorá namiesto toho používa absolútnu odchýlku mediánu. Cenou za to je vyššia
-výpočtová náročnosť metódy, na druhej strane sú hodnoty F-skóre takmer až o~30\%
-vyššie~\cite{Hochenbaum2005}.
+Do rovnakej kategórie môžeme zaradiť aj sezónnu $ESD$ (angl. \textit{Seasonal
+Extreme Studentized Deviation}), ktorá rovnako využíva $ESD$ na identifikáciu
+anomálií. Kľúčovým rozdielom je aplikovanie $ESD$ až na dáta, ktoré boli
+dekomponované pomocou modifikovaného $STL$ algoritmu. Vďaka tomu algoritmus
+deteguje globálne anomálie, ktoré sa rozpínajú mimo očakávaných sezónnych
+extrémov, ale aj lokálne anomálie, ktoré by inak ostali zamaskované sezónnou
+zložkou časových radov. Modifikácia STL algoritmu pozostáva v~zamenení trendovej
+zložky mediánom daného časového radu. Reziduálna zložka je potom vypočítaná ako
+rozdiel nameranej hodnoty a~súčtu sezónneho komponentu a~mediánu. Zmena vzorca
+použitého na dekompozíciu, zabráni tvorbe falošných anomálií v~reziduálnej
+zložke časového radu. Hlavnými obmedzením $S{\text-}ESD$ sú datasety obsahujúce
+väčšií podiel anomálií. Môžeme si to všimnúť na
+obrázku~\ref{fig:sesd-anomalies}, kde anomálie nachádzajúce sa vo zvíraznenom
+regióne nie sú detegované, keďže ich množstvo ovplyvňuje ako priemer tak aj
+štandardnú odchýlku. Kvôli tomu algoritmus neoznačuje podozrivé pozorovania čím
+vzniká mnoho falošne neoznačených inštancií~\cite{Hochenbaum2017}.
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{sesd_anomalies.png}
+  \caption{Anomálie detegované pomocou $S{\text-}ESD$ algoritmu~\cite{Hochenbaum2017}.}
+  \label{fig:sesd-anomalies}
+\end{figure}
+
+Cieľom sezónnej hybridnej $ESD$ (angl. \textit{Seasonal Hybrid Extreme
+Studentized Deviation}) odstrániť obmedzenia, ktoré vznikajú pri $S{\text-}ESD$.
+Rovnako je použitá modifikovaná dekompozícia $STL$. Rozdiel je v~$ESD$, kde
+namiesto priemeru a~štandardnej odchýlky je použitá robustnejšia štatistická
+metóda, ktorá je schopná tolerovať až 50\% anomálií v~časovom rade. Jedná sa
+o~absolútnu odchýlku mediánu $MAD$ (angl. \textit{Median Absolute Deviation}),
+ktorú vypočítame pomocou vzorca~\ref{eq:mad}~\cite{Hochenbaum2017}.
+
+\begin{equation}
+	\label{eq:mad}
+  MAD = median_i(|X_i - median_j(X_j)|)
+\end{equation}
+
+\noindent
+Cenou za to je vyššia výpočtová náročnosť metódy, keďže $MAD$ požaduje zoradenie
+dát pred výpočtom $ESD$. Na druhej strane sú hodnoty F-skóre takmer až o~30\%
+vyššie. V~datasetoch s~nízkym počtom výskytov anomálií môže byť vhodnejšie
+použitie metódy $S{\text-}ESD$~\cite{Hochenbaum2017}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{shesd_anomalies.png}
+  \caption{Anomálie detegované pomocou $S{\text-}H{\text-}ESD$ algoritmu~\cite{Hochenbaum2017}.}
+  \label{fig:shesd-anomalies}
+\end{figure}
+
+% TODO add shesd*
 
 %-------------------------------------------------------------------------------
 %   Time series classification
