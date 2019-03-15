@@ -636,7 +636,7 @@ v~testovacej vzorke dát~\cite{Chandola2009}.
 %   Anomaly detection techniques
 %-------------------------------------------------------------------------------
 
-\subsubsection{Techniky detekcie anomálií}
+\subsection{Techniky detekcie anomálií}
 \label{c-analysis-techniques}
 Detegovať anomálie rôznych typov môžeme niekoľkými spôsobmi, čo závisí aj od
 samotných dát. Ich úplnosť, množstvo a~oblasť, v~ktorej boli zozbierané sú
@@ -645,30 +645,30 @@ identifikované. Nás budú zaujímať najmä detekcie anomálií v~časových r
 Popísané metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale pre
 úplnosť sú spomenuté aj iné používané metódy.
 
-\paragraph{Klasifikácia} na základe naučeného modelu, nazývaného aj
-klasifikátor, rozoznáva triedy jednotlivých inštancií. Pri detekcii anomálneho
-správania, klasifikátor rozlišuje iba medzi dvoma triedami, triedou normálnych
-dát a~anomálií. Vzhľadom na to, že na natrénovanie klasifikátora sú potrebné
-označené dáta, ide o~učenie s~učiteľom. Na implementovanie klasifikátora môžeme
-použiť techniky založené na rôznych typoch neurónových sietí, Bayesových
-sieťach, pravidlových systémoch či metóde podporných
-vektorov~\cite{Chandola2009,Tan2005}.
+\subsubsection{Klasifikácia}
+Pomocou naučeného modelu, nazývaného aj klasifikátor, sú rozoznávané triedy
+jednotlivých inštancií. Pri detekcii anomálneho správania, klasifikátor
+rozlišuje iba medzi dvoma triedami, triedou normálnych dát a~anomálií. Vzhľadom
+na to, že na natrénovanie klasifikátora sú potrebné označené dáta, ide o~učenie
+s~učiteľom. Na implementovanie klasifikátora môžeme použiť techniky založené na
+rôznych typoch neurónových sietí, Bayesových sieťach, pravidlových systémoch či
+metóde podporných vektorov~\cite{Chandola2009,Tan2005}.
 
-\paragraph{Analýza najbližšieho suseda} určí na základe vzdialenosti alebo
-podobnosti medzi dátovými inštanciami, či sa jedná o~normálnu inštanciu alebo
-anomáliu. To je vypočítané pomocou vzdialeností medzi testovanou inštanciou
-a~všetkými bodmi, alebo iba \textit{k} najbližšími bodmi. Pri viacrozmerných
-dátach je vzdialenosť určovaná pre každú dimenziu zvlášť. Metóda je založená na
-predpoklade, že zatiaľ čo normálne inštancie sa nachádzajú pri sebe a~sú husto
-usporiadané, anomálie sú vzdialenejšie, prípadne na okraji vzniknutých oblastí.
-Aplikácia je možná pomocou techník založených na relatívnej hustote alebo
-vzdialenosti najbližších \textit{k} susedných
-inštancií~\cite{Chandola2009,Tan2005}.
+\subsubsection{Analýza najbližšieho suseda}
+Metóda určí na základe vzdialenosti alebo podobnosti medzi dátovými inštanciami,
+či sa jedná o~normálnu inštanciu alebo anomáliu. To je vypočítané pomocou
+vzdialeností medzi testovanou inštanciou a~všetkými bodmi, alebo iba \textit{k}
+najbližšími bodmi. Pri viacrozmerných dátach je vzdialenosť určovaná pre
+každú dimenziu zvlášť. Metóda je založená na predpoklade, že zatiaľ čo normálne
+inštancie sa nachádzajú pri sebe a~sú husto usporiadané, anomálie sú
+vzdialenejšie, prípadne na okraji vzniknutých oblastí. Aplikácia je možná
+pomocou techník založených na relatívnej hustote alebo vzdialenosti najbližších
+\textit{k} susedných inštancií~\cite{Chandola2009,Tan2005}.
 
-\paragraph{Zhlukovanie} predstavuje učenie bez učiteľa, keďže zhluky inštancií
-sú vytvorené na základe ich vzdialenosti či podobnosti. Techniky ďalej delíme do
-kategórií na základe predpokladu o~dátových
-inštanciách~\cite{Chandola2009,Tan2005}.
+\subsubsection{Zhlukovanie}
+Jedná sa o~učenie bez učiteľa, keďže zhluky inštancií sú vytvorené na základe
+ich vzdialenosti či podobnosti. Techniky ďalej delíme do kategórií na základe
+predpokladu o~dátových inštanciách~\cite{Chandola2009,Tan2005}.
 
 Prvá kategória predpokladá, že normálne inštancie patria do zhluku, zatiaľ čo
 anomálne nepatria do žiadneho. Používané sú zhlukovacie algoritmy ako DBSCAN
@@ -694,18 +694,22 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
-\paragraph{Štatistické metódy} predstavujú súbor metód, ktoré na základe
+\subsubsection{Štatistické metódy} predstavujú súbor metód, ktoré na základe
 vypočítaných hodnôt priemeru, odchýlky, atď. označujú jednotlivé anomálne
-inštancie. V~práci budeme používať najmä metódu extrémnej študentizovanej
-odchýlky (angl. \textit{Extreme Studentized Deviation}) a~jej ďalšie derivácie.
-Metóda \textit{ESD} slúži na detekciu viacerých anomálnych inštancií. Jediným
-vstupným parametrom metódy je najväčší možný počet podozrivých inštancií v~danom
-datasete. Generalizovaná ESD sa snaží maximalizovať odchýlku datasetu
-$|x_i - \tilde{x}|$ pre $s$ inštancií. Počet inštancií, sa postupne znižuje,
-pokiaľ nie je dosiahnutá stanovená hranica. Pre každý odobraný počet inštancií
-sú overované všetky kombinácie. Tento vzťah môžeme zapísať jednoduchou
-rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
-inštancií~\cite{Kuppusamy2013,Rosner1983}.
+inštancie.
+% TODO: write some other statistical methods
+
+\subsubsection{Extrémna Studentova odchýlka} V~práci budeme používať najmä
+metódu extrémnej Studentovej odchýlky (angl. \textit{Extreme Studentized
+Deviation}) a~jej ďalšie derivácie. Metóda \textit{ESD} slúži na detekciu
+viacerých anomálnych inštancií. Jediným vstupným parametrom metódy je najväčší
+možný počet podozrivých inštancií v~danom datasete. Generalizovaná ESD sa snaží
+maximalizovať odchýlku datasetu $|x_i - \tilde{x}|$ pre $s$ inštancií. Počet
+inštancií, sa postupne znižuje, pokiaľ nie je dosiahnutá stanovená hranica. Pre
+každý odobraný počet inštancií sú overované všetky kombinácie. Tento vzťah
+môžeme zapísať jednoduchou rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
+inštancií, ktorá je v~štatistike často označovaná aj ako Grubbov
+test~\cite{Kuppusamy2013,Rosner1983}.
 
 \begin{equation}
 	\label{eq:gesd}
@@ -773,7 +777,7 @@ použitie metódy $S{\text-}ESD$~\cite{Hochenbaum2017}.
 \subsection{Metódy zhlukovania časových radov}
 Cieľom zhlukovania je rozdeliť dátové inštancie do \textit{k}~zhlukov na základe
 spoločných čŕt. V~prípade, že inštancie sú reprezentované nízkodimenzionálnym
-vektorom v~Euklidovskom priestore, môžu byť na zhlukovanie použité klasické
+vektorom v~Euklidovom priestore, môžu byť na zhlukovanie použité klasické
 techniky spomenuté v~\ref{c-analysis-techniques}. Ak inštancie reprezentujú
 časový rad, nasadenie takýchto štandardných prístupov je
 zriedkavé~\cite{Hautamaki2008}.
@@ -849,7 +853,7 @@ neuróny sú usporiadané v~nízkodimenzionálnej štruktúre a~trénované iter
 a~bez učiteľa. Trénovací proces začína pridelením náhodných hodnôt váhovým
 vektorom $w$. Každá iterácia trénovania pozostáva z~3~krokov a~to náhodného
 výberu vstupného vektoru z~trénovacej množiny, evaluácie siete a~aktualizovaní
-váhových vektorov. Po natrénovaní je vypočítaná Euklidovská vzdialenosť medzi
+váhových vektorov. Po natrénovaní je vypočítaná Euklidova vzdialenosť medzi
 vstupným vzorom a~váhovým vektorom. Následne je neurón s~najmenšou vzdialenosťou
 označený ako $t$ a~ostatné váhy ostatných neurónov sú aktualizované v~závislosti
 od vzdialenosti od neuróna $t$. Nevýhodou je opäť náročné spracovanie časových
@@ -894,7 +898,7 @@ skupina meraní alebo celý časový rad označené za anomálie~\cite{Teng2010}
 Kľúčovou záležitosťou pri zhlukovaní časových radov na základe ich podobnosti,
 je meranie vzdialenosti medzi nimi. Rovnako ako pri zhlukovaní bodových
 inštancií je potrebné definovať si metódy merania vzdialenosti. Najčastejšími
-metrikami sú Euklidovská a~Manhattanovská vzdialenosť. Vhodnosť aplikovania
+metrikami sú Euklidova a~Manhattanova vzdialenosť. Vhodnosť aplikovania
 týchto klasických metód je nízka, keďže nameraná vzdialenosť zachytáva aj
 použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla zaujíma
 zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
@@ -904,7 +908,7 @@ radov~\cite{Dzeroski2007,WarrenLiao2005}.
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
 3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
-základe, ktorého je vypočítaná napr. Euklidovská vzdialenosť medzi jednotlivými
+základe, ktorého je vypočítaná napr. Euklidova vzdialenosť medzi jednotlivými
 inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
 časové rady. Vzdialenosť je potom definovaná ako vzdialenosť medzi jednotlivými
 modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledný tvar
@@ -995,7 +999,7 @@ závislosť~\cite{Dzeroski2007}.
 
 
 % TODO compare euclidian and manhattan distance metrics
-\paragraph{Euklidovská vzdialenosť} je používaná najmä pri klasických
+\paragraph{Euklidova vzdialenosť} je používaná najmä pri klasických
 zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenosť
 vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
 obrázku~\ref{fig:euclidean-distance} sú vždy porovnávané hodnoty vyskytujúce sa
@@ -1008,11 +1012,11 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{euclidean-distance.png}
-  \caption{Príklad porovnávania časových radov pomocou Euklidovskej vzdialenosti~\cite{Malinowski2017}.}
+  \caption{Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti~\cite{Malinowski2017}.}
   \label{fig:euclidean-distance}
 \end{figure}
 
-\paragraph{Manhattanovská vzdialenosť} je rovnako ako Euklidovská vzdialenosť
+\paragraph{Manhattanovská vzdialenosť} je rovnako ako Euklidova vzdialenosť
 používaná najmä pri klasických zhlukovacích problémoch. Výpočet je tiež veľmi
 podobný, môžeme ho vyjadriť vzorcom~\ref{eq:distance-manhattan}
 % TODO add som refference
@@ -1466,7 +1470,7 @@ V~\cite{Hautamaki2008} bola pri zhlukovaní použitá aj kombinácia viacerých
 metód, konkrétne k-means, metóda náhodnej výmeny a~aglomeratívne zhlukovanie.
 Ako už bolo spomenuté v~\ref{c-analysis-techniques}, úlohou algoritmu k-means
 namapovať existujúce inštancie do \textit{k} zhlukov. Aj keď metóda náhodnej
-výmeny je obmedzená na zhlukovacie problémy v~Euklidovskom priestore, bola
+výmeny je obmedzená na zhlukovacie problémy v~Euklidovom priestore, bola
 použitá aj pri zhlukovaní časových radov a~zabraňuje zaseknutiu zhluku
 v~lokálnom minime. V~princípe je náhodne vybraný zhluk, ktorý bude vymazaný a~za
 centroid bude vybraný jeden časový rad z~neho. Ak takéto riešenie je lepšie ako
@@ -1485,7 +1489,7 @@ spotreby elektrickej energie. Po predikcii boli porovnané predikované
 a~testovacie dáta pomocou štatistickej metódy RMSE. Výsledkom experimentov je
 dostatočne presná predikcia spotreby energie vypočítaná iba na základe atribútov
 extrahovaných z~časovej známky. Prekročením stanovej hranice boli inštancie
-považované za anomálne.  Počas experimentov boli použité M5P rozhodovacie učiace
+považované za anomálne. Počas experimentov boli použité M5P rozhodovacie učiace
 stromy.
 \medskip
 
@@ -1599,7 +1603,7 @@ odberateľov do jednej skupiny tak, aby sa neprekrývalo. Vzniknuté časové ra
 nutné pred ďalším spracovaním normalizovať, napr. pomocou z-skóre. Normalizácia
 je potrebná kvôli použitým metrikám podobnosti časových radov, ktoré porovnávajú
 inštancie na základe tvaru krivky a~nie ich absolútnych hodnôt ako je to napr.
-pri Euklidovskej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
+pri Euklidovej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
 početnosti jednotlivých skupín na majoritné a~minoritné. Z~majoritnej skupiny sú
 vybrané časové rady nachádzajúce sa na okraji zhluku. Časové rady z~oboch skupín
 sú následne analyzované pomocou SHESD metódy, čím vznikájú jednotlivé merania
@@ -1660,8 +1664,9 @@ medzi jednotlivými pokusmi je minimálny.
 \end{figure}
 
 Ďalším testovaným hyperparametrom sú vzdialenostné metriky, ktoré sú použité
-implementované v~knižnici \textit{dtwclust}~\cite{dtwclust2018}. Metriky sú
-bližšie popísané v~kapitole~\ref{c:distance-metrics}.
+implementované v~knižnici
+\textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}.
+Metriky sú bližšie popísané v~kapitole~\ref{c:distance-metrics}.
 Z~kapitoly~\ref{c:cluster-validity-indeces} je zrejmé, že najlepšiu informáciu
 o~kvalite zhlukovania poskytujú práve Silhouetteov index
 a~modifikovaný Davies-Bouldinov index, vizualizované na
@@ -1701,14 +1706,14 @@ posunom trval 5-krát dlhšie oproti týždňovému posunu.
 
 Predspracovanie dataset pozostáva aj z~normalizácie dát pomocou z-skóre, ktoré
 je bližšie opísané v~kapitole~\ref{c:z-score}. Použitá knižnica
-\textit{dtwclust}~\cite{dtwclust2018} v~jazyku R~poskytuje taktiež
-predspracovanie vstupnej množiny dát pomocou rovnakej normalizácie. Preto sme
-vykonali niekoľko experimentov pre porovnanie časovej náročnosti a~presnosti
-výsledného zhlukovania, pri použití vstavanej a~externej normalizácie. Časová
-náročnosť pri použití oboch normalizácií súčasne alebo iba jednej z~nich bola
-približne rovnaká. Rozdiel bol vo výsledkoch, ktoré nepoužívali externú
-normalizáciu. V~prípade použitia oboch súčasne alebo iba externej normalizácie
-sú dosahované výsledky porovnateľné.
+\textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}
+v~jazyku R~poskytuje taktiež predspracovanie vstupnej množiny dát pomocou
+rovnakej normalizácie. Preto sme vykonali niekoľko experimentov pre porovnanie
+časovej náročnosti a~presnosti výsledného zhlukovania, pri použití vstavanej
+a~externej normalizácie. Časová náročnosť pri použití oboch normalizácií súčasne
+alebo iba jednej z~nich bola približne rovnaká. Rozdiel bol vo výsledkoch, ktoré
+nepoužívali externú normalizáciu. V~prípade použitia oboch súčasne alebo iba
+externej normalizácie sú dosahované výsledky porovnateľné.
 
 %-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
