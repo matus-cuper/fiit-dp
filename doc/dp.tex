@@ -973,10 +973,16 @@ vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
   \label{fig:warping-distance}
 \end{figure}
 
-% TODO Add GAK
 \label{c:distance-metrics-gak}
-% TODO Add SBD
-
+Do rovnakej rodiny vzdialenostných metrík patrí aj rýchle globálne zarovnávanie
+kernelov (angl. \textit{Fast global alignment kernels}) skrátene GAK. Cieľom
+metódy je znížiť veľkú časovú náročnosť DTW s~dosiahnutím porovnateľných
+výsledkov. Podobne aj metrika založená na tvare časových radov (angl.
+\textit{Shape-based distance}) skrátene SBD, znižuje časovú náročnosť výpočtu
+vzdialenosti medzi časovými radmi. Narozdiel od GAK nepoužíva kernely, ale
+štatistické metódy založené na krížovej korelácií (angl.
+\textit{cross-correlation}). Bližšie sa týmito metrikami zaoberali autori
+v~prácach~\cite{Cuturi2011} a~\cite{Paparrizos2016}.
 
 \paragraph{Kvalitatívna vzdialenosť} je metóda založená na kvalitatívnom
 porovnávaní tvaru dvoch časových radov. Pre časové rady $X$~a~$Y$~vyberieme
@@ -1672,7 +1678,9 @@ o~kvalite zhlukovania poskytujú práve Silhouetteov index
 a~modifikovaný Davies-Bouldinov index, vizualizované na
 grafoch~\ref{fig:cvi-metric-sil} a~\ref{fig:cvi-metric-dbs}. Najvhodnejšími
 vzdialenostnými metrikami sú potom GAK a~DTW, pri ďalších experimentoch preto
-budeme používať GAK~\ref{c:distance-metrics-gak}.
+budeme používať GAK~\ref{c:distance-metrics-gak}. Je dôležité poznamenať, že
+pri rovnakom nastavení funkcie, sú výsledky medzi jednotlivými behmi nezávislé
+a~rôzne. Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
 
 \begin{figure}[htbp]
   \centering
