@@ -1,3 +1,22 @@
+filterSuspiciousTS <- function(dataset, columns, q1 = 0.10, q2 = 0.33) {
+  suspiciousTS <- c()
+  for (i in 1:length(dataset)) {
+    clustersCount <- table(dataset[[i]]$cluster)
+    quantile1 <- as.numeric(quantile(clustersCount, probs = q1))
+    suspicious <- data.frame(t(dataset[[i]]$cluster))
+    names(suspicious) <- columns
+    suspiciousTS <- c(
+      suspiciousTS,
+      names(suspicious[dataset[[i]]$cluster %in% names(clustersCount[clustersCount < quantile1])])
+    )
+  }
+
+  suspiciousCount <- table(table(suspiciousTS))
+  quantile2 <- quantile(suspiciousCount, probs = q2)
+
+  return(suspiciousTS[table(suspiciousTS) %in% names(suspiciousCount[suspiciousCount < quantile2])])
+}
+
 filterByDay <- function(dataset, selectDays) {
   if ("day" %in% names(dataset))
     return(dataset[dataset$day %in% selectDays, ])
