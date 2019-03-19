@@ -694,22 +694,42 @@ hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený i
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
 daného zhluku~\cite{Salvador2005}.
 
-\subsubsection{Štatistické metódy} predstavujú súbor metód, ktoré na základe
-vypočítaných hodnôt priemeru, odchýlky, atď. označujú jednotlivé anomálne
-inštancie.
-% TODO: write some other statistical methods
+\subsubsection{Štatistické metódy}
+Jedná sa o~súbor metód založených na štatistike. K~jednotlivým výpočtom sú
+väčšinou používané priemerné hodnoty, odchýlky, atď. V~praxi sa používajú
+metódy kĺzavého priemeru, $3\cdot\sigma$ pravidlo, dekompozícia časových radov,
+ale aj metóda extrémnej Studentovej odchýlky, ktorá je bližšie opísaná
+v~nasledujúcej podkapitole~\ref{c:esd}. Pravidlo $3\cdot\sigma$ je bežne
+používané na identifikáciu globálnych anomálie, ktoré sú detegované po
+prekročení trojnásobku hodnoty štandardnej odchýlky. Pri sezónnych anomáliach
+tento typ detekcie zlyháva, keďže odchýlka je vypočítaná nad celým pozorovaným
+časovým radom. Pri jeho segmentácií je metóda úspešná iba v~prípade, kedy sa
+odchýlka nepretržite mení~\cite{Hochenbaum2017}.
 
-\subsubsection{Extrémna Studentova odchýlka} V~práci budeme používať najmä
-metódu extrémnej Studentovej odchýlky (angl. \textit{Extreme Studentized
-Deviation}) a~jej ďalšie derivácie. Metóda \textit{ESD} slúži na detekciu
-viacerých anomálnych inštancií. Jediným vstupným parametrom metódy je najväčší
-možný počet podozrivých inštancií v~danom datasete. Generalizovaná ESD sa snaží
-maximalizovať odchýlku datasetu $|x_i - \tilde{x}|$ pre $s$ inštancií. Počet
-inštancií, sa postupne znižuje, pokiaľ nie je dosiahnutá stanovená hranica. Pre
-každý odobraný počet inštancií sú overované všetky kombinácie. Tento vzťah
-môžeme zapísať jednoduchou rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných
-inštancií, ktorá je v~štatistike často označovaná aj ako Grubbov
-test~\cite{Kuppusamy2013,Rosner1983}.
+Metóda kĺzavého priemeru má niekoľko modifikácií, na základe ovahánia
+jednotlivých meraní vzniká napr. metóda kĺzavého priemeru s~exponencionálnym
+váhovaním (angl. \textit{exponentially weighted moving average}), skrátene
+EWMA. Autori v~práci~\cite{Hochenbaum2017} porovnávali okrem EWMA aj PEWMA
+(pravdepodobnostné exponencionálne váhovanie), kde v~kombinácií s~metódou ESD
+nedosiahli postačujúce výsledky. Kĺzavý priemer zlyhával pri identifikácií
+sezónnych anomálií.
+
+%-------------------------------------------------------------------------------
+%   Extreme Studentized Deviation
+%-------------------------------------------------------------------------------
+
+\subsubsection{Extrémna Studentova odchýlka}
+\label{c:esd}
+V~práci budeme používať najmä metódu extrémnej Studentovej odchýlky (angl.
+\textit{Extreme Studentized Deviation}) a~jej ďalšie derivácie. Metóda
+\textit{ESD} slúži na detekciu viacerých anomálnych inštancií. Jediným vstupným
+parametrom metódy je najväčší možný počet podozrivých inštancií v~danom
+datasete. Generalizovaná ESD sa snaží maximalizovať odchýlku datasetu
+$|x_i - \tilde{x}|$ pre $s$ inštancií. Počet inštancií, sa postupne znižuje,
+pokiaľ nie je dosiahnutá stanovená hranica. Pre každý odobraný počet inštancií
+sú overované všetky kombinácie. Tento vzťah môžeme zapísať jednoduchou
+rovnicou~\ref{eq:gesd} definovanú pre $i$ odobraných inštancií, ktorá je
+v~štatistike často označovaná aj ako Grubbov test~\cite{Kuppusamy2013,Rosner1983}.
 
 \begin{equation}
 	\label{eq:gesd}
