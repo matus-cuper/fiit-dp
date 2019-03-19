@@ -37,4 +37,50 @@ findAnomaliesSumScore <- function(dataset, aggregations = c(0, 1, 2, 3, 4)) {
   return(result)
 }
 
-# TODO: Add visualization of these process if it is really needed
+# Run single anomaly detection with different alpha and anomalities count
+runAnomalyDetection <- function(dataset, numberOfAnomalies = c(0.1), alphaOfAnomalies = c(0.05),
+                                windowsLength = 8, longtermPeriod = 5, measurementsPerDay = MPD) {
+
+  oneWeekLength <- longtermPeriod * measurementsPerDay
+  totalWeeks <- floor(nrow(dataset) / (oneWeekLength * windowsLength))
+
+  result <- c()
+  for (i in numberOfAnomalies) {
+    for (j in alphaOfAnomalies) {
+      for (week in 1:totalWeeks) {
+        s <- (week - 1) * windowsLength * oneWeekLength + 1
+        e <- week * windowsLength * oneWeekLength
+        tryCatch({
+          anomalies <- AnomalyDetectionVec(dataset$load[s:e], max_anoms = i, alpha = j, period = measurementsPerDay, longterm_period = oneWeekLength, plot = FALSE, direction = "both")
+        }, error = function(e){cat("ERROR: Number of anomalies is too small\n")})
+        result <- c(result, anomalies$anoms$index + s)
+      }
+    }
+  }
+
+  return(result)
+}
+
+# Run anomaly detection with different alpha, anomalities count and aggregation window
+customAnomalyDetection <- function(dataset, aggregations = c(0, 1, 2, 3, 4), numberOfAnomalies = c(0.1), alphaOfAnomalies = c(0.05),
+                                   windowsLength = 8, longtermPeriod = 5, measurementsPerDay = MPD) {
+
+  anomalies <- data.frame(matrix(0, nrow = nrow(dataset), ncol = length(aggregations)))
+  names(anomalies) <- sapply(aggregations, as.character)
+
+  for (a in aggregations) {
+    ratio <- 2**a
+    anoms <- runAnomalyDetection(
+      dataset = groupByAggregate(dataset, ratio),
+      windowsLength = windowsLength,
+      longtermPeriod = longtermPeriod,
+      numberOfAnomalies = numberOfAnomalies,
+      alphaOfAnomalies = alphaOfAnomalies,
+      measurementsPerDay = measurementsPerDay / ratio
+    )
+    tanoms <- table(anoms)
+    anomalies[names(tanoms), as.character(a)] <- tanoms
+  }
+
+  return(anomalies)
+}
