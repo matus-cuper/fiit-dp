@@ -79,8 +79,39 @@ customAnomalyDetection <- function(dataset, aggregations = c(0, 1, 2, 3, 4), num
       measurementsPerDay = measurementsPerDay / ratio
     )
     tanoms <- table(anoms)
-    anomalies[names(tanoms), as.character(a)] <- tanoms
+
+    columns <- as.numeric(names(tanoms)) * ratio
+    values <- c(1:ratio) - 1
+    cartesian <- expand.grid(columns, values)
+
+    canoms <- c(rep(tanoms, each = ratio))
+    names(canoms) <- sort(cartesian$Var1 + cartesian$Var2)
+
+    anomalies[names(canoms), as.character(a)] <- canoms
   }
 
   return(anomalies)
+}
+
+# Dummy wrapper for Twitter Anomaly Detection
+anomalyDetectionWrapper <- function(suspiciousColumns, settings, computeHolidays = FALSE) {
+  df <- list()
+  if (computeHolidays) {
+    for(s in suspiciousColumns) {
+      tmp <- merge(filterHolidays(IRELAND[c(METADATACOLUMNS, s)]), filterWeekends(IRELAND[c(METADATACOLUMNS, s)]), all = TRUE)
+      names(tmp) <- c(METADATACOLUMNS, "load")
+      df[[s]] <- customAnomalyDetection(tmp, aggregations = settings$aggregations, numberOfAnomalies = settings$numberOfAnomalies, alphaOfAnomalies = settings$alphaOfAnomalies)
+      print(paste(match(s, suspiciousColumns), "/", length(suspiciousColumns)))
+    }
+  }
+  else {
+    for(s in suspiciousColumns) {
+      tmp <- filterWorkdays(IRELAND[c(METADATACOLUMNS, s)])
+      names(tmp) <- c(METADATACOLUMNS, "load")
+      df[[s]] <- customAnomalyDetection(tmp, aggregations = settings$aggregations, numberOfAnomalies = settings$numberOfAnomalies, alphaOfAnomalies = settings$alphaOfAnomalies)
+      print(paste(match(s, suspiciousColumns), "/", length(suspiciousColumns)))
+    }
+  }
+
+  return(df)
 }
