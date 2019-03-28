@@ -788,8 +788,6 @@ použitie metódy $S{\text-}ESD$~\cite{Hochenbaum2017}.
   \label{fig:shesd-anomalies}
 \end{figure}
 
-% TODO add shesd*
-
 %-------------------------------------------------------------------------------
 %   Time series classification
 %-------------------------------------------------------------------------------
@@ -856,9 +854,6 @@ dĺžky. Zároveň tiež nie je možné zmeniť delenie zhluku, ktoré už bolo 
 Na meranie vzdialenosti môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
-% TODO Add k-means / dbscan
-% TODO Add random swap
-
 \subsubsection{Zhlukovanie na základe reprezentácie}
 Keďže manipulácia so surovými dátami je často náročná a~dáta navyše obsahujú
 nadbytočné informácie, táto metóda (angl. \textit{Representation based
@@ -867,7 +862,6 @@ následne sú aplikované zhlukovacie algoritmy. V~literatúre sa zvykne označo
 aj ako zhlukovanie na základe vlastností (angl. \textit{Feature based clustering
 approach})~\cite{Rani2012}.
 
-% TODO add equation ???
 \paragraph{Samoorganizované mapy} predstavujú triedu neurónových sietí, kde
 neuróny sú usporiadané v~nízkodimenzionálnej štruktúre a~trénované iteratívne
 a~bez učiteľa. Trénovací proces začína pridelením náhodných hodnôt váhovým
@@ -969,8 +963,7 @@ obrázku~\ref{fig:warping-distance} si môžeme všimnúť, že sú porovnávan�
 ktoré by sme intuitívne zvolili pri zarovnaní časových radov podľa tvaru krivky.
 $D_{DTW}$~je vypočítané pomocou dynamického programovania, práve kvôli množstvu
 existujúcich kombinácií. Rekurzia je vyjadrená
-vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011}.
-% TODO add ref from Flexible Dynamic Time Warping for Time Series Classification
+vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011,Hsu2015}.
 \begin{equation}
 	\label{eq:dtw-distance}
   D_{DTW} \left( i, j \right) =
@@ -1023,8 +1016,6 @@ závislosť~\cite{Dzeroski2007}.
   {N \cdot \left( N - 1 \right)}
 \end{equation}
 
-
-% TODO compare euclidian and manhattan distance metrics
 \paragraph{Euklidova vzdialenosť} je používaná najmä pri klasických
 zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenosť
 vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
@@ -1044,8 +1035,8 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
 
 \paragraph{Manhattanovská vzdialenosť} je rovnako ako Euklidova vzdialenosť
 používaná najmä pri klasických zhlukovacích problémoch. Výpočet je tiež veľmi
-podobný, môžeme ho vyjadriť vzorcom~\ref{eq:distance-manhattan}
-% TODO add som refference
+podobný, môžeme ho vyjadriť vzorcom~\ref{eq:distance-manhattan}~\cite{Craw2017}.
+
 \begin{equation}
 	\label{eq:distance-manhattan}
   D_M \left( X, Y \right) = \sum_{k=1}^{n} \lvert X_{ik} - Y_{jk} \rvert
@@ -1354,7 +1345,6 @@ klasifikovaní~\cite{Spiric2015}.
 %   Evaluation metrics
 %-------------------------------------------------------------------------------
 
-% TODO add confusion matrix table
 \subsection{Vyhodnocovacie metriky}
 Za predpokladu, že získané dáta budú obsahovať aj označené inštancie, prípadne
 budú označené dodatočne na základe výpočtov, môžeme na vyhodnotenie úspešnosti
@@ -1411,7 +1401,6 @@ pokrytie~\cite{Trevizan2015}.
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
 \end{equation}
 
-% TODO add evaluation with syntetic dataset
 \subsubsection{Zhlukovacie validačné indexy}
 \label{c:cluster-validity-indeces}
 Zhlukovanie je metóda, ktorej cieľom je určiť skupinu, do ktorej spadá daná
@@ -1444,7 +1433,7 @@ Spomínané validačné indexy môžeme vyjadriť nasledujúcimi vzorcami, a~to 
 index vzorcom~\ref{eq:rand}, Jaccardov index vzorcom~\ref{eq:jaccard}
 a~Fowlkes-Mallowsov index vzorcom~\ref{eq:fowlkes}. Indexy sú bližšie popísané
 v~práci~\cite{Bilgic2018}.
-% TODO add missing journal for citation
+
 \begin{equation}
 	\label{eq:rand}
   \text{RI} = \frac{TP}{FP + FN + TP}
@@ -1637,10 +1626,6 @@ v~časových radoch označené ako anomálie. Vzniknutým bodom je pridelené sk
 ktoré opisuje mieru istoty, že dané meranie je anomálne. Body je následné nutné
 zlúčiť do intervalov, ktoré sú roztriedené do skupín.
 
-% TODO Výsledné skupiny sú ďalej analyzované????
-% TODO zmenit mozno nazov, kedze data nie su nijak spracovavane pred vytvaranim zhlukov aj ked data su predspracovane tak ze sa filtruj
-% TODO pridat zbezny popis myslienky
-
 \subsection{Vytvorenie zhlukov}
 Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
 je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
@@ -1659,6 +1644,38 @@ nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
 
 \newpage
 \section{Experimentálne overenie}
+Pri experimentoch sme pracovali v~jazyku~R. Použité knižnice sú zobrazené
+pomocou tabuľky~\ref{tab:libraries}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Použité knižnice jazyka R.}
+  \label{tab:libraries}
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Názov}  &   \textbf{Použitá verzia}  \\ \hline
+    AnomalyDetection    &   1.0         \\ \hline
+    BreakoutDetection   &   1.0.1       \\ \hline
+    cluster             &   2.0.6       \\ \hline
+    clusterCrit         &   1.2.8       \\ \hline
+    data.table          &   1.12.0      \\ \hline
+    devtools            &   1.13.6      \\ \hline
+    dplyr               &   0.7.8       \\ \hline
+    dtw                 &   1.20-1      \\ \hline
+    dtwclust            &   5.5.1       \\ \hline
+    ggplot2             &   3.1.0       \\ \hline
+    lubridate           &   1.7.4       \\ \hline
+    pkgmaker            &   0.27        \\ \hline
+    plotly              &   4.8.0       \\ \hline
+    proxy               &   0.4-22      \\ \hline
+    registry            &   0.5         \\ \hline
+    rngtools            &   1.3.1       \\ \hline
+    stringr             &   1.3.1       \\ \hline
+    TSrepr              &   1.0.1       \\ \hline
+    zoo                 &   1.8-4       \\ \hline
+  \end{tabular}
+\end{table}
+
 % TODO add something
 
 \subsection{Výber hyperparametrov zhlukovania}
