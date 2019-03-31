@@ -246,7 +246,7 @@ profily zákazníkov, ktorí svojím správaním porušujú stanovené podmienky
 a~manipulujú s~hodnotami nameranými meračmi za cieľom obohatenia sa. Samozrejme
 tiež dochádza k~prípadom, kedy je presnosť meracieho zariadenia nižšia aj bez
 zapríčinenia zákazníka. Oba prípady sú pre distribučnú spoločnosť nežiaduce a~je
-v~záujme zníženia strát ich, čo najskôr identifikovať. Obvykle sú za týmto
+v~záujme zníženia strát, ich čo najskôr identifikovať. Obvykle sú za týmto
 účelom vykonávané náhodné kontroly, ktoré pokrývajú iba nízky počet zákazníkov
 s~anomálnym správaním. Na základe množstva dát získavaných z~inteligentných
 meračov je možné modelovať správanie zákazníkov. Distribučné spoločnosti tak
@@ -299,7 +299,7 @@ $x(t)$, kde premenná $x$ predstavuje časový rad a~$t$ čas, kedy bolo meranie
 vykonané. Časové rady pozostávajúce z~meraní jednej veličiny sa nazývajú
 jednorozmerné, pri meraní viacerých veličín sa jedná o~viacrozmerné časové rady.
 Tiež ich môžeme rozdeliť na spojité a~diskrétne. Spojité časové rady merajú
-pozorovanú veličiny v~každej jednotke času. Môže sa jednať napr. o~počasie,
+pozorovanú veličinu v~každej jednotke času. Môže sa jednať napr. o~počasie,
 veľkosť prietoku rieky alebo koncentráciu látok pri chemických procesoch.
 Diskrétne časové rady sú pozorované spravidla v~rovnakých časových intervaloch,
 napr. rokoch, dňoch či minútach. Stretnúť sa s~nimi môžeme pri kurzoch mien,
@@ -341,8 +341,8 @@ Taktiež aj veľkosť periódy tohto cyklu môže byť rôzna, a~to niekoľko dn
 mesiacov či rokov. Keďže prostredie, v~ktorom meriame predpovedanú veličinu sa
 vyvíja, rovnako sa vyvíja aj správanie pozorovanej veličiny. Preto je potrebné
 pri modelovaní správania uvažovať jednotlivé komponenty časového radu.
-V~literatúre sa najčastejšie stretávame s~rozdelením do 4~komponentov, a~to
-trendová, cyklická, sezónna a~reziduálna zložka~\cite{Grmanova2016}.
+V~literatúre sa najčastejšie stretávame s~rozdelením na 4~komponenty, a~to
+trendovú, cyklickú, sezónnu a~reziduálnu zložku~\cite{Grmanova2016}.
 
 \paragraph{Trendová zložka} zastupuje dlhodobé správanie časového radu. Ide
 o~dlhodobé klesanie, rast alebo stagnáciu časového radu. Príkladom môže byť
@@ -423,8 +423,8 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{add_model.pdf}
-  \caption{Príklad aditívneho modelu.}
+  \includegraphics[width=0.9\textwidth]{add_model.pdf}
+  \caption[Príklad aditívneho modelu.]{Príklad aditívneho modelu, spotreba elektrickej energie v~regióne, Slovensko.}
   \label{fig:add-time-series-model}
 \end{figure}
 
@@ -445,7 +445,7 @@ Vznikajú tak 4 nasledujúce kategórie~\cite{Teng2010}:
   \item[$\bullet$ Neperiodické a synchrónne časové rady] nemajú žiadnu
 	periodicitu, ale opäť sú časovo zarovnané.
   \item[$\bullet$ Periodické a asynchrónne časové rady] nie sú časovo zarovnané,
-	ale obsahujú periodicitu, čiže začiatok periódy v~každom časovo rade je iný.
+	ale obsahujú periodicitu, čiže začiatok periódy v~každom časovom rade je iný.
   \item[$\bullet$ Neperiodické a asynchrónne časové rady] predstavujú skupinu,
 	do ktorej spadajú ostatné časové rady, ktoré neobsahujú periodicitu a~ani
 	synchrónnosť.
@@ -487,7 +487,8 @@ problémami~\cite{Chandola2009}:
 	\item[$\bullet$ Presná predstava o anomálii] je často rôzna naprieč viacerými
 	odbormi, a~preto neexistuje univerzálny spôsob na určovanie anomálií.
 	\item[$\bullet$ Dostupnosť označených dát] zlepšuje presnosť identifikácie
-	anomálií, avšak často takéto dáta neexistujú alebo ich je potrebné označiť.
+	anomálií, avšak často takéto dáta neexistujú alebo ich je potrebné označiť,
+	čo spravidla býva drahé.
 	\item[$\bullet$ Biely šum] vyskytujúci sa v~dátach má tendenciu skresľovať
 	normálne dáta, ktorých identifikácia je následne zložitá.
 \end{description}
@@ -505,8 +506,8 @@ machine})~\cite{Coma-Puig2016}.
 %-------------------------------------------------------------------------------
 
 \subsubsection{Typy anomálií}
-Dôležitým aspektom pri uplatnení detekcie anomálií je charakter anomálie. Z~toho
-dôvodu môžeme anomálie rozdeliť do nasledujúcich troch skupín.
+Dôležitým aspektom pri uplatnení detekcie anomálií je charakter anomálie.
+Z~tohto dôvodu môžeme anomálie rozdeliť do nasledujúcich troch skupín.
 
 \paragraph{Bodové anomálie} predstavujú inštancie, ktoré sa nenachádzajú
 v~oblasti normálnych dát a~je možné ich detegovať jednotlivo. Jedná sa
@@ -618,13 +619,13 @@ detekcia anomálií s~učiteľom (angl. \textit{supervised learning}), bez učit
 \paragraph{Detekcia bez učiteľa} nepotrebuje označené trénovacie dáta, vďaka
 čomu je široko aplikovateľná a~často používaná. Vychádza z~predpokladu, že
 normálne inštancie majú majoritné zastúpenie v~množine. Ak táto podmienka nie je
-splnená, dochádza tak často k~falošnému alarmu~\cite{Chandola2009}.
+splnená, môže často dochádzať k~falošnému alarmu~\cite{Chandola2009}.
 
 \paragraph{Detekcia s učiteľom} potrebuje trénovacie dáta s~označenými
 inštanciami ako normálnymi, tak aj anomálnymi. Cieľom je vytvoriť prediktívny
-model, ktorého úlohou je určiť triedu inštancie. Problémom je, že anomálnych
-inštancií v~porovnaní s~normálnymi je omnoho menej a~označenie dát ľudským
-expertom môže byť pri anomálnej inštancií náročné~\cite{Chandola2009}.
+model, ktorého úlohou je určiť triedu inštancie. Problémom je nepomer anomálnych
+inštancií v~porovnaní s~normálnymi a~ich označenie ľudským expertom môže byť
+časovo a~finančne náročné~\cite{Chandola2009}.
 
 \paragraph{Kombinované učenie} je kombináciou predchádzajúcich dvoch prístupov
 a~počíta s~označenou iba jednou triedou inštancií. Typicky sú označené normálne
@@ -663,7 +664,7 @@ každú dimenziu zvlášť. Metóda je založená na predpoklade, že zatiaľ č
 inštancie sa nachádzajú pri sebe a~sú husto usporiadané, anomálie sú
 vzdialenejšie, prípadne na okraji vzniknutých oblastí. Aplikácia je možná
 pomocou techník založených na relatívnej hustote alebo vzdialenosti najbližších
-\textit{k} susedných inštancií~\cite{Chandola2009,Tan2005}.
+\textit{k}~susedných inštancií~\cite{Chandola2009,Tan2005}.
 
 \subsubsection{Zhlukovanie}
 Jedná sa o~učenie bez učiteľa, keďže zhluky inštancií sú vytvorené na základe
@@ -682,13 +683,13 @@ najbližšieho centroidu a~anomálne inštancie sú od neho vzdialené. Algoritm
 väčšinou pozostávajú z~dvoch krokov, v~prvom sú inštancie pridelené do zhluku
 a~v~druhom je vypočítané ich anomálne skóre na základe vzdialenosti od centroidu
 daného zhluku. Používanými algoritmami sú neurónové siete (konkrétne SOM) alebo
-algoritmus k-means, ktoré sa môžu učiť aj pomocou kombinovaného
+algoritmus k-means, ktoré sa môžu natrénovať aj pomocou kombinovaného
 učenia~\cite{Chandola2009}.
 
 Posledná kategória pracuje s~predpokladom, že normálne inštancie sú súčasťou
 veľkých a~hustých zhlukov, na druhej strane anomálie patria do malých a~riedkych
 zhlukov. Používanými algoritmami sú napr. CBLOF
-(angl. \textit{Cluster-Based Local Outlier Factor}) alebo \textit{k-d} stromy.
+(angl. \textit{Cluster-Based Local Outlier Factor}) alebo \textit{k-d}~stromy.
 V~princípe algoritmy najskôr vytvárajú zhluky a~až potom určujú, na základe ich
 hustoty, či sa jedná o~normálne zhluky alebo anomálie. Zhluk je vytvorený iba
 v~prípade, že inštancia sa nachádza mimo preddefinovaného rádiusu od centra
@@ -722,7 +723,7 @@ sezónnych anomálií.
 \label{c:esd}
 V~práci budeme používať najmä metódu extrémnej Studentovej odchýlky (angl.
 \textit{Extreme Studentized Deviation}) a~jej ďalšie derivácie. Metóda
-\textit{ESD} slúži na detekciu viacerých anomálnych inštancií. Jediným vstupným
+ESD slúži na detekciu viacerých anomálnych inštancií. Jediným vstupným
 parametrom metódy je najväčší možný počet podozrivých inštancií v~danom
 datasete. Generalizovaná ESD sa snaží maximalizovať odchýlku datasetu
 $|x_i - \tilde{x}|$ pre $s$ inštancií. Počet inštancií, sa postupne znižuje,
@@ -738,17 +739,17 @@ v~štatistike často označovaná aj ako Grubbov test~\cite{Kuppusamy2013,Rosner
   {n - i}
 \end{equation}
 
-Do rovnakej kategórie môžeme zaradiť aj sezónnu $ESD$ (angl. \textit{Seasonal
-Extreme Studentized Deviation}), ktorá rovnako využíva $ESD$ na identifikáciu
-anomálií. Kľúčovým rozdielom je aplikovanie $ESD$ až na dáta, ktoré boli
-dekomponované pomocou modifikovaného $STL$ algoritmu. Vďaka tomu algoritmus
+Do rovnakej kategórie môžeme zaradiť aj sezónnu ESD (angl. \textit{Seasonal
+Extreme Studentized Deviation}), ktorá rovnako využíva ESD na identifikáciu
+anomálií. Kľúčovým rozdielom je aplikovanie ESD až na dáta, ktoré boli
+dekomponované pomocou modifikovaného STL algoritmu. Vďaka tomu algoritmus
 deteguje globálne anomálie, ktoré sa rozpínajú mimo očakávaných sezónnych
 extrémov, ale aj lokálne anomálie, ktoré by inak ostali zamaskované sezónnou
 zložkou časových radov. Modifikácia STL algoritmu pozostáva v~zamenení trendovej
 zložky mediánom daného časového radu. Reziduálna zložka je potom vypočítaná ako
 rozdiel nameranej hodnoty a~súčtu sezónneho komponentu a~mediánu. Zmena vzorca
 použitého na dekompozíciu, zabráni tvorbe falošných anomálií v~reziduálnej
-zložke časového radu. Hlavnými obmedzením $S{\text-}ESD$ sú datasety obsahujúce
+zložke časového radu. Hlavnými obmedzením S-ESD sú datasety obsahujúce
 väčšií podiel anomálií. Môžeme si to všimnúť na
 obrázku~\ref{fig:sesd-anomalies}, kde anomálie nachádzajúce sa vo zvíraznenom
 regióne nie sú detegované, keďže ich množstvo ovplyvňuje ako priemer tak aj
@@ -758,16 +759,16 @@ vzniká mnoho falošne neoznačených inštancií~\cite{Hochenbaum2017}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{sesd_anomalies.png}
-  \caption{Anomálie detegované pomocou $S{\text-}ESD$ algoritmu~\cite{Hochenbaum2017}.}
+  \caption{Anomálie detegované pomocou S-ESD algoritmu~\cite{Hochenbaum2017}.}
   \label{fig:sesd-anomalies}
 \end{figure}
 
-Cieľom sezónnej hybridnej $ESD$ (angl. \textit{Seasonal Hybrid Extreme
-Studentized Deviation}) odstrániť obmedzenia, ktoré vznikajú pri $S{\text-}ESD$.
-Rovnako je použitá modifikovaná dekompozícia $STL$. Rozdiel je v~$ESD$, kde
+Cieľom sezónnej hybridnej ESD (angl. \textit{Seasonal Hybrid Extreme
+Studentized Deviation}) odstrániť obmedzenia, ktoré vznikajú pri S-ESD.
+Rovnako je použitá modifikovaná dekompozícia STL. Rozdiel je v~ESD, kde
 namiesto priemeru a~štandardnej odchýlky je použitá robustnejšia štatistická
 metóda, ktorá je schopná tolerovať až 50\% anomálií v~časovom rade. Jedná sa
-o~absolútnu odchýlku mediánu $MAD$ (angl. \textit{Median Absolute Deviation}),
+o~absolútnu odchýlku mediánu MAD (angl. \textit{Median Absolute Deviation}),
 ktorú vypočítame pomocou vzorca~\ref{eq:mad}~\cite{Hochenbaum2017}.
 
 \begin{equation}
@@ -776,15 +777,15 @@ ktorú vypočítame pomocou vzorca~\ref{eq:mad}~\cite{Hochenbaum2017}.
 \end{equation}
 
 \noindent
-Cenou za to je vyššia výpočtová náročnosť metódy, keďže $MAD$ požaduje zoradenie
-dát pred výpočtom $ESD$. Na druhej strane sú hodnoty F-skóre takmer až o~30\%
+Cenou za to je vyššia výpočtová náročnosť metódy, keďže MAD požaduje zoradenie
+dát pred výpočtom ESD. Na druhej strane sú hodnoty F-skóre takmer až o~30\%
 vyššie. V~datasetoch s~nízkym počtom výskytov anomálií môže byť vhodnejšie
-použitie metódy $S{\text-}ESD$~\cite{Hochenbaum2017}.
+použitie metódy S-ESD~\cite{Hochenbaum2017}.
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{shesd_anomalies.png}
-  \caption{Anomálie detegované pomocou $S{\text-}H{\text-}ESD$ algoritmu~\cite{Hochenbaum2017}.}
+  \caption{Anomálie detegované pomocou S-H-ESD algoritmu~\cite{Hochenbaum2017}.}
   \label{fig:shesd-anomalies}
 \end{figure}
 
@@ -804,13 +805,16 @@ Metódy používané na zhlukovanie časových radov môžeme rozdeliť do 3~sku
 základe reprezentácie dát, s~ktorými pracujú. Prvá skupina predpokladá surové
 dáta, druhá pracuje s~extrahovanými vlastnosťami z~dát a~posledná metóda
 pristupuje k~dátam pomocou vytvoreného modelu. Prístupy sú opísané
-v~nasledujúcich podkapitolách~\cite{Rani2012}.
+v~nasledujúcich podkapitolách~\ref{c:raw-data-clustering},
+\ref{c:feature-clustering}, \ref{c:model-clustering}
+a~\ref{c:other-clustering}~\cite{Rani2012}.
 
 \subsubsection{Zhlukovanie na základe dočasnej susednosti}
+\label{c:raw-data-clustering}
 Metóda (angl. \textit{Temporal-Proximity based clustering approach}) pracuje
 priamo so surovými, neupravenými dátami, kvôli čomu sa zvykne nazývať aj
 zhlukovanie na základe surových dát (angl. \textit{Raw data based clustering
-approach}). Hlavným princípom je vystriedanie viacerých vzdialenostných alebo
+approach}). Hlavným princípom je striedanie viacerých vzdialenostných alebo
 podobnostných metrík pre použité časové rady~\cite{Rani2012}.
 
 \label{c:hierarchical-clustering}
@@ -832,8 +836,8 @@ kvadratická~\cite{Dzeroski2007}.
 Metóda hierarchického zhlukovania zoskupuje časové rady do stromu zhlukov. Vo
 všeobecnosti existujú dva typy týchto metód, aglomeratívne a~deliace.
 Aglomeratívne metódy zo začiatku umiestňujú časové rady do samostatného zhluku,
-až potom ich postupne spájajú do väčších zhlukov až pokiaľ neexistuje jediný
-zhluk alebo nie je ukončovacou podmienkou práve $k$ zhlukov. Deliace metódy sú
+následne ich postupne spájajú do väčších zhlukov, pokiaľ neexistuje jediný
+zhluk, alebo nie je ukončovacou podmienkou práve $k$ zhlukov. Deliace metódy sú
 pravým opakom, kedy sú jednotlivé zhluky postupne delené na menšie
 a~umiestňované do hierarchického stromu. Na zlepšenie kvality zhlukovania pri
 hierarchickom zhlukovaní sú používané bežné zhlukovacie
@@ -844,7 +848,7 @@ zhlukmi nameranej pomocou dvojice najbližších časových radov umiestnených
 v~rôznych zhlukoch, predstavujú potenciálnych kandidátov na zlúčenie. Podobnosť
 môže určovať aj \textit{Wardov algoritmus minimálnej variancie}, ktorý zlúči
 zhluky s~najmenším nárastom variancie. V~každom kroku sú tak vyskúšané všetky
-kombinácie dvojíc zhlukov, až potom je vybrané minimum. Porovnávané časové rady
+kombinácie dvojíc zhlukov, následne je vybrané minimum. Porovnávané časové rady
 nemusia mať vždy rovnakú dĺžku. Nevýhodou metódy je najmä vysoký počet operácií,
 ale aj neschopnosť spätne zmeniť rozhodnutie zlúčiť
 zhluky~\cite{WarrenLiao2005}.
@@ -855,16 +859,17 @@ Na meranie vzdialenosti môžu byť použité metriky opísané
 v~\ref{c:distance-metrics}~\cite{WarrenLiao2005}.
 
 \subsubsection{Zhlukovanie na základe reprezentácie}
+\label{c:feature-clustering}
 Keďže manipulácia so surovými dátami je často náročná a~dáta navyše obsahujú
 nadbytočné informácie, táto metóda (angl. \textit{Representation based
-clustering approach}) najskôr transformuje dáta do vektoru vlastností až
+clustering approach}) najskôr transformuje dáta do vektoru vlastností a~až
 následne sú aplikované zhlukovacie algoritmy. V~literatúre sa zvykne označovať
 aj ako zhlukovanie na základe vlastností (angl. \textit{Feature based clustering
 approach})~\cite{Rani2012}.
 
 \paragraph{Samoorganizované mapy} predstavujú triedu neurónových sietí, kde
-neuróny sú usporiadané v~nízkodimenzionálnej štruktúre a~trénované iteratívne
-a~bez učiteľa. Trénovací proces začína pridelením náhodných hodnôt váhovým
+sú neuróny usporiadané v~nízkodimenzionálnej štruktúre. Trénovanie prebieha
+iiteratívne a~bez učiteľa. Proces začína pridelením náhodných hodnôt váhovým
 vektorom $w$. Každá iterácia trénovania pozostáva z~3~krokov a~to náhodného
 výberu vstupného vektoru z~trénovacej množiny, evaluácie siete a~aktualizovaní
 váhových vektorov. Po natrénovaní je vypočítaná Euklidova vzdialenosť medzi
@@ -875,6 +880,7 @@ radov rôznych dĺžok, keďže dĺžka časového radu definuje aj dĺžku váh
 vektora $w$~\cite{Kohonen2001,WarrenLiao2005}.
 
 \subsubsection{Zhlukovanie na základe modelu}
+\label{c:model-clustering}
 Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každý
 časový rad je generovaný nejakým modelom alebo pravdepodobnostnou distribúciou.
 Časové rady sú považované za podobné ak aj modely charakterizujúce jednotlivé
@@ -890,6 +896,7 @@ počet modelov nebol väčší ako aktuálny počet zhlukov. Na záver boli odst
 podobné modely, čím sa ešte zmenšil výsledný počet zhlukov $k$.
 
 \subsubsection{Ďalšie prístupy k~zhlukovaniu}
+\label{c:other-clustering}
 Ďalší prístup je založený na oknách fixnej veľkosti (angl. \textit{Windows based
 clustering approach}). V~diskretizovaných časových radoch sú následne
 identifikované anomálne úseky. Nevýhodou metódy je náročnosť voľby správnej
@@ -920,9 +927,9 @@ radov~\cite{Dzeroski2007,WarrenLiao2005}.
 
 % TODO explain different approaches add figure from real dataset
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
-3~skupín, založených na atribútoch, na modeloch a~na tvare krivky. Pri
+3~skupín založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
-základe, ktorého je vypočítaná napr. Euklidova vzdialenosť medzi jednotlivými
+základe ktorého je vypočítaná napr. Euklidova vzdialenosť medzi jednotlivými
 inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
 časové rady. Vzdialenosť je potom definovaná ako vzdialenosť medzi jednotlivými
 modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledný tvar
@@ -940,18 +947,18 @@ medzi dvoma časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlatio
   {E \left[ \left( X - E \left[ X \right] \right)^2 \right] \cdot E \left[ \left( Y - E \left[ Y \right] \right)^2 \right]}
 \end{equation}
 
-Korelácia blízka $-1$ znamená, že nárast kriviek časových radov je zrkadlový,
-pri korelácií rovnej $0$ hovoríme o~rozdielnych časových radoch a~pri hodnote
+Korelácia blízka $-1$ znamená, že nárast kriviek časových radov je zrkadlový.
+Pri korelácií rovnej $0$ hovoríme o~rozdielnych časových radoch a~pri hodnote
 $1$ o~podobných. Na základe hodnoty korelácie, potom môžeme vyjadriť vzdialenosť
 vzorcom~\ref{eq:correlation-distance}. Nevýhodou je, ak máme k~dispozícií iba
-malú, prípadne krátku časť datasetu, podobnosť touto metrikou sa určuje len
-ťažko. Keďže korelácia zachytáva iba lineárnu podobnosť časových radov, pri
-aplikovaní metriky na dva nelineárne podobné časové rady, sú vyhodnotené ako
-vzdialené~\cite{Dzeroski2007}.
+malú, prípadne krátku časť datasetu. V~takom prípade sa podobnosť touto metrikou
+určuje len ťažko. Keďže korelácia zachytáva iba lineárnu podobnosť časových
+radov, pri aplikovaní metriky na dva nelineárne podobné časové rady, sú
+vyhodnotené ako vzdialené~\cite{Dzeroski2007}.
 
 \begin{equation}
 	\label{eq:correlation-distance}
-  D_r \left( X, Y \right) = \sqrt{0.5 \cdot \left( 1 - r \left( X, Y \right) \right)}
+  D_r \left( X, Y \right) = \sqrt{\frac{1}{2} \cdot \left( 1 - r \left( X, Y \right) \right)}
 \end{equation}
 
 
@@ -982,6 +989,7 @@ vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011,Hsu2015}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{warping-distance.png}
+  % TODO: add missing axis names
   \caption{Príklad porovnávania časových radov pomocou dynamickej deformácií času~\cite{Malinowski2017}.}
   \label{fig:warping-distance}
 \end{figure}
@@ -1020,7 +1028,7 @@ závislosť~\cite{Dzeroski2007}.
 zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenosť
 vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
 obrázku~\ref{fig:euclidean-distance} sú vždy porovnávané hodnoty vyskytujúce sa
-v~rovnakom časte $t$~\cite{WarrenLiao2005}.
+v~rovnakom čase $t$~\cite{WarrenLiao2005}.
 \begin{equation}
 	\label{eq:distance-euclidean}
   D_E \left( X, Y \right) = \sqrt{\sum_{k=1}^{n} \left( X_{ik} - Y_{jk} \right)^2 }
@@ -1029,6 +1037,7 @@ v~rovnakom časte $t$~\cite{WarrenLiao2005}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{euclidean-distance.png}
+  % TODO: add missing axis names
   \caption{Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti~\cite{Malinowski2017}.}
   \label{fig:euclidean-distance}
 \end{figure}
@@ -1060,9 +1069,9 @@ vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
 
 \paragraph{Vzdialenosť medzi krátkymi časovými radmi} je metóda (angl.
 \textit{Short time series}), ktorá meria vzdialenosť ako sumu štvorcových
-rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiaducich
+rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiadúcich
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
-vyjadrime vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
+vyjadríme vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 čas~\cite{WarrenLiao2005}.
 \begin{equation}
 	\label{eq:sts-distance}
@@ -1127,7 +1136,7 @@ ide napr. o~vytvorenie hodinového priemeru pre každého zákazníka. Vzťah
 priemernej spotreby $x_h$ môžeme definovať rôzne, v~našom prípade ide o~podiel
 mesačnej priemernej spotreby nasledujúceho mesiaca $P_{h+1}$~a~rozdielu dennej
 spotreby v~aktuálnom a~nasledujúcom mesiaci $D_{h+1} - D_{h}$, čo zapíšeme
-vzorcom~\ref{eq:feature-extraction}
+vzorcom~\ref{eq:feature-extraction}.
 \begin{equation}
 	\label{eq:feature-extraction}
   x_h = \frac{P_{h+1}}{D_{h+1} - D_{h}}
@@ -1135,7 +1144,7 @@ vzorcom~\ref{eq:feature-extraction}
 
 \subsubsection{Agregácia dát}
 Dáta z~meračov sú dostupné v~pravidelných intervaloch. Pre jednoduchšiu
-manipuláciu s~časovými radmi a~redukciu dimenzií môžu byť dáta agregované do
+manipuláciu s~časovými radmi a~redukciu dimenzií, môžu byť dáta agregované do
 väčších intervalov. Pri použití viacerých datasetov s~rôznou frekvenciou zberu,
 je agregácia hustejšieho časového radu nutná, keďže by tak vzniklo množstvo
 chýbajúcich hodnôt. Agregácia dát tiež vyhladzuje malé odchýlky v~časových
@@ -1146,11 +1155,11 @@ neštandardné~\cite{Cody2015}.
 Cieľom agregácie časových radov môže byť aj redukcia na priemer, prípadne
 medián, dňa alebo týždňa. So zredukovanými dátami je potom možné pracovať rýchlo
 a~efektívne, keďže ich pamäťová náročnosť je iba zlomkom oproti pôvodnej.
-Zároveň však vzniká priestor na stratenie informácie o~anomálne aktivite
+Zároveň však vzniká priestor na stratenie informácie o~anomálnej aktivite
 odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
 
 \subsubsection{Redukcia dimenzií}
-Jednou z~najjednoduchších metód používaných pri redukcií dát je práve
+Jednou z~najjednoduchších metód používaných pri redukcii dát je práve
 vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
 predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť sa medzi
 jednotlivými inštanciami zväčšuje, no zároveň je rovnaká medzi všetkými
@@ -1183,7 +1192,7 @@ zlučovania je určené na základe ceny zlučovania~\cite{Fu2011}.
 
 Žiaducim efektom pri redukovaní dimenzií je zachovanie charakteristických bodov.
 Tieto body sa zvyknú nazývať percepčne dôležité body (angl. \textit{perceptually
-important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body a~to
+important points}), skrátene PIP. Algoritmus najskôr určí prvé tri body, a~to
 prvý, posledný a~bod, ktorý je od týchto dvoch najvzdialenejší. Ďalšie body sú
 určované na základe maximálnej vertikálnej vzdialenosti medzi dvoma susednými
 bodmi PIP. Proces pokračuje pokiaľ nie sú zoradené podľa dôležitosti všetky
@@ -1214,12 +1223,12 @@ aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
 Na podobnom princípe ako DTW je založené aj hľadanie najdlhšej spoločnej
 podpostupnosti (angl. \textit{longest common subsequence}), skrátene LCSS. Ide
 o~variáciu editačnej vzdialenosti a~spájania dvoch sekvencií, ktoré sa môžu
-natiahnuť a~vynechať tak niektoré elementy, bez toho aby sa menilo ich poradie
+natiahnuť a~vynechať tak niektoré elementy bez toho, aby sa menilo ich poradie
 v~rámci postupnosti. Narozdiel od DTW, výstupy nie sú skreslené anomáliami
 v~dátach~\cite{Fu2011}.
 
 \subsubsection{Segmentácia časových radov}
-Časové rady sú charakteristické súvislým priebehom a~preto pri ich segmentácii
+Časové rady sú charakteristické súvislým priebehom, a~preto pri ich segmentácii
 je nutné čeliť viacerým problémom. Najjednoduchším prístupom je rozdeliť časový
 rad pomocou okna fixnej dĺžky do segmentov, z~ktorých vznikajú jednoduché vzory.
 Jedinou úlohou je správne zvoliť dĺžku okna. Pri použití tejto metódy existujú
@@ -1249,7 +1258,7 @@ vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
 
 \subsection{Anomálie v~energetických časových radoch}
 V~distribučných sieťach vznikajú straty, ktoré vo všeobecnosti môžeme rozdeliť
-na technické a netechnické straty. Technické straty sú spôsobené vlastnosťami
+na technické a~netechnické. Technické straty sú spôsobené vlastnosťami
 obvodu ako napr. odporom materiálu či únikmi cez poškodenú izoláciu a~môžu sa
 meniť pri rôznych teplotách či počasí. Medzi netechnické straty patria najmä
 nelegálne odbery. V~práci sa budeme zaoberať ich identifikáciou na základe
@@ -1271,7 +1280,7 @@ správanie~\cite{Spiric2015}.
 Najčastejšími metódami používanými pri nelegálnom odbere je obídenie meračov
 spotreby energie či samotná manipulácia s~nimi. Merače tak poskytujú nesprávne
 informácie o~spotrebovanej energie odberateľmi, čo je možné detegovať až po
-identifikácií celkových netechnických strát v~sieti. Ďalšou populárnou metódou
+identifikácii celkových netechnických strát v~sieti. Ďalšou populárnou metódou
 používanou na detekciu nelegálnych odberov je analýza spotrebiteľského
 profilu zákazníka, kedy je našou snahou identifikovať nepravidelné vzory
 v~nameraných spotrebiteľských dátach~\cite{Sahoo2015}. Tak ako je spomenuté
@@ -1284,7 +1293,7 @@ rýchlejšie, najmä kvôli vysokej frekvencii zberania údajov. Takto sú
 identifikované aj také odbery, ktoré by sa pri klasických meraniach stratili
 v~týždenných alebo mesačných agregáciách. Úspešnosť detekcie nelegálnych odberov
 je výrazne vyššia najmä pri neštandardných spotrebách alebo ak sa jedná
-o~neopakujúcu sa udalosť. Problém vzniká ak odberateľ systematicky mení
+o~neopakujúcu udalosť. Problém vzniká ak odberateľ systematicky mení
 nelegálnu spotrebu a~kopíruje vzory, ktoré vznikajú v~dátach pri legálnom
 odbere. Vtedy je potrebné mať k~dispozícií väčšie množstvo dát a~zároveň použiť
 zložitejšie algoritmy detekcie anomálií, ktoré sú popísané v~súvisiacej
@@ -1294,7 +1303,7 @@ V~súvisiacich prácach sa autori zaoberali určením netechnických strát
 v~elektrických distribučných sieťach s~použitím rôznych štatistických metód
 alebo strojového učenia. Dostupné dáta od distribútorov pochádzali najmä
 z~jedného zdroja, lokality a~zameriavali sa na jeden zdroj energie. Dáta, ktoré
-budeme mať k~dispozícií disponujú podobnými vlastnosťami. V súvisiacej
+budeme mať k~dispozícií disponujú podobnými vlastnosťami. V~súvisiacej
 práci~\cite{Coma-Puig2016} boli použité viaceré zdroje dát a~energie, následkom
 čoho bola zvýšená presnosť identifikácie anomálneho správania odberateľa.
 Ďalším zdrojom dát môžu byť agregované hodnoty meraní z~klasických meračov,
@@ -1302,10 +1311,10 @@ prípadne spätná väzba zo samotných kontrol odberateľov.
 
 Typickou črtou netechnických strát je negatívny skok v spotrebe elektrickej
 energie. Nasleduje po poškodení inteligentného meracieho zariadenia alebo pri
-začatí nelegálneho odberu. Pokles môže byť zapríčinený aj zmenou počtom ľudí,
+začatí nelegálneho odberu. Pokles môže byť zapríčinený aj zmenou počtu ľudí,
 miestností prípadne ich funkcie alebo zvýšením energetickej sebestačnosti.
 Následkom je nižšia nameraná spotrebe energie v dlhšom horizonte. Zníženie
-spotreby môže byť čiastočné alebo úplne, ako môžeme
+spotreby môže byť čiastočné alebo úplné, ako môžeme
 vidieť na obrázkoch~\ref{fig:decrease-partial}
 a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
@@ -1313,6 +1322,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
 	\begin{minipage}{0.45\textwidth}
 		\begin{center}
+			\captionsetup{justification=centering}
 			\includegraphics[scale=0.33]{decrease-partial.png}
 			\caption{Čiastočné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
 			\label{fig:decrease-partial}
@@ -1321,6 +1331,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
   \centering
   \begin{minipage}{0.45\textwidth}
     \begin{center}
+      \captionsetup{justification=centering}
       \includegraphics[scale=0.33]{decrease-total.png}
 			\caption{Úplné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
 			\label{fig:decrease-total}
@@ -1331,10 +1342,10 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
 Z~pohľadu výskytu anomálie môžu nastať nasledovné scenáre:
 \begin{itemize}
-  \item Anomália vznikne neodborným pripojením odberateľa do energetickej siete alebo existuje ešte pred tým ako nastane zber dát inteligentnými meračmi.
+  \item Anomália vznikne neodborným pripojením odberateľa do energetickej siete alebo existuje ešte pred tým ako, nastane zber dát inteligentnými meračmi.
         Keďže celý časový rad pozostáva z~chybných dát, odhalenie anomálie je nepravdepodobné.
   \item Anomália vznikne v~priebehu sledovaného intervalu a~zároveň je odhalená a~ďalej sa už nevyskytuje.
-  \item Anomália vznikne v~priebehu sledovaného intervalu a~nie je odhalená. Táto skupina ja predmetom celej práce.
+  \item Anomália vznikne v~priebehu sledovaného intervalu a~nie je odhalená. Táto skupina je predmetom celej našej práce.
 \end{itemize}
 Prvý prípad anomálií je možné odhaliť iba na základe vysvetľujúcich premenných,
 ktoré nemusia byť pravdivé, ak sú dodané samotným odberateľom. Druhú skupinu je
@@ -1351,14 +1362,14 @@ budú označené dodatočne na základe výpočtov, môžeme na vyhodnotenie ús
 použiť aj maticu zámen. V~takom prípade budeme musieť predpovedať triedu
 jednotlivých inštancií, a~teda či sa jedná o~normálneho alebo anomálneho
 odberateľa. Jednoduchý klasifikátor označí prvých \textit{n} odberateľov,
-ktorých miera pravdepodobnosti výskytu čierneho odberu je najvyššia, za
+ktorých miera pravdepodobnosti výskytu anomálneho odberu je najvyššia, za
 anomálnych. Pri vyjadrení matice zámen pomocou
 tabuľky~\ref{tab:confusion-matrix} potom riadky predstavujú predpovedanú triedu
 a~stĺpce skutočnú. Vznikajú tak 4~kategórie, správne označení podozriví
-odberatelia (angl. \textit{TRUE POSITIVE}), nesprávne označení podozriví
-odberatelia (angl. \textit{FALSE POSITIVE}), nesprávne označený normálny
-odberatelia (angl. \textit{TRUE NEGATIVE}) a~správne označený normálny
-odberatelia (angl. \textit{FALSE NEGATIVE}). Kvalitu klasifikácie potom môžeme
+odberatelia (angl. \textit{true positive}), nesprávne označení podozriví
+odberatelia (angl. \textit{false positive}), nesprávne označení normálni
+odberatelia (angl. \textit{true negative}) a~správne označení normálni
+odberatelia (angl. \textit{false negative}). Kvalitu klasifikácie potom môžeme
 zmerať pomocou presnosti a~pokrytia. Presnosť vypočítame
 vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených anomálií
 a~celkový počet označených anomálií. Tým vypočítame percento odberateľov,
@@ -1410,14 +1421,15 @@ používajú validačné indexy zhlukov (angl. \textit{cluster validity indeces}
 Indexy sa delia na externé a~interné, v~závislosti od dostupnosti skutočných
 tried zhlukovaného datasetu~\cite{Arbelaitz2013}.
 
-\paragraph{Externé indexy zhlukov} v~sebe zahŕňajú napr. Randov, Jaccardov alebo
+\paragraph{Externé indexy zhlukov} obsahujú napr. Randov, Jaccardov alebo
 Fowlkes-Mallowsov index. Naivným prístupom je porovnávanie zhlukov a~počítanie
 dvojíc inštancií, ktoré sa nachádzajú v~rovnakom zhluku. Maticu zámen tak
 môžeme prepísať do tabuľky~\ref{tab:validation-matrix}. Časové rady nachádzajúce
 sa v~rovnakom zhluku pri rôznych zhlukovaniach \textit{X} a~\textit{Y} sa
-nachádzajú v~kategórií \textit{TRUE POSITIVE}~\cite{Bilgic2018}.
+nachádzajú v~kategórií \textit{true positive}~\cite{Bilgic2018}.
 
 \begin{table}[htbp]
+  % TODO: move to another page or down
 	\centering
 	\caption{Validačná matica zhlukovania časových radov}
 	\label{tab:validation-matrix}
@@ -1480,7 +1492,7 @@ generalizovaný Dunnov index a~COP index~\cite{Arbelaitz2013}.
 %   Related work
 %-------------------------------------------------------------------------------
 
-\subsection{Súvisiace práce v doméne energetiky}
+\subsection{Súvisiace práce v~doméne energetiky a~indentifikácií anomálií}
 V~\cite{Hautamaki2008} bola pri zhlukovaní použitá aj kombinácia viacerých
 metód, konkrétne k-means, metóda náhodnej výmeny a~aglomeratívne zhlukovanie.
 Ako už bolo spomenuté v~\ref{c-analysis-techniques}, úlohou algoritmu k-means
@@ -1490,7 +1502,7 @@ použitá aj pri zhlukovaní časových radov a~zabraňuje zaseknutiu zhluku
 v~lokálnom minime. V~princípe je náhodne vybraný zhluk, ktorý bude vymazaný a~za
 centroid bude vybraný jeden časový rad z~neho. Ak takéto riešenie je lepšie ako
 bez rozpustenia zhluku je nahradené pôvodným. Ako bolo spomenuté
-v~\ref{c:hierarchical-clustering} cieľom aglomeratívneho zhlukovania je všetky
+v~\ref{c:hierarchical-clustering}, cieľom aglomeratívneho zhlukovania je všetky
 časové rady označiť ako zhluky a~následne ich iteratívne zhlukovať. V~momente,
 keď je vytvorených \textit{k} zhlukov, je vypočítaný centroid zhluku a~určená
 hierarchia zhlukov.
@@ -1502,10 +1514,10 @@ V~práci~\cite{Cody2015} boli pri určovaní podozrivých aktivít odberateľov
 množiny boli vygenerované rozhodovacie pravidlá reprezentujúce model normálnej
 spotreby elektrickej energie. Po predikcii boli porovnané predikované
 a~testovacie dáta pomocou štatistickej metódy RMSE. Výsledkom experimentov je
-dostatočne presná predikcia spotreby energie vypočítaná iba na základe atribútov
-extrahovaných z~časovej známky. Prekročením stanovej hranice boli inštancie
-považované za anomálne. Počas experimentov boli použité M5P rozhodovacie učiace
-stromy.
+dostatočne presná predikcia spotreby energie, vypočítaná iba na základe
+atribútov extrahovaných z~časovej známky. Prekročením stanovej hranice boli
+inštancie považované za anomálne. Počas experimentov boli použité M5P
+rozhodovacie učiace stromy.
 \medskip
 
 \noindent
@@ -1516,7 +1528,7 @@ detekčného systému jednoduché. Navrhovaná metóda je citlivá na lokálne z
 vzore dát. Taktiež dosiahli s~relatívne malým množstvom meraní presnosť až 78\%
 na trénovacej množine a~70\% na testovacej množine. Metóda je citlivá na zmeny
 amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nie je citlivý
-na nevýrazne zmeny a~trendy v~dátach.
+na nevýrazné zmeny a~trendy v~dátach.
 \medskip
 
 %-------------------------------------------------------------------------------
@@ -1534,17 +1546,17 @@ označujeme ako intervaly s~výskytom anomálií. Cieľom našej práce ich bude
 a~zmenšiť dĺžku nájdeného intervalu tak, aby bol čo najmenší, no zároveň v~sebe
 zahŕňal identifikované anomálie.
 
-Identifikácia anomálií v~časových radoch prináša so sebou viacero výziev, tými
-najčastejšími je vysoká dimenzionalita dát, definícia normálneho správania, ale
-najmä absencia označených dát. Označenie dát je navyše náročné pre ľudského
+Identifikácia anomálií v~časových radoch prináša so sebou viacero výziev, medzi
+tie najčastejšie patrí vysoká dimenzionalita dát, definícia normálneho správania,
+ale najmä absencia označených dát. Označenie dát je navyše náročné pre ľudského
 experta a~taktiež sa veľmi líši definícia anomálie pri rôznych doménach. Ani
 normálne správanie nie je možné jednoznačne a~jednoducho určiť, keďže tisíce
 odberateľov sa správa unikátne. Z~dostupných dát však vieme po normalizácií
 extrahovať vzory, ktoré po následnom zhlukovaní predstavujú rádovo menej skupín,
 s~ktorými ďalej pracujeme ako s~definíciou normálneho správania. Väčšina článkov
 zaoberajúca sa zhlukovaním, sa zameriava na nízkorozmerné dáta. Pri
-vysokodimenzionálnych dátach sú metriky podobnosti inštancií zamerané na tvary
-jednotlivých priebehov, než na absolútne hodnoty pozorovaní.
+vysokodimenzionálnych dátach sú metriky podobnosti inštancií zväčša zamerané na
+tvary jednotlivých priebehov, než na absolútne hodnoty pozorovaní.
 
 Cieľom našej práce je pomocou zhlukovania časových radov vhodne zadefinovať
 normálne správanie odberateľov a~presnejšie identifikovať intervaly obsahujúce
@@ -1579,7 +1591,7 @@ a~príznak označujúci dni pracovného pokoja.
 Z~experimentov môžeme predpokladať, že zhlukovacie algoritmy vytvárajú husté
 a~riedke zhluky. Primárne sa budeme zameriavať na analýzu časových radov,
 ktoré spadajú do riedkych zhlukov a~už ony samotné môžu predstavovať anomálie.
-Cieľom je v~takýchto časových radoch, čo najpresnejšie identifikovať
+Cieľom je v~takýchto časových radoch čo najpresnejšie identifikovať
 a~lokalizovať intervaly s~neštandardným správaním odberateľa. Musíme pri tom
 brať ohľad najmä na cyklus dní a~týždňov, no zároveň pristupovať k~zvykom
 odberateľov jednotlivo a~zvážiť ich pri označovaní anomálneho intervalu.
@@ -1598,8 +1610,8 @@ svojim skóre opisujú mieru istoty, že označený interval obsahuje anomáliu.
 Výhodou takéhoto spracovania je univerzálnosť riešenia, jednoduchá vizualizácia,
 ale najmä klasifikácia rôznych typov anomálií. Zatiaľ čo lokálne anomálie sú
 výsledkom krátkodobej zmeny správania odberateľa a~môže sa jednať aj o~výsledok
-náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmenu
-a~môže byť predmetom záujmu distribútorov elektrickej energie.
+náhody, globálne anomálie predstavujú výraznejšiu alebo dlhodobejšiu zmenu,
+ktorá môže byť predmetom záujmu distribútorov elektrickej energie.
 
 Pre lepšie znázornenie je opísaný postup vizualizovaný stavovým diagramom na
 obrázku~\ref{fig:state-diagram}. Jednotlivé kroky sú ďalej rozpísané
