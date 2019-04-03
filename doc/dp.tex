@@ -789,6 +789,25 @@ použitie metódy S-ESD~\cite{Hochenbaum2017}.
   \label{fig:shesd-anomalies}
 \end{figure}
 
+Daľšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
+Seasonal Hybrid Extreme Studentized Deviation}), ktorej proces pozostáva z~troch
+krokov, a~to transformácia dát, dekompozícia časových radov a~analýza
+reziduálnej zložky. Účelom transformácie dát je minimalizovať počet falošne
+identifikovaných normálnych inštancií a~zároveň normalizovať vstupné časové
+rady pomocou Box-Coxovej transformácie, keďže parametrické štatistické testy
+dosahujú lepšie výsledky pri normálnom rozdelení dát. Na optimálne nastavenie
+parametrov normalizačnej funkcie je použitá metóda maximálnej pravdepodobnosti
+(angl. \textit{Maximum Likelihood method}), ktorá je výpočtovo nenáročná
+a~vhodná na daný problém. V~procese dekompozície je použitá LOESS regresia
+(angl. \textit{Locally Estimated Scatterplot Smoothing}), kedže klasická
+dekompozícia môže byť ovplyvnená výskytom anomálií vo vstupných dátach.
+Cieľom modifikovanej dekompozície je pomocou série vnorených cykloch a~váh,
+robustne a~iteratívne identifikovať trend a~sezónnosť v~danom časovom rade.
+Posledným procesom je samotná analýza reziduálnej zložky, kde bežná ESD metóda
+potrebuje $k$ ako vstupný parameter označujúci počet anomálnych inštancií.
+V~navrhovanej metóde je parameter vypočítaný automaticky na základe štandardnej
+odchýlky spracovávaného okna~\cite{Vieira2018}.
+
 %-------------------------------------------------------------------------------
 %   Time series classification
 %-------------------------------------------------------------------------------
@@ -1646,9 +1665,21 @@ metrík vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}, kritér
 na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
 rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť existujúce
 anomálie do takej miery, že by neboli identifikované. Na druhej strane agregácia
-zabezpečuje elimináciu lokálnych anomálií. Cieľom práce je identifikovať najmä
+zabezpečuje elimináciu menších anomálií. Cieľom práce je identifikovať najmä
 rozsiahlejšie anomálie v~správaní odberateľov. Veľkosť kroku posuvného okna je
 nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
+
+\subsection{Selekcia zhlukov}
+Pre výber riedkych zhlukov a~inštancií na okraji zhlukov potrebné vypočítať
+skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
+časovom rozmedzí. Skóre označujúce hustotu pozorovaného zhluku budeme ďalej
+označovať ako skóre zhluku a~skóre označujúce vzdialenosť konkrétneho časového
+radu od centroidu zhluku ako skóre inštancie. Ich násobením je vypočítané
+anomálne skóre časového radu. Predpokladom pre výpočet skóre je zhlukovanie,
+ktoré okrem rozdelenia inštancií do zhlukov obsahuje aj informáciu
+o~vzdialenosti inštancie od centroidu.
+
+% TODO maybe add some pictures
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
