@@ -1,13 +1,16 @@
 scoreSuspiciousTS <- function(dataset, minorPenalty = c(0.10)) {
-  scores <- c(rep(0, length(dataset[[1]]$cluster)))
+  scores <- list()
   for (i in 1:length(dataset)) {
     subscores <- c(rep(1, length(table(dataset[[i]]$cluster))))
     for (p in minorPenalty) {
       q <- as.numeric(quantile(table(dataset[[i]]$cluster), probs = p))
       subscores[table(dataset[[i]]$cluster) < q] <- subscores[table(dataset[[i]]$cluster) < q] + 1
     }
-    scores <- scores + subscores[dataset[[i]]$cluster] * dataset[[i]]$cldist / dataset[[i]]$clusinfo$av_dist[dataset[[i]]$cluster]
+    scores[[i]] <- subscores[dataset[[i]]$cluster] * dataset[[i]]$cldist / dataset[[i]]$clusinfo$av_dist[dataset[[i]]$cluster]
   }
+  scores <- data.frame(matrix(unlist(scores), nrow = length(dataset), byrow = TRUE))
+  names(scores) <- NULL
+
   return(scores)
 }
 
