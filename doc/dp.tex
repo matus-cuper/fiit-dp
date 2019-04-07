@@ -237,7 +237,8 @@ cenné rady a pripomienky pri spracovaní diplomovej práce.
 %   Chapter 1 - Introduction
 %-------------------------------------------------------------------------------
 
-\newpage\null\thispagestyle{empty}\newpage
+% \newpage\null\thispagestyle{empty}
+\newpage
 \setcounter{page}{1}
 \section{Úvod}
 Jedným z~problémov, ktorým v~súčasnosti čelia distribučné spoločnosti, je
@@ -638,7 +639,7 @@ v~testovacej vzorke dát~\cite{Chandola2009}.
 %-------------------------------------------------------------------------------
 
 \subsection{Techniky detekcie anomálií}
-\label{c-analysis-techniques}
+\label{c:analysis-techniques}
 Detegovať anomálie rôznych typov môžeme niekoľkými spôsobmi, čo závisí aj od
 samotných dát. Ich úplnosť, množstvo a~oblasť, v~ktorej boli zozbierané sú
 kritické pre správny výber techniky, pomocou ktorej budú anomálie
@@ -816,7 +817,7 @@ odchýlky spracovávaného okna~\cite{Vieira2018}.
 Cieľom zhlukovania je rozdeliť dátové inštancie do \textit{k}~zhlukov na základe
 spoločných čŕt. V~prípade, že inštancie sú reprezentované nízkodimenzionálnym
 vektorom v~Euklidovom priestore, môžu byť na zhlukovanie použité klasické
-techniky spomenuté v~\ref{c-analysis-techniques}. Ak inštancie reprezentujú
+techniky spomenuté v~\ref{c:analysis-techniques}. Ak inštancie reprezentujú
 časový rad, nasadenie takýchto štandardných prístupov je
 zriedkavé~\cite{Hautamaki2008}.
 
@@ -1514,7 +1515,7 @@ generalizovaný Dunnov index a~COP index~\cite{Arbelaitz2013}.
 \subsection{Súvisiace práce v~doméne energetiky a~indentifikácií anomálií}
 V~\cite{Hautamaki2008} bola pri zhlukovaní použitá aj kombinácia viacerých
 metód, konkrétne k-means, metóda náhodnej výmeny a~aglomeratívne zhlukovanie.
-Ako už bolo spomenuté v~\ref{c-analysis-techniques}, úlohou algoritmu k-means
+Ako už bolo spomenuté v~\ref{c:analysis-techniques}, úlohou algoritmu k-means
 namapovať existujúce inštancie do \textit{k} zhlukov. Aj keď metóda náhodnej
 výmeny je obmedzená na zhlukovacie problémy v~Euklidovom priestore, bola
 použitá aj pri zhlukovaní časových radov a~zabraňuje zaseknutiu zhluku
@@ -1660,8 +1661,8 @@ zlúčiť do intervalov, ktoré sú roztriedené do skupín.
 \subsection{Vytvorenie zhlukov}
 Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
 je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
-parametre ako je veľkosť a~veľkosť kroku posuvného okna. Výhody a~nevýhody
-metrík vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}, kritériami
+parametre ako je dĺžka a~veľkosť kroku posuvného okna. Výhody a~nevýhody
+metrík vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}. Kritériami
 na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
 rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť existujúce
 anomálie do takej miery, že by neboli identifikované. Na druhej strane agregácia

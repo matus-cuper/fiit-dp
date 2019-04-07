@@ -84,7 +84,7 @@ movingWindowHolidays <- function(windowSize = 4, clusterCount = 20, distanceMetr
   bar <- txtProgressBar(min = 0, max = WEEKS - windowSize, style = 3)
   counter <- 0
 
-  for (week in seq(3, WEEKS - windowSize)) {
+  for (week in seq(1, WEEKS - windowSize)) {
     s <- (week - 1) * (MPD * WEEK) + 1
     e <- WEEK * MPD * (week + windowSize - 1)
     tmp <- merge(filterHolidays(IRELAND[s:e, COLUMNS]), filterWeekends(IRELAND[s:e, COLUMNS]), all = TRUE)
