@@ -1669,6 +1669,26 @@ zabezpečuje elimináciu menších anomálií. Cieľom práce je identifikovať 
 rozsiahlejšie anomálie v~správaní odberateľov. Veľkosť kroku posuvného okna je
 nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
 
+Výpočet intervalov posuvného okna môžeme zapísať
+vzorcami~\ref{eq:windowing-start} a~\ref{eq:windowing-end}, pre každé okno
+z~intervalu $<1, pocet\_tyzdnov - dlzka\_okna>$. Všetky posuvné okná sa
+prekrývajú minimálne v~jednom týždni, práve toľko krát, koľko je dĺžka posuvného
+okna v~týždňoch. Vybraný interval dát je agregovaný na základe poradia merania
+v~danom dni, čím vznikne denná reprezentácia odberateľa. Výbrané okno časových
+radov je porovnávané na základe tvaru krivky, preto je nutné dáta najskôr
+normalizovať a~až potom analyzovať zhlukovacím algoritmom. Normalizácia je
+opísaná v~podkapitole~\ref{c:z-score}
+
+\begin{equation}
+  index_{zaciatok} = (poradie\_tyzdna - 1) * pocet\_merani\_tyzdenne
+  \label{eq:windowing-start}
+\end{equation}
+
+\begin{equation}
+  index_{koniec} = (poradie\_tyzdna + dlzka\_okna - 1) * pocet\_merani\_tyzdenne
+  \label{eq:windowing-end}
+\end{equation}
+
 \subsection{Selekcia zhlukov}
 Pre výber riedkych zhlukov a~inštancií na okraji zhlukov potrebné vypočítať
 skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
@@ -1678,6 +1698,25 @@ radu od centroidu zhluku ako skóre inštancie. Ich násobením je vypočítané
 anomálne skóre časového radu. Predpokladom pre výpočet skóre je zhlukovanie,
 ktoré okrem rozdelenia inštancií do zhlukov obsahuje aj informáciu
 o~vzdialenosti inštancie od centroidu.
+
+Vzorec pre výpočet skóre zhluku môžeme zapísať vzorcom~\ref{eq:cluster-score}
+a~skóre inštancie vzorcom~\ref{eq:instance-score}. Skóre zhluku zabezpečuje
+penalizáciu malých zhlukov, čím je kvantilov viac a~sú menšie, tým je
+penalizácia výraznejšia. Funkcia pre dané skóre je potom nerastúca
+a~nadobúda hodnoty z~intervalu $<0, pocet\_kvantilov>$. Skóre inštancie
+predstavuje pomer medzi vzdialenosťou inštancie od centroidu zhluku, do ktorého
+patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
+
+\begin{equation}
+  skore_{zhluk_i} = \sum_{j=1}^{n} 1 \text{ ak } P(pocetnost_i \leq Q_j) \text{ inak } 0 \text{, pre j } \in (0.05, 0.1, ...)
+  \label{eq:cluster-score}
+\end{equation}
+
+\begin{equation}
+  skore_{instancia_k} = \frac{vzdialenost_k}{priemerna\_vzdialenost\_zhluku_l} \text{, pre } instancia_k \in zhluk_l
+  \label{eq:instance-score}
+\end{equation}
+
 
 % TODO maybe add some pictures
 
