@@ -18,7 +18,6 @@ visualizeDatasetStats <- function(dataset, windowTotalLength = 10, windowSize = 
 
 # Visualize whole dataset in one plot with anomaly scores
 visualizeDatasetAnomalies <- function(dataset) {
-  dataset <- df.3778.stats
   df <- data.frame(list(
     timestamp = as.character(dataset$timestamp),
     load = dataset$load,
