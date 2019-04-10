@@ -60,7 +60,7 @@
 	{\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-XXXX-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-182905-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
@@ -81,7 +81,7 @@
   {\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-XXXX-73688 \par}
+  {\normalsize Evidenčné číslo: FIIT-182905-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
@@ -684,8 +684,11 @@ najbližšieho centroidu a~anomálne inštancie sú od neho vzdialené. Algoritm
 väčšinou pozostávajú z~dvoch krokov, v~prvom sú inštancie pridelené do zhluku
 a~v~druhom je vypočítané ich anomálne skóre na základe vzdialenosti od centroidu
 daného zhluku. Používanými algoritmami sú neurónové siete (konkrétne SOM) alebo
-algoritmus k-means, ktoré sa môžu natrénovať aj pomocou kombinovaného
-učenia~\cite{Chandola2009}.
+algoritmus k-means, ktoré sa môžu natrénovať aj pomocou kombinovaného učenia. Do
+rovnakej skupiny spadá aj metóda k-medoids, ktorá funguje podobne ako k-means,
+rozdielom je výpočet centroidov. Pri metóde k-medoids je centroidom inštancia,
+ktorej vzdialenosť od všetkých ostatných inštancií je minimálna. Pri k-means
+centroidom nemusí byť reálna inštancia~\cite{Chandola2009}.
 
 Posledná kategória pracuje s~predpokladom, že normálne inštancie sú súčasťou
 veľkých a~hustých zhlukov, na druhej strane anomálie patria do malých a~riedkych
@@ -1709,7 +1712,12 @@ predstavuje pomer medzi vzdialenosťou inštancie od centroidu zhluku, do ktoré
 patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
 
 \begin{equation}
-  skore_{zhluk_i} = \sum_{j=1}^{n} 1 \text{ ak } P(pocetnost_i \leq Q_j) \text{ inak } 0 \text{, pre j } \in (0.05, 0.1, ...)
+  skore_{zhluk_i} = \sum_{j=1}^{n}
+  \begin{cases}
+    1 \text{ ak } P(pocetnost_i \leq Q_j) \\
+    0 \text{ inak } \\
+  \end{cases}
+  \text{, pre j } \in (0.05, 0.1, ...)
   \label{eq:cluster-score}
 \end{equation}
 
@@ -1727,8 +1735,8 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
 
 \newpage
 \section{Experimentálne overenie}
-Pri experimentoch sme pracovali v~jazyku~R. Použité knižnice sú zobrazené
-pomocou tabuľky~\ref{tab:libraries}.
+Pri experimentoch sme pracovali v~jazyku~R. Použité knižnice s~verziami sú
+zobrazené pomocou tabuľky~\ref{tab:libraries}.
 
 \begin{table}[ht]
   \centering
@@ -1759,7 +1767,34 @@ pomocou tabuľky~\ref{tab:libraries}.
   \end{tabular}
 \end{table}
 
-% TODO add something
+Pri experimentoch sme použili dataset 4621 írskych domácností, ktorých spotreba
+elektrickej energie bola počas 17 mesiacov sledovaná pomocou inteligentných
+meračov. Dáta boli zberané každých 15 minút v~období medzi 15. júlom 2009 a~31.
+decembrom 2010. Dataset obsahuje iba časovú známku, spotrebu v~kW a~príznak
+sviatku. Spotreba elektrickej energie meraná v~kW nadobúda hodnoty v~intervale
+$<0, 66.815>$ a~priemerná spotreba je 0.6727399 kW. Medián, dolný a~horný
+kvantil je zobrazený v~tabuľke~\ref{tab:quantile}. Štandardná odchýlka súboru
+je 1.372831. Je náročné prehľadne vizualizovať množstvo meraní od odberateľov,
+preto sme použili krabicové grafy~\ref{fig:boxplot} na vizualizáciu náhodne
+vybraných odberateľov.
+
+\begin{table}[ht]
+  \centering
+  \caption{Charakteristiky polohy použitého datasetu.}
+  \label{tab:quantile}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Dolný kvantil}  &   \textbf{Medián}		&		\textbf{Horný kvantil} \\ \hline
+    0.121								    &   0.269							&		0.666					         \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{sample_boxplot.png}
+  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov.}
+  \label{fig:boxplot}
+\end{figure}
 
 \subsection{Výber hyperparametrov zhlukovania}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
