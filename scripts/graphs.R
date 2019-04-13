@@ -25,3 +25,16 @@ d <- data.frame(inst, orig)
 p <- plot_ly(d, x = ~inst, y = ~orig, name = 'Pôvodné dáta', type = 'scatter', mode = 'lines') %>%
   layout(xaxis = list(title = "Poradie meraní"), yaxis = list(title = "Hodnota"), showlegend = TRUE)
 print(p)
+
+
+df.3727 <- loadIrelandDataset("~/r/fiit-dp/data/ireland/3727.csv", windowsCount = Inf)
+df.6998 <- loadIrelandDataset("~/r/fiit-dp/data/ireland/6998.csv", windowsCount = Inf)
+df.7422 <- loadIrelandDataset("~/r/fiit-dp/data/ireland/7422.csv", windowsCount = Inf)
+boxPlotData <- data.frame(
+  "load" = c(df.3727$dataset$load, df.6998$dataset$load, df.7422$dataset$load),
+  "consumer" = c(rep("3727", nrow(df.3727$dataset)), rep("6998", nrow(df.6998$dataset)), rep("7422", nrow(df.7422$dataset)))
+)
+p <- ggboxplot(boxPlotData, x = "consumer", y = "load", color = "consumer") +
+      xlab("Identifikátor spotrebiteľa") + ylab("Spotreba elektrickej energie v kW") +
+      theme(legend.position = "none")
+print(p)
