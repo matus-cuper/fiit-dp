@@ -668,6 +668,7 @@ pomocou techník založených na relatívnej hustote alebo vzdialenosti najbliž
 \textit{k}~susedných inštancií~\cite{Chandola2009,Tan2005}.
 
 \subsubsection{Zhlukovanie}
+\label{c:clustering}
 Jedná sa o~učenie bez učiteľa, keďže zhluky inštancií sú vytvorené na základe
 ich vzdialenosti či podobnosti. Techniky ďalej delíme do kategórií na základe
 predpokladu o~dátových inštanciách~\cite{Chandola2009,Tan2005}.
@@ -1690,6 +1691,25 @@ ktoré opisuje mieru istoty, že dané meranie je anomálne. Body je následné 
 zlúčiť do intervalov, ktoré sú roztriedené do skupín.
 
 \subsection{Vytvorenie zhlukov}
+Prvým krokom pri návrhu zhlukovania je výber vhodnej zhlukovacej metódy.
+Existujúce metódy sú bližšie popísané v~kapitole~\ref{c:clustering}. Aj na
+základe experimentov vykonaných autormi v~práci~\cite{PhDLaurinec2018} sme sa
+rozhodli pre metódu k-medoids, ktorá ako stred zhluku používa inštanciu, ktorej
+súčet vzdialeností od ostatných inštancií v~zhluku je čo najnižšia. Takýto
+vzťah môžeme zapísať rovnicou~\ref{eq:k-medoids}. Jej výhodou je najmä
+jednoduchosť a~rýchlosť konvergencie k~postačujúcim výsledkom. Rovnako ako pri
+k-means ide NP problém, kvôli čomu sú na vyriešenie problému použité heuristiky.
+Najpopulárnejšou z~nich je metóda delenia okolo medoidov (angl.
+\textit{Partitioning around medoids}), skrátene PAM. Najskôr je pre každú
+inštanciu vypočítaný najbližší medoid a~súčet vzdialeností, následné je proces
+opakovaný so zamenením medoidov a~inštanciami. Posledným krokom je výber
+riešenia, ktoré poskytuje najlepšie zhlukovanie.
+
+\begin{equation}
+  \label{eq:k-medoids}
+  \hat{\gamma} = min \sum_{j=1}^{k} \sum_{x \in K_j(\lambda)} d(x, m_j)
+\end{equation}
+
 Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
 je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
 parametre ako je dĺžka a~veľkosť kroku posuvného okna. Výhody a~nevýhody
