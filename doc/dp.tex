@@ -1599,6 +1599,7 @@ dostupných dát a~znalostí o~anomáliách.
 
 \newpage
 \section{Návrh riešenia}
+\label{c:solution-design}
 Pomocou metód strojového učenia a~dátovej analytiky sa zameriame na
 identifikáciu anomálií v~časových radoch v~oblasti distribučných spoločností. Na
 základe dostupných dát môžu nastať dva rôzne scenáre. Ak dataset bude obsahovať
@@ -1727,8 +1728,6 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
 \end{equation}
 
 
-% TODO maybe add some pictures
-
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
 %-------------------------------------------------------------------------------
@@ -1775,8 +1774,8 @@ sviatku. Spotreba elektrickej energie meraná v~kW nadobúda hodnoty v~intervale
 $<0, 66.815>$ a~priemerná spotreba je 0.6727399 kW. Medián, dolný a~horný
 kvantil je zobrazený v~tabuľke~\ref{tab:quantile}. Štandardná odchýlka súboru
 je 1.372831. Je náročné prehľadne vizualizovať množstvo meraní od odberateľov,
-preto sme použili krabicové grafy~\ref{fig:boxplot} na vizualizáciu náhodne
-vybraných odberateľov.
+preto sme použili čiarové a krabicové grafy~\ref{fig:whole_plot} na vizualizáciu
+náhodne vybraných odberateľov.
 
 \begin{table}[ht]
   \centering
@@ -1791,9 +1790,49 @@ vybraných odberateľov.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{sample_boxplot.png}
+  \includegraphics[width=\textwidth]{sample_plot.png}
   \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov.}
-  \label{fig:boxplot}
+  \label{fig:whole_plot}
+\end{figure}
+
+Profil spotrebiteľa sa výrazne líši počas pracovných dní a~víkendov, preto je
+celý proces opísaný v~kapitole~\ref{c:solution-design} aplikovaný osobitne na
+pracovné dni a~osobitne na dni voľna, čiže sviatky, soboty a~nedele. Cieľom je
+zvýšiť presnosť zhlukovania a~následne identifikácie anomálnych intervalov
+v~pôvodnom datasete. Charakteristiky polohy sú prehľadne zobrazené
+v~tabuľke~\ref{tab:dataset-statistics}. Štandardná odchýlka pracovných dní je
+1.418979 a~dní voľna 1.24807. Pre lepšiu vizualizáciu rozdielov medzi pracovnými
+dňami a~dňami voľna sme vizualizovali spotrebu elektrickej energie rovnakých
+odberateľov grafmi~\ref{fig:workdays_plot} a~\ref{fig:holidays_plot}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Charakteristiky polohy po rozdelení datasetu.}
+  \label{tab:dataset-statistics}
+  \begin{tabular}{|r|c|c|c|c|}
+    \hline
+					&  \textbf{Pracovné dni}  &	\textbf{Víkendy}	&	\textbf{Sviatky}	&	\textbf{Dni voľna} 	\\ \hline
+		Priemer				&		0.6826072			&		0.6480718				&		0.7035064				&		0.6495951				 	\\ \hline
+		Minimum				&		0							&		0								&		0								&		0								 	\\ \hline
+		Dolný kvantil	&		0.121					&		0.124						&		0.127						&		0.124							\\ \hline
+		Medián				&		0.266					&		0.275						&		0.303						&		0.276							\\ \hline
+		Horný kvantil	&		0.644					&		0.670						&		0.778						&		0.673							\\ \hline
+		Maximum				&		66.815				&		42.326					&		38.530					&		42.326						\\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{workdays_plot.png}
+  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas pracovných dní.}
+  \label{fig:workdays_plot}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{holidays_plot.png}
+  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas dní voľna.}
+  \label{fig:holidays_plot}
 \end{figure}
 
 \subsection{Výber hyperparametrov zhlukovania}
