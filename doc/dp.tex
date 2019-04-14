@@ -1165,6 +1165,33 @@ vzorcom~\ref{eq:feature-extraction}.
   x_h = \frac{P_{h+1}}{D_{h+1} - D_{h}}
 \end{equation}
 
+\subsubsection{Reprezentácia FeaClip}
+Ako bolo už spomenuté, niektoré datasety obsahujú informácie iba o~meranej
+veličine, čo niekedy nemusí byť postačujúce. Preto vznikajú nové atribúty
+popisujúce sledovanú veličinu. Jednou z~nich je metóda FeaClip, ktorá
+reprezentuje dáta pomocou bitového reťazca, z~ktorého sú vytvorené nové
+atribúty. Nad vybraným posuvným oknom nad datasetom je aplikovaná transformácia
+popísaná rovnicou~\ref{eq:feaclip}, čím sú merania s~hodnotami väčšími ako
+priemer aktuálneho posuvného okna nahradené hodnotou 1, inak 0. Na vzniknutý
+reťazec je aplikované kódovanie dĺžky behu (angl. \textit{Run-length
+encoding}). Beh je súvislá postupnosť jedného znaku, dĺžka behu predstavuje
+počet znakov v~takomto behu. Analyzované okno časového radu je transformované
+na osmicu čísel, a~to maximum z~dĺžok jednotkových behov, maximum z~dĺžok
+nulových behov, počet jednotiek v~reťazci, počet prechodov medzi rôznymi behmi
+a~počty prvých a~posledných núl a~jednotiek. Výhodami reprezentácie sú najmä
+redukcia dimenzií, zvýraznenie charakteru dát, paralelizmus a~jednoduchá
+interpretácia dát~\cite{Laurinec2018}.
+
+\begin{equation}
+  \label{eq:feaclip}
+  \hat{x_i} =
+  \begin{cases}
+    1 \text{ ak } x_i > \mu \\
+    0 \text{ inak } \\
+  \end{cases}
+  \text{, pre i } \in (1, 2, ..., 48)
+\end{equation}
+
 \subsubsection{Agregácia dát}
 Dáta z~meračov sú dostupné v~pravidelných intervaloch. Pre jednoduchšiu
 manipuláciu s~časovými radmi a~redukciu dimenzií, môžu byť dáta agregované do
