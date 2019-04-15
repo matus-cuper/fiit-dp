@@ -1167,6 +1167,7 @@ vzorcom~\ref{eq:feature-extraction}.
 \end{equation}
 
 \subsubsection{Reprezentácia FeaClip}
+\label{c:feaclip-representation}
 Ako bolo už spomenuté, niektoré datasety obsahujú informácie iba o~meranej
 veličine, čo niekedy nemusí byť postačujúce. Preto vznikajú nové atribúty
 popisujúce sledovanú veličinu. Jednou z~nich je metóda FeaClip, ktorá
@@ -1210,6 +1211,7 @@ Zároveň však vzniká priestor na stratenie informácie o~anomálnej aktivite
 odberateľa, čo je nutné zvážiť pri konkrétnej implementácii.
 
 \subsubsection{Redukcia dimenzií}
+\label{c:dimension-reduction}
 Jednou z~najjednoduchších metód používaných pri redukcii dát je práve
 vzorkovanie (angl. \textit{sampling}). Parametrami sú $m$~a~$n$, ktoré
 predstavujú počet dimenzií pred a~po procese vzorkovania. Vzdialenosť sa medzi
@@ -1270,6 +1272,7 @@ symbol~\cite{Fu2011}.
 component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu menej
 významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
 aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
+% TODO add something more about PCA and also eq
 
 Na podobnom princípe ako DTW je založené aj hľadanie najdlhšej spoločnej
 podpostupnosti (angl. \textit{longest common subsequence}), skrátene LCSS. Ide
@@ -1408,6 +1411,7 @@ klasifikovaní~\cite{Spiric2015}.
 %-------------------------------------------------------------------------------
 
 \subsection{Vyhodnocovacie metriky}
+\label{c:evaluation-metrics}
 Za predpokladu, že získané dáta budú obsahovať aj označené inštancie, prípadne
 budú označené dodatočne na základe výpočtov, môžeme na vyhodnotenie úspešnosti
 použiť aj maticu zámen. V~takom prípade budeme musieť predpovedať triedu
@@ -1741,7 +1745,7 @@ opísaná v~podkapitole~\ref{c:z-score}
   \label{eq:windowing-end}
 \end{equation}
 
-\subsection{Selekcia zhlukov}
+\subsection{Selekcia podozrivých zhlukov a intervalov}
 Pre výber riedkych zhlukov a~inštancií na okraji zhlukov potrebné vypočítať
 skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
 časovom rozmedzí. Skóre označujúce hustotu pozorovaného zhluku budeme ďalej
@@ -1774,6 +1778,21 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
   \label{eq:instance-score}
 \end{equation}
 
+Vypočítané skóre anomálnosti je potrebné vyhodnotiť a~porovnávať navzájom voči
+ostatným navrhovaným skórovaniam. V~prípade dostupnosti dát s~označenými
+anomálnymi inštanciami je jednoduché pomocou vyhodnocovacích metrík
+analyzovaných v~kapitole~\ref{c:evaluation-metrics} určiť presnosť daného
+riešenia. Ako už bolo spomenuté, vytvorenie takéhoto datasetu je nesmierne
+časovo a~finančne náročné. Vyhodnocovanie vytvoreného skóre je založené na
+vhodnej reprezentácií časového radu v~dvojdimenzionálnom priestore pomocou
+FeaClip reprezentácie, opísanej v~kapitole~\ref{c:feaclip-representation}
+a~metódy PCA, ktorá je bližšie opísaná v~kapitole~\ref{c:dimension-reduction}.
+Preto je potrebné analyzovať a~porovnať vzorku vybraných anomálnych intervalov
+pri rôznych oskórovaniach navzájom a~následne zvoliť nastavenie skórovania podľa
+dosiahnutých výsledkov. Na dodatočné overenie kvality skórovania môže slúžiť aj
+medzikvartilové rozpätie, v~prípade, že skórovanie bude zodpovedať normálnej
+distribúcií. Za anomálie budeme tak považovať intervaly, ktorých anomálne skóre
+sa nachádza mimo intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$.
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
@@ -2099,15 +2118,3 @@ Pri indexoch s~$(min.)$ nižšie hodnoty znamenajú lepšie výsledky zhlukovani
 \end{appendices}
 
 \end{document}
-
-% \subsubsection{Nájdenie anomálií}
-% \paragraph{Klasifikácia}
-% \paragraph{Identifikácia najbližším susedom}
-% \paragraph{Identifikácia zhlukovaním}
-% \paragraph{Grafová analýza}
-% \paragraph{Štatistické metódy}
-% \paragraph{Hybridné prístupy}
-% \paragraph{Spektrálna analýza}
-
-% https://github.com/numenta/NAB
-% http://odds.cs.stonybrook.edu/
