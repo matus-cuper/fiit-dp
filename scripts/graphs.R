@@ -18,14 +18,15 @@ p <- ggplot(d, aes(instances - 1)) +
   geom_line(aes(y = means, color = hue_pal()(5)[3]), size = 1) +
   geom_line(aes(y = medians, color = hue_pal()(5)[4]), size = 1) +
   geom_line(aes(y = pips, color = hue_pal()(5)[5]), size = 1) +
-  xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") +
+  xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") + labs(color = "Typ redukcie") +
+  scale_color_manual(labels = c("Vzorkovanie", "Priemer", "Medián", "PIP"), values = c(hue_pal()(5)[2], hue_pal()(5)[3], hue_pal()(5)[4], hue_pal()(5)[5])) +
   scale_y_continuous(minor_breaks = seq(0, 5, 1), breaks = seq(0, 5, 1)) +
   scale_x_continuous(minor_breaks = seq(0, 48, 6), breaks = seq(0, 48, 12)) +
   theme(
-    legend.position = "none",
     panel.grid.major = element_line(colour = "grey", size = 0.5),
     panel.grid.minor = element_line(color = "grey"),
-    panel.background = element_rect(fill = "white", color = "black")
+    panel.background = element_rect(fill = "white", color = "black"),
+    legend.key = element_rect(colour = "transparent", fill = "white")
   )
 print(p)
 
