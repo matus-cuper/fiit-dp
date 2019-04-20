@@ -10,6 +10,7 @@ if (!require("gridExtra")) install.packages("gridExtra")
 if (!require("lubridate")) install.packages("lubridate")
 if (!require("plotly")) install.packages("plotly")
 if (!require("rngtools")) install.packages("rngtools")
+if (!require("Rtsne")) install.packages("Rtsne")
 if (!require("scales")) install.packages("scales")
 if (!require("stringr")) install.packages("stringr")
 if (!require("TSrepr")) install.packages("TSrepr")
@@ -18,9 +19,11 @@ if (!require("zoo")) install.packages("zoo")
 
 devtools::install_github("twitter/AnomalyDetection", quiet = TRUE)
 devtools::install_github("twitter/BreakoutDetection", quiet = TRUE)
+devtools::install_github("vqv/ggbiplot", quiet = TRUE)
 
 library(AnomalyDetection)
 library(BreakoutDetection)
+library(ggbiplot)
 
 
 MPD <- 48

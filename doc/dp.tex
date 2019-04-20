@@ -1769,7 +1769,7 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
     1 \text{ ak } P(pocetnost_i \leq Q_j) \\
     0 \text{ inak } \\
   \end{cases}
-  \text{, pre j } \in (0.05, 0.1, ...)
+  \text{, pre j } \in (0.05, 0.1, ..., 1)
   \label{eq:cluster-score}
 \end{equation}
 
@@ -1777,6 +1777,21 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
   skore_{instancia_k} = \frac{vzdialenost_k}{priemerna\_vzdialenost\_zhluku_l} \text{, pre } instancia_k \in zhluk_l
   \label{eq:instance-score}
 \end{equation}
+
+Navrhnuté skórovanie je vypočítané pre každé analyzované posuvné okno. Výpočet
+skórovania je zobrazený na obrázku~\ref{fig:clustering-score}. Skóre zhluku je
+založené na rozdelení zhlukov na majoritné a~minoritné zhluky. Majoritné zhluky
+predstavujú zhluky, ktorých početnosť je väčšia ako kvantil $Q_j$ pre aktuálny
+beh $j$, minoritné sú všetky ostatné. Ich početnosť nespĺňa dané kvantilové
+kritérium. Skóre inštancie je znázornené na obrázku~\ref{fig:clustering-score}
+šedou šípkou, ktorá predstavuje vzdialenosť inštancie od medoidu daného zhluku.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{clustering_score.png}
+  \caption{Skórovanie podozrivých inštancií a~zhlukov.}
+  \label{fig:clustering-score}
+\end{figure}
 
 Vypočítané skóre anomálnosti je potrebné vyhodnotiť a~porovnávať navzájom voči
 ostatným navrhovaným skórovaniam. V~prípade dostupnosti dát s~označenými
