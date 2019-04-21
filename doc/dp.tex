@@ -1257,7 +1257,7 @@ zúžením podintervalov v~redukovanom časovom rade~\cite{Fu2011}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{data_reduction_agg.png}
-  \caption{Redukované časové rady}
+  \caption{Redukované časové rady.}
   \label{fig:data-reduction-agg}
 \end{figure}
 
@@ -1271,8 +1271,21 @@ symbol~\cite{Fu2011}.
 Ďalšou metódou je analýza hlavných komponentov (angl. \textit{principal
 component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu menej
 významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
-aj pri analýze či vizualizácií vysokodimenzionálnych dát~\cite{Fu2011}.
-% TODO add something more about PCA and also eq
+aj pri analýze či vizualizácií vysokodimenzionálnych dát. Ńajskôr sú vypočítané
+priemery pre jednotlivé dimenzie dát, z~nich variancie a~kovariančná matica. Na
+základe kovariančnej matice sú vypočítané vlastné hodnoty a~vektory (angl.
+\textit{eigenvalues} a~\textit{eigenvectors}), ktoré definujú rovinu, na ktorú
+sú pôvodné dáta premietané. Zobrazenie pri tom dosahuje najnižšiu chybu
+rekonštrukcie a~zároveň najnižšiu vzdialenosť meraní od vzniknutej roviny. Ako
+príklad môže poslúžiť obrázok~\ref{fig:pca-example}, na ktorom je vizualizovaná
+redukcia dvojdimenzionálnych dát~\cite{Fu2011,Smith2002}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.9\textwidth]{pca_example.png}
+  \caption{Príklad redukcie dimenzií pomocou PCA, pôvodný (vľavo) a redukovaný dataset (vpravo).}
+  \label{fig:pca-example}
+\end{figure}
 
 Na podobnom princípe ako DTW je založené aj hľadanie najdlhšej spoločnej
 podpostupnosti (angl. \textit{longest common subsequence}), skrátene LCSS. Ide
@@ -1934,14 +1947,14 @@ počet identifikovaných anomálií nespĺňa medzikvartilové pravidloa, čiže
 do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
 z~celkového počtu odberateľov. Tieto výsledky vizualizované pomocou FeaClip
 transformácie sú zobrazené na obrázku~\ref{fig:twitter-results}. V~prvom riadku
-sú výsledky funkcie \textit{anomalyDetectionTs} s~3.05\% anomálnych odberateľov,
-v~druhom riadku sú výsledky funkcie \textit{anomalyDetectionVec} s~2.27\%
+sú výsledky funkcie \textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov,
+v~druhom riadku sú výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\%
 anomálnych odberateľov.
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{twitter_visualization.png}
-  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas dní voľna.}
+  \caption{Grafy zobrazujúce identifikovaných anomálnych odberateľov pomocou metódy S-H-ESD.}
   \label{fig:twitter-results}
 \end{figure}
 
