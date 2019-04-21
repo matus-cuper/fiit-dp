@@ -1801,12 +1801,13 @@ riešenia. Ako už bolo spomenuté, vytvorenie takéhoto datasetu je nesmierne
 časovo a~finančne náročné. Vyhodnocovanie vytvoreného skóre je založené na
 vhodnej reprezentácií časového radu v~dvojdimenzionálnom priestore pomocou
 FeaClip reprezentácie, opísanej v~kapitole~\ref{c:feaclip-representation}
-a~metódy PCA, ktorá je bližšie opísaná v~kapitole~\ref{c:dimension-reduction}.
-Preto je potrebné analyzovať a~porovnať vzorku vybraných anomálnych intervalov
-pri rôznych oskórovaniach navzájom a~následne zvoliť nastavenie skórovania podľa
-dosiahnutých výsledkov. Na dodatočné overenie kvality skórovania môže slúžiť aj
-medzikvartilové rozpätie, v~prípade, že skórovanie bude zodpovedať normálnej
-distribúcií. Za anomálie budeme tak považovať intervaly, ktorých anomálne skóre
+a~metódy PCA (prípadne TSNE), ktorá je bližšie opísaná
+v~kapitole~\ref{c:dimension-reduction}. Preto je potrebné analyzovať a~porovnať
+vzorku vybraných anomálnych intervalov pri rôznych oskórovaniach navzájom
+a~následne zvoliť nastavenie skórovania podľa dosiahnutých výsledkov. Na
+dodatočné overenie kvality skórovania môže slúžiť aj medzikvartilové rozpätie
+(angl. \textit{Interquartile Range}). Za anomálie budeme tak považovať
+intervaly, ktorých anomálne skóre nespĺňa medzikvartilové pravidlo, čiže skóre
 sa nachádza mimo intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$.
 
 %-------------------------------------------------------------------------------
@@ -1855,7 +1856,7 @@ sviatku. Spotreba elektrickej energie meraná v~kW nadobúda hodnoty v~intervale
 $<0, 66.815>$ a~priemerná spotreba je 0.6727399 kW. Medián, dolný a~horný
 kvantil je zobrazený v~tabuľke~\ref{tab:quantile}. Štandardná odchýlka súboru
 je 1.372831. Je náročné prehľadne vizualizovať množstvo meraní od odberateľov,
-preto sme použili čiarové a krabicové grafy~\ref{fig:whole_plot} na vizualizáciu
+preto sme použili čiarové a krabicové grafy~\ref{fig:whole-plot} na vizualizáciu
 náhodne vybraných odberateľov.
 
 \begin{table}[ht]
@@ -1873,7 +1874,7 @@ náhodne vybraných odberateľov.
   \centering
   \includegraphics[width=\textwidth]{sample_plot.png}
   \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov.}
-  \label{fig:whole_plot}
+  \label{fig:whole-plot}
 \end{figure}
 
 Profil spotrebiteľa sa výrazne líši počas pracovných dní a~víkendov, preto je
@@ -1884,7 +1885,7 @@ v~pôvodnom datasete. Charakteristiky polohy sú prehľadne zobrazené
 v~tabuľke~\ref{tab:dataset-statistics}. Štandardná odchýlka pracovných dní je
 1.418979 a~dní voľna 1.24807. Pre lepšiu vizualizáciu rozdielov medzi pracovnými
 dňami a~dňami voľna sme vizualizovali spotrebu elektrickej energie rovnakých
-odberateľov grafmi~\ref{fig:workdays_plot} a~\ref{fig:holidays_plot}.
+odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
 
 \begin{table}[ht]
   \centering
@@ -1906,14 +1907,42 @@ odberateľov grafmi~\ref{fig:workdays_plot} a~\ref{fig:holidays_plot}.
   \centering
   \includegraphics[width=\textwidth]{workdays_plot.png}
   \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas pracovných dní.}
-  \label{fig:workdays_plot}
+  \label{fig:workdays-plot}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{holidays_plot.png}
   \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas dní voľna.}
-  \label{fig:holidays_plot}
+  \label{fig:holidays-plot}
+\end{figure}
+
+\subsection{Existujúce riešenia}
+Experimenty, ktoré sme vykonali sme porovnávali s~existujúcou implementáciou
+metódy S-H-ESD, ktorá sa nachádza v~balíčku
+\textit{AnomalyDetection}~\footnote{https://github.com/twitter/AnomalyDetection}.
+Vstupnými parametrami metódy je hladina významnosti, na ktorej je hypotéza
+o~anomálnosti inštancie zamietaná, typ anomálie (kladná alebo záporná)
+a~maximálny počet anomálií v~danom datasete. Vďaka robustnosti metódy S-H-ESD,
+je možné identifikovať až 50\% anomálií, preto sme sa rozhodli toto nastavenie
+ponechať a~upraviť iba hladinu významnosti na $\alpha = 0.001$. Pri
+experimentoch bola priemerná doba spracovania jedného odberateľa 63.24 sekúnd so
+štandardnou odchýlkou 1.8 sekundy. Najrýchlejšie spracovanie trvalo presne
+minútu, najpomalšie 70 sekúnd. Priemerný počet identifikovaných anomálií je
+14.11\%. V~prípade, že sme ako anomálnych označili tých odberateľov, ktorých
+počet identifikovaných anomálií nespĺňa medzikvartilové pravidloa, čiže nespadá
+do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
+z~celkového počtu odberateľov. Tieto výsledky vizualizované pomocou FeaClip
+transformácie sú zobrazené na obrázku~\ref{fig:twitter-results}. V~prvom riadku
+sú výsledky funkcie \textit{anomalyDetectionTs} s~3.05\% anomálnych odberateľov,
+v~druhom riadku sú výsledky funkcie \textit{anomalyDetectionVec} s~2.27\%
+anomálnych odberateľov.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{twitter_visualization.png}
+  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas dní voľna.}
+  \label{fig:twitter-results}
 \end{figure}
 
 \subsection{Výber hyperparametrov zhlukovania}

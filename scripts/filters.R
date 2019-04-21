@@ -1,3 +1,17 @@
+filterAnomalies <- function(df, lambda = 1.5) {
+  c1 <- quantile(df$sum_1, probs = 0.75) + lambda * IQR(df$sum_1)
+  c2 <- quantile(df$sum_1, probs = 0.25) - lambda * IQR(df$sum_1)
+  c3 <- quantile(df$cross., probs = 0.75) + lambda * IQR(df$cross.)
+
+  result <- c(
+    rownames(df[which(df$sum_1 > c1), ]),
+    rownames(df[which(df$sum_1 < c2), ]),
+    rownames(df[which(df$cross. > c3), ])
+  )
+
+  return(unique(sort(result)))
+}
+
 scoreSuspiciousTS <- function(dataset, minorPenalty = c(0.10)) {
   scores <- list()
   for (i in 1:length(dataset)) {

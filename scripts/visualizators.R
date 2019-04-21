@@ -1,3 +1,22 @@
+# Visualize results of twitter anomaly detection package
+visualizeTwitterResults <- function(consumerID, from = 0, to = 960) {
+  df <- IRELAND[, c('timestamp', consumerID)]
+  df$timestamp <- as.POSIXlt(df$timestamp)
+
+  df$anomaly <- 'no'
+  df$anomaly[df$timestamp %in% TWITTER_TS[[consumerID]]$anom$anoms$timestamp] <- 'ts'
+  df$anomaly[TWITTER_VEC[[consumerID]]$anom$anoms$index %in% which(df$anomaly == 'ts')] <- 'both'
+  df$anomaly[TWITTER_VEC[[consumerID]]$anom$anoms$index %in% which(df$anomaly == 'no')] <- 'vec'
+  names(df) <- c("timestamp", "load", "anomaly")
+
+  p <- ggplot(df[from:to, ], aes(x = as.POSIXct(timestamp))) +
+    geom_line(aes(y = load)) +
+    geom_point(aes(y = load, color = anomaly)) +
+    scale_color_manual(values=c("#FF0000", "#000000", "#FF0FF0", "#FFFF00"))
+  print(p)
+  Sys.sleep(2)
+}
+
 # Visualize whole dataset in one plot with mean and median
 visualizeDatasetStats <- function(dataset, windowTotalLength = 10, windowSize = 7, sleepTime = 0.0) {
   windowSize <- getFrequency(df) * windowSize * windowTotalLength
