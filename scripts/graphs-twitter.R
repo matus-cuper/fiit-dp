@@ -36,7 +36,7 @@ for (tw.col in DATACOLUMNS)
 }
 
 {
-  tw.groups <- as.data.frame(rep(0, length(DATACOLUMNS)))
+  tw.groups <- as.data.frame(rep(2, length(DATACOLUMNS)))
   rownames(tw.groups) <- DATACOLUMNS
   tw.groups[tw.anoms, ] <- 1
   names(tw.groups) <- c("isAnomaly")
@@ -52,7 +52,7 @@ for (tw.col in DATACOLUMNS)
 
 tw.ts.tsne <- ggplot(tw.plot, aes(x = X, y = Y, colour = groups)) + geom_point() +
   xlab("TSNE1") + ylab("TSNE2") + labs(color = "Anomálnosť") +
-  scale_color_manual(labels = c("nie", "áno"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
+  scale_color_manual(labels = c("áno", "nie"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
   theme(
     axis.title.x = element_blank(),
     panel.grid.major = element_line(colour = "grey"),
@@ -65,7 +65,7 @@ tw.ts.tsne <- ggplot(tw.plot, aes(x = X, y = Y, colour = groups)) + geom_point()
 tw.pca <- prcomp(tw.dfea)
 tw.ts.pca <- ggbiplot(tw.pca, groups = tw.groups, var.axes = FALSE) +
   xlab("PCA1") + ylab("PCA2") + labs(color = "Anomálnosť") +
-  scale_color_manual(labels = c("nie", "áno"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
+  scale_color_manual(labels = c("áno", "nie"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
   theme(
     axis.title.x = element_blank(),
     panel.grid.major = element_line(colour = "grey"),
@@ -116,7 +116,7 @@ for (tw.col in DATACOLUMNS)
 }
 
 {
-  tw.groups <- as.data.frame(rep(0, length(DATACOLUMNS)))
+  tw.groups <- as.data.frame(rep(2, length(DATACOLUMNS)))
   rownames(tw.groups) <- DATACOLUMNS
   tw.groups[tw.anoms, ] <- 1
   names(tw.groups) <- c("isAnomaly")
@@ -132,7 +132,7 @@ for (tw.col in DATACOLUMNS)
 
 tw.vec.tsne <- ggplot(tw.plot, aes(x = X, y = Y, colour = groups)) + geom_point() +
   xlab("TSNE1") + ylab("TSNE2") + labs(color = "Anomálnosť") +
-  scale_color_manual(labels = c("nie", "áno"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
+  scale_color_manual(labels = c("áno", "nie"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
   theme(
     panel.grid.major = element_line(colour = "grey"),
     panel.grid.minor = element_line(color = "grey"),
@@ -144,7 +144,7 @@ tw.vec.tsne <- ggplot(tw.plot, aes(x = X, y = Y, colour = groups)) + geom_point(
 tw.pca <- prcomp(tw.dfea)
 tw.vec.pca <- ggbiplot(tw.pca, groups = tw.groups, var.axes = FALSE) +
   xlab("PCA1") + ylab("PCA2") + labs(color = "Anomálnosť") +
-  scale_color_manual(labels = c("nie", "áno"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
+  scale_color_manual(labels = c("áno", "nie"), values = c(hue_pal()(2)[1], hue_pal()(2)[2])) +
   theme(
     panel.grid.major = element_line(colour = "grey"),
     panel.grid.minor = element_line(color = "grey"),

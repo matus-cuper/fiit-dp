@@ -1171,18 +1171,18 @@ vzorcom~\ref{eq:feature-extraction}.
 Ako bolo už spomenuté, niektoré datasety obsahujú informácie iba o~meranej
 veličine, čo niekedy nemusí byť postačujúce. Preto vznikajú nové atribúty
 popisujúce sledovanú veličinu. Jednou z~nich je metóda FeaClip, ktorá
-reprezentuje dáta pomocou bitového reťazca, z~ktorého sú vytvorené nové
-atribúty. Nad vybraným posuvným oknom nad datasetom je aplikovaná transformácia
-popísaná rovnicou~\ref{eq:feaclip}, čím sú merania s~hodnotami väčšími ako
-priemer aktuálneho posuvného okna nahradené hodnotou 1, inak 0. Na vzniknutý
-reťazec je aplikované kódovanie dĺžky behu (angl. \textit{Run-length
-encoding}). Beh je súvislá postupnosť jedného znaku, dĺžka behu predstavuje
-počet znakov v~takomto behu. Analyzované okno časového radu je transformované
-na osmicu čísel, a~to maximum z~dĺžok jednotkových behov, maximum z~dĺžok
-nulových behov, počet jednotiek v~reťazci, počet prechodov medzi rôznymi behmi
-a~počty prvých a~posledných núl a~jednotiek. Výhodami reprezentácie sú najmä
-redukcia dimenzií, zvýraznenie charakteru dát, paralelizmus a~jednoduchá
-interpretácia dát~\cite{Laurinec2018}.
+na základe reprezentácie dát ako bitového reťazca, vytvára nové atribúty. Nad
+vybraným posuvným oknom nad datasetom je aplikovaná transformácia popísaná
+rovnicou~\ref{eq:feaclip}, čím sú merania s~hodnotami väčšími ako priemer
+aktuálneho posuvného okna nahradené hodnotou 1, inak 0. Na vzniknutý reťazec je
+aplikované kódovanie dĺžky behu (angl. \textit{Run-length encoding}). Beh je
+súvislá postupnosť jedného znaku, dĺžka behu predstavuje počet znakov v~takomto
+behu. Analyzované okno časového radu je transformované na osmicu čísel, a~to
+maximum z~dĺžok jednotkových behov, maximum z~dĺžok nulových behov, počet
+jednotiek v~reťazci, počet prechodov medzi rôznymi behmi a~počty prvých
+a~posledných núl a~jednotiek. Výhodami reprezentácie sú najmä redukcia dimenzií,
+zvýraznenie charakteru dát, paralelizmus a~jednoduchá interpretácia
+dát~\cite{Laurinec2018}.
 
 \begin{equation}
   \label{eq:feaclip}
@@ -1822,6 +1822,17 @@ dodatočné overenie kvality skórovania môže slúžiť aj medzikvartilové ro
 (angl. \textit{Interquartile Range}). Za anomálie budeme tak považovať
 intervaly, ktorých anomálne skóre nespĺňa medzikvartilové pravidlo, čiže skóre
 sa nachádza mimo intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$.
+
+Ako už bolo spomenuté, metóda FeaClip extrahuje z~dát spotreby elektrickej
+energie odberateľov ďalšie vlastnosti časových radov. Tým je zabezpečená
+redukcia vysokodimenzionálnych dát a~následná jednoduchá vizualizácia. Keďže
+metóda FeaClip pozostáva z~8~vlastností, je nutné časové rady opäť redukovať,
+napr. pomocou analýzy hlavných komponentov alebo vhodnou selekciou vzniknutých
+atribútov. Takými atribútmi môže byť práve počet jednotiek alebo počet prechodov
+medzi rôznymi behmi v~pozorovanom okne časového radu, čo bližšie opísali autori
+v~práci~\cite{Laurinec2018}. Pre vizualizáciu vybraného intervalu časového radu
+je nutná najskôr FeaClip transformácia po oknách, spriemerovanie výsledkov
+a~výber vhodných atribútov alebo PCA.
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
