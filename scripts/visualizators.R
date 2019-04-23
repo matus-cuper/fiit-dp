@@ -1,3 +1,19 @@
+# Visualize subresults of twitter
+visualizeTwitterTS <- function(consumerID, resultTS, from = 0, to = 960) {
+  df <- IRELAND[, c('timestamp', consumerID)]
+  df$timestamp <- as.POSIXlt(df$timestamp)
+
+  df$anomaly <- 'no'
+  df$anomaly[df$timestamp %in% as.POSIXlt(resultTS)] <- 'ts'
+  names(df) <- c("timestamp", "load", "anomaly")
+
+  p <- ggplot(df[from:to, ], aes(x = as.POSIXct(timestamp))) +
+    geom_line(aes(y = load)) +
+    geom_point(aes(y = load, color = anomaly)) +
+    scale_color_manual(values=c("#000000", "#FF0000"))
+  print(p)
+}
+
 # Visualize results of twitter anomaly detection package
 visualizeTwitterResults <- function(consumerID, from = 0, to = 960) {
   df <- IRELAND[, c('timestamp', consumerID)]

@@ -23,7 +23,7 @@ scoreSuspiciousTS <- function(dataset, minorPenalty = c(0.10)) {
     scores[[i]] <- subscores[dataset[[i]]$cluster] * dataset[[i]]$cldist / dataset[[i]]$clusinfo$av_dist[dataset[[i]]$cluster]
   }
   scores <- data.frame(matrix(unlist(scores), nrow = length(dataset), byrow = TRUE))
-  names(scores) <- NULL
+  names(scores) <- DATACOLUMNS
 
   return(scores)
 }

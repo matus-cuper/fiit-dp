@@ -60,18 +60,18 @@
 	{\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-182905-73688 \par}
+  {\Large FIIT-182905-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
+	{\LARGE IDENTIFIKÁCIA NEŠTANDARDNÉHO SPRÁVANIA ODBERATEĽOV V~ENERGETICKEJ SIETI \par}
 	\vspace{0.5cm}
 	{\large Diplomová práca \par}
 	\vspace{7cm}
   \flushleft
 	{\large Vedúci práce: Ing. Marek Lóderer \par}
   \vspace{0.5cm}
-  {\large máj 2019 \par}
+  {\large apríl 2019 \par}
 	\vfill
 \end{titlepage}
 \newpage\null\thispagestyle{empty}\newpage
@@ -81,11 +81,11 @@
   {\Large Slovenská technická univerzita v Bratislave \par}
 	{\Large Fakulta informatiky a informačných technológií \par}
   \vspace{0.5cm}
-  {\normalsize Evidenčné číslo: FIIT-182905-73688 \par}
+  {\Large FIIT-182905-73688 \par}
 	\vspace{7cm}
   {\large Bc. Matúš Cuper \par}
   \vspace{0.5cm}
-	{\LARGE Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
+  {\LARGE IDENTIFIKÁCIA NEŠTANDARDNÉHO SPRÁVANIA ODBERATEĽOV V~ENERGETICKEJ SIETI \par}
 	\vspace{0.5cm}
 	{\large Diplomová práca \\}
 	\vspace{7cm}
@@ -95,7 +95,7 @@
 	{\normalsize Miesto vypracovania: Ústav informatiky a softvérového inžinierstva, FIIT STU v Bratislave \par}
 	{\normalsize Vedúci práce: Ing. Marek Lóderer \par}
   \vspace{0.5cm}
-  {\normalsize máj 2019 \par}
+  {\normalsize apríl 2019 \par}
 \end{titlepage}
 \newpage\null\thispagestyle{empty}\newpage
 
@@ -1954,7 +1954,7 @@ experimentoch bola priemerná doba spracovania jedného odberateľa 63.24 sekún
 štandardnou odchýlkou 1.8 sekundy. Najrýchlejšie spracovanie trvalo presne
 minútu, najpomalšie 70 sekúnd. Priemerný počet identifikovaných anomálií je
 14.11\%. V~prípade, že sme ako anomálnych označili tých odberateľov, ktorých
-počet identifikovaných anomálií nespĺňa medzikvartilové pravidloa, čiže nespadá
+počet identifikovaných anomálií nespĺňa medzikvartilové pravidlo, čiže nespadá
 do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
 z~celkového počtu odberateľov. Tieto výsledky vizualizované pomocou FeaClip
 transformácie sú zobrazené na obrázku~\ref{fig:twitter-results}. V~prvom riadku
@@ -1968,6 +1968,16 @@ anomálnych odberateľov.
   \caption{Grafy zobrazujúce identifikovaných anomálnych odberateľov pomocou metódy S-H-ESD.}
   \label{fig:twitter-results}
 \end{figure}
+
+Funkcia \textit{AnomalyDetectionTs} očakáva na vstupe časový rad, ktorý obsahuje
+časovú známku a~hodnotu sledovanej veličiny v~danom čase. Nutnou podmienkou je
+dostatočne dlhý časový rad, nad ktorým je spustená identifikácia anomálií. Pri
+experimentoch, kedy bola analyzovaná iba časť časového radu je kvôli tomu nutné
+zvoliť obdobie aspoň 9~týždňov. Pre funkciu \textit{AnomalyDetectionVec}
+používateľ parametrami definuje krátkodobú a~dlhodobú periódu dát a~spomínané
+obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
+časového radu, tak aj pri čiastkových analýzach, čo môže byť prispieť
+k~rýchlosti identifikácie anomálií.
 
 \subsection{Výber hyperparametrov zhlukovania}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
@@ -2067,7 +2077,7 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 %   Chapter 8 - Bibliography
 %-------------------------------------------------------------------------------
 
-\newpage
+\newpage\null\thispagestyle{empty}\newpage
 \bibliographystyle{iso-690/slovakiso}
 \bibliography{bibliography}
 \newpage\null\thispagestyle{empty}\newpage
