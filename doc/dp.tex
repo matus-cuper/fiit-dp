@@ -995,6 +995,7 @@ ktoré by sme intuitívne zvolili pri zarovnaní časových radov podľa tvaru k
 $D_{DTW}$~je vypočítané pomocou dynamického programovania, práve kvôli množstvu
 existujúcich kombinácií. Rekurzia je vyjadrená
 vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011,Hsu2015}.
+
 \begin{equation}
 	\label{eq:dtw-distance}
   D_{DTW} \left( i, j \right) =
@@ -1041,6 +1042,7 @@ aplikovateľná iba na krátke časové rady bez toho, aby sa dramaticky zníži
 kvalita odhadu vzdialenosti. Podobnosť tvarov kriviek je detegovaná aj
 v~prípade, kedy neexistuje medzi časovými radmi lineárna alebo nelineárna
 závislosť~\cite{Dzeroski2007}.
+
 \begin{equation}
 	\label{eq:qualitative-distance}
   D_q \left( X, Y \right) = \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} \frac
@@ -1053,6 +1055,7 @@ zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenos�
 vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
 obrázku~\ref{fig:euclidean-distance} sú vždy porovnávané hodnoty vyskytujúce sa
 v~rovnakom čase $t$~\cite{WarrenLiao2005}.
+
 \begin{equation}
 	\label{eq:distance-euclidean}
   D_E \left( X, Y \right) = \sqrt{\sum_{k=1}^{n} \left( X_{ik} - Y_{jk} \right)^2 }
@@ -1080,12 +1083,14 @@ vzdialenosti, ktorá je založená na vzájomnej korelácií. Vo
 vzorci~\ref{eq:distance-pearson} reprezentuje $\widetilde{X}$~aritmetický
 priemer časového radu $X$. Vzdialenosť vyjadríme
 vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
+
 \begin{equation}
 	\label{eq:distance-pearson}
   r \left( X, Y \right) = \frac
   { \sum_{i=1}^{n} \left( X_{i} - \widetilde{X} \right) \cdot \left( Y_{i} - \widetilde{Y} \right) }
   { \sqrt{\sum_{i=1}^{n} \left( X_{i} - \widetilde{X} \right)^2 } \cdot \sqrt{\sum_{i=1}^{n} \left( Y_{i} - \widetilde{Y} \right)^2 } }
 \end{equation}
+
 \begin{equation}
 	\label{eq:distance-golay}
   D_P \left( X, Y \right) = 2 \cdot \left( 1 - r \left( X, Y \right) \right)
@@ -1097,6 +1102,7 @@ rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiad
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
 vyjadríme vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 čas~\cite{WarrenLiao2005}.
+
 \begin{equation}
 	\label{eq:sts-distance}
   D_{STS} \left( X, Y \right) = \sqrt{ \sum_{k=1}^{n} \left(
@@ -1161,6 +1167,7 @@ priemernej spotreby $x_h$ môžeme definovať rôzne, v~našom prípade ide o~po
 mesačnej priemernej spotreby nasledujúceho mesiaca $P_{h+1}$~a~rozdielu dennej
 spotreby v~aktuálnom a~nasledujúcom mesiaci $D_{h+1} - D_{h}$, čo zapíšeme
 vzorcom~\ref{eq:feature-extraction}.
+
 \begin{equation}
 	\label{eq:feature-extraction}
   x_h = \frac{P_{h+1}}{D_{h+1} - D_{h}}
@@ -1191,7 +1198,7 @@ dát~\cite{Laurinec2018}.
     1 \text{ ak } x_i > \mu \\
     0 \text{ inak } \\
   \end{cases}
-  \text{, pre i } \in (1, 2, ..., 48)
+  \text{, pre i } \in (1, 2, ..., n)
 \end{equation}
 
 \subsubsection{Agregácia dát}
@@ -1314,6 +1321,7 @@ najmä štandardné skóre, nazývané aj z-skóre (angl. \textit{z-score}). Hod
 vypočítame ako podiel rozdielu hodnoty a~priemeru a~štandardnej odchýlky.
 Normalizáciu vyjadríme nasledujúcim
 vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
+
 \begin{equation}
 	\label{eq:z-score}
   z = \frac{x-\mu}{\sigma}
@@ -1442,16 +1450,20 @@ zmerať pomocou presnosti a~pokrytia. Presnosť vypočítame
 vzorcom~\ref{eq:precision}, kedy ide o~pomer správne označených anomálií
 a~celkový počet označených anomálií. Tým vypočítame percento odberateľov,
 ktorých sme správne klasifikovali ako podozrivých.
+
 \begin{equation}
 	\label{eq:precision}
   \text{Presnosť} = \frac{TP}{TP + FP}
 \end{equation}
+
 Pokrytie označuje pomer správne označených anomálií a~celkový počet skutočných
 anomálií. Vyjadríme ju pomocou vzorca~\ref{eq:recall}.
+
 \begin{equation}
 	\label{eq:recall}
   \text{Pokrytie} = \frac{TP}{TP + FN}
 \end{equation}
+
 Aby sa predišlo situácií, kedy sa v~dátach nachádza iba malý počet anomálnych
 odberateľov a~pre model by tak bolo výhodnejšie označovať iba tých, s~ktorými si
 je takmer istý, je dôležité brať do úvahy aj túto metriku. Obe metriky sú
@@ -1475,6 +1487,7 @@ predchádzajúcich metrík. Keďže ide o~súčet metrík, tiež je vyjadrené
 v~percentách. Cieľom práce je maximalizovať túto metriku. F-skóre vyjadríme
 pomocou vzorca~\ref{eq:f-score}, kde $P$~predstavuje presnosť a~$C$ predstavuje
 pokrytie~\cite{Trevizan2015}.
+
 \begin{equation}
 	\label{eq:f-score}
   F = 2 \cdot \left( P^{-1} + C^{-1} \right)^{-1}
@@ -1729,9 +1742,14 @@ riešenia, ktoré poskytuje najlepšie zhlukovanie.
 
 Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
 je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
-parametre ako je dĺžka a~veľkosť kroku posuvného okna. Výhody a~nevýhody
-metrík vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}. Kritériami
-na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
+parametre ako je veľkosť kroku a~dĺžka posuvného okna. Pod dĺžkou posuvného okna
+rozumieme dĺžku vybraného intervalu, ktorý udávame v~týždňoch. Veľkosť kroku
+posuvného okna je rovnako udávaná v~týždňoch a~predstavuje veľkosť posunu,
+o~ktorý sa okno zmení. V~prípade, že dĺžka posuvného okna a~veľkosť kroku sú
+rovnaké, nedochádza k~prekryvu okien. Pri dĺžke okna $n$ a~menšej veľkosti kroku
+napr. $n-1$, sa okná prekrývajú práve v~$n-1$ týždňoch. Výhody a~nevýhody metrík
+vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}. Kritériami na
+výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
 rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť existujúce
 anomálie do takej miery, že by neboli identifikované. Na druhej strane agregácia
 zabezpečuje elimináciu menších anomálií. Cieľom práce je identifikovať najmä
@@ -1741,12 +1759,14 @@ nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
 Výpočet intervalov posuvného okna môžeme zapísať
 vzorcami~\ref{eq:windowing-start} a~\ref{eq:windowing-end}, pre každé okno
 z~intervalu $<1, pocet\_tyzdnov - dlzka\_okna>$. Všetky posuvné okná sa
-prekrývajú minimálne v~jednom týždni, práve toľko krát, koľko je dĺžka posuvného
-okna v~týždňoch. Vybraný interval dát je agregovaný na základe poradia merania
-v~danom dni, čím vznikne denná reprezentácia odberateľa. Výbrané okno časových
-radov je porovnávané na základe tvaru krivky, preto je nutné dáta najskôr
-normalizovať a~až potom analyzovať zhlukovacím algoritmom. Normalizácia je
-opísaná v~podkapitole~\ref{c:z-score}
+prekrývajú minimálne v~jednom týždni, práve toľko krát, koľko je veľkosť kroku
+posuvného okna v~týždňoch. Vybraný interval dát je agregovaný na základe
+poradia merania v~danom dni, čím vznikne denná reprezentácia odberateľa. Výbrané
+okno časových radov je porovnávané na základe tvaru krivky, preto je nutné dáta
+najskôr normalizovať a~až potom analyzovať zhlukovacím algoritmom. Normalizácia
+pomocou z-skóre  je bližšie opísaná v~podkapitole~\ref{c:z-score}. Jedná sa
+o~výpočet podielu medzi rozdielom nameranej hodnoty a~jej priemerom
+a~štandardnej odchýlky, čo môžeme zapísať vzorcom~\ref{eq:z-score2}.
 
 \begin{equation}
   index_{zaciatok} = (poradie\_tyzdna - 1) * pocet\_merani\_tyzdenne
@@ -1758,15 +1778,26 @@ opísaná v~podkapitole~\ref{c:z-score}
   \label{eq:windowing-end}
 \end{equation}
 
-\subsection{Selekcia podozrivých zhlukov a intervalov}
-Pre výber riedkych zhlukov a~inštancií na okraji zhlukov potrebné vypočítať
+\begin{equation}
+	\label{eq:z-score2}
+  z = \frac{x-\mu}{\sigma}
+\end{equation}
+
+\subsection{Ohodnotenie podozrivých zhlukov a~intervalov}
+Pre výber riedkych zhlukov a~inštancií na okraji zhlukov je potrebné vypočítať
 skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
 časovom rozmedzí. Skóre označujúce hustotu pozorovaného zhluku budeme ďalej
 označovať ako skóre zhluku a~skóre označujúce vzdialenosť konkrétneho časového
 radu od centroidu zhluku ako skóre inštancie. Ich násobením je vypočítané
-anomálne skóre časového radu. Predpokladom pre výpočet skóre je zhlukovanie,
-ktoré okrem rozdelenia inštancií do zhlukov obsahuje aj informáciu
-o~vzdialenosti inštancie od centroidu.
+anomálne skóre časového radu, zapísané rovnicou~\ref{eq:custom-score}.
+Predpokladom pre výpočet skóre je zhlukovanie, ktoré okrem rozdelenia inštancií
+do zhlukov obsahuje aj informáciu o~vzdialenosti jednotlivých inštancií od
+centroidu zhluku, do ktorého patrí.
+
+\begin{equation}
+  skore_i = skore_{instancia_i} * skore_{zhluk_j} \text{, pre } instancia_i \in zhluk_j
+  \label{eq:custom-score}
+\end{equation}
 
 Vzorec pre výpočet skóre zhluku môžeme zapísať vzorcom~\ref{eq:cluster-score}
 a~skóre inštancie vzorcom~\ref{eq:instance-score}. Skóre zhluku zabezpečuje
@@ -1787,7 +1818,7 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
 \end{equation}
 
 \begin{equation}
-  skore_{instancia_k} = \frac{vzdialenost_k}{priemerna\_vzdialenost\_zhluku_l} \text{, pre } instancia_k \in zhluk_l
+  skore_{instancia_i} = \frac{vzdialenost_i}{priemerna\_vzdialenost\_zhluku_j} \text{, pre } instancia_i \in zhluk_j
   \label{eq:instance-score}
 \end{equation}
 
@@ -1806,33 +1837,100 @@ kritérium. Skóre inštancie je znázornené na obrázku~\ref{fig:clustering-sc
   \label{fig:clustering-score}
 \end{figure}
 
+\subsection{Selekcia podozrivých inštancií}
 Vypočítané skóre anomálnosti je potrebné vyhodnotiť a~porovnávať navzájom voči
 ostatným navrhovaným skórovaniam. V~prípade dostupnosti dát s~označenými
 anomálnymi inštanciami je jednoduché pomocou vyhodnocovacích metrík
 analyzovaných v~kapitole~\ref{c:evaluation-metrics} určiť presnosť daného
 riešenia. Ako už bolo spomenuté, vytvorenie takéhoto datasetu je nesmierne
-časovo a~finančne náročné. Vyhodnocovanie vytvoreného skóre je založené na
-vhodnej reprezentácií časového radu v~dvojdimenzionálnom priestore pomocou
-FeaClip reprezentácie, opísanej v~kapitole~\ref{c:feaclip-representation}
-a~metódy PCA (prípadne TSNE), ktorá je bližšie opísaná
-v~kapitole~\ref{c:dimension-reduction}. Preto je potrebné analyzovať a~porovnať
-vzorku vybraných anomálnych intervalov pri rôznych oskórovaniach navzájom
-a~následne zvoliť nastavenie skórovania podľa dosiahnutých výsledkov. Na
-dodatočné overenie kvality skórovania môže slúžiť aj medzikvartilové rozpätie
-(angl. \textit{Interquartile Range}). Za anomálie budeme tak považovať
-intervaly, ktorých anomálne skóre nespĺňa medzikvartilové pravidlo, čiže skóre
-sa nachádza mimo intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$.
+časovo a~finančne náročné.
+
+Vyhodnocovanie vytvoreného skórovanie je založené na vhodnej reprezentácií
+časového radu v~dvojdimenzionálnom priestore pomocou FeaClip reprezentácie,
+opísanej v~kapitole~\ref{c:feaclip-representation} a~metódy PCA (prípadne TSNE),
+ktorá je bližšie opísaná v~kapitole~\ref{c:dimension-reduction}.
 
 Ako už bolo spomenuté, metóda FeaClip extrahuje z~dát spotreby elektrickej
 energie odberateľov ďalšie vlastnosti časových radov. Tým je zabezpečená
 redukcia vysokodimenzionálnych dát a~následná jednoduchá vizualizácia. Keďže
-metóda FeaClip pozostáva z~8~vlastností, je nutné časové rady opäť redukovať,
-napr. pomocou analýzy hlavných komponentov alebo vhodnou selekciou vzniknutých
-atribútov. Takými atribútmi môže byť práve počet jednotiek alebo počet prechodov
-medzi rôznymi behmi v~pozorovanom okne časového radu, čo bližšie opísali autori
-v~práci~\cite{Laurinec2018}. Pre vizualizáciu vybraného intervalu časového radu
-je nutná najskôr FeaClip transformácia po oknách, spriemerovanie výsledkov
-a~výber vhodných atribútov alebo PCA.
+metóda FeaClip je založená na transformácií dát podľa vzorca~\ref{eq:feaclip2}
+a~až následnej extrakcii 8~vlastností, je nutné vzniknuté časové rady opäť
+redukovať, napr. pomocou analýzy hlavných komponentov alebo vhodnou selekciou
+vzniknutých atribútov. Takými atribútmi môže byť práve počet jednotiek alebo
+počet prechodov medzi rôznymi behmi v~pozorovanom okne časového radu, čo bližšie
+opísali autori v~práci~\cite{Laurinec2018}. Pre vizualizáciu vybraného intervalu
+časového radu je nutná najskôr FeaClip transformácia po oknách, spriemerovanie
+výsledkov a~následný výber vhodných atribútov alebo aplikovanie PCA.
+
+\begin{equation}
+  \hat{x_i} =
+  \begin{cases}
+    1 \text{ ak } x_i > \mu \\
+    0 \text{ inak } \\
+  \end{cases}
+  \text{, pre i } \in (1, 2, ..., n)
+  \label{eq:feaclip2}
+\end{equation}
+
+Z~extrahovaných vlastností nás zaujímajú najmä počet jednotiek v~reťazci a~počet
+prechodov medzi rôznymi behmi. Beh predstavuje súvislú postupnosť jedného znaku.
+Operácie môžeme zapísať vzorcami~\ref{eq:feaclip-sum} a~\ref{eq:feaclip-cross}.
+Za anomálne sú považované intervaly časových radov, ktorých vlastnosti nespadajú
+do invervalu medzikvartilového pravidla $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$. Pri
+vizualizácií pomocou PCA, sú anomáliami inštancie nachádzajúce sa mimo oblasti
+väčšiny dát.
+
+\begin{equation}
+  sum_1 = \sum_{i=1}^{n} casovy\_rad_i
+  \label{eq:feaclip-sum}
+\end{equation}
+
+\begin{equation}
+  RLE = dlzka_{RLE}(casovy\_rad_i) - 1
+  \label{eq:feaclip-cross}
+\end{equation}
+
+Rovnako ako pri FeaClip reprezentácií, tak aj pri skórovaní inštancií môžeme na
+vypočítané skóre opäť uplatniť medzikvartilové pravidlo $<Q1 - 1.5 *
+IQR, Q3 + 1.5 * IQR>$. Vzhľadom na to, že nás zaujímajú najmä odberatelia,
+ktorých skóre je výrazne väčšie, budeme uvažovať iba prípady, ktoré prekračujú
+hornú hranicu pravidla. V~prípade, že spotreba odberateľov, je identifikovaná
+ako anomália vo viacerých posuvných oknách, je časový rad  dodatočne analyzovaný
+v~ďalších krokoch.
+
+\subsection{Vyhladenie časových radov}
+% TODO Pridat nieco o vyhladzovani + graf
+TODO Pridat nieco o vyhladzovani + graf
+
+\subsection{Analýza metódou S-H-ESD}
+Cieľom je vylepšiť skóre vypočítané v~predchádzajúcich krokoch a~spresniť tak
+interval, v~ktorom je výskyt anomálií výrazne väčší. Výstupom je pôvodný časový
+rad s~novým atribútom, ktorý pre každé meranie obsahuje skóre opisujúce
+podozrenie na anomálnosť. Atribút budeme nazývať skóre odberateľa, nakoľko je
+vypočítané pre celé sledované obdobie spotreby odberateľa. Môžeme ho vyjadriť
+vzorcom~\ref{eq:client-score}. Dôležité je uvedomiť si, že zatiaľ čo skóre
+inštancie a~zhluku sú vypočítané pre posuvné okno, ktoré je rozdelené na
+pracovné dni a~dni pokoja, skóre odberateľa je vypočítané pre celé sledované
+obdobie bez ohľadu na typ dňa. Predpokladom je, že metóda S-H-ESD dokáže
+spracovať časové rady s~dvojitou sezónnosťou.
+
+% TODO add some equation, mozno nejaky logaritmus per window + jednotlive instancie
+\begin{equation}
+  \label{eq:client-score}
+\end{equation}
+
+Dosiahnuté výsledky je nutné vhodne vizualizovať a~vyhodnotiť. Príkladom môže
+byť vizualizácia výsledkov na obrázku ~\ref{fig:shesd-example} TODO pridat obrazok.
+% TODO add picture and description
+Vzhľadom na fakt, že metóda je založená na učení bez učiteľa, vyhodnocovanie prebieha na základe
+už spomenutých riešení, konkrétne FeaClip transformácie a~metóde S-H-ESD.
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\textwidth]{shesd_example.png}
+%   \caption{TODO add caption .}
+%   \label{fig:shesd-example}
+% \end{figure}
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification

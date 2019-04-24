@@ -20,7 +20,7 @@ scoreSuspiciousTS <- function(dataset, minorPenalty = c(0.10)) {
       q <- as.numeric(quantile(table(dataset[[i]]$cluster), probs = p))
       subscores[table(dataset[[i]]$cluster) < q] <- subscores[table(dataset[[i]]$cluster) < q] + 1
     }
-    scores[[i]] <- subscores[dataset[[i]]$cluster] * dataset[[i]]$cldist / dataset[[i]]$clusinfo$av_dist[dataset[[i]]$cluster]
+    scores[[i]] <- subscores[dataset[[i]]$cluster] * dataset[[i]]$cldist / (dataset[[i]]$clusinfo$av_dist[dataset[[i]]$cluster] + 0.000000001)
   }
   scores <- data.frame(matrix(unlist(scores), nrow = length(dataset), byrow = TRUE))
   names(scores) <- DATACOLUMNS
