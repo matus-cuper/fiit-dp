@@ -414,7 +414,7 @@ nezávislosť. Multiplikatívny model je znázornený na
 obrázku~\ref{fig:multi-time-series-model} a~aditívny na
 obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
 	\captionsetup{justification=centering}
   \includegraphics[width=\textwidth]{multi_model.jpg}
@@ -422,7 +422,7 @@ obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
   \label{fig:multi-time-series-model}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{add_model.png}
   \caption[Príklad aditívneho modelu.]{Príklad aditívneho modelu, spotreba elektrickej energie v~regióne, Slovensko.}
@@ -587,7 +587,7 @@ Za anomáliu v~našej doméne považujeme správanie odberateľa, ktoré sa výr
 líši od ostatných odberateľov. Anomáliou môže byť celé pozorované obdobie alebo
 iba jeho určitá časť. Keďže datasety, ktoré máme k~dispozícií obsahujú konečný
 počet meraní a~teda nie sú spojité, anomália môže byť reprezentovaná aj jediným
-meraním. Anomálie môžme taktiež rozdeliť na pozitívne a~negatívne, v~závislosti
+meraním. Anomálie môžeme taktiež rozdeliť na pozitívne a~negatívne, v~závislosti
 od toho, aké sú očakávané a~reálne hodnoty. Ak je ich rozdiel kladný budeme
 hovoriť o~pozitívnych anomáliách, inak o~negatívnych~\cite{Kejariwal2015}.
 
@@ -755,8 +755,8 @@ zložky mediánom daného časového radu. Reziduálna zložka je potom vypočí
 rozdiel nameranej hodnoty a~súčtu sezónneho komponentu a~mediánu. Zmena vzorca
 použitého na dekompozíciu, zabráni tvorbe falošných anomálií v~reziduálnej
 zložke časového radu. Hlavnými obmedzením S-ESD sú datasety obsahujúce
-väčšií podiel anomálií. Môžeme si to všimnúť na
-obrázku~\ref{fig:sesd-anomalies}, kde anomálie nachádzajúce sa vo zvíraznenom
+väčší podiel anomálií. Môžeme si to všimnúť na
+obrázku~\ref{fig:sesd-anomalies}, kde anomálie nachádzajúce sa vo zvýraznenom
 regióne nie sú detegované, keďže ich množstvo ovplyvňuje ako priemer tak aj
 štandardnú odchýlku. Kvôli tomu algoritmus neoznačuje podozrivé pozorovania čím
 vzniká mnoho falošne neoznačených inštancií~\cite{Hochenbaum2017}.
@@ -794,7 +794,7 @@ použitie metódy S-ESD~\cite{Hochenbaum2017}.
   \label{fig:shesd-anomalies}
 \end{figure}
 
-Daľšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
+Dalšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
 Seasonal Hybrid Extreme Studentized Deviation}), ktorej proces pozostáva z~troch
 krokov, a~to transformácia dát, dekompozícia časových radov a~analýza
 reziduálnej zložky. Účelom transformácie dát je minimalizovať počet falošne
@@ -893,13 +893,13 @@ approach})~\cite{Rani2012}.
 
 \paragraph{Samoorganizované mapy} predstavujú triedu neurónových sietí, kde
 sú neuróny usporiadané v~nízkodimenzionálnej štruktúre. Trénovanie prebieha
-iiteratívne a~bez učiteľa. Proces začína pridelením náhodných hodnôt váhovým
+iteratívne a~bez učiteľa. Proces začína pridelením náhodných hodnôt váhovým
 vektorom $w$. Každá iterácia trénovania pozostáva z~3~krokov a~to náhodného
 výberu vstupného vektoru z~trénovacej množiny, evaluácie siete a~aktualizovaní
 váhových vektorov. Po natrénovaní je vypočítaná Euklidova vzdialenosť medzi
 vstupným vzorom a~váhovým vektorom. Následne je neurón s~najmenšou vzdialenosťou
 označený ako $t$ a~ostatné váhy ostatných neurónov sú aktualizované v~závislosti
-od vzdialenosti od neuróna $t$. Nevýhodou je opäť náročné spracovanie časových
+od vzdialenosti od neurónu $t$. Nevýhodou je opäť náročné spracovanie časových
 radov rôznych dĺžok, keďže dĺžka časového radu definuje aj dĺžku váhového
 vektora $w$~\cite{Kohonen2001,WarrenLiao2005}.
 
@@ -1098,7 +1098,7 @@ vzorcom~\ref{eq:distance-pearson}~\cite{WarrenLiao2005}.
 
 \paragraph{Vzdialenosť medzi krátkymi časovými radmi} je metóda (angl.
 \textit{Short time series}), ktorá meria vzdialenosť ako sumu štvorcových
-rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiadúcich
+rozdielov medzi krivkami jednotlivých časových radov. Na odstránenie nežiaducich
 efektov škály sa používa \textit{z} štandardizácia. Matematicky vzdialenosť
 vyjadríme vzorcom~\ref{eq:sts-distance}. Zložka $t_k$ predstavuje
 čas~\cite{WarrenLiao2005}.
@@ -1278,7 +1278,7 @@ symbol~\cite{Fu2011}.
 Ďalšou metódou je analýza hlavných komponentov (angl. \textit{principal
 component analysis}), skrátene PCA. Obvykle sa PCA používa na elimináciu menej
 významných komponentov, čím sa znižuje dimenzionalita dát. Metóda má uplatnenie
-aj pri analýze či vizualizácií vysokodimenzionálnych dát. Ńajskôr sú vypočítané
+aj pri analýze či vizualizácií vysokodimenzionálnych dát. Najskôr sú vypočítané
 priemery pre jednotlivé dimenzie dát, z~nich variancie a~kovariančná matica. Na
 základe kovariančnej matice sú vypočítané vlastné hodnoty a~vektory (angl.
 \textit{eigenvalues} a~\textit{eigenvectors}), ktoré definujú rovinu, na ktorú
@@ -1326,6 +1326,10 @@ vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
 	\label{eq:z-score}
   z = \frac{x-\mu}{\sigma}
 \end{equation}
+
+\subsubsection{Vyhladzovanie časových radov}
+% TODO add whole subchapter
+TODO pridat analyzu k smoothingu
 
 %-------------------------------------------------------------------------------
 %   Identification of abnormal behavior
@@ -1701,7 +1705,7 @@ v~nasledujúcich kapitolách.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.65\textwidth]{state_diagram.pdf}
+  \includegraphics[width=0.75\textwidth]{state_diagram.png}
   \caption{Stavový diagram procesu identifikácií anomálií.}
   \label{fig:state-diagram}
 \end{figure}
@@ -1715,7 +1719,7 @@ inštancie na základe tvaru krivky a~nie ich absolútnych hodnôt ako je to nap
 pri Euklidovej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
 početnosti jednotlivých skupín na majoritné a~minoritné. Z~majoritnej skupiny sú
 vybrané časové rady nachádzajúce sa na okraji zhluku. Časové rady z~oboch skupín
-sú následne analyzované pomocou SHESD metódy, čím vznikájú jednotlivé merania
+sú následne analyzované pomocou SHESD metódy, čím vznikajú jednotlivé merania
 v~časových radoch označené ako anomálie. Vzniknutým bodom je pridelené skóre,
 ktoré opisuje mieru istoty, že dané meranie je anomálne. Body je následné nutné
 zlúčiť do intervalov, ktoré sú roztriedené do skupín.
@@ -1876,7 +1880,7 @@ Z~extrahovaných vlastností nás zaujímajú najmä počet jednotiek v~reťazci
 prechodov medzi rôznymi behmi. Beh predstavuje súvislú postupnosť jedného znaku.
 Operácie môžeme zapísať vzorcami~\ref{eq:feaclip-sum} a~\ref{eq:feaclip-cross}.
 Za anomálne sú považované intervaly časových radov, ktorých vlastnosti nespadajú
-do invervalu medzikvartilového pravidla $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$. Pri
+do intervalu medzikvartilového pravidla $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$. Pri
 vizualizácií pomocou PCA, sú anomáliami inštancie nachádzajúce sa mimo oblasti
 väčšiny dát.
 
@@ -2054,11 +2058,12 @@ minútu, najpomalšie 70 sekúnd. Priemerný počet identifikovaných anomálií
 14.11\%. V~prípade, že sme ako anomálnych označili tých odberateľov, ktorých
 počet identifikovaných anomálií nespĺňa medzikvartilové pravidlo, čiže nespadá
 do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
-z~celkového počtu odberateľov. Tieto výsledky vizualizované pomocou FeaClip
-transformácie sú zobrazené na obrázku~\ref{fig:twitter-results}. V~prvom riadku
-sú výsledky funkcie \textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov,
-v~druhom riadku sú výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\%
-anomálnych odberateľov.
+z~celkového počtu odberateľov. Opäť sme uvažovali iba odberateľov, ktorých skóre
+nespĺňa hornú hranicu pravidla, nakoľko nás nezaujímajú štandardný odberatelia.
+Výsledky sme vizualizovali pomocou transformácie FeaClip a~sú zobrazené na
+obrázku~\ref{fig:twitter-results}. V~prvom riadku sú výsledky funkcie
+\textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov, v~druhom riadku sú
+výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov.
 
 \begin{figure}
   \centering
@@ -2074,8 +2079,12 @@ experimentoch, kedy bola analyzovaná iba časť časového radu je kvôli tomu 
 zvoliť obdobie aspoň 9~týždňov. Pre funkciu \textit{AnomalyDetectionVec}
 používateľ parametrami definuje krátkodobú a~dlhodobú periódu dát a~spomínané
 obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
-časového radu, tak aj pri čiastkových analýzach, čo môže byť prispieť
-k~rýchlosti identifikácie anomálií.
+časového radu, tak aj pri čiastkových analýzach, čo môže prispieť k~rýchlosti
+identifikácie anomálií.
+
+TODO pridat metodu od petolau 
+% TODO add peto lau  experiments
+% TODO pridat experimenty z noci, porovnat pocty a kvality identifikovanych časových radov, vizualizovať zo dva tri TS
 
 \subsection{Výber hyperparametrov zhlukovania}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
@@ -2170,6 +2179,9 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
   \caption{Vytvorené zhluky so zvýraznenými medoidmi.}
 	\label{fig:clustering-workdays}
 \end{figure}
+
+\subsection{Porovnanie navrhovanej metódy s~existujúcimi}
+TODO analyzovat vysledky podobne ako v 4.
 
 %-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
