@@ -50,6 +50,8 @@
     urlcolor=black
 }
 
+\hyphenation{veľ-kosť}
+
 %-------------------------------------------------------------------------------
 %   TITLE PAGES
 %-------------------------------------------------------------------------------
@@ -1328,8 +1330,26 @@ vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
 \end{equation}
 
 \subsubsection{Vyhladzovanie časových radov}
-% TODO add whole subchapter
-TODO pridat analyzu k smoothingu
+Spracovávané dáta často obsahujú lokálne extrémy alebo anomálne meranie, ktorých
+vplyv je nutné pred ďalším spracovaním eliminovať. Zatiaľ čo niektoré metódy sú
+robustné a~výsledky spracovania nie sú skreslené extrémnymi hodnotami, iné
+metódy sa vyznačujú extrémnou citlivosťou a~je potrebné predspracovať dáta
+pomocou vyhladzovania. Jednou takou je aj metóda lokálne odhadovaného
+vyhladzovania rozptylu (angl. \textit{locally estimated scatterplot smoothing}),
+skrátene LOESS. Predpokladajme, že veličina $y$ je definovaná pomocou regresnej
+funckie $g(x)$, ktorá predikuje danú veličinu s~náhodnou chybou $\epsilon$.
+Vzťah môžeme zapísať rovnicou~\ref{eq:loess}. Ide však o~neparametrickú
+štatistickú metódu, keďže pracujú s~početnosťami súboru alebo s~ich poradím
+určenom vo vstupných dátach. Princíp metódy spočíva v~lokálnej aproximácií
+prediktora $x_i$ pomocou susediacich meraní na základe veľkosti chyby voči
+skutočným meraniam. So zmenou veľkosti rádiusu prediktora $x_i$ sa mení aj miera
+vyhladzovania. Váha jednotlivých meraní sa zmenšuje v~závislosti od vzdialenosti
+od prediktora~\cite{Cohen1999}.
+
+\begin{equation}
+	\label{eq:loess}
+  y_i = g(x_i) + \epsilon_i
+\end{equation}
 
 %-------------------------------------------------------------------------------
 %   Identification of abnormal behavior
@@ -1849,7 +1869,7 @@ analyzovaných v~kapitole~\ref{c:evaluation-metrics} určiť presnosť daného
 riešenia. Ako už bolo spomenuté, vytvorenie takéhoto datasetu je nesmierne
 časovo a~finančne náročné.
 
-Vyhodnocovanie vytvoreného skórovanie je založené na vhodnej reprezentácií
+Vyhodnocovanie vytvoreného skórovania je založené na vhodnej reprezentácií
 časového radu v~dvojdimenzionálnom priestore pomocou FeaClip reprezentácie,
 opísanej v~kapitole~\ref{c:feaclip-representation} a~metódy PCA (prípadne TSNE),
 ktorá je bližšie opísaná v~kapitole~\ref{c:dimension-reduction}.
@@ -1881,7 +1901,7 @@ prechodov medzi rôznymi behmi. Beh predstavuje súvislú postupnosť jedného z
 Operácie môžeme zapísať vzorcami~\ref{eq:feaclip-sum} a~\ref{eq:feaclip-cross}.
 Za anomálne sú považované intervaly časových radov, ktorých vlastnosti nespadajú
 do intervalu medzikvartilového pravidla $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$. Pri
-vizualizácií pomocou PCA, sú anomáliami inštancie nachádzajúce sa mimo oblasti
+vizualizácií pomocou PCA, sú anomáliami inštancie, nachádzajúce sa mimo oblasti
 väčšiny dát.
 
 \begin{equation}
