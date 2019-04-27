@@ -22,7 +22,7 @@
 \usepackage{threeparttable}                                                     % table with footnotes
 \usepackage{listings}                                                           % source code syntax highlighting
 \usepackage{courier}																														% monospace in listings
-\usepackage{caption}																														% enable caption centering
+\usepackage[justification=centering]{caption}																		% enable caption centering
 \usepackage{regexpatch}																													% fix slovak in table with multirows
 \usepackage[titletoc]{appendix} 																								% appendix in toc with word appendix
 \usepackage{dirtree}                                                            % directory tree in appendix
@@ -51,6 +51,15 @@
 }
 
 \hyphenation{veľ-kosť}
+\hyphenation{veľ-kos-ťou}
+\hyphenation{naj-čas-tej-šie}
+\hyphenation{ap-proach}
+\hyphenation{sku-toč-ným}
+\hyphenation{jed-no-znač-ne}
+\hyphenation{Fea-Clip}
+\hyphenation{dtw-clust}
+\hyphenation{dos-tup-ných}
+\hyphenation{pos-led-né}
 
 %-------------------------------------------------------------------------------
 %   TITLE PAGES
@@ -90,12 +99,12 @@
   {\LARGE IDENTIFIKÁCIA NEŠTANDARDNÉHO SPRÁVANIA ODBERATEĽOV V~ENERGETICKEJ SIETI \par}
 	\vspace{0.5cm}
 	{\large Diplomová práca \\}
-	\vspace{7cm}
+	\vspace{6cm}
   \flushleft
-  {\normalsize Študijný program: Inteligentné softvérové systémy \par}
-	{\normalsize Študijný odbor: 9.2.5 Softvérové inžinierstvo, 9.2.8 Umelá inteligencia \par}
-	{\normalsize Miesto vypracovania: Ústav informatiky a softvérového inžinierstva, FIIT STU v Bratislave \par}
-	{\normalsize Vedúci práce: Ing. Marek Lóderer \par}
+  {\normalsize Študijný program: \hphantom{aaa} Inteligentné softvérové systémy \par}
+	{\normalsize Študijný odbor: \hphantom{aaaaa} 9.2.5 Softvérové inžinierstvo a 9.2.8 Umelá inteligencia \par}
+	{\normalsize Miesto vypracovania: \hphantom{} Ústav informatiky, informačných systémov a~softvérového \hphantom{Miesto vypracovania:.} inžinierstva, FIIT STU v~Bratislave \par}
+	{\normalsize Vedúci práce: \hphantom{aaaaaaa} Ing. Marek Lóderer \par}
   \vspace{0.5cm}
   {\normalsize apríl 2019 \par}
 \end{titlepage}
@@ -120,11 +129,11 @@
 \end{center}
 {Slovenská technická univerzita v Bratislave \par}
 {FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ \par}
-{Študijný program: Inteligentné softvérové systémy \par}
-{Autor: Bc. Matúš Cuper \par}
-{Bakalárska práca: Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
-{Vedúci práce: Ing. Marek Lóderer \par}
-{máj 2019 \par}
+{Študijný program: \indent Inteligentné softvérové systémy \par}
+{Autor: \indent \indent \indent \indent \vphantom{.} Bc. Matúš Cuper \par}
+{Bakalárska práca: \indent \vphantom{.} Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
+{Vedúci práce: \indent \indent \vphantom{.} Ing. Marek Lóderer \par}
+{apríl 2019 \par}
 \bigskip
 V práci sme sa zamerali na identifikáciu anomálií v~energetických časových
 radoch. Anomálie môžu vznikať na základe neštandardného správania odberateľov
@@ -158,32 +167,32 @@ a~rozloženia profilu používateľa v~zhlukoch.
     \textbf{Annotation} \par
   \end{Large}
 \end{center}
-{Slovak University of Technology Bratislava \par}
+{Slovak University of Technology in Bratislava \par}
 {FACULTY OF INFORMATICS AND INFORMATION TECHNOLOGIES \par}
-{Degree Course: Intelligent software systems \par}
-{Author: Bc. Matúš Cuper \par}
-{Bachelor thesis: Identification of abnormal behavior of customers in the power grid \par}
-{Supervisor: Ing. Marek Lóderer \par}
-{May 2019 \par}
+{Degree Course: \indent Intelligent Software Systems \par}
+{Author: \indent \indent \indent \vphantom{.} Bc. Matúš Cuper \par}
+{Bachelor thesis: \indent Identification of abnormal behavior of customers in the power grid \par}
+{Supervisor: \indent \indent \vphantom{.} Ing. Marek Lóderer \par}
+{April 2019 \par}
 \bigskip
 In the thesis we focused on anomaly identification in energy time series.
-Anomalies can be caused by abnormal behavior of customers or failure of
+Anomalies can be caused by abnormal behavior of customers or a failure of
 intelligent meter of electricity load. The aim of this master thesis is to
 identify these mentioned cases and reduce electricity loss of distribution
-company. Also it is necessary to identify only cases, when the behavioral change
-is temporal, whether it is result of different number of residents, weather or
-an exceptional occasion. Nowadays, electricity load profile of customers is
-changing as the new technologies are involved and therefore it is necessary to
-correctly identify new trends in data.
+companies. Also it is necessary to identify only those cases, when the
+behavioral change is temporal, whether it is a result of different number of
+residents, weather or an exceptional occasion. Nowadays, the electricity load
+profile of customers is changing as new technologies are involved and therefore
+it is necessary to correctly identify new trends in data.
 
 We also analyzed time series, anomalies and methods used for their
 identification. We described problems linked to identifications of anomalies in
-domain of electricity, while our method is facing these problems as well. We
+the domain of electricity, while our method is facing these problems as well. We
 focused on time series clustering, which brings new approaches to clustering of
-multidimensional data, which includes also smoothing, dimension reduction and
-attribute selection. Proposed method clusters discretized smoothed time series
-and then, based on created clusters and layout of customers profile in cluster,
-identifies anomalies.
+multidimensional data, including smoothing, dimension reduction and attribute
+selection. Our proposed method clusters discretized smoothed time series and
+then, subsequently identifies anomalies, based on created clusters and layout of
+customers profiles in clusters.
 \end{titlepage}
 \newpage\null\thispagestyle{empty}\newpage
 
@@ -247,17 +256,43 @@ detekcia neštandardného správania odberateľov. Jej úlohou je identifikovať
 profily zákazníkov, ktorí svojím správaním porušujú stanovené podmienky
 a~manipulujú s~hodnotami nameranými meračmi za cieľom obohatenia sa. Samozrejme
 tiež dochádza k~prípadom, kedy je presnosť meracieho zariadenia nižšia aj bez
-zapríčinenia zákazníka. Oba prípady sú pre distribučnú spoločnosť nežiaduce a~je
-v~záujme zníženia strát, ich čo najskôr identifikovať. Obvykle sú za týmto
-účelom vykonávané náhodné kontroly, ktoré pokrývajú iba nízky počet zákazníkov
-s~anomálnym správaním. Na základe množstva dát získavaných z~inteligentných
-meračov je možné modelovať správanie zákazníkov. Distribučné spoločnosti tak
-môžu znižovať svoje straty a~preverovať iba odberateľov, ktorí svojím profilom
-nezapadajú medzi odberateľov so štandardným správaním.
+zapríčinenia zákazníka. Ďalším faktorom ovplyvňujúcim predikciu spotreby
+elektrickej energie je nepredvídateľné správanie zákazníka. Ide o~prípady, kedy
+sú dodržané zmluvné podmienky a~meracie zariadenie nevykazuje chybu s~významnou
+veľkosťou. Všetky prípady sú pre distribučnú spoločnosť nežiaduce a~je v~záujme
+zníženia strát a~optimalizácie distribúcie, ich čo najskôr identifikovať
+a~dodatočne monitorovať. Odhalením neobvyklého správania je možné zvýšiť
+stabilitu distribučnej siete, zvýšiť presnosť predikcie distribútora, prípadne
+rozšíriť kapacitu siete a~pripraviť ju tak na budúce trendy. Obvykle sú za
+účelom odhalenia vykonávané náhodné kontroly, ktoré pokrývajú iba nízky počet
+zákazníkov s~anomálnym správaním. Na základe množstva dát získavaných
+z~inteligentných meračov je možné modelovať správanie buď jednotlivých
+zákazníkov alebo aj rovnakých skupín používateľov. Distribučné spoločnosti tak
+žnižujú straty pri dodávke energie a~zároveň dokážu preverovať iba odberateľov,
+ktorí svojím profilom nezapadajú medzi odberateľov so štandardným správaním.
 
-% TODO dopíš niečo o anomáliách a predpovediach časových radov
-% TODO výsledky práce
-% TODO členenie práce
+Cieľom práce je identifikovať v~časových radov spotreby elektrickej energie,
+také invervaly, ktoré svojou charakteristikou nezodpovedajú správaniu ostatných
+odberateľov v~datasete. Vzhľadom na fakt, že manuálne označenie takýchto
+intervalov je časovo a~finančne náročné, je metóda založená na učení bez
+učiteľa. Na druhej strane predpokladá veľké množstvo dát odberateľov, na základe
+ktorých sú medzi nimi identifikované podobnosti a~odlišnosti. Miera odlišnosti
+definuje aj mieru anomálnosti daného intervalu. Spracovanie a~transformácia
+veľkých datasetov je dosiahnutá pomocou štatistických metód a~strojového učenia.
+
+Práca je rozdelená do piatich kapitol vrátane úvodu.
+V~kapitole~\ref{c:problem-analysis} sa zaoberáme analýzou existujúcich riešení,
+rôznymi prístupmi pri identifikácií anomálií, zhlukovaniu časových radov, ale aj
+ich transformáciou alebo redukciou dimenzií. Osobitná pozornosť je venovaná
+štatistickým metódam, ktorých cieľom je identifikovať anomálie a~zmeny
+v~časových radoch. V~kapitole~\ref{c:solution-design} navrhujeme vlastné
+riešenie, ktoré na základe zhlukovania časových radov počíta skóre anomálnosti
+pre každého odberateľa. Skóre je ďalej použité pri bližšej identifikácií
+intervalov, ktorých priebeh je neobvyklý prípadne náhody.
+V~kapitole~\ref{c:experimental-verification} sú bližšie popísané vykonané
+experimenty a~porovnanie navrhovaného riešenia s~existujúcimi. V~poslednej
+kapitole~\ref{c:conclusion} sú zhodnotené výsledky našej práce.
+
 \newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
@@ -336,15 +371,15 @@ a~objektívne~\cite{Sapankevych2009}.
 \subsubsection{Zložky časových radov}
 Na vývoj časových radov vplývajú ich jednotlivé komponenty, z~ktorých
 pozostávajú. Ich vývoj je ovplyvnení rôznymi faktormi, či už ekonomickými,
-ekologickými, počasím, sviatkami alebo kultúrou. Priebehy grafov jednotlivých
-komponentov potom môžu byť cyklické, rastúce, klesajúce alebo stagnujúce
-v~závislosti od toho, či existuje zmena, ktorá je trvalá alebo opakujúca.
-Taktiež aj veľkosť periódy tohto cyklu môže byť rôzna, a~to niekoľko dní,
-mesiacov či rokov. Keďže prostredie, v~ktorom meriame predpovedanú veličinu sa
-vyvíja, rovnako sa vyvíja aj správanie pozorovanej veličiny. Preto je potrebné
-pri modelovaní správania uvažovať jednotlivé komponenty časového radu.
-V~literatúre sa najčastejšie stretávame s~rozdelením na 4~komponenty, a~to
-trendovú, cyklickú, sezónnu a~reziduálnu zložku~\cite{Grmanova2016}.
+počasím, sviatkami alebo kultúrou. Priebehy grafov jednotlivých komponentov
+potom môžu byť cyklické, rastúce, klesajúce alebo stagnujúce v~závislosti od
+toho, či existuje zmena, ktorá je trvalá alebo opakujúca. Taktiež aj veľkosť
+periódy tohto cyklu môže byť rôzna, a~to niekoľko hodín, dní, mesiacov či
+rokov. Keďže prostredie, v~ktorom meriame predpovedanú veličinu sa vyvíja,
+rovnako sa vyvíja aj správanie pozorovanej veličiny. Preto je potrebné pri
+modelovaní správania uvažovať jednotlivé komponenty časového radu. V~literatúre
+sa najčastejšie stretávame s~rozdelením na 4~komponenty, a~to trendovú,
+cyklickú, sezónnu a~reziduálnu zložku~\cite{Grmanova2016}.
 
 \paragraph{Trendová zložka} zastupuje dlhodobé správanie časového radu. Ide
 o~dlhodobé klesanie, rast alebo stagnáciu časového radu. Príkladom môže byť
@@ -407,6 +442,22 @@ kapitole vznikajú 2~typy modelov, aditívny a~multiplikatívny.
   \label{eq:time-series-models}
 \end{equation}
 
+\begin{figure}[htbp]
+  \centering
+	\captionsetup{justification=centering}
+  \includegraphics[width=0.9\textwidth]{multi_model.jpg}
+  \caption[Príklad multiplikatívneho modelu.]{Príklad multiplikatívneho modelu, index stavebnej produkcie Slovenska, Eurostat.}
+  \label{fig:multi-time-series-model}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{add_model.png}
+  \caption[Príklad aditívneho modelu.]{Príklad aditívneho modelu, spotreba elektrickej energie v~regióne, Slovensko.}
+  \label{fig:add-time-series-model}
+\end{figure}
+
+\noindent
 Vo vzorci~\ref{eq:time-series-models}, $Y(t)$ predstavuje meranie pozorovanej
 veličiny v~čase $t$. Ostatné premenné $T$, $S$, $C$ a $I$ reprezentujú trendový,
 sezónny, cyklický a~reziduálny komponent. Veličiny multiplikatívneho modelu sa
@@ -414,21 +465,6 @@ môžu vzájomne ovplyvňovať, zatiaľ čo pri aditívnom modely predpokladáme
 nezávislosť. Multiplikatívny model je znázornený na
 obrázku~\ref{fig:multi-time-series-model} a~aditívny na
 obrázku~\ref{fig:add-time-series-model}~\cite{Agrawal2013}.
-
-\begin{figure}[htbp]
-  \centering
-	\captionsetup{justification=centering}
-  \includegraphics[width=\textwidth]{multi_model.jpg}
-  \caption[Príklad multiplikatívneho modelu.]{Príklad multiplikatívneho modelu, index stavebnej produkcie Slovenska, Eurostat.}
-  \label{fig:multi-time-series-model}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.9\textwidth]{add_model.png}
-  \caption[Príklad aditívneho modelu.]{Príklad aditívneho modelu, spotreba elektrickej energie v~regióne, Slovensko.}
-  \label{fig:add-time-series-model}
-\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Division of time series
@@ -495,7 +531,7 @@ problémami~\cite{Chandola2009}:
 	normálne dáta, ktorých identifikácia je následne zložitá.
 \end{description}
 
-Na detekciu anomálií sú používané aj algoritmy určené na klasifikáciu, ako je
+Na detekciu anomálií sa bežne používajú algoritmy určené na klasifikáciu, ako je
 napríklad naivný Bayesovský klasifikátor (angl. \textit{Naive Bayes}),
 k-najbližší susedia (angl. \textit{k-nearest neighbors}), rozhodovacie stromy
 (angl. \textit{decision tree}), náhodné lesy (angl. \textit{random forests}),
@@ -645,8 +681,8 @@ Detegovať anomálie rôznych typov môžeme niekoľkými spôsobmi, čo závis�
 samotných dát. Ich úplnosť, množstvo a~oblasť, v~ktorej boli zozbierané sú
 kritické pre správny výber techniky, pomocou ktorej budú anomálie
 identifikované. Nás budú zaujímať najmä detekcie anomálií v~časových radoch.
-Popísané metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale pre
-úplnosť sú spomenuté aj iné používané metódy.
+Analyzované metódy sú najmä z~oblasti strojového učenia a~dátovej analýzy, ale
+pre úplnosť sú spomenuté aj iné používané metódy.
 
 \subsubsection{Klasifikácia}
 Pomocou naučeného modelu, nazývaného aj klasifikátor, sú rozoznávané triedy
@@ -745,6 +781,7 @@ v~štatistike často označovaná aj ako Grubbov test~\cite{Kuppusamy2013,Rosner
   {n - i}
 \end{equation}
 
+\noindent
 Do rovnakej kategórie môžeme zaradiť aj sezónnu ESD (angl. \textit{Seasonal
 Extreme Studentized Deviation}), ktorá rovnako využíva ESD na identifikáciu
 anomálií. Kľúčovým rozdielom je aplikovanie ESD až na dáta, ktoré boli
@@ -769,6 +806,7 @@ vzniká mnoho falošne neoznačených inštancií~\cite{Hochenbaum2017}.
   \label{fig:sesd-anomalies}
 \end{figure}
 
+\noindent
 Cieľom sezónnej hybridnej ESD (angl. \textit{Seasonal Hybrid Extreme
 Studentized Deviation}) odstrániť obmedzenia, ktoré vznikajú pri S-ESD.
 Rovnako je použitá modifikovaná dekompozícia STL. Rozdiel je v~ESD, kde
@@ -795,6 +833,7 @@ použitie metódy S-ESD~\cite{Hochenbaum2017}.
   \label{fig:shesd-anomalies}
 \end{figure}
 
+\noindent
 Dalšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
 Seasonal Hybrid Extreme Studentized Deviation}), ktorej proces pozostáva z~troch
 krokov, a~to transformácia dát, dekompozícia časových radov a~analýza
@@ -821,7 +860,7 @@ odchýlky spracovávaného okna~\cite{Vieira2018}.
 \subsection{Metódy zhlukovania časových radov}
 Cieľom zhlukovania je rozdeliť dátové inštancie do \textit{k}~zhlukov na základe
 spoločných čŕt. V~prípade, že inštancie sú reprezentované nízkodimenzionálnym
-vektorom v~Euklidovom priestore, môžu byť na zhlukovanie použité klasické
+vektorom v~Euklidovskom priestore, môžu byť na zhlukovanie použité klasické
 techniky spomenuté v~\ref{c:analysis-techniques}. Ak inštancie reprezentujú
 časový rad, nasadenie takýchto štandardných prístupov je
 zriedkavé~\cite{Hautamaki2008}.
@@ -858,6 +897,7 @@ kvadratická~\cite{Dzeroski2007}.
   \label{fig:hierarchical-clustering}
 \end{figure}
 
+\noindent
 Metóda hierarchického zhlukovania zoskupuje časové rady do stromu zhlukov. Vo
 všeobecnosti existujú dva typy týchto metód, aglomeratívne a~deliace.
 Aglomeratívne metódy zo začiatku umiestňujú časové rady do samostatného zhluku,
@@ -897,7 +937,7 @@ sú neuróny usporiadané v~nízkodimenzionálnej štruktúre. Trénovanie prebi
 iteratívne a~bez učiteľa. Proces začína pridelením náhodných hodnôt váhovým
 vektorom $w$. Každá iterácia trénovania pozostáva z~3~krokov a~to náhodného
 výberu vstupného vektoru z~trénovacej množiny, evaluácie siete a~aktualizovaní
-váhových vektorov. Po natrénovaní je vypočítaná Euklidova vzdialenosť medzi
+váhových vektorov. Po natrénovaní je vypočítaná Euklidovská vzdialenosť medzi
 vstupným vzorom a~váhovým vektorom. Následne je neurón s~najmenšou vzdialenosťou
 označený ako $t$ a~ostatné váhy ostatných neurónov sú aktualizované v~závislosti
 od vzdialenosti od neurónu $t$. Nevýhodou je opäť náročné spracovanie časových
@@ -907,7 +947,7 @@ vektora $w$~\cite{Kohonen2001,WarrenLiao2005}.
 \subsubsection{Zhlukovanie na základe modelu}
 \label{c:model-clustering}
 Metóda (angl. \textit{Model based clustering approach}) predpokladá, že každý
-časový rad je generovaný nejakým modelom alebo pravdepodobnostnou distribúciou.
+časový rad je generovaný určitým modelom alebo pravdepodobnostnou distribúciou.
 Časové rady sú považované za podobné ak aj modely charakterizujúce jednotlivé
 časové rady sú si podobné~\cite{Rani2012}.
 
@@ -944,7 +984,7 @@ skupina meraní alebo celý časový rad označené za anomálie~\cite{Teng2010}
 Kľúčovou záležitosťou pri zhlukovaní časových radov na základe ich podobnosti,
 je meranie vzdialenosti medzi nimi. Rovnako ako pri zhlukovaní bodových
 inštancií je potrebné definovať si metódy merania vzdialenosti. Najčastejšími
-metrikami sú Euklidova a~Manhattanova vzdialenosť. Vhodnosť aplikovania
+metrikami sú Euklidovská a~Manhattanská vzdialenosť. Vhodnosť aplikovania
 týchto klasických metód je nízka, keďže nameraná vzdialenosť zachytáva aj
 použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla zaujíma
 zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
@@ -954,7 +994,7 @@ radov~\cite{Dzeroski2007,WarrenLiao2005}.
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
 3~skupín založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
-základe ktorého je vypočítaná napr. Euklidova vzdialenosť medzi jednotlivými
+základe ktorého je vypočítaná napr. Euklidovská vzdialenosť medzi jednotlivými
 inštanciami. Modelové techniky používajú parametrický model, do ktorého vstupujú
 časové rady. Vzdialenosť je potom definovaná ako vzdialenosť medzi jednotlivými
 modelmi. Metódy porovnávajúce tvary kriviek sa snažia prispôsobiť výsledný tvar
@@ -971,7 +1011,9 @@ medzi dvoma časovými radmi $X$ a~$Y$. Vyjadríme ho vzorcom~\ref{eq:correlatio
   {E \left[ \left( X - E \left[ X \right] \right) \cdot \left( Y - E \left[ Y \right] \right) \right]}
   {E \left[ \left( X - E \left[ X \right] \right)^2 \right] \cdot E \left[ \left( Y - E \left[ Y \right] \right)^2 \right]}
 \end{equation}
+\medskip
 
+\noindent
 Korelácia blízka $-1$ znamená, že nárast kriviek časových radov je zrkadlový.
 Pri korelácií rovnej $0$ hovoríme o~rozdielnych časových radoch a~pri hodnote
 $1$ o~podobných. Na základe hodnoty korelácie, potom môžeme vyjadriť vzdialenosť
@@ -1014,12 +1056,13 @@ vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011,Hsu2015}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\textwidth]{warping-distance.png}
-  \caption[Príklad porovnávania časových radov pomocou dynamickej deformácií času.]{Príklad porovnávania časových radov pomocou dynamickej deformácií času~\cite{Malinowski2017}.}
+  \includegraphics[width=\textwidth]{warping_distance.png}
+  \caption[Príklad porovnávania časových radov pomocou dynamickej deformácií času.]{Príklad porovnávania časových radov pomocou dynamickej deformácií času (časové rady sú vyznačené modrou a~červenou)~\cite{Malinowski2017}.}
   \label{fig:warping-distance}
 \end{figure}
 
 \label{c:distance-metrics-gak}
+\noindent
 Do rovnakej rodiny vzdialenostných metrík patrí aj rýchle globálne zarovnávanie
 kernelov (angl. \textit{Fast global alignment kernels}) skrátene GAK. Cieľom
 metódy je znížiť veľkú časovú náročnosť DTW s~dosiahnutím porovnateľných
@@ -1050,7 +1093,7 @@ závislosť~\cite{Dzeroski2007}.
   {N \cdot \left( N - 1 \right)}
 \end{equation}
 
-\paragraph{Euklidova vzdialenosť} je používaná najmä pri klasických
+\paragraph{Euklidovská vzdialenosť} je používaná najmä pri klasických
 zhlukovacích problémoch. Ak zvolený časový rad má dĺžku $n$, vzdialenosť
 vypočítame vzorcom~\ref{eq:distance-euclidean}. Na
 obrázku~\ref{fig:euclidean-distance} sú vždy porovnávané hodnoty vyskytujúce sa
@@ -1063,12 +1106,12 @@ v~rovnakom čase $t$~\cite{WarrenLiao2005}.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.95\textwidth]{euclidean-distance.png}
-  \caption[Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti.]{Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti~\cite{Malinowski2017}.}
+  \includegraphics[width=\textwidth]{euclidean_distance.png}
+  \caption[Príklad porovnávania časových radov pomocou Euklidovskej vzdialenosti.]{Príklad porovnávania časových radov pomocou Euklidovskej vzdialenosti (časové rady sú vyznačené modrou a~červenou)~\cite{Malinowski2017}.}
   \label{fig:euclidean-distance}
 \end{figure}
 
-\paragraph{Manhattanovská vzdialenosť} je rovnako ako Euklidova vzdialenosť
+\paragraph{Manhattanská vzdialenosť} je rovnako ako Euklidovská vzdialenosť
 používaná najmä pri klasických zhlukovacích problémoch. Výpočet je tiež veľmi
 podobný, môžeme ho vyjadriť vzorcom~\ref{eq:distance-manhattan}~\cite{Craw2017}.
 
@@ -1151,7 +1194,7 @@ dĺžku posuvného okna~\cite{Nagi2008}.
 \subsubsection{Výber atribútov}
 Väčšina dát pochádzajúcich z~inteligentných meračov obsahuje iba stĺpce
 s~časovou známkou a~momentálnou spotrebou daného uzlu v~sieti. Z~týchto
-informácií ešte vieme vyčítať, mesiac, týždeň, deň prípadne deň v~týždni alebo
+informácií ešte vieme určiť, mesiac, týždeň, deň prípadne deň v~týždni alebo
 sviatok. Niektoré z~extrahovaných atribútov úzko súvisia s~funkciou spotreby
 elektrickej energie. Pri vytváraní presného modelu je preto nevyhnutné správne
 identifikovať takéto atribúty. Otestovanie všetkých kombinácií by bolo časovo
@@ -1478,6 +1521,7 @@ ktorých sme správne klasifikovali ako podozrivých.
   \text{Presnosť} = \frac{TP}{TP + FP}
 \end{equation}
 
+\noindent
 Pokrytie označuje pomer správne označených anomálií a~celkový počet skutočných
 anomálií. Vyjadríme ju pomocou vzorca~\ref{eq:recall}.
 
@@ -1486,6 +1530,7 @@ anomálií. Vyjadríme ju pomocou vzorca~\ref{eq:recall}.
   \text{Pokrytie} = \frac{TP}{TP + FN}
 \end{equation}
 
+\noindent
 Aby sa predišlo situácií, kedy sa v~dátach nachádza iba malý počet anomálnych
 odberateľov a~pre model by tak bolo výhodnejšie označovať iba tých, s~ktorými si
 je takmer istý, je dôležité brať do úvahy aj túto metriku. Obe metriky sú
@@ -1504,6 +1549,7 @@ vyjadrené v~percentách~\cite{Trevizan2015,Wei2006}.
 	\end{tabular}
 \end{table}
 
+\noindent
 Ďalšou používanou metrikou je aj tzv. F-skóre, ktoré obsahuje informácie oboch
 predchádzajúcich metrík. Keďže ide o~súčet metrík, tiež je vyjadrené
 v~percentách. Cieľom práce je maximalizovať túto metriku. F-skóre vyjadríme
@@ -1544,6 +1590,7 @@ nachádzajú v~kategórií \textit{true positive}~\cite{Bilgic2018}.
 	\end{tabular}
 \end{table}
 
+\noindent
 Spomínané validačné indexy môžeme vyjadriť nasledujúcimi vzorcami, a~to Randov
 index vzorcom~\ref{eq:rand}, Jaccardov index vzorcom~\ref{eq:jaccard}
 a~Fowlkes-Mallowsov index vzorcom~\ref{eq:fowlkes}. Indexy sú bližšie popísané
@@ -1581,6 +1628,7 @@ skóre ako skórovacia funkcia, generalizované Dunnove indexy a~COP index.
   \label{fig:shaffer-test}
 \end{figure}
 
+\noindent
 V~závere autori vyhodnotili výsledky svojich experimentov a~graficky ich
 interpretovali pomocou Shafferovho testu~\ref{fig:shaffer-test}. Nižší rank
 predstavuje lepšie výsledky validačného indexu na rôznych datasoch. Zároveň
@@ -1600,7 +1648,7 @@ V~\cite{Hautamaki2008} bola pri zhlukovaní použitá aj kombinácia viacerých
 metód, konkrétne k-means, metóda náhodnej výmeny a~aglomeratívne zhlukovanie.
 Ako už bolo spomenuté v~\ref{c:analysis-techniques}, úlohou algoritmu k-means
 namapovať existujúce inštancie do \textit{k} zhlukov. Aj keď metóda náhodnej
-výmeny je obmedzená na zhlukovacie problémy v~Euklidovom priestore, bola
+výmeny je obmedzená na zhlukovacie problémy v~Euklidovskom priestore, bola
 použitá aj pri zhlukovaní časových radov a~zabraňuje zaseknutiu zhluku
 v~lokálnom minime. V~princípe je náhodne vybraný zhluk, ktorý bude vymazaný a~za
 centroid bude vybraný jeden časový rad z~neho. Ak takéto riešenie je lepšie ako
@@ -1734,7 +1782,7 @@ odberateľov do jednej skupiny tak, aby sa neprekrývalo. Vzniknuté časové ra
 nutné pred ďalším spracovaním normalizovať, napr. pomocou z-skóre. Normalizácia
 je potrebná kvôli použitým metrikám podobnosti časových radov, ktoré porovnávajú
 inštancie na základe tvaru krivky a~nie ich absolútnych hodnôt ako je to napr.
-pri Euklidovej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
+pri Euklidovskej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
 početnosti jednotlivých skupín na majoritné a~minoritné. Z~majoritnej skupiny sú
 vybrané časové rady nachádzajúce sa na okraji zhluku. Časové rady z~oboch skupín
 sú následne analyzované pomocou SHESD metódy, čím vznikajú jednotlivé merania
@@ -1762,6 +1810,7 @@ riešenia, ktoré poskytuje najlepšie zhlukovanie.
   \hat{\gamma} = min \sum_{j=1}^{k} \sum_{x \in K_j(\lambda)} d(x, m_j)
 \end{equation}
 
+\noindent
 Pri práci so zhlukovacími metódami je nutné určiť viacero hyperparametrov, ako
 je napr. výsledný počet zhlukov, metrika vzdialenosti, ale aj špecifické
 parametre ako je veľkosť kroku a~dĺžka posuvného okna. Pod dĺžkou posuvného okna
@@ -1770,13 +1819,14 @@ posuvného okna je rovnako udávaná v~týždňoch a~predstavuje veľkosť posun
 o~ktorý sa okno zmení. V~prípade, že dĺžka posuvného okna a~veľkosť kroku sú
 rovnaké, nedochádza k~prekryvu okien. Pri dĺžke okna $n$ a~menšej veľkosti kroku
 napr. $n-1$, sa okná prekrývajú práve v~$n-1$ týždňoch. Výhody a~nevýhody metrík
-vzdialenosti sú popísané v~kapitole~\ref{c:distance-metrics}. Kritériami na
-výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať aj časové
-rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť existujúce
-anomálie do takej miery, že by neboli identifikované. Na druhej strane agregácia
-zabezpečuje elimináciu menších anomálií. Cieľom práce je identifikovať najmä
-rozsiahlejšie anomálie v~správaní odberateľov. Veľkosť kroku posuvného okna je
-nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu okien.
+vzdialenosti sme bližšie anaylzovali už v~kapitole~\ref{c:distance-metrics}.
+Kritériami na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať
+aj časové rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť
+existujúce anomálie do takej miery, že by neboli identifikované. Na druhej
+strane agregácia zabezpečuje elimináciu menších anomálií. Cieľom práce je
+identifikovať najmä rozsiahlejšie anomálie v~správaní odberateľov. Veľkosť kroku
+posuvného okna je nutné zadefinovať tak, aby pri posune dochádzalo k~prekryvu
+okien.
 
 Výpočet intervalov posuvného okna môžeme zapísať
 vzorcami~\ref{eq:windowing-start} a~\ref{eq:windowing-end}, pre každé okno
@@ -1805,7 +1855,7 @@ a~štandardnej odchýlky, čo môžeme zapísať vzorcom~\ref{eq:z-score2}.
   z = \frac{x-\mu}{\sigma}
 \end{equation}
 
-\subsection{Ohodnotenie podozrivých zhlukov a~intervalov}
+\subsection{Skórovanie podozrivých zhlukov a~inštancií}
 Pre výber riedkych zhlukov a~inštancií na okraji zhlukov je potrebné vypočítať
 skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
 časovom rozmedzí. Skóre označujúce hustotu pozorovaného zhluku budeme ďalej
@@ -1821,6 +1871,7 @@ centroidu zhluku, do ktorého patrí.
   \label{eq:custom-score}
 \end{equation}
 
+\noindent
 Vzorec pre výpočet skóre zhluku môžeme zapísať vzorcom~\ref{eq:cluster-score}
 a~skóre inštancie vzorcom~\ref{eq:instance-score}. Skóre zhluku zabezpečuje
 penalizáciu malých zhlukov, čím je kvantilov viac a~sú menšie, tým je
@@ -1844,6 +1895,7 @@ patrí a~priemerom vzdialeností inštancií od centroidu v~rovnakom zhluku.
   \label{eq:instance-score}
 \end{equation}
 
+\noindent
 Navrhnuté skórovanie je vypočítané pre každé analyzované posuvné okno. Výpočet
 skórovania je zobrazený na obrázku~\ref{fig:clustering-score}. Skóre zhluku je
 založené na rozdelení zhlukov na majoritné a~minoritné zhluky. Majoritné zhluky
@@ -1859,7 +1911,7 @@ kritérium. Skóre inštancie je znázornené na obrázku~\ref{fig:clustering-sc
   \label{fig:clustering-score}
 \end{figure}
 
-\subsection{Selekcia podozrivých inštancií}
+\subsection{Selekcia podozrivých odberateľov}
 Vypočítané skóre anomálnosti je potrebné vyhodnotiť a~porovnávať navzájom voči
 ostatným navrhovaným skórovaniam. V~prípade dostupnosti dát s~označenými
 anomálnymi inštanciami je jednoduché pomocou vyhodnocovacích metrík
@@ -1894,6 +1946,7 @@ výsledkov a~následný výber vhodných atribútov alebo aplikovanie PCA.
   \label{eq:feaclip2}
 \end{equation}
 
+\noindent
 Z~extrahovaných vlastností nás zaujímajú najmä počet jednotiek v~reťazci a~počet
 prechodov medzi rôznymi behmi. Beh predstavuje súvislú postupnosť jedného znaku.
 Operácie môžeme zapísať vzorcami~\ref{eq:feaclip-sum} a~\ref{eq:feaclip-cross}.
@@ -1942,6 +1995,7 @@ v~tabuľke~\ref{tab:feaclip}
   \label{fig:feaclip-example}
 \end{figure}
 
+\noindent
 Rovnako ako pri FeaClip reprezentácií, tak aj pri skórovaní inštancií môžeme na
 vypočítané skóre opäť uplatniť medzikvartilové pravidlo $<Q1 - 1.5 *
 IQR, Q3 + 1.5 * IQR>$. Vzhľadom na to, že nás zaujímajú najmä odberatelia,
@@ -1950,7 +2004,7 @@ hornú hranicu pravidla. V~prípade, že spotreba odberateľov, je identifikovan
 ako anomália vo viacerých posuvných oknách, je časový rad dodatočne analyzovaný
 v~ďalších krokoch.
 
-\subsection{Vyhladenie časových radov}
+\subsection{Vyhladzovanie časových radov podozrivých odberateľov}
 Odberatelia označený najvyšším anomálnym skóre sú ďalej analyzovaný pomocou
 metódy S-H-ESD. Najskôr je však potrebné spracovávané dáta vyhladiť, čím sú
 v~podstatnej miere eliminované extrémne hodnoty a~lokálne anomálie. V~analýze
@@ -1986,7 +2040,7 @@ vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
   \label{fig:smoothing-anomalies}
 \end{figure}
 
-\subsection{Analýza metódou S-H-ESD}
+\subsection{Skórovanie odberateľov metódou S-H-ESD}
 Cieľom je vylepšiť skóre vypočítané v~predchádzajúcich krokoch a~spresniť tak
 interval, v~ktorom je výskyt anomálií výrazne väčší. Výstupom metódy S-H-ESD je
 pôvodný časový rad s~príznakom, ktorým sú označené identifikované anomálie. Nový
@@ -2008,6 +2062,7 @@ spracovať časové rady s~dvojitou sezónnosťou.
   \label{eq:client-score}
 \end{equation}
 
+\noindent
 Dosiahnuté výsledky bez aplikovania S-H-ESD sú agregované v~rámci jedného
 posuvného okna, čiže vytvorené skóre okna je rovnaké. Je možné ho spriemerovať
 s~prekrývajúcimi sa oknami, no ak by bola veľkosť prekryvu príliš malá, nárast
@@ -2053,48 +2108,18 @@ spomenutých riešení, konkrétne FeaClip transformácie a~metóde S-H-ESD.
 
 \newpage
 \section{Experimentálne overenie}
-Pri experimentoch sme pracovali v~jazyku~R. Použité knižnice s~verziami sú
-zobrazené pomocou tabuľky~\ref{tab:libraries}.
-
-\begin{table}[ht]
-  \centering
-  \caption{Použité knižnice jazyka R.}
-  \label{tab:libraries}
-  \begin{tabular}{|l|l|}
-    \hline
-    \textbf{Názov}  &   \textbf{Použitá verzia}  \\ \hline
-    AnomalyDetection    &   1.0         \\ \hline
-    BreakoutDetection   &   1.0.1       \\ \hline
-    cluster             &   2.0.6       \\ \hline
-    clusterCrit         &   1.2.8       \\ \hline
-    data.table          &   1.12.0      \\ \hline
-    devtools            &   1.13.6      \\ \hline
-    dplyr               &   0.7.8       \\ \hline
-    dtw                 &   1.20-1      \\ \hline
-    dtwclust            &   5.5.1       \\ \hline
-    ggplot2             &   3.1.0       \\ \hline
-    lubridate           &   1.7.4       \\ \hline
-    pkgmaker            &   0.27        \\ \hline
-    plotly              &   4.8.0       \\ \hline
-    proxy               &   0.4-22      \\ \hline
-    registry            &   0.5         \\ \hline
-    rngtools            &   1.3.1       \\ \hline
-    stringr             &   1.3.1       \\ \hline
-    TSrepr              &   1.0.1       \\ \hline
-    zoo                 &   1.8-4       \\ \hline
-  \end{tabular}
-\end{table}
-
-Pri experimentoch sme použili dataset 4621 írskych domácností, ktorých spotreba
-elektrickej energie bola počas 17 mesiacov sledovaná pomocou inteligentných
-meračov. Dáta boli zberané každých 15 minút v~období medzi 15. júlom 2009 a~31.
-decembrom 2010. Dataset obsahuje iba časovú známku, spotrebu v~kW a~príznak
-sviatku. Spotreba elektrickej energie meraná v~kW nadobúda hodnoty v~intervale
-$<0, 66.815>$ a~priemerná spotreba je 0.6727399 kW. Medián, dolný a~horný
-kvantil je zobrazený v~tabuľke~\ref{tab:quantile}. Štandardná odchýlka súboru
-je 1.372831. Je náročné prehľadne vizualizovať množstvo meraní od odberateľov,
-preto sme použili čiarové a krabicové grafy~\ref{fig:whole-plot} na vizualizáciu
-náhodne vybraných odberateľov.
+\label{c:experimental-verification}
+Pri experimentoch sme pracovali v~jazyku~R. Použili dataset 4621 írskych
+domácností, ktorých spotreba elektrickej energie bola počas 17 mesiacov
+sledovaná pomocou inteligentných meračov. Dáta boli zberané každých 15 minút
+v~období medzi 15. júlom 2009 a~31. decembrom 2010. Dataset obsahuje iba časovú
+známku, spotrebu v~kW a~príznak sviatku. Spotreba elektrickej energie meraná
+v~kW nadobúda hodnoty v~intervale $<0, 66.815>$ a~priemerná spotreba je
+0.6727399 kW. Medián, dolný a~horný kvantil je zobrazený
+v~tabuľke~\ref{tab:quantile}. Štandardná odchýlka súboru je 1.372831. Je náročné
+prehľadne vizualizovať množstvo meraní od odberateľov, preto sme použili čiarové
+a~krabicové grafy~\ref{fig:whole-plot} (angl. \textit{box plots}) na
+vizualizáciu náhodne vybraných odberateľov.
 
 \begin{table}[ht]
   \centering
@@ -2114,6 +2139,7 @@ náhodne vybraných odberateľov.
   \label{fig:whole-plot}
 \end{figure}
 
+\noindent
 Profil spotrebiteľa sa výrazne líši počas pracovných dní a~víkendov, preto je
 celý proces opísaný v~kapitole~\ref{c:solution-design} aplikovaný osobitne na
 pracovné dni a~osobitne na dni voľna, čiže sviatky, soboty a~nedele. Cieľom je
@@ -2154,7 +2180,7 @@ odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
   \label{fig:holidays-plot}
 \end{figure}
 
-\subsection{Existujúce riešenia}
+\subsection{Porovnanie existujúcich riešení}
 Experimenty, ktoré sme vykonali sme porovnávali s~existujúcou implementáciou
 metódy S-H-ESD, ktorá sa nachádza v~balíčku
 \textit{AnomalyDetection}~\footnote{https://github.com/twitter/AnomalyDetection}.
@@ -2176,10 +2202,10 @@ obrázku~\ref{fig:twitter-results}. V~prvom riadku sú výsledky funkcie
 \textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov, v~druhom riadku sú
 výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{twitter_visualization.png}
-  \caption{Vizualizácia identifikovaných anomálnych odberateľov pomocou PCA.}
+  \caption[Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD.]{Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD, hore \textit{AnomalyDetectionTs}, dole \textit{AnomalyDetectionVec}}
   \label{fig:twitter-results}
 \end{figure}
 
@@ -2193,24 +2219,52 @@ obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
 časového radu, tak aj pri čiastkových analýzach, čo môže prispieť k~rýchlosti
 identifikácie anomálií.
 
-TODO pridat metodu od petolau 
 % TODO add peto lau  experiments
 % TODO pridat experimenty z noci, porovnat pocty a kvality identifikovanych časových radov, vizualizovať zo dva tri TS
+% TODO porovnat casy vypoctov a pomery
 
 \subsection{Výber hyperparametrov zhlukovania}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
 zhlukovanie, jeho kvalitu alebo časovú náročnosť. Pri práci sme sa zamerali
 najmä na dosahovanú presnosť, ktorú sme merali pomocou zhlukovacích validačných
-indexov, bližšie opísaných v~kapitole~\ref{c:cluster-validity-indeces}. Niektoré
-hyperparametre sme testovali iba na požadovanom rozmedzí. Veľkosť posuvného okna
+indexov, bližšie opísaných v~kapitole~\ref{c:cluster-validity-indeces}.
+Rozhodovali sme sa najmä na základe Silhouetteovho a~Davies-Bouldinovho indexu.
+Silhouetteov index môžeme definovať pomocou
+rovnice~\ref{eq:silhouette-index}~\cite{Arbelaitz2013}, kde $a_i$ predstavuje
+priemernú vzdialenosť inštancie $i$ od ostatných bodov nachádzajúcich sa
+v~rovnakom zhluku, a~$b_i$ predstavuje najmenšiu priemernú vzdialenosť inštancie
+$i$ od všetkých bodov nachádzajúcich sa v~iných zhlukoch, čím je nájdený
+najbližší susedný zhluk. Davies-Bouldinov index je možné zapísať pomocou
+rovnice~\ref{eq:davies-bouldin-index}\cite{Arbelaitz2013}. Hodnota $S_i$
+predstavuje mieru rozptylu meraní v~rámci zhluku $i$ a~$M_{i, j}$ mieru
+separácie medzi zhlukmi $i$ a~$j$. Maximalizovaním ich podielu dostaneme
+priemernú hodnotu Davies-Bouldinovho indexu pre každý zhluk.
+
+\begin{equation}
+  \label{eq:silhouette-index}
+  S_i =
+  \begin{cases}
+    1 - \frac{a_i}{b_i} \indent \text{ ak } a_i < b_i \\
+    0                   \indent \indent \hphantom{a} \text{ ak } a_i = b_i \\
+    \frac{b_i}{a_i} - 1 \indent \text{ ak } a_i > b_i \\
+  \end{cases}
+\end{equation}
+
+\begin{equation}
+  \label{eq:davies-bouldin-index}
+  DB = \frac{1}{N} \sum^N_{i = i} max \frac{S_i + S_j}{M_{i, j}} \text{ pre } i \neq j
+\end{equation}
+
+\noindent
+Hyperparametre sme testovali iba na požadovanom rozmedzí. Veľkosť posuvného okna
 by nemala presahovať 4-5 týždňov, aby okno neobsahovalo sezónnosť jednotlivých
-ročných období. Všetky výsledky experimentov sa nachádzajú v~prílohe
-v~kapitole~\ref{c:clustering-hyperparameters-experiments}. Z~vybraných
-grafov~\ref{fig:cvi-sparse-sil} a~\ref{fig:cvi-dense-db} je zrejmé, že najlepším
-nastavením hyperparametrov je práve nízky počet okien, ktoré budú agregované.
-Výsledný počet zhlukov by mal byť približne 25. Ostatné grafy podporujú naše
-tvrdenie, prípadne neposkytujú dostatočnú výpovednú hodnotu, keďže rozdiel
-medzi jednotlivými pokusmi je minimálny.
+ročných období. Z~vybraných grafov~\ref{fig:cvi-sparse-sil}
+a~\ref{fig:cvi-dense-db} je zrejmé, že najlepším nastavením hyperparametrov je
+práve nízky počet okien, ktoré budú agregované. Výsledný počet zhlukov by mal
+byť približne 25. Všetky výsledky experimentov sa nachádzajú v~prílohe
+v~kapitole~\ref{c:clustering-hyperparameters-experiments}. Grafy podporujú naše
+tvrdenie, prípadne neposkytujú dostatočnú výpovednú hodnotu, keďže rozdiel medzi
+jednotlivými pokusmi je minimálny.
 
 \begin{figure}[htbp]
   \centering
@@ -2225,18 +2279,27 @@ medzi jednotlivými pokusmi je minimálny.
 	\label{fig:cvi-dense-db}
 \end{figure}
 
-Ďalším testovaným hyperparametrom sú vzdialenostné metriky, ktoré sú použité
+\noindent
+Ďalším testovaným hyperparametrom sú použité vzdialenostné metriky, ktoré sú
 implementované v~knižnici
 \textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}.
 Metriky sú bližšie popísané v~kapitole~\ref{c:distance-metrics}.
 Z~kapitoly~\ref{c:cluster-validity-indeces} je zrejmé, že najlepšiu informáciu
 o~kvalite zhlukovania poskytujú práve Silhouetteov index
-a~modifikovaný Davies-Bouldinov index, vizualizované na
-grafoch~\ref{fig:cvi-metric-sil} a~\ref{fig:cvi-metric-dbs}. Najvhodnejšími
-vzdialenostnými metrikami sú potom GAK a~DTW, pri ďalších experimentoch preto
-budeme používať GAK~\ref{c:distance-metrics-gak}. Je dôležité poznamenať, že
-pri rovnakom nastavení funkcie, sú výsledky medzi jednotlivými behmi nezávislé
-a~rôzne. Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
+a~modifikovaný Davies-Bouldinov index, ktoré autori v~práci~\cite{Arbelaitz2013}
+označili za najkvalitnejšie na základe množstva experimentov na rôznych typoch
+datasetov. Na základe nich sme sa rozhodovali pre najlepšiu vzdialenostnú
+metriku. Metriky sme vizualizovali pomocou grafov~\ref{fig:cvi-metric-sil}
+a~\ref{fig:cvi-metric-dbs}, kde pri Silhouetteovom indexe dosahuje jednoznačne
+najlepšie výsledky GAK a~za ním nasleduje DTW. Pri Davies-Bouldinovom indexe, je
+lepšie zhlukovanie dané nižším skóre, dosahuje lepšie výsledky DTW, tesne za ním
+nasleduje metrika GAK. Medzi najvhodnejšie vzdialenostné metriky pre náš dataset
+preto patrí GAK a~DTW. Pri ďalších experimentoch preto budeme používať najmä
+GAK, ktoré dosahuje pri Silhouetteovom indexe výrazne lepšie výsledky.
+Vzdialenostná metrika je bližšie opísaná
+v~kapitole~\ref{c:distance-metrics-gak}. Je dôležité poznamenať, že pri rovnakom
+nastavení funkcie, sú výsledky medzi jednotlivými behmi nezávislé a~rôzne.
+Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
 
 \begin{figure}[htbp]
   \centering
@@ -2251,6 +2314,7 @@ a~rôzne. Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznam
 	\label{fig:cvi-metric-dbs}
 \end{figure}
 
+\noindent
 Dôležitým nastavením posuvného okna je jeho tvar a~posun. Pri výbere tvaru sme
 sa zamerali najmä na pracovné dni, no na porovnanie sme vykonali experimenty aj
 s~celými týždňami. Predpokladali sme, že zhlukovanie vytvorené iba z~pracovných
@@ -2268,8 +2332,11 @@ posunom trval 5-krát dlhšie oproti týždňovému posunu.
 	\label{fig:cvi-window-sil}
 \end{figure}
 
+\noindent
 Predspracovanie dataset pozostáva aj z~normalizácie dát pomocou z-skóre, ktoré
-je bližšie opísané v~kapitole~\ref{c:z-score}. Použitá knižnica
+je bližšie opísané v~kapitole~\ref{c:z-score}. Môžeme ho zapísať
+vzorcom~\ref{eq:z-score3}, kde rozdiel nameranej hodnoty a~priemeru sledovanej
+veličiny je podelený štandardnou odchýlkou. Použitá knižnica
 \textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}
 v~jazyku R~poskytuje taktiež predspracovanie vstupnej množiny dát pomocou
 rovnakej normalizácie. Preto sme vykonali niekoľko experimentov pre porovnanie
@@ -2278,6 +2345,11 @@ a~externej normalizácie. Časová náročnosť pri použití oboch normalizáci
 alebo iba jednej z~nich bola približne rovnaká. Rozdiel bol vo výsledkoch, ktoré
 nepoužívali externú normalizáciu. V~prípade použitia oboch súčasne alebo iba
 externej normalizácie sú dosahované výsledky porovnateľné.
+
+\begin{equation}
+	\label{eq:z-score3}
+  z = \frac{x-\mu}{\sigma}
+\end{equation}
 
 Výsledkom experimentov je nové zhlukovanie pre každé posuvné okno. Náhodne
 vybrané zhlukovanie je zobrazené aj na obrázku~\ref{fig:clustering-workdays}.
@@ -2295,6 +2367,14 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 TODO analyzovat vysledky podobne ako v 4.
 
 %-------------------------------------------------------------------------------
+%   Chapter 5 - Conclusion
+%-------------------------------------------------------------------------------
+
+\newpage
+\section{Záver}
+\label{c:conclusion}
+
+%-------------------------------------------------------------------------------
 %   Chapter 8 - Bibliography
 %-------------------------------------------------------------------------------
 
@@ -2310,7 +2390,40 @@ TODO analyzovat vysledky podobne ako v 4.
 \begin{appendices}
 \newpage
 \pagenumbering{Roman}
-\section{Obsah elektronického média}
+
+\section{Technická dokumentácia}
+Použité knižnice s~verziami sú zobrazené pomocou tabuľky~\ref{tab:libraries}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Použité knižnice jazyka R.}
+  \label{tab:libraries}
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Názov}  &   \textbf{Použitá verzia}  \\ \hline
+    AnomalyDetection    &   1.0         \\ \hline
+    BreakoutDetection   &   1.0.1       \\ \hline
+    cluster             &   2.0.6       \\ \hline
+    clusterCrit         &   1.2.8       \\ \hline
+    data.table          &   1.12.0      \\ \hline
+    devtools            &   1.13.6      \\ \hline
+    dplyr               &   0.7.8       \\ \hline
+    dtw                 &   1.20-1      \\ \hline
+    dtwclust            &   5.5.1       \\ \hline
+    ggplot2             &   3.1.0       \\ \hline
+    lubridate           &   1.7.4       \\ \hline
+    pkgmaker            &   0.27        \\ \hline
+    plotly              &   4.8.0       \\ \hline
+    proxy               &   0.4-22      \\ \hline
+    registry            &   0.5         \\ \hline
+    rngtools            &   1.3.1       \\ \hline
+    stringr             &   1.3.1       \\ \hline
+    TSrepr              &   1.0.1       \\ \hline
+    zoo                 &   1.8-4       \\ \hline
+  \end{tabular}
+\end{table}
+
+\subsection{Obsah elektronického média}
 \dirtree{%
   .1 CD nosič.
   .2 \textbf{doc}.
@@ -2426,6 +2539,94 @@ Pri indexoch s~$(min.)$ nižšie hodnoty znamenajú lepšie výsledky zhlukovani
   \caption{Porovnanie veľkostí a~typov posuvných okien (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
+\newpage
+\section{Plán práce na riešení projektu}
+\subsection{Plán do zimného semestra}
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{||l|p{0.65\textwidth}||}
+    \hline \hline
+    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v~zimnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
+    \hline
+    1. týždeň    &  dokončenie analýzy literatúry, špecifikácie, výber vhodných metód na experimenty					\\ \hline
+    2. týždeň    &  nájdenie viacerých vhodných zdrojov dát, analýza datasetov		                            \\ \hline
+    3. týždeň    &  analýza datasetov, doplnenie datasetov dátami z~iných zdrojov										          \\ \hline
+    4. týždeň    &  výber atribútov, spojenie dát, príprava prostredia pre dáta a~manipuláciu s nimi			    \\ \hline
+    5. týždeň    &  hlbšia analýza zvolených datasetov, agregácia časových radov, výber technológií           \\ \hline
+    6. týždeň    &  vyhladenie a~diskretizácia časových radov															                    \\ \hline
+    7. týždeň    &  tvorba prototypu modelu zhlukujúceho časové rady	                                        \\ \hline
+    8. týždeň    &  prvé zhlukovacie experimenty, skúmanie vytvorených zhlukov	                              \\ \hline
+    9. týždeň    &  tvorba identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov     \\ \hline
+    10. týždeň   &  tvorba prototypu modelu identifikujúceho anomálie v~rámci zhlukov                         \\ \hline
+    11. týždeň   &  prvé experimenty, skúmanie identifikovaných anomálií                                      \\ \hline
+		12. týždeň   &  tvorba prezentácie a~príprava na obhajoby					                                        \\ \hline
+    \hline
+  \end{tabular}
+\end{table}
+
+\noindent
+Počas zimného semestra budú analyzované dostupné datasety. Následne budú
+spracované a~upravené do formátu potrebného pre model. Po vytvorení protypu
+modelu budú čo najskôr evaluované výsledky. Na základe nich budú ďalej
+spracovávané dáta a~menené datasety. Taktiež sa bližšie pozrieme na
+identifikované anomálie dáta a~určíme ich pôvod na základe dostupných
+vysvetľujúcich premenných. V~závere semestra budú prebiehať prípravy na obhajoby
+tvorbou prezentácie a~súvisiacich materiálov.
+
+Použitý dataset bol analyzovaný a~transformovaný podľa potrieb ďalších
+experimentov v~súlade s~časovým plánom. Úspešne sme vykonali a~vyhodnotili
+experimenty súvisiace s~použitým zhlukovaním. Nemali sme však k~dispozícií
+žiadne ďalšie testované datasety a~preto sme obmedzili rozsah experimentov
+iba na spomínaný dataset. Prototyp hodnotiaci anomálnosť časových radov
+jednotlivých odberateľov bol úspešne vytvorený. Príprava na obhajobu práce si
+vyžiadala väčšie úsilie vzhľadom na zoznamovanie sa s~prostredím pre
+vizualizáciu výsledkov. V~rámci výskumného semináru prebehla aj skúšobné
+prezentovanie výsledkov kolegom.
+
+\newpage
+\subsection{Plán do letného semestra}
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{||l|p{0.65\textwidth}||}
+    \hline \hline
+    \multicolumn{1}{|c|}{\textbf{\begin{tabular}[c]{@{}c@{}}Poradie týždňa \\ v letnom semestri\end{tabular}}} & \multicolumn{1}{c|}{\textbf{Popis plánovanej činnosti}}   \\ \hline
+    \hline
+    1. týždeň    &  vytvorenie validačného modelu pre zhlukovanie časových radov                              \\ \hline
+    2. týždeň    &  výber hyperparametrov a~metrík vzdialenosti pre použité zhlukovacie algoritmy             \\ \hline
+    3. týždeň    &  použitie rôznych diskretizačných okien a~validácia použitých metrík      					        \\ \hline
+    4. týždeň    &  použitie identifikátora pre anomálne časové rady nachádzajúce sa mimo početných zhlukov   \\ \hline
+    5. týždeň    &  porovnanie výsledkov z~experimentov s~naštudovanou literatúrou, overenie výsledkov        \\ \hline
+    6. týždeň    &  optimalizácia modelu a~výpočtov, vyhodnotenie experimentov                                \\ \hline
+    7. týždeň    &  vytvorenie článku na študentskú konferenciu, dokončovanie experimentov                    \\ \hline
+    8. týždeň    &  príprava na študentskú vedeckú konferenciu, vizualizácia dosiahnutých výsledkov						\\ \hline
+    9. týždeň    &  zapracovanie pripomienok z~konferencie, návrh ďalších experimentov                        \\ \hline
+    10. týždeň   &  písanie technickej dokumentácie k~softvérovému dielu, posledné experimentovanie           \\ \hline
+    11. týždeň   &  vyhodnotenie experimentov, evaluácia riešenia, zhodnotenie výsledkov                      \\ \hline
+		12. týždeň   &  tvorba prezentácie a~príprava na obhajobu projektu                                        \\ \hline
+    \hline
+  \end{tabular}
+\end{table}
+\noindent
+V~úvode semestra bude vytvorený validačný mechanizmus pre model, zhlukujúci
+analyzované časové rady na základe podobnosti priebehov. Cieľom bude overiť
+vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie.
+Dôležitý je aj výber hyperparametrov pre algoritmi strojového učenia, ale aj
+vhodná dĺžka posuvného okna, prípadne metrika použitá na meranie podobnosti
+jednotlivých časových radov. Z~analyzovaných riešení je potrebné vybrať
+najvhodnejšie pre náš problém. Ďalšie navrhované vylepšenia budú zapracované na
+základe vlastností dát a~dosiahnutých výsledkov. V~prípade veľkej časovej
+náročnosti budú optimalizované jednotlivé procesy pri manipulácií dát. Na konci
+semestra sa koná študentská konferencia, do ktorej by sme chceli prispieť
+článkom a~získať tak dôležitú spätnú väzbu. Na záver by sme chceli zapracovať
+jednotlivé pripomienky a~znova vyhodnotiť výsledky, ktoré budú použité pri
+obhajobe projektu.
+
+Navrhnuté zhlukovanie bolo sériou experimentov vylepšené. Taktiež boli
+optimalizované procesy s~vysokou časovou náročnosťou. Na základe vytvoreného
+zhlukovania bolo navrhnuté a~odskúšané skóre, ktorým je určená miera anomálnosti
+daného odberateľa. Výsledky boli porovnávané s~ďalšími existujúcimi riešeniami.
+Naše skóre sme skombinovali s~existujúcimi metódami kvôli spresneniu intervalov.
+Výsledky sme overili ich vizualizovaním a~porovnávaním.
 
 \end{appendices}
 

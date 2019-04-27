@@ -14,7 +14,7 @@ plotData <- data.frame(
   "consumer" = 1:length(ts$seasonal[1:1344])
 )
 ggplot(plotData, aes(x = consumer, y = load)) + geom_line() +
-  xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") +
+  xlab("Poradie meraní") + ylab("Sezónna zložka spotreby elektrickej energie v kW") +
   scale_x_continuous(minor_breaks = seq(0 , nrow(plotData), 48), breaks = seq(0, nrow(plotData), 336)) +
   theme(
     panel.grid.major = element_line(colour = "grey", size = 1),
@@ -42,7 +42,7 @@ plotData <- data.frame(
   "consumer" = 1:length(ts$trend)
 )
 ggplot(plotData, aes(x = consumer, y = load)) + geom_line() +
-  xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") +
+  xlab("Poradie meraní") + ylab("Trendová zložka spotreby elektrickej energie v kW") +
   scale_x_continuous(minor_breaks = seq(0 , nrow(plotData), 336), breaks = seq(0, nrow(plotData), 336)) +
   theme(
     panel.grid.major = element_line(colour = "grey", size = 1),
@@ -56,7 +56,7 @@ plotData <- data.frame(
   "consumer" = 1:length(ts$remainder)
 )
 ggplot(plotData, aes(x = consumer, y = load)) + geom_line() +
-  xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") +
+  xlab("Poradie meraní") + ylab("Reziduálna zložka spotreby elektrickej energie v kW") +
   scale_x_continuous(minor_breaks = seq(0 , nrow(plotData), 336), breaks = seq(0, nrow(plotData), 336)) +
   theme(
     panel.grid.major = element_line(colour = "grey", size = 1),
