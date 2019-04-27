@@ -224,22 +224,24 @@ cenné rady a pripomienky pri spracovaní diplomovej práce.
 %-------------------------------------------------------------------------------
 
 \newpage
+\thispagestyle{empty}
 \tableofcontents
-\thispagestyle{empty}                                                           % removes page numbering from table of contents page
+\thispagestyle{empty}
 
-% \newpage
-% \listoffigures
-% \thispagestyle{empty}
-%
-% \newpage
-% \listoftables
-% \thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+\listoffigures
+\thispagestyle{empty}
+
+\newpage
+\listoftables
+\thispagestyle{empty}
 
 %-------------------------------------------------------------------------------
 %   Chapter 1 - Introduction
 %-------------------------------------------------------------------------------
 
-% \newpage\null\thispagestyle{empty}
+\newpage\null\thispagestyle{empty}
 \newpage
 \setcounter{page}{1}
 \section{Úvod}
@@ -457,14 +459,14 @@ Vznikajú tak 4 nasledujúce kategórie~\cite{Teng2010}:
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{periodic_time_series.png}
-  \caption{Príklad periodických časových radov~\cite{Perea2015}.}
+  \caption[Príklad periodických časových radov.]{Príklad periodických časových radov~\cite{Perea2015}.}
   \label{fig:periodic-time-series}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{non_periodic_time_series.png}
-  \caption{Príklad neperiodických časových radov~\cite{Perea2015}.}
+  \caption[Príklad neperiodických časových radov.]{Príklad neperiodických časových radov~\cite{Perea2015}.}
   \label{fig:non-periodic-time-series}
 \end{figure}
 
@@ -523,7 +525,7 @@ nie sú anomáliou~\cite{Chandola2009}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{point_anomalies.png}
-  \caption{Príklad bodových anomálií~\cite{Chandola2009}.}
+  \caption[Príklad bodových anomálií.]{Príklad bodových anomálií~\cite{Chandola2009}.}
   \label{fig:point-anomalies}
 \end{figure}
 
@@ -551,7 +553,7 @@ zmysluplne určené v~cieľovej doméne ich aplikácie~\cite{Chandola2009}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{contextual_anomalies.png}
-  \caption{Príklad kontextových anomálií~\cite{Chandola2009}.}
+  \caption[Príklad kontextových anomálií.]{Príklad kontextových anomálií~\cite{Chandola2009}.}
   \label{fig:contextual-anomalies}
 \end{figure}
 
@@ -566,7 +568,7 @@ softvéru~\cite{Chandola2009}.
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{collective_anomalies.png}
-  \caption{Príklad skupinových anomálií~\cite{Chandola2009}.}
+  \caption[Príklad skupinových anomálií.]{Príklad skupinových anomálií~\cite{Chandola2009}.}
   \label{fig:collective-anomalies}
 \end{figure}
 
@@ -766,7 +768,7 @@ vzniká mnoho falošne neoznačených inštancií~\cite{Hochenbaum2017}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{sesd_anomalies.png}
-  \caption{Anomálie detegované pomocou S-ESD algoritmu~\cite{Hochenbaum2017}.}
+  \caption[Anomálie detegované pomocou S-ESD algoritmu.]{Anomálie detegované pomocou S-ESD algoritmu~\cite{Hochenbaum2017}.}
   \label{fig:sesd-anomalies}
 \end{figure}
 
@@ -792,7 +794,7 @@ použitie metódy S-ESD~\cite{Hochenbaum2017}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{shesd_anomalies.png}
-  \caption{Anomálie detegované pomocou S-H-ESD algoritmu~\cite{Hochenbaum2017}.}
+  \caption[Anomálie detegované pomocou S-H-ESD algoritmu.]{Anomálie detegované pomocou S-H-ESD algoritmu~\cite{Hochenbaum2017}.}
   \label{fig:shesd-anomalies}
 \end{figure}
 
@@ -1016,8 +1018,7 @@ vzorcom~\ref{eq:dtw-distance}~\cite{Dzeroski2007,Fu2011,Hsu2015}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{warping-distance.png}
-  % TODO: add missing axis names
-  \caption{Príklad porovnávania časových radov pomocou dynamickej deformácií času~\cite{Malinowski2017}.}
+  \caption[Príklad porovnávania časových radov pomocou dynamickej deformácií času.]{Príklad porovnávania časových radov pomocou dynamickej deformácií času~\cite{Malinowski2017}.}
   \label{fig:warping-distance}
 \end{figure}
 
@@ -1066,8 +1067,7 @@ v~rovnakom čase $t$~\cite{WarrenLiao2005}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{euclidean-distance.png}
-  % TODO: add missing axis names
-  \caption{Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti~\cite{Malinowski2017}.}
+  \caption[Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti.]{Príklad porovnávania časových radov pomocou Euklidovej vzdialenosti~\cite{Malinowski2017}.}
   \label{fig:euclidean-distance}
 \end{figure}
 
@@ -1232,7 +1232,7 @@ a~\ref{fig:data-reduction-agg}~\cite{Fu2011}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{data_reduction_orig.png}
-  \caption{Časový rad bez úprav}
+  \caption{Príklad časového radu bez redukcie dimenzií.}
   \label{fig:data-reduction-orig}
 \end{figure}
 
@@ -1266,7 +1266,7 @@ zúžením podintervalov v~redukovanom časovom rade~\cite{Fu2011}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{data_reduction_agg.png}
-  \caption{Redukované časové rady.}
+  \caption{Príklad redukovaného časového radu.}
   \label{fig:data-reduction-agg}
 \end{figure}
 
@@ -1292,7 +1292,7 @@ redukcia dvojdimenzionálnych dát~\cite{Fu2011,Smith2002}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.9\textwidth]{pca_example.png}
-  \caption{Príklad redukcie dimenzií pomocou PCA, pôvodný (vľavo) a redukovaný dataset (vpravo).}
+  \caption{Príklad redukcie dimenzií pomocou PCA.}
   \label{fig:pca-example}
 \end{figure}
 
@@ -1424,7 +1424,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 		\begin{center}
 			\captionsetup{justification=centering}
 			\includegraphics[scale=0.33]{decrease-partial.png}
-			\caption{Čiastočné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
+			\caption[Čiastočné zníženie spotreby elektrickej energie.]{Čiastočné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
 			\label{fig:decrease-partial}
 		\end{center}
 	\end{minipage}
@@ -1433,7 +1433,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
     \begin{center}
       \captionsetup{justification=centering}
       \includegraphics[scale=0.33]{decrease-total.png}
-			\caption{Úplné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
+			\caption[Úplné zníženie spotreby elektrickej energie.]{Úplné zníženie spotreby elektrickej energie~\cite{Trevizan2015}.}
 			\label{fig:decrease-total}
     \end{center}
   \end{minipage}\hfill
@@ -1496,7 +1496,7 @@ vyjadrené v~percentách~\cite{Trevizan2015,Wei2006}.
 
 \begin{table}[htbp]
 	\centering
-	\caption{Matica zámen}
+	\caption{Matica zámen (angl. \textit{Confusion matrix})}
 	\label{tab:confusion-matrix}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
@@ -1580,7 +1580,7 @@ skóre ako skórovacia funkcia, generalizované Dunnove indexy a~COP index.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{shaffer_test.png}
-  \caption{Výsledky Shafferovho testu so stupňom dôležitosti 10\%~\cite{Arbelaitz2013}.}
+  \caption[Výsledky Shafferovho testu validačných indexov.]{Výsledky Shafferovho testu validačných indexov so stupňom dôležitosti 10\%~\cite{Arbelaitz2013}.}
   \label{fig:shaffer-test}
 \end{figure}
 
@@ -1920,7 +1920,7 @@ vypočítané skóre opäť uplatniť medzikvartilové pravidlo $<Q1 - 1.5 *
 IQR, Q3 + 1.5 * IQR>$. Vzhľadom na to, že nás zaujímajú najmä odberatelia,
 ktorých skóre je výrazne väčšie, budeme uvažovať iba prípady, ktoré prekračujú
 hornú hranicu pravidla. V~prípade, že spotreba odberateľov, je identifikovaná
-ako anomália vo viacerých posuvných oknách, je časový rad  dodatočne analyzovaný
+ako anomália vo viacerých posuvných oknách, je časový rad dodatočne analyzovaný
 v~ďalších krokoch.
 
 \subsection{Vyhladenie časových radov}
@@ -1940,7 +1940,7 @@ obrázku~\ref{fig:smoothing-example}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{smoothing_example.png}
-  \caption{Vyhladenie časových radov pomocou metódy LOESS s~rozpätím $\alpha=0.25$.}
+  \caption[Vyhladenie časových radov pomocou metódy LOESS.]{Vyhladenie časových radov pomocou metódy LOESS s~rozpätím $\alpha=0.25$.}
   \label{fig:smoothing-example}
 \end{figure}
 
@@ -2052,7 +2052,7 @@ náhodne vybraných odberateľov.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{sample_plot.png}
-  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov.}
+  \caption{Krabicový graf spotreby odberateľov.}
   \label{fig:whole-plot}
 \end{figure}
 
@@ -2085,14 +2085,14 @@ odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{workdays_plot.png}
-  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas pracovných dní.}
+  \caption{Krabicový graf spotreby odberateľov počas pracovných dní.}
   \label{fig:workdays-plot}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{holidays_plot.png}
-  \caption{Krabicový graf znázorňujúci spotrebu vybraných odberateľov počas dní voľna.}
+  \caption{Krabicový graf spotreby odberateľov počas dní voľna.}
   \label{fig:holidays-plot}
 \end{figure}
 
@@ -2121,7 +2121,7 @@ výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{twitter_visualization.png}
-  \caption{Grafy zobrazujúce identifikovaných anomálnych odberateľov pomocou metódy S-H-ESD.}
+  \caption{Vizualizácia identifikovaných anomálnych odberateľov pomocou PCA.}
   \label{fig:twitter-results}
 \end{figure}
 
@@ -2157,13 +2157,13 @@ medzi jednotlivými pokusmi je minimálny.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov pre Silhouetteov index.}
 	\label{fig:cvi-sparse-sil}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov pre Davies-Bouldinov index.}
 	\label{fig:cvi-dense-db}
 \end{figure}
 
@@ -2183,13 +2183,13 @@ a~rôzne. Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznam
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík pomocou Silhouetteovho indexu.}
 	\label{fig:cvi-metric-sil}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík pomocou Davies-Bouldinovho indexu.}
 	\label{fig:cvi-metric-dbs}
 \end{figure}
 
@@ -2206,7 +2206,7 @@ posunom trval 5-krát dlhšie oproti týždňovému posunu.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
-  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+  \caption{Porovnanie veľkostí a~typov posuvných okien pomocou Silhouetteovho indexu.}
 	\label{fig:cvi-window-sil}
 \end{figure}
 
@@ -2229,7 +2229,7 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{clustering_workdays.png}
-  \caption{Vytvorené zhluky so zvýraznenými medoidmi.}
+  \caption{Vizualizácia vytvoreného zhlukovania so zvýraznenými medoidmi.}
 	\label{fig:clustering-workdays}
 \end{figure}
 
@@ -2286,85 +2286,85 @@ Pri indexoch s~$(min.)$ nižšie hodnoty znamenajú lepšie výsledky zhlukovani
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-CH-dtw_basic_workdays_sparse.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DB-dtw_basic_workdays_sparse.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DBstar-dtw_basic_workdays_sparse.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-Sil-dtw_basic_workdays_dense.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-CH-dtw_basic_workdays_dense.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DBstar-dtw_basic_workdays_dense.png}
-  \caption{Graf zhlukovania, porovnanie veľkosti posuvného okna a~počtu zhlukov.}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-CH-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DB-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
-  \caption{Graf zhlukovania, porovnanie vzdialenostných metrík.}
+  \caption{Porovnanie vzdialenostných metrík (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
-  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+  \caption{Porovnanie veľkostí a~typov posuvných okien (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-CH-window_comparison.png}
-  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+  \caption{Porovnanie veľkostí a~typov posuvných okien (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DBstar-window_comparison.png}
-  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+  \caption{Porovnanie veľkostí a~typov posuvných okien (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DB-window_comparison.png}
-  \caption{Graf zhlukovania, porovnanie veľkostí a~typov posuvných okien.}
+  \caption{Porovnanie veľkostí a~typov posuvných okien (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 
