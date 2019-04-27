@@ -1988,9 +1988,10 @@ vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
 
 \subsection{Analýza metódou S-H-ESD}
 Cieľom je vylepšiť skóre vypočítané v~predchádzajúcich krokoch a~spresniť tak
-interval, v~ktorom je výskyt anomálií výrazne väčší. Výstupom je pôvodný časový
-rad s~novým atribútom, ktorý pre každé meranie obsahuje skóre opisujúce
-podozrenie na anomálnosť. Atribút budeme nazývať skóre odberateľa, nakoľko je
+interval, v~ktorom je výskyt anomálií výrazne väčší. Výstupom metódy S-H-ESD je
+pôvodný časový rad s~príznakom, ktorým sú označené identifikované anomálie. Nový
+atribút budeme nazývať príznak anomálnosti. Po jeho skombinovaní s~navrhnutým
+skórovaním inštancie a~zhluku budeme hovoriť o~skóre odberateľa, nakoľko je
 vypočítané pre celé sledované obdobie spotreby odberateľa. Môžeme ho vyjadriť
 vzorcom~\ref{eq:client-score}. Dôležité je uvedomiť si, že zatiaľ čo skóre
 inštancie a~zhluku sú vypočítané pre posuvné okno, ktoré je rozdelené na
@@ -1998,23 +1999,53 @@ pracovné dni a~dni pokoja, skóre odberateľa je vypočítané pre celé sledov
 obdobie bez ohľadu na typ dňa. Predpokladom je, že metóda S-H-ESD dokáže
 spracovať časové rady s~dvojitou sezónnosťou.
 
-% TODO add some equation, mozno nejaky logaritmus per window + jednotlive instancie
 \begin{equation}
+  \begin{split}
+    skore_{ik} = & skore_{instancia_i} * skore_{zhluk_j} + skore_{odberatel_k} \text{, pre } \\
+    & instancia_i \in zhluk_j \text{ } \land \\
+    & instancia_i \in odberatel_k
+  \end{split}
   \label{eq:client-score}
 \end{equation}
 
-Dosiahnuté výsledky je nutné vhodne vizualizovať a~vyhodnotiť. Príkladom môže
-byť vizualizácia výsledkov na obrázku ~\ref{fig:shesd-example} TODO pridat obrazok.
-% TODO add picture and description
-Vzhľadom na fakt, že metóda je založená na učení bez učiteľa, vyhodnocovanie prebieha na základe
-už spomenutých riešení, konkrétne FeaClip transformácie a~metóde S-H-ESD.
+Dosiahnuté výsledky bez aplikovania S-H-ESD sú agregované v~rámci jedného
+posuvného okna, čiže vytvorené skóre okna je rovnaké. Je možné ho spriemerovať
+s~prekrývajúcimi sa oknami, no ak by bola veľkosť prekryvu príliš malá, nárast
+časovej a~pamäťovej zložitosti by bol niekoľko násobný. Pri zmenšení veľkosti
+prekryvu na hodiny je výpočet dokonca rádovo náročnejší. Z~toho dôvodu je
+zhlukovanie časových radov realizované pomocou posuvných okien, ktorých veľkosť
+je vždy niekoľko týždňov. Pri vizualizácií výsledkov pomocou tepelnej mapy,
+môžeme na obrázku~\ref{fig:heatmap-days} vidieť nedostatok tejto metódy, keďže
+rovnaký typ dňa v~rámci jedného týždňa má vždy rovnaké skóre anomálnosti. Mapa
+zobrazuje skóre jedného odberateľa v~celom pozorovanom období. Čím je skóre
+anomálnosti vyššie, tým je väčšia miera istoty výskytu anomálií.
 
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=\textwidth]{shesd_example.png}
-%   \caption{TODO add caption .}
-%   \label{fig:shesd-example}
-% \end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{heatmap_days.png}
+  \caption{Vizualizácia skóre odberateľa pred pridaním S-H-ESD.}
+  \label{fig:heatmap-days}
+\end{figure}
+
+Ako už bolo spomenuté po aplikovaní metódy S-H-ESD na časový rad dostaneme pre
+každé meranie príznak, ktorý označuje anomálie. Časový rad príznakov je často
+zúbkovitý a~označené intervaly obsahujú jediné meranie. Po vyhladení časového
+radu je sú vysledkom grafy zobrazené na obrázku~\ref{fig:smoothing-anomalies}.
+Dosiahnuté skóre je pripočítané k~pôvodnému skóre na základe
+vzorca~\ref{eq:client-score}. Výsledky je nutné vhodne vizualizovať
+a~vyhodnotiť. Príkladom môže byť vizualizácia výsledkov na
+obrázku~\ref{fig:heatmap-hours}. Vzhľadom na fakt, že granularita výsledkom je
+o~mnoho väčšia ako pred pridaním metódy, je použitý na vizualizáciu iný typ
+tepelnej mapy a~zobrazovaný interval je len niekoľko týždňov. Keďže navrhnutá
+metóda je založená na učení bez učiteľa, vyhodnocovanie prebieha na základe už
+spomenutých riešení, konkrétne FeaClip transformácie a~metóde S-H-ESD.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{heatmap_hours.png}
+  \caption{Vizualizácia skóre odberateľa po pridaním S-H-ESD.}
+  \label{fig:heatmap-hours}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
