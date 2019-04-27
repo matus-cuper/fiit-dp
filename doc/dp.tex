@@ -1330,6 +1330,7 @@ vzorcom~\ref{eq:z-score}~\cite{Arampatzis2009}
 \end{equation}
 
 \subsubsection{Vyhladzovanie časových radov}
+\label{c:ts-smoothing}
 Spracovávané dáta často obsahujú lokálne extrémy alebo anomálne meranie, ktorých
 vplyv je nutné pred ďalším spracovaním eliminovať. Zatiaľ čo niektoré metódy sú
 robustné a~výsledky spracovania nie sú skreslené extrémnymi hodnotami, iné
@@ -1923,8 +1924,40 @@ ako anomália vo viacerých posuvných oknách, je časový rad  dodatočne anal
 v~ďalších krokoch.
 
 \subsection{Vyhladenie časových radov}
-% TODO Pridat nieco o vyhladzovani + graf
-TODO Pridat nieco o vyhladzovani + graf
+Odberatelia označený najvyšším anomálnym skóre sú ďalej analyzovaný pomocou
+metódy S-H-ESD. Najskôr je však potrebné spracovávané dáta vyhladiť, čím sú
+v~podstatnej miere eliminované extrémne hodnoty a~lokálne anomálie. V~analýze
+v~kapitole~\ref{c:ts-smoothing} sme opísali metódu LOESS, ktorej vstupným
+parametrom je rozpätie rádiusu, ktoré ovplyvňuje mieru vyhladenia
+spracovávaného časového radu. Je nutné správne určiť daný parameter, nakoľko
+je tým ovplyvnené aj ďalšie spracovanie časového radu. Vzhľadom na to, že cieľom
+je určiť anomálne intervaly spotreby elektrickej energie, viac nás zaujímajú
+globálne anomálie. Vďaka ich identifikácií môže distribútor optimalizovať
+výrobu, distribúciu a~spotrebu elektrickej energie. Príkladom aplikovania metódy
+LOESS, môžu byť pôvodné a~vyhladené časové rady zobrazené na
+obrázku~\ref{fig:smoothing-example}.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{smoothing_example.png}
+  \caption{Vyhladenie časových radov pomocou metódy LOESS s~rozpätím $\alpha=0.25$.}
+  \label{fig:smoothing-example}
+\end{figure}
+
+Výstupom metódy S-H-ESD je príznak anomálnosti pre každé analyzované meranie.
+Vizualizáciou takýchto výsledkov dostaneme zúbkovitý graf, kde niektoré anomálne
+intervaly sú jasne identifikovateľné, pri iných sa hodnota príznaku často mení
+a~za anomálne sú považované iba samotné merania. Daný jav môžeme vidieť aj na
+obrázku~\ref{fig:smoothing-anomalies}, kde prechody medzi normálnymi
+a~anomálnymi invervalmi v~pôvodnom časovom rade príznakov sú ostré, pomocou
+vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{smoothing_anomalies.png}
+  \caption{Vyhladenie príznakov anomálnosti pomocou metódy LOESS.}
+  \label{fig:smoothing-anomalies}
+\end{figure}
 
 \subsection{Analýza metódou S-H-ESD}
 Cieľom je vylepšiť skóre vypočítané v~predchádzajúcich krokoch a~spresniť tak
