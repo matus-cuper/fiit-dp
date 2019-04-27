@@ -224,18 +224,14 @@ cenné rady a pripomienky pri spracovaní diplomovej práce.
 %-------------------------------------------------------------------------------
 
 \newpage
-\thispagestyle{empty}
+\pagenumbering{roman}
 \tableofcontents
-\thispagestyle{empty}
 
 \newpage
-\thispagestyle{empty}
 \listoffigures
-\thispagestyle{empty}
 
 \newpage
 \listoftables
-\thispagestyle{empty}
 
 %-------------------------------------------------------------------------------
 %   Chapter 1 - Introduction
@@ -243,6 +239,7 @@ cenné rady a pripomienky pri spracovaní diplomovej práce.
 
 \newpage\null\thispagestyle{empty}
 \newpage
+\pagenumbering{arabic}
 \setcounter{page}{1}
 \section{Úvod}
 Jedným z~problémov, ktorým v~súčasnosti čelia distribučné spoločnosti, je
@@ -1911,9 +1908,39 @@ väčšiny dát.
 \end{equation}
 
 \begin{equation}
-  RLE = dlzka_{RLE}(casovy\_rad_i) - 1
+  |prechody| = dlzka_{RLE}(casovy\_rad_i) - 1
   \label{eq:feaclip-cross}
 \end{equation}
+
+\noindent
+Príkladom FeaClip transformácie môžu byť časové rady zobrazené na
+obrázku~\ref{fig:feaclip-example}. Popis atribútov sa nachádza
+v~tabuľke~\ref{tab:feaclip}
+
+\begin{table}[ht]
+  \centering
+  \caption{Atribúty metódy FeaClip a~ich opis.}
+  \label{tab:feaclip}
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Názov atribútu}   &   \textbf{Popis atribútu}  \\ \hline
+    max\_1           &   Maximálna veľkosť jednotkového behu   \\ \hline
+    sum\_1           &   Počet jednotiek v~reťazci             \\ \hline
+    max\_0           &   Maximálna veľkosť nulového behu       \\ \hline
+    cross.           &   Počet prechodov medzi rôznymi behmi   \\ \hline
+    f\_0             &   Počet núl v~prvom behu                \\ \hline
+    l\_0             &   Počet núl v~poslednom behu            \\ \hline
+    f\_1             &   Počet jednotiek v~prvom behu          \\ \hline
+    l\_1             &   Počet jednotiek v~poslednom behu      \\ \hline
+  \end{tabular}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{feaclip_example.png}
+  \caption{Reprezentácia spotrebiteľov pomocou metódy FeaClip.}
+  \label{fig:feaclip-example}
+\end{figure}
 
 Rovnako ako pri FeaClip reprezentácií, tak aj pri skórovaní inštancií môžeme na
 vypočítané skóre opäť uplatniť medzikvartilové pravidlo $<Q1 - 1.5 *
@@ -2251,6 +2278,7 @@ TODO analyzovat vysledky podobne ako v 4.
 
 \begin{appendices}
 \newpage
+\pagenumbering{Roman}
 \section{Obsah elektronického média}
 \dirtree{%
   .1 CD nosič.
