@@ -111,6 +111,38 @@
 \newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
+%   Declaration
+%-------------------------------------------------------------------------------
+
+\begin{titlepage}
+  \vspace*{15cm}
+  \begin{large}
+    \noindent \textbf{ČESTNÉ PREHLÁSENIE} \par
+  \end{large}
+  \vspace*{0.5cm}
+  \noindent
+  Čestne prehlasujem, že diplomovú prácu som vypracoval samostatne pod vedením
+  vedúceho diplomovej práce a s použitím odbornej literatúry, ktorá je uvedená
+  v zozname použitej literatúry. \\
+  \vspace*{0.5cm}\\
+  V Bratislave, 30.4.2019 \hspace*{6cm}............................\\
+  \hspace*{10.4cm} Matúš Cuper
+  \end{titlepage}
+  \newpage\null\thispagestyle{empty}\newpage
+
+  \begin{titlepage}
+  \vspace*{15cm}
+  \begin{large}
+    \noindent \textbf{POĎAKOVANIE} \par
+  \end{large}
+  \vspace*{0.5cm}
+  \noindent
+  Ďakujem vedúcemu diplomovej práce Ing. Marekovi Lódererovi za odborné vedenie,
+  cenné rady a pripomienky pri spracovaní diplomovej práce.
+  \end{titlepage}
+  \newpage\null\thispagestyle{empty}\newpage
+
+%-------------------------------------------------------------------------------
 %   ANOTATION
 %-------------------------------------------------------------------------------
 
@@ -129,10 +161,10 @@
 \end{center}
 {Slovenská technická univerzita v Bratislave \par}
 {FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ \par}
-{Študijný program: \indent Inteligentné softvérové systémy \par}
-{Autor: \indent \indent \indent \indent \vphantom{.} Bc. Matúš Cuper \par}
-{Bakalárska práca: \indent \vphantom{.} Identifikácia neštandardného správania odberateľov v~energetickej sieti \par}
-{Vedúci práce: \indent \indent \vphantom{.} Ing. Marek Lóderer \par}
+{Študijný program: \indent \indent \indent Inteligentné softvérové systémy \par}
+{Autor: \indent \indent \indent \indent \indent \indent \vphantom{} Bc. Matúš Cuper \par}
+{Diplomová práca: \indent \indent \indent Identifikácia neštandardného správania odberateľov \\ \indent \indent \indent \indent \indent \indent \indent \indent v~energetickej sieti \par}
+{Vedúci diplomovej práce: \hphantom{aa.} Ing. Marek Lóderer \par}
 {apríl 2019 \par}
 \bigskip
 V práci sme sa zamerali na identifikáciu anomálií v~energetických časových
@@ -170,9 +202,9 @@ a~rozloženia profilu používateľa v~zhlukoch.
 {Slovak University of Technology in Bratislava \par}
 {FACULTY OF INFORMATICS AND INFORMATION TECHNOLOGIES \par}
 {Degree Course: \indent Intelligent Software Systems \par}
-{Author: \indent \indent \indent \vphantom{.} Bc. Matúš Cuper \par}
-{Bachelor thesis: \indent Identification of abnormal behavior of customers in the power grid \par}
-{Supervisor: \indent \indent \vphantom{.} Ing. Marek Lóderer \par}
+{Author: \indent \indent \indent \vphantom{.} Matúš Cuper \par}
+{Master's thesis: \indent Identification of abnormal behavior of customers in the power grid \par}
+{Supervisor: \indent \indent Marek Lóderer \par}
 {April 2019 \par}
 \bigskip
 In the thesis we focused on anomaly identification in energy time series.
@@ -193,38 +225,6 @@ multidimensional data, including smoothing, dimension reduction and attribute
 selection. Our proposed method clusters discretized smoothed time series and
 then, subsequently identifies anomalies, based on created clusters and layout of
 customers profiles in clusters.
-\end{titlepage}
-\newpage\null\thispagestyle{empty}\newpage
-
-%-------------------------------------------------------------------------------
-%   Declaration
-%-------------------------------------------------------------------------------
-
-\begin{titlepage}
-\vspace*{15cm}
-\begin{large}
-  \noindent \textbf{ČESTNÉ PREHLÁSENIE} \par
-\end{large}
-\vspace*{0.5cm}
-\noindent
-Čestne prehlasujem, že diplomovú prácu som vypracoval samostatne pod vedením
-vedúceho diplomovej práce a s použitím odbornej literatúry, ktorá je uvedená
-v zozname použitej literatúry. \\
-\vspace*{0.5cm}\\
-\hspace*{10cm}............................\\
-\hspace*{10.7cm} Matúš Cuper
-\end{titlepage}
-\newpage\null\thispagestyle{empty}\newpage
-
-\begin{titlepage}
-\vspace*{15cm}
-\begin{large}
-  \noindent \textbf{POĎAKOVANIE} \par
-\end{large}
-\vspace*{0.5cm}
-\noindent
-Ďakujem vedúcemu diplomovej práce Ing. Marekovi Lódererovi za odborné vedenie,
-cenné rady a pripomienky pri spracovaní diplomovej práce.
 \end{titlepage}
 \newpage\null\thispagestyle{empty}\newpage
 
@@ -291,7 +291,7 @@ pre každého odberateľa. Skóre je ďalej použité pri bližšej identifikác
 intervalov, ktorých priebeh je neobvyklý prípadne náhody.
 V~kapitole~\ref{c:experimental-verification} sú bližšie popísané vykonané
 experimenty a~porovnanie navrhovaného riešenia s~existujúcimi. V~poslednej
-kapitole~\ref{c:conclusion} sú zhodnotené výsledky našej práce.
+kapitole~\ref{c:evaluation} sú zhodnotené výsledky našej práce.
 
 \newpage\null\thispagestyle{empty}\newpage
 
@@ -2367,18 +2367,19 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 TODO analyzovat vysledky podobne ako v 4.
 
 %-------------------------------------------------------------------------------
-%   Chapter 5 - Conclusion
+%   Chapter 5 - Evaluation
 %-------------------------------------------------------------------------------
 
 \newpage
-\section{Záver}
-\label{c:conclusion}
+\section{Zhodnotenie}
+\label{c:evaluation}
 
 %-------------------------------------------------------------------------------
-%   Chapter 8 - Bibliography
+%   Chapter 6 - Bibliography
 %-------------------------------------------------------------------------------
 
 \newpage\null\thispagestyle{empty}\newpage
+\addcontentsline{toc}{section}{Literatúra}
 \bibliographystyle{iso-690/slovakiso}
 \bibliography{bibliography}
 \newpage\null\thispagestyle{empty}\newpage
@@ -2403,50 +2404,37 @@ Použité knižnice s~verziami sú zobrazené pomocou tabuľky~\ref{tab:librarie
     \textbf{Názov}  &   \textbf{Použitá verzia}  \\ \hline
     AnomalyDetection    &   1.0         \\ \hline
     BreakoutDetection   &   1.0.1       \\ \hline
-    cluster             &   2.0.6       \\ \hline
+    cluster             &   2.0.8       \\ \hline
     clusterCrit         &   1.2.8       \\ \hline
-    data.table          &   1.12.0      \\ \hline
-    devtools            &   1.13.6      \\ \hline
-    dplyr               &   0.7.8       \\ \hline
+    data.table          &   1.12.2      \\ \hline
+    devtools            &   2.0.2       \\ \hline
+    dplyr               &   0.8.0.1     \\ \hline
     dtw                 &   1.20-1      \\ \hline
-    dtwclust            &   5.5.1       \\ \hline
-    ggplot2             &   3.1.0       \\ \hline
+    dtwclust            &   5.5.2       \\ \hline
+    dygraphs            &   1.1.1.6     \\ \hline
+    ggbiplot            &   0.55        \\ \hline
+    ggplot2             &   3.1.1       \\ \hline
+    ggpubr              &   0.2         \\ \hline
+    gridExtra           &   2.3         \\ \hline
+    gtable              &   0.3.0       \\ \hline
     lubridate           &   1.7.4       \\ \hline
     pkgmaker            &   0.27        \\ \hline
     plotly              &   4.8.0       \\ \hline
     proxy               &   0.4-22      \\ \hline
     registry            &   0.5         \\ \hline
     rngtools            &   1.3.1       \\ \hline
-    stringr             &   1.3.1       \\ \hline
-    TSrepr              &   1.0.1       \\ \hline
-    zoo                 &   1.8-4       \\ \hline
+    Rtsne               &   0.15        \\ \hline
+    scales              &   1.0.0       \\ \hline
+    stringr             &   1.4.0       \\ \hline
+    TSrepr              &   1.0.2       \\ \hline
+    tidyquant           &   0.5.6       \\ \hline
+    zoo                 &   1.8-5       \\ \hline
   \end{tabular}
 \end{table}
 
-\subsection{Obsah elektronického média}
-\dirtree{%
-  .1 CD nosič.
-  .2 \textbf{doc}.
-	.3 DP\_MATUS\_CUPER.pdf.
-  .2 \textbf{src}.
-  .3 aggregators.R.
-  .3 analyzators.R.
-  .3 anomalyDetectors.R.
-  .3 boilerplate.R.
-  .3 filters.R.
-  .3 loaders.R.
-  .3 oneliners.sh.
-  .3 presentation.R.
-  .3 ts-sample-decomposition.R.
-  .3 utilities.R.
-  .3 visualizators.R.
-}
-
-\begin{description}
-  \item[$\bullet$ doc] dokumentácia, obrázky použité v nej a zdrojové súbory pre LaTeX
-  \item[$\bullet$ src] skripty, prototypy a časti zdrojových kódov, ktoré boli použité pri experimentoch
-\end{description}
-
+%-------------------------------------------------------------------------------
+%   Appendix - Experiments
+%-------------------------------------------------------------------------------
 
 \newpage
 \section{Vizualizácie experimentov pre výber hyperparametrov}
@@ -2627,6 +2615,35 @@ zhlukovania bolo navrhnuté a~odskúšané skóre, ktorým je určená miera ano
 daného odberateľa. Výsledky boli porovnávané s~ďalšími existujúcimi riešeniami.
 Naše skóre sme skombinovali s~existujúcimi metódami kvôli spresneniu intervalov.
 Výsledky sme overili ich vizualizovaním a~porovnávaním.
+
+\section{Opis digitálnej časti práce}
+Evidenčné číslo práce v~informačnom systéme: FIIT-182905-73688
+
+Obsah digitálnej časti práce (archív ZIP):
+\dirtree{%
+  .1 archív ZIP.
+  .2 \textbf{doc}.
+  .3 DP\_MATUS\_CUPER.pdf.
+  .2 \textbf{src}.
+  .3 aggregators.R.
+  .3 analyzators.R.
+  .3 anomalyDetectors.R.
+  .3 boilerplate.R.
+  .3 filters.R.
+  .3 loaders.R.
+  .3 oneliners.sh.
+  .3 presentation.R.
+  .3 ts-sample-decomposition.R.
+  .3 utilities.R.
+  .3 visualizators.R.
+}
+
+\begin{description}
+  \item[$\bullet$ doc] dokumentácia, obrázky použité v nej a zdrojové súbory pre LaTeX
+  \item[$\bullet$ src] skripty, prototypy a časti zdrojových kódov, ktoré boli použité pri experimentoch
+\end{description}
+
+Názov odovzdaného archívu: DP\_prilohy\_digital\_cuper.zip
 
 \end{appendices}
 

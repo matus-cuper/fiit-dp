@@ -14,9 +14,9 @@ pips <- repr_pip(orig, times = length(orig) / 4 - 1)
 
 d <- data.frame(instances, samples, means, medians, pips)
 p <- ggplot(d, aes(instances - 1)) +
-  geom_line(aes(y = samples, color = hue_pal()(5)[2]), size = 1) +
+  geom_line(aes(y = medians, color = hue_pal()(5)[2]), size = 1) +
   geom_line(aes(y = means, color = hue_pal()(5)[3]), size = 1) +
-  geom_line(aes(y = medians, color = hue_pal()(5)[4]), size = 1) +
+  geom_line(aes(y = samples, color = hue_pal()(5)[4]), size = 1) +
   geom_line(aes(y = pips, color = hue_pal()(5)[5]), size = 1) +
   xlab("Poradie meraní") + ylab("Spotreba elektrickej energie v kW") + labs(color = "Typ redukcie") +
   scale_color_manual(labels = c("Vzorkovanie", "Priemer", "Medián", "PIP"), values = c(hue_pal()(5)[2], hue_pal()(5)[3], hue_pal()(5)[4], hue_pal()(5)[5])) +
