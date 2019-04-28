@@ -12,3 +12,13 @@ getFrequency <- function(dataset) {
 getIQRrule <- function(df) {
   return(df[df > quantile(df, probs = 0.75) + 1.5 * IQR(df)])
 }
+
+unlistAndTransform <- function(dataset, dimensions, columns.names, rows.names = DATACOLUMNS) {
+  df <- unlist(dataset, use.names = FALSE)
+  dim(df) <- dimensions
+  df <- data.frame(df)
+  names(df) <- columns.names
+  rownames(df) <- rows.names
+
+  return(df)
+}

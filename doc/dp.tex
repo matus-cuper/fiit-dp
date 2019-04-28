@@ -271,7 +271,7 @@ zákazníkov alebo aj rovnakých skupín používateľov. Distribučné spoločn
 žnižujú straty pri dodávke energie a~zároveň dokážu preverovať iba odberateľov,
 ktorí svojím profilom nezapadajú medzi odberateľov so štandardným správaním.
 
-Cieľom práce je identifikovať v~časových radov spotreby elektrickej energie,
+Cieľom práce je identifikovať v~časových radoch spotreby elektrickej energie
 také invervaly, ktoré svojou charakteristikou nezodpovedajú správaniu ostatných
 odberateľov v~datasete. Vzhľadom na fakt, že manuálne označenie takýchto
 intervalov je časovo a~finančne náročné, je metóda založená na učení bez
@@ -282,13 +282,13 @@ veľkých datasetov je dosiahnutá pomocou štatistických metód a~strojového 
 
 Práca je rozdelená do piatich kapitol vrátane úvodu.
 V~kapitole~\ref{c:problem-analysis} sa zaoberáme analýzou existujúcich riešení,
-rôznymi prístupmi pri identifikácií anomálií, zhlukovaniu časových radov, ale aj
+rôznymi prístupmi pri identifikácií anomálií, zhlukovaním časových radov, ale aj
 ich transformáciou alebo redukciou dimenzií. Osobitná pozornosť je venovaná
 štatistickým metódam, ktorých cieľom je identifikovať anomálie a~zmeny
 v~časových radoch. V~kapitole~\ref{c:solution-design} navrhujeme vlastné
 riešenie, ktoré na základe zhlukovania časových radov počíta skóre anomálnosti
 pre každého odberateľa. Skóre je ďalej použité pri bližšej identifikácií
-intervalov, ktorých priebeh je neobvyklý prípadne náhody.
+intervalov, ktorých priebeh je neobvyklý prípadne náhodný.
 V~kapitole~\ref{c:experimental-verification} sú bližšie popísané vykonané
 experimenty a~porovnanie navrhovaného riešenia s~existujúcimi. V~poslednej
 kapitole~\ref{c:evaluation} sú zhodnotené výsledky našej práce.
@@ -1678,8 +1678,8 @@ ktorý v~sebe zahŕňa viacero modelov, čím je pridávanie ďalších komponen
 detekčného systému jednoduché. Navrhovaná metóda je citlivá na lokálne zmeny vo
 vzore dát. Taktiež dosiahli s~relatívne malým množstvom meraní presnosť až 78\%
 na trénovacej množine a~70\% na testovacej množine. Metóda je citlivá na zmeny
-amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nie je citlivý
-na nevýrazné zmeny a~trendy v~dátach.
+amplitúd a~frekvencií v~dátach z~meračov. Nevýhodou je, že model nedokáže
+zachytiť nevýrazné zmeny a~trendy v~dátach.
 \medskip
 
 %-------------------------------------------------------------------------------
@@ -1720,6 +1720,8 @@ anomálie.
 Vzhľadom na to, že dostupné dáta neobsahujú informáciu o~anomáliách, budeme pri
 evaluácií riešenia používať syntetický dataset, ktorý bude vytvorený na základe
 dostupných dát a~znalostí o~anomáliách.
+
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Chapter 3 - Solution design
@@ -1783,12 +1785,14 @@ nutné pred ďalším spracovaním normalizovať, napr. pomocou z-skóre. Normal
 je potrebná kvôli použitým metrikám podobnosti časových radov, ktoré porovnávajú
 inštancie na základe tvaru krivky a~nie ich absolútnych hodnôt ako je to napr.
 pri Euklidovskej. Zhluky vo vytvorenom zhlukovaní sú rozdelené na základe
-početnosti jednotlivých skupín na majoritné a~minoritné. Z~majoritnej skupiny sú
-vybrané časové rady nachádzajúce sa na okraji zhluku. Časové rady z~oboch skupín
-sú následne analyzované pomocou SHESD metódy, čím vznikajú jednotlivé merania
-v~časových radoch označené ako anomálie. Vzniknutým bodom je pridelené skóre,
-ktoré opisuje mieru istoty, že dané meranie je anomálne. Body je následné nutné
-zlúčiť do intervalov, ktoré sú roztriedené do skupín.
+početnosti jednotlivých skupín na majoritné a~minoritné od čoho sa odvíja
+hodnota skóre. Časové rady z~oboch skupín sú následne analyzované pomocou metódy
+FeaClip a~je určené skóre, na základe ktorého sú identifikované podozrivý
+odberatelia. Dáta podozrivých odberateľov sú vyhladené a~analyzované pomocou
+metódy S-H-ESD, čím vznikajú jednotlivé merania v~časových radoch označené ako
+anomálie. Vzniknutým bodom je pridelené skóre, ktoré opisuje mieru istoty, že
+dané meranie je anomálne. Anomálne intervaly sú pozlučované a~výsledky
+vizualizované.
 
 \subsection{Vytvorenie zhlukov}
 Prvým krokom pri návrhu zhlukovania je výber vhodnej zhlukovacej metódy.
@@ -1833,12 +1837,12 @@ vzorcami~\ref{eq:windowing-start} a~\ref{eq:windowing-end}, pre každé okno
 z~intervalu $<1, pocet\_tyzdnov - dlzka\_okna>$. Všetky posuvné okná sa
 prekrývajú minimálne v~jednom týždni, práve toľko krát, koľko je veľkosť kroku
 posuvného okna v~týždňoch. Vybraný interval dát je agregovaný na základe
-poradia merania v~danom dni, čím vznikne denná reprezentácia odberateľa. Výbrané
+poradia merania v~danom dni, čím vznikne denná reprezentácia odberateľa. Vybrané
 okno časových radov je porovnávané na základe tvaru krivky, preto je nutné dáta
 najskôr normalizovať a~až potom analyzovať zhlukovacím algoritmom. Normalizácia
 pomocou z-skóre  je bližšie opísaná v~podkapitole~\ref{c:z-score}. Jedná sa
-o~výpočet podielu medzi rozdielom nameranej hodnoty a~jej priemerom
-a~štandardnej odchýlky, čo môžeme zapísať vzorcom~\ref{eq:z-score2}.
+o~výpočet podielu medzi rozdielom nameranej hodnoty $x$ a~jej priemerom $\mu$
+a~štandardnej odchýlky $\sigma$, čo môžeme zapísať vzorcom~\ref{eq:z-score2}.
 
 \begin{equation}
   index_{zaciatok} = (poradie\_tyzdna - 1) * pocet\_merani\_tyzdenne
@@ -1904,7 +1908,7 @@ beh $j$, minoritné sú všetky ostatné. Ich početnosť nespĺňa dané kvanti
 kritérium. Skóre inštancie je znázornené na obrázku~\ref{fig:clustering-score}
 šedou šípkou, ktorá predstavuje vzdialenosť inštancie od medoidu daného zhluku.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{clustering_score.png}
   \caption{Skórovanie podozrivých inštancií a~zhlukov.}
@@ -1988,7 +1992,7 @@ v~tabuľke~\ref{tab:feaclip}
   \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{feaclip_example.png}
   \caption{Reprezentácia spotrebiteľov pomocou metódy FeaClip.}
@@ -2005,7 +2009,7 @@ ako anomália vo viacerých posuvných oknách, je časový rad dodatočne analy
 v~ďalších krokoch.
 
 \subsection{Vyhladzovanie časových radov podozrivých odberateľov}
-Odberatelia označený najvyšším anomálnym skóre sú ďalej analyzovaný pomocou
+Odberatelia označení najvyšším anomálnym skóre sú ďalej analyzovaní pomocou
 metódy S-H-ESD. Najskôr je však potrebné spracovávané dáta vyhladiť, čím sú
 v~podstatnej miere eliminované extrémne hodnoty a~lokálne anomálie. V~analýze
 v~kapitole~\ref{c:ts-smoothing} sme opísali metódu LOESS, ktorej vstupným
@@ -2018,7 +2022,7 @@ výrobu, distribúciu a~spotrebu elektrickej energie. Príkladom aplikovania met
 LOESS, môžu byť pôvodné a~vyhladené časové rady zobrazené na
 obrázku~\ref{fig:smoothing-example}.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{smoothing_example.png}
   \caption[Vyhladenie časových radov pomocou metódy LOESS.]{Vyhladenie časových radov pomocou metódy LOESS s~rozpätím $\alpha=0.25$.}
@@ -2033,7 +2037,7 @@ obrázku~\ref{fig:smoothing-anomalies}, kde prechody medzi normálnymi
 a~anomálnymi invervalmi v~pôvodnom časovom rade príznakov sú ostré, pomocou
 vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{smoothing_anomalies.png}
   \caption{Vyhladenie príznakov anomálnosti pomocou metódy LOESS.}
@@ -2041,6 +2045,7 @@ vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
 \end{figure}
 
 \subsection{Skórovanie odberateľov metódou S-H-ESD}
+\label{c:shesd-scoring}
 Cieľom je vylepšiť skóre vypočítané v~predchádzajúcich krokoch a~spresniť tak
 interval, v~ktorom je výskyt anomálií výrazne väčší. Výstupom metódy S-H-ESD je
 pôvodný časový rad s~príznakom, ktorým sú označené identifikované anomálie. Nový
@@ -2075,7 +2080,7 @@ rovnaký typ dňa v~rámci jedného týždňa má vždy rovnaké skóre anomáln
 zobrazuje skóre jedného odberateľa v~celom pozorovanom období. Čím je skóre
 anomálnosti vyššie, tým je väčšia miera istoty výskytu anomálií.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{heatmap_days.png}
   \caption{Vizualizácia skóre odberateľa pred pridaním S-H-ESD.}
@@ -2095,12 +2100,14 @@ tepelnej mapy a~zobrazovaný interval je len niekoľko týždňov. Keďže navrh
 metóda je založená na učení bez učiteľa, vyhodnocovanie prebieha na základe už
 spomenutých riešení, konkrétne FeaClip transformácie a~metóde S-H-ESD.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{heatmap_hours.png}
   \caption{Vizualizácia skóre odberateľa po pridaním S-H-ESD.}
   \label{fig:heatmap-hours}
 \end{figure}
+
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Chapter 4 - Experimental verification
@@ -2121,7 +2128,7 @@ prehľadne vizualizovať množstvo meraní od odberateľov, preto sme použili �
 a~krabicové grafy~\ref{fig:whole-plot} (angl. \textit{box plots}) na
 vizualizáciu náhodne vybraných odberateľov.
 
-\begin{table}[ht]
+\begin{table}[htbp]
   \centering
   \caption{Charakteristiky polohy použitého datasetu.}
   \label{tab:quantile}
@@ -2184,6 +2191,11 @@ odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
 Experimenty, ktoré sme vykonali sme porovnávali s~existujúcou implementáciou
 metódy S-H-ESD, ktorá sa nachádza v~balíčku
 \textit{AnomalyDetection}~\footnote{https://github.com/twitter/AnomalyDetection}.
+Autori ju bližšie opísali v~práci~\cite{Hochenbaum2014}. Rovnako sme výsledky
+porovnávali aj s~metódou FeaClip, ktorú navrhli autori
+v~práci~\cite{Laurinec2018}.
+
+\subsubsection{Identifikácia anomálií metódou S-H-ESD}
 Vstupnými parametrami metódy je hladina významnosti, na ktorej je hypotéza
 o~anomálnosti inštancie zamietaná, typ anomálie (kladná alebo záporná)
 a~maximálny počet anomálií v~danom datasete. Vďaka robustnosti metódy S-H-ESD,
@@ -2201,6 +2213,10 @@ Výsledky sme vizualizovali pomocou transformácie FeaClip a~sú zobrazené na
 obrázku~\ref{fig:twitter-results}. V~prvom riadku sú výsledky funkcie
 \textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov, v~druhom riadku sú
 výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov.
+Anomálne inštancie sa obvykle nachádzajú na okraji zhlukov, no nie je to
+pravidlom. Pri vizualizácií vysokodimenzionálnych dát často nie je možné
+jednoznačne určiť dostatočne reprezentatívne atribúty a~z~toho dôvodu nám metóda
+PCA a~TSNE neposkytuje žiadnu informáciu o~anomálnosti odberateľa.
 
 \begin{figure}[htbp]
   \centering
@@ -2219,11 +2235,36 @@ obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
 časového radu, tak aj pri čiastkových analýzach, čo môže prispieť k~rýchlosti
 identifikácie anomálií.
 
-% TODO add peto lau  experiments
-% TODO pridat experimenty z noci, porovnat pocty a kvality identifikovanych časových radov, vizualizovať zo dva tri TS
-% TODO porovnat casy vypoctov a pomery
+Vizualizované výsledky môžeme vidieť na obrázku~\ref{fig:results-twitter}.
+Z~oboch je zrejmé, že anomálnymi meraniami sú označené merania, ktorých hodnota
+je lokálnym extrémom. Pri dolnom obrázku odberateľa 6536 je tak označená časť
+takmer každého dňa pozorovaného intervalu, hoc môžeme vidieť, že existuje určitá
+pravidelnosť v~spotrebe elektrickej energie.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{results_twitter.png}
+  \caption[Vizualizácia S-H-ESD skóre odberateľov.]{Vizualizácia S-H-ESD skóre odberateľov, hore 2172, dole 6536.}
+  \label{fig:results-twitter}
+\end{figure}
+
+\subsubsection{Identifikácia anomálií metódou FeaClip}
+Jediným vstupným parametrom metódy je postupnosť meraní, nad ktorou je vykonaný
+výpočet. Metóda je extrémne rýchla, odberateľa transformuje a~aplikuje
+medzikvartilové pravidlo primerne za 0.0197 sekundy. Za anomálnych je však
+označených až tretina odberateľov na celom pozorovanom intervale. Kvôli tomu je
+nutné vykonať transformáciu iba nad posuvným oknom, ktorého výsledky sú
+agregované a~je naň aplikované medzikvartilové pravidlo na identifikáciu
+anomálií. Výpočet sa tak predĺži na 0.4605 sekundy pre každého odberateľa. Počet
+identifikovaných anomálnych odberateľov sa snížil približne na 2.66\%, pri
+výbere 10\% najčastejšie označovaných odberateľov. Priemerne je v~každom okne
+označených ako anomálnych 63.4 odberateľov. Oba časové rady identifikované
+metódou S-H-ESD zobrazené na obrázku~\ref{fig:results-twitter} sú označené
+anomálnymi aj FeaClip metódou. Jej nevýhodou však je, že ako anomáliu označí
+celé analyzované posuvné okno.
 
 \subsection{Výber hyperparametrov zhlukovania}
+\label{c:hyperparameter-selection}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
 zhlukovanie, jeho kvalitu alebo časovú náročnosť. Pri práci sme sa zamerali
 najmä na dosahovanú presnosť, ktorú sme merali pomocou zhlukovacích validačných
@@ -2333,7 +2374,7 @@ posunom trval 5-krát dlhšie oproti týždňovému posunu.
 \end{figure}
 
 \noindent
-Predspracovanie dataset pozostáva aj z~normalizácie dát pomocou z-skóre, ktoré
+Predspracovanie datasetu pozostáva aj z~normalizácie dát pomocou z-skóre, ktoré
 je bližšie opísané v~kapitole~\ref{c:z-score}. Môžeme ho zapísať
 vzorcom~\ref{eq:z-score3}, kde rozdiel nameranej hodnoty a~priemeru sledovanej
 veličiny je podelený štandardnou odchýlkou. Použitá knižnica
@@ -2351,6 +2392,7 @@ externej normalizácie sú dosahované výsledky porovnateľné.
   z = \frac{x-\mu}{\sigma}
 \end{equation}
 
+\noindent
 Výsledkom experimentov je nové zhlukovanie pre každé posuvné okno. Náhodne
 vybrané zhlukovanie je zobrazené aj na obrázku~\ref{fig:clustering-workdays}.
 Je zrejmé, že jednotlivé medoidy sa navzájom dostatočne líšia a~potvrdzujú
@@ -2363,8 +2405,87 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 	\label{fig:clustering-workdays}
 \end{figure}
 
-\subsection{Porovnanie navrhovanej metódy s~existujúcimi}
-TODO analyzovat vysledky podobne ako v 4.
+\subsection{Porovnanie navrhovanej metódy s~existujúcimi riešeniami}
+Prvým krokom nami navrhnutej metódy je predspracovanie a~normalizácia dát, kedy
+sú dáta normalizované a~následne rozdelené na dve skupiny. Prvá skupina obsahuje
+pracovné dni v~týždni, druhá skupiny dni voľna, čiže sviatky a~víkendy.
+Rozdelenie je navrhnuté na základe porovnania charakteriských polohy datasetu
+v~kapitole~\ref{c:experimental-verification}.
+
+Obe skupiny dát sú následne postupne zhlukované pomocou k-medoidov. Každé
+zhlukovanie je vykonané na agregovaných časových radoch v~rámci jedného
+posuvného okna. Dĺžku okna sme určili na základe experimentov popísaných
+v~kapitole~\ref{c:hyperparameter-selection} na hodnotu~2. Snahou bolo zabezpečiť
+rýchlu odozvu na nové trendy v~správaní používateľov a~zároveň sčasti eliminovať
+množstvo lokálnych anomálií. Podobnými experimentmi sme identifikovali
+najvhodnejšiu vzdialenostnú metriku pre PAM heuristiku a~počet zhlukov, do
+ktorých bude množina odberateľov rozdelená. Používanou metrikou je GAK a~počet
+zhlukov s~najlepšími výsledkami je 25.
+
+Výstupom zhlukovania je pre každého odberateľa vo všetkých posuvných oknách
+skóre, ktoré opisuje jeho polohu v~rámci zhluku, do ktorého spadá ako aj veľkosť
+samotného zhluku oproti ostatným zhlukom. Dodatočne je pre každé posuvné okno
+taktiež vypočítané skóre, ktoré vychádza z~FeaClip transformácie. Odberatelia,
+ktorých skóre sa v~jednotlivých oknách často vyskytuje mimo intervalu
+medzikvartilového pravidla sú označení a~analyzovaní v~ďalších krokoch procesu.
+Ich počet závisí od parametra, ktorý udáva používateľ. Výstupom sú
+identifikátory odberateľov, ktorých anomálne skóre bolo najvyššie.
+
+Pôvodné časové rady odberateľov sú následne predspracované vyhladzovacou metódou
+LOESS, ktorej cieľom je vyhladiť vysokú volatilitu spotreby elektrickej energie.
+Vďaka tomu sú menej výrazné lokálne anomálie zanedbané a~metóda S-H-ESD ich
+neidentifikuje.
+
+Posledným krokom je aplikovanie štatistickej metódy S-H-ESD na vyhladené časové
+rady. Získame tým skóre odberateľa, ktoré na najnižšej granularite identifikuje
+podozrivé merania. Je dôležité si uvedomiť, že skóre vypočítané
+v~predchádzajúcich krokoch určuje anomálie na maximálne dňovej granularite.
+Vzhľadom na fakt, že skóre odberateľa nadobúda iba hodnoty 0~a~1, je pred
+kombinovaním s~pôvodným skóre vyhladené. Použitím metódy LOESS je zabezpečené
+čiastočné zaniknutie ojedinelých anomálií a~zároveň zlúčenie intervalov, kde je
+výskyt anomálií vysoký. Kombináciou skórovaní získavame pre každé pôvodné
+meranie novú hodnotu, ktorým je určená miera podozrenia, že dané meranie je
+anomáliou. Čím je výsledné skóre väčšie, tým je väčšie aj podozrenie.
+
+Dosiahnuté výsledky je možné vizualizovať rôznymi grafmi, napr. aj pomocou
+tepelnej mapy, ako je to v~kapitole~\ref{c:shesd-scoring}. Nevýhodou však je, že
+nemáme k~dispozícii pôvodný časový rad odberateľa. Preto sme sa rozhodli použiť
+tepelnú mapu v~kombinácií s~bežným čiarovým grafom, ktorého farba sa mení
+v~závislosti od vypočítaného skóre. Vybrané časové rady sú zobrazené na
+obrázkoch~\ref{fig:results-my-2172} a~\ref{fig:results-my-6536}. Môžeme si
+všimnúť, že spotreba elektrickej energie na obrázku~\ref{fig:results-my-2172}
+je veľmi nepravidelná a~náhodná. Anomáliami sú označené intervaly, v~ktorých sa
+nachádza extrémne vysoká spotreba. Naopak časový rad na
+obrázku~\ref{fig:results-my-6536} má pomerne pravidelný denný priebeh
+a~anomálnym intervalom je označený deň, ktorého priebeh nie je štandardný.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{results_my_2172.png}
+  \caption{Vizualizácia vypočítaného skóre pre odberateľa 2172.}
+	\label{fig:results-my-2172}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{results_my_6536.png}
+  \caption{Vizualizácia vypočítaného skóre pre odberateľa 6536.}
+	\label{fig:results-my-6536}
+\end{figure}
+
+\noindent
+Množstvo identifikovaných odberateľov je udávané vstupným parametrom. Pri
+experimentoch sme použili 1\% tých, ktorých skóre anomálnosti bolo najväčšie.
+Počet identifikovaných anomálií jednotlivých odberateľov sa pohybuje na úrovni
+3-4\% v~závislosti od nastavenia vstupných premenných a~samozrejme aj od
+zhlukovania, ktoré je stochastické. Doba spracovania odberateľa je o~19.42
+sekundy dlhšia ako pri metóde S-H-ESD, ktorej to zaberie priemerne 63.24
+sekúnd. Dôležité je poznamenať, že zatiaľ čo pri metóde S-H-ESD je potrebné
+analyzovať všetky časové rady, pri nami navrhovanej metóde je nutné aplikovať
+na celý dataset iba zhlukovanie. Priemerný čas výpočtu na odberateľa je pritom
+iba 14.79 sekundy.
+
+\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Chapter 5 - Evaluation
@@ -2373,6 +2494,41 @@ TODO analyzovat vysledky podobne ako v 4.
 \newpage
 \section{Zhodnotenie}
 \label{c:evaluation}
+Cieľom našej práce bolo navrhnúť a~overiť riešenie, ktoré v~časových radoch
+spotreby elektrickej energie identifikuje podozrivé intervaly a~merania. Nemusí
+pritom nutne ísť o~anomálie spôsobené manipuláciou s~meracím zariadením, ale
+môže sa jednať aj o~jeho poškodenie prípadne môže byť správanie odberateľa
+nepredvídateľné. Identifikácia podozrivých odberateľov je kvôli množstvu dát
+a~rýchlosti s~akou pribúdajú, nesmierne finančne a~časovo náročná. Zároveň musí
+byť navrhnuté riešenie dostatočne robustné voči meniacim sa trendom spotreby
+elektrickej energie. Preto je požiadavkou na riešenie robustnosť, ale najmä
+schopnosť učenia bez učiteľa. Navrhovaná metóda je založená na zhlukovaní
+časových radov postupne po niekoľko týždňových intervaloch, čím je zabezpečená
+rýchla adaptácia na zmenu v~prostredí. Zhlukovanie bolo validované pomocou
+zhlukovacích validačných indexov. Anomálnosť intervalu a~merania je určená na
+základe skórovania, ktoré vychádza zo spomínaného zhlukovania a~štatistickej
+metódy S-H-ESD, ktorá je primárne určená na identifikáciu anomálií.
+Pri~experimentoch však nedosahuje postačujúce výsledky a~často dochádza
+k~falošne pozitívnym označeniam anomálií. Pridaním zhlukovania sme sa snažili
+zredukovať takéto prípady a~docieliť presnejšiu identifikáciu anomálií.
+
+V~analýze sme sa zamerali na používané metódy v~doméne identifikácie anomálií,
+spôsoby predspracovania vysokodimenzionálnych dát, ale aj existujúce práce
+v~danej doméne. Bližšie sme analyzovali oblasť zhlukovania časových radov
+a~štatistických metód používaných pri detekcii anomálií. Pri predspracovaní dát
+sme sa zamerali najmä na vhodnú redukciu dimenzií a~normalizáciu dát, nakoľko
+sme pri zhlukovaní používali vzdialenostné metriky založené na tvare kriviek
+časových radov. V~návrhu riešenia sme opísali nami navrhovanú metódu a~bližšie
+sme opísali jednotlivé kroky metódy. Dáta sú počas spracovania rozdelené,
+normalizované, agregované, zhlukované, vyhladzované a~nakoniec aj vizualizované
+pomocou vhodne aplikovaných grafov.
+
+Experimentmi sme overili nami navrhnuté riešenie a~výsledky sme vhodne
+vizualizovali a~následne porovnali s~existujúcimi metódami. Na základe výberu
+náhodnej vzorky časových radov môžeme zhodnotiť zrýchlenie výpočtu a~pri
+niektorých inštanciách aj dosiahnutie lepších výsledkov. Pod tým môžeme
+rozumieť identifikovanie anomálneho intervalu namiesto jednotlivých hodnôt, ale
+aj zredukovanie falošne pozitívnych hlásení.
 
 %-------------------------------------------------------------------------------
 %   Chapter 6 - Bibliography
