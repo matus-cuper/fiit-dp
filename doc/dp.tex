@@ -162,6 +162,7 @@
 {Slovenská technická univerzita v Bratislave \par}
 {FAKULTA INFORMATIKY A INFORMAČNÝCH TECHNOLÓGIÍ \par}
 {Študijný program: \indent \indent \indent Inteligentné softvérové systémy \par}
+{\vphantom{.} \par}
 {Autor: \indent \indent \indent \indent \indent \indent \vphantom{} Bc. Matúš Cuper \par}
 {Diplomová práca: \indent \indent \indent Identifikácia neštandardného správania odberateľov \\ \indent \indent \indent \indent \indent \indent \indent \indent v~energetickej sieti \par}
 {Vedúci diplomovej práce: \hphantom{aa.} Ing. Marek Lóderer \par}
@@ -202,9 +203,10 @@ a~rozloženia profilu používateľa v~zhlukoch.
 {Slovak University of Technology in Bratislava \par}
 {FACULTY OF INFORMATICS AND INFORMATION TECHNOLOGIES \par}
 {Degree Course: \indent Intelligent Software Systems \par}
+{\vphantom{.} \par}
 {Author: \indent \indent \indent \vphantom{.} Matúš Cuper \par}
 {Master's thesis: \indent Identification of abnormal behavior of customers in the power grid \par}
-{Supervisor: \indent \indent Marek Lóderer \par}
+{Supervisor: \indent \indent \vphantom{} Marek Lóderer \par}
 {April 2019 \par}
 \bigskip
 In the thesis we focused on anomaly identification in energy time series.
@@ -268,11 +270,11 @@ rozšíriť kapacitu siete a~pripraviť ju tak na budúce trendy. Obvykle sú za
 zákazníkov s~anomálnym správaním. Na základe množstva dát získavaných
 z~inteligentných meračov je možné modelovať správanie buď jednotlivých
 zákazníkov alebo aj rovnakých skupín používateľov. Distribučné spoločnosti tak
-žnižujú straty pri dodávke energie a~zároveň dokážu preverovať iba odberateľov,
+znižujú straty pri dodávke energie a~zároveň dokážu preverovať iba odberateľov,
 ktorí svojím profilom nezapadajú medzi odberateľov so štandardným správaním.
 
 Cieľom práce je identifikovať v~časových radoch spotreby elektrickej energie
-také invervaly, ktoré svojou charakteristikou nezodpovedajú správaniu ostatných
+také intervaly, ktoré svojou charakteristikou nezodpovedajú správaniu ostatných
 odberateľov v~datasete. Vzhľadom na fakt, že manuálne označenie takýchto
 intervalov je časovo a~finančne náročné, je metóda založená na učení bez
 učiteľa. Na druhej strane predpokladá veľké množstvo dát odberateľov, na základe
@@ -745,16 +747,16 @@ metódy kĺzavého priemeru, $3\cdot\sigma$ pravidlo, dekompozícia časových r
 ale aj metóda extrémnej Studentovej odchýlky, ktorá je bližšie opísaná
 v~nasledujúcej podkapitole~\ref{c:esd}. Pravidlo $3\cdot\sigma$ je bežne
 používané na identifikáciu globálnych anomálie, ktoré sú detegované po
-prekročení trojnásobku hodnoty štandardnej odchýlky. Pri sezónnych anomáliach
+prekročení trojnásobku hodnoty štandardnej odchýlky. Pri sezónnych anomáliách
 tento typ detekcie zlyháva, keďže odchýlka je vypočítaná nad celým pozorovaným
 časovým radom. Pri jeho segmentácií je metóda úspešná iba v~prípade, kedy sa
 odchýlka nepretržite mení~\cite{Hochenbaum2017}.
 
 Metóda kĺzavého priemeru má niekoľko modifikácií, na základe ovahánia
-jednotlivých meraní vzniká napr. metóda kĺzavého priemeru s~exponencionálnym
+jednotlivých meraní vzniká napr. metóda kĺzavého priemeru s~exponenciálnym
 váhovaním (angl. \textit{exponentially weighted moving average}), skrátene
 EWMA. Autori v~práci~\cite{Hochenbaum2017} porovnávali okrem EWMA aj PEWMA
-(pravdepodobnostné exponencionálne váhovanie), kde v~kombinácií s~metódou ESD
+(pravdepodobnostné exponenciálne váhovanie), kde v~kombinácií s~metódou ESD
 nedosiahli postačujúce výsledky. Kĺzavý priemer zlyhával pri identifikácií
 sezónnych anomálií.
 
@@ -835,7 +837,7 @@ použitie metódy S-ESD~\cite{Hochenbaum2017}.
 \end{figure}
 
 \noindent
-Dalšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
+Ďalšou metódou založenou na ESD je aj rozšírená S-H-ESD (angl. \textit{Enhanced
 Seasonal Hybrid Extreme Studentized Deviation}), ktorej proces pozostáva z~troch
 krokov, a~to transformácia dát, dekompozícia časových radov a~analýza
 reziduálnej zložky. Účelom transformácie dát je minimalizovať počet falošne
@@ -845,7 +847,7 @@ dosahujú lepšie výsledky pri normálnom rozdelení dát. Na optimálne nastav
 parametrov normalizačnej funkcie je použitá metóda maximálnej pravdepodobnosti
 (angl. \textit{Maximum Likelihood method}), ktorá je výpočtovo nenáročná
 a~vhodná na daný problém. V~procese dekompozície je použitá LOESS regresia
-(angl. \textit{Locally Estimated Scatterplot Smoothing}), kedže klasická
+(angl. \textit{Locally Estimated Scatterplot Smoothing}), keďže klasická
 dekompozícia môže byť ovplyvnená výskytom anomálií vo vstupných dátach.
 Cieľom modifikovanej dekompozície je pomocou série vnorených cykloch a~váh,
 robustne a~iteratívne identifikovať trend a~sezónnosť v~danom časovom rade.
@@ -1378,7 +1380,7 @@ metódy sa vyznačujú extrémnou citlivosťou a~je potrebné predspracovať dá
 pomocou vyhladzovania. Jednou takou je aj metóda lokálne odhadovaného
 vyhladzovania rozptylu (angl. \textit{locally estimated scatterplot smoothing}),
 skrátene LOESS. Predpokladajme, že veličina $y$ je definovaná pomocou regresnej
-funckie $g(x)$, ktorá predikuje danú veličinu s~náhodnou chybou $\epsilon$.
+funkcie $g(x)$, ktorá predikuje danú veličinu s~náhodnou chybou $\epsilon$.
 Vzťah môžeme zapísať rovnicou~\ref{eq:loess}. Ide však o~neparametrickú
 štatistickú metódu, keďže pracujú s~početnosťami súboru alebo s~ich poradím
 určenom vo vstupných dátach. Princíp metódy spočíva v~lokálnej aproximácií
@@ -1818,7 +1820,7 @@ posuvného okna je rovnako udávaná v~týždňoch a~predstavuje veľkosť posun
 o~ktorý sa okno zmení. V~prípade, že dĺžka posuvného okna a~veľkosť kroku sú
 rovnaké, nedochádza k~prekryvu okien. Pri dĺžke okna $n$ a~menšej veľkosti kroku
 napr. $n-1$, sa okná prekrývajú práve v~$n-1$ týždňoch. Výhody a~nevýhody metrík
-vzdialenosti sme bližšie anaylzovali už v~kapitole~\ref{c:distance-metrics}.
+vzdialenosti sme bližšie analyzovali už v~kapitole~\ref{c:distance-metrics}.
 Kritériami na výber je presnosť a~rýchlosť výpočtu, prípadne schopnosť spracovať
 aj časové rady s~rôznymi dĺžkami. Veľkosť posuvného okna by nemala vyhladiť
 existujúce anomálie do takej miery, že by neboli identifikované. Na druhej
@@ -1856,7 +1858,7 @@ a~štandardnej odchýlky $\sigma$, čo môžeme zapísať vzorcom~\ref{eq:z-scor
 
 \subsection{Skórovanie podozrivých zhlukov a~inštancií}
 Pre výber riedkych zhlukov a~inštancií na okraji zhlukov je potrebné vypočítať
-skóre, na základe ktorého bude daný časový rad považoný za anomálny vo~vybranom
+skóre, na základe ktorého bude daný časový rad považovaný za anomálny vo~vybranom
 časovom rozmedzí. Skóre označujúce hustotu pozorovaného zhluku budeme ďalej
 označovať ako skóre zhluku a~skóre označujúce vzdialenosť konkrétneho časového
 radu od centroidu zhluku ako skóre inštancie. Ich násobením je vypočítané
@@ -2029,7 +2031,7 @@ Vizualizáciou takýchto výsledkov dostaneme zúbkovitý graf, kde niektoré an
 intervaly sú jasne identifikovateľné, pri iných sa hodnota príznaku často mení
 a~za anomálne sú považované iba samotné merania. Daný jav môžeme vidieť aj na
 obrázku~\ref{fig:smoothing-anomalies}, kde prechody medzi normálnymi
-a~anomálnymi invervalmi v~pôvodnom časovom rade príznakov sú ostré, pomocou
+a~anomálnymi intervalmi v~pôvodnom časovom rade príznakov sú ostré, pomocou
 vyhladzovania sú početné užšie intervaly zlúčené a~prechody zabrúsené.
 
 \begin{figure}[H]
@@ -2086,7 +2088,7 @@ anomálnosti vyššie, tým je väčšia miera istoty výskytu anomálií.
 Ako už bolo spomenuté po aplikovaní metódy S-H-ESD na časový rad dostaneme pre
 každé meranie príznak, ktorý označuje anomálie. Časový rad príznakov je často
 zúbkovitý a~označené intervaly obsahujú jediné meranie. Po vyhladení časového
-radu je sú vysledkom grafy zobrazené na obrázku~\ref{fig:smoothing-anomalies}.
+radu sú výsledkom grafy zobrazené na obrázku~\ref{fig:smoothing-anomalies}.
 Dosiahnuté skóre je pripočítané k~pôvodnému skóre na základe
 vzorca~\ref{eq:client-score}. Výsledky je nutné vhodne vizualizovať
 a~vyhodnotiť. Príkladom môže byť vizualizácia výsledkov na
@@ -2260,7 +2262,7 @@ experimentoch preto budeme používať najmä GAK, ktoré dosahuje pri Silhouett
 indexe výrazne lepšie výsledky. Vzdialenostná metrika je bližšie opísaná
 v~kapitole~\ref{c:distance-metrics-gak}. Je dôležité poznamenať, že pri rovnakom
 nastavení funkcie, sú výsledky medzi jednotlivými behmi nezávislé a~rôzne.
-Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
+Experimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
 
 \begin{figure}[H]
   \centering
@@ -2323,7 +2325,7 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 Prvým krokom nami navrhnutej metódy je predspracovanie a~normalizácia dát, kedy
 sú dáta normalizované a~následne rozdelené na dve skupiny. Prvá skupina obsahuje
 pracovné dni v~týždni, druhá skupiny dni voľna, čiže sviatky a~víkendy.
-Rozdelenie je navrhnuté na základe porovnania charakteriských polohy datasetu
+Rozdelenie je navrhnuté na základe porovnania charakteristík polohy datasetu
 v~kapitole~\ref{c:experimental-verification}.
 
 Obe skupiny dát sú následne postupne zhlukované pomocou k-medoidov. Každé
@@ -2482,12 +2484,12 @@ pravidelnosť v~spotrebe elektrickej energie.
 \subsubsection{Identifikácia anomálií metódou FeaClip}
 Jediným vstupným parametrom metódy je postupnosť meraní, nad ktorou je vykonaný
 výpočet. Metóda je extrémne rýchla, odberateľa transformuje a~aplikuje
-medzikvartilové pravidlo primerne za 0.0197 sekundy. Za anomálnych je však
+medzikvartilové pravidlo priemerne za 0.0197 sekundy. Za anomálnych je však
 označených až tretina odberateľov na celom pozorovanom intervale. Kvôli tomu je
 nutné vykonať transformáciu iba nad posuvným oknom, ktorého výsledky sú
 agregované a~je naň aplikované medzikvartilové pravidlo na identifikáciu
 anomálií. Výpočet sa tak predĺži na 0.4605 sekundy pre každého odberateľa. Počet
-identifikovaných anomálnych odberateľov sa snížil približne na 2.66\%, pri
+identifikovaných anomálnych odberateľov sa znížil približne na 2.66\%, pri
 výbere 10\% najčastejšie označovaných odberateľov. Priemerne je v~každom okne
 označených ako anomálnych 63.4 odberateľov. Oba časové rady identifikované
 metódou S-H-ESD zobrazené na obrázku~\ref{fig:results-twitter} sú označené
@@ -2608,7 +2610,7 @@ Každý index obsahuje aj informáciu o~jeho optimálnych hodnotách. Pri indexo
 ktoré obsahujú $(max.)$ znamenajú väčšie hodnoty lepšie výsledné zhlukovanie.
 Pri indexoch s~$(min.)$ sú za lepšie výsledky zhlukovania považované nižšie
 hodnoty. Indexy, ktorých výsledky boli veľmi podobné sme pri rozhodovaní
-vynechali, používali sme najmä Silhouetteov a~Davies-Bouldinov index, ktoré
+vynechali. Používali sme najmä Silhouetteov a~Davies-Bouldinov index, ktoré
 najlepšie opisujú kvalitu zhlukovania.
 
 \begin{figure}[htbp]
@@ -2722,7 +2724,7 @@ najlepšie opisujú kvalitu zhlukovania.
 
 \noindent
 Počas zimného semestra budú analyzované dostupné datasety. Následne budú
-spracované a~upravené do formátu potrebného pre model. Po vytvorení protypu
+spracované a~upravené do formátu potrebného pre model. Po vytvorení prototypu
 modelu budú čo najskôr evaluované výsledky. Na základe nich budú ďalej
 spracovávané dáta a~menené datasety. Taktiež sa bližšie pozrieme na
 identifikované anomálie dáta a~určíme ich pôvod na základe dostupných
@@ -2765,8 +2767,8 @@ prezentovanie výsledkov kolegom.
 \noindent
 V~úvode semestra bude vytvorený validačný mechanizmus pre model, zhlukujúci
 analyzované časové rady na základe podobnosti priebehov. Cieľom bude overiť
-vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej enerie.
-Dôležitý je aj výber hyperparametrov pre algoritmi strojového učenia, ale aj
+vytvorené zhluky, ktoré vznikli na základe profilov spotreby elektrickej energie.
+Dôležitý je aj výber hyperparametrov pre algoritmy strojového učenia, ale aj
 vhodná dĺžka posuvného okna, prípadne metrika použitá na meranie podobnosti
 jednotlivých časových radov. Z~analyzovaných riešení je potrebné vybrať
 najvhodnejšie pre náš problém. Ďalšie navrhované vylepšenia budú zapracované na
@@ -2793,7 +2795,7 @@ Obsah digitálnej časti práce (archív ZIP):
   .2 \textbf{doc}.
   .3 img.
   .3 iso-690.
-  .3 DP\_MATUS\_CUPER.pdf.
+  .3 DP\_matus\_cuper.pdf.
   .3 dp.tex.
   .3 bibliography.bib.
   .2 \textbf{src}.
@@ -2815,14 +2817,14 @@ Obsah digitálnej časti práce (archív ZIP):
   \begin{description}
     \item[-- img] adresár s~obrázkami použitými v~práci
     \item[-- iso-690] adresár s~formátovaním pre BibTeX
-    \item[-- DP\_MATUS\_CUPER.pdf] PDF dokument diplomovej práce
+    \item[-- DP\_matus\_cuper.pdf] PDF dokument diplomovej práce
     \item[-- dp.tex] zdrojový súbor dokumentácie v~LaTeXu
     \item[-- bibliography.bib] zdrojový súbor bibliografických odkazov v~BibTeXu
   \end{description}
   \item[$\bullet$ src] skripty, vizualizácie a časti zdrojových kódov v~jazyku R použité pri experimentoch
   \begin{description}
-    \item[-- graphs] adresár obsahujúci skripty vykreslujúce grafy, ktoré sú použité v~práci
-    \item[-- server] adresár obsahuújci skripty, ktoré boli spúšťané na výpočtovom servery
+    \item[-- graphs] adresár obsahujúci skripty vykresľujúce grafy, ktoré sú použité v~práci
+    \item[-- server] adresár obsahujúci skripty, ktoré boli spúšťané na výpočtovom servery
     \item[-- agg-functions.R] funkcie používané na agregáciu dát
     \item[-- dependencies.R] skript obsahujúci všetky závislosti projektu
     \item[-- filter-functions.R] funkcie selektujúce dáta na základe kritérií
@@ -2835,7 +2837,7 @@ Obsah digitálnej časti práce (archív ZIP):
   \end{description}
 \end{description}
 
-Názov odovzdaného archívu: DP\_prilohy\_digital\_cuper.zip
+Názov odovzdaného archívu: DP\_prilohy\_digital\_matus\_cuper.zip
 
 \end{appendices}
 
