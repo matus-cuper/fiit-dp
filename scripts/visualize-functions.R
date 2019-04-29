@@ -70,7 +70,6 @@ visualizeDatasetAnomalies <- function(dataset) {
 # Visualize CVI with same metric
 visualizeCVISameMetric <- function(df, graphName, pathToFile = "/tmp", save = FALSE) {
   actualTime <- as.character(format(as.POSIXct(Sys.time()), "%Y%m%d%H%M"))
-  legendTitle <- list(yref = "paper", xref = "paper", y = 1.05, x = 1.09, text = 'Veľkosť okna', showarrow = FALSE)
 
   plotData <- data.frame(list(
     Sil = df$Sil,
@@ -96,19 +95,28 @@ visualizeCVISameMetric <- function(df, graphName, pathToFile = "/tmp", save = FA
   for(index in names(graphTitles)) {
     tmp <- plotData[c(index, "wsize", "nclus")]
     names(tmp) <- c("val", "wsize", "nclus")
-    plot <- plot_ly(data = tmp, x = ~nclus, y = ~val, color = ~wsize, marker = list(size = 10), mode = "markers+lines", type = "scatter") %>%
-      layout(xaxis = list(title = 'Počet zhlukov', dtick = 5), yaxis = list(title = 'Hodnota indexu'), title = graphTitles[[index]], showlegend = TRUE, annotations = legendTitle)
+
+    plot <- ggplot(tmp, aes(y = val, color = wsize)) + geom_line(aes(x = nclus), size = 1) + geom_point(aes(x = nclus), size = 2.5) +
+      scale_x_continuous(minor_breaks = seq(15, 25, 2.5), breaks = seq(15, 25, 5)) +
+      xlab("Počet zhlukov") + ylab("Hodnota indexu") + labs(color = "Veľkosť okna") + ggtitle(graphTitles[[index]]) +
+      theme(
+        plot.title = element_text(hjust = 0.5),
+        panel.grid.major = element_line(colour = "grey", size = 0.5),
+        panel.grid.minor = element_line(color = "grey"),
+        panel.background = element_rect(fill = "white", color = "black"),
+        legend.key = element_rect(colour = "transparent", fill = "white")
+      )
+
     print(plot)
-    Sys.sleep(3)
+    Sys.sleep(2)
     if (save)
-      plotly_IMAGE(plot, format = "png", out_file = paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''))
+      ggsave(paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''), plot, width = 9, height = 4)
   }
 }
 
 # Visualize CVI with same metric
 visualizeCVIDiffMetric <- function(df, graphName, pathToFile = "/tmp", save = FALSE) {
   actualTime <- as.character(format(as.POSIXct(Sys.time()), "%Y%m%d%H%M"))
-  legendTitle <- list(yref = "paper", xref = "paper", y = 1.05, x = 1.09, text = 'Veľkosť okna', showarrow = FALSE)
 
   plotData <- data.frame(list(
     Sil = df$Sil,
@@ -135,19 +143,28 @@ visualizeCVIDiffMetric <- function(df, graphName, pathToFile = "/tmp", save = FA
   for(index in names(graphTitles)) {
     tmp <- plotData[c(index, "wsize", "metric")]
     names(tmp) <- c("val", "wsize", "metric")
-    plot <- plot_ly(data = tmp, x = ~metric, y = ~val, color = ~wsize, type = "bar") %>%
-      layout(xaxis = list(title = 'Použitá metrika'), yaxis = list(title = 'Hodnota indexu'), title = graphTitles[[index]], showlegend = TRUE, annotations = legendTitle)
+    tmp[tmp$val == Inf, "val"] <- NaN
+
+    plot <- ggplot(tmp, aes(y = val, fill = wsize)) + geom_bar(aes(x = metric), stat = "identity", position=position_dodge()) +
+      xlab("Počet zhlukov") + ylab("Hodnota indexu") + labs(fill = "Veľkosť okna") + ggtitle(graphTitles[[index]]) +
+      theme(
+        plot.title = element_text(hjust = 0.5),
+        panel.grid.major = element_line(colour = "grey", size = 0.5),
+        panel.grid.minor = element_line(color = "grey"),
+        panel.background = element_rect(fill = "white", color = "black"),
+        legend.key = element_rect(colour = "transparent", fill = "white")
+      )
+
     print(plot)
-    Sys.sleep(3)
+    Sys.sleep(2)
     if (save)
-      plotly_IMAGE(plot, format = "png", out_file = paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''))
+      ggsave(paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''), plot, width = 9, height = 3.5)
   }
 }
 
 # Visualize CVI with diff window
 visualizeCVIDiffWindow <- function(df, graphName, pathToFile = "/tmp", save = FALSE) {
   actualTime <- as.character(format(as.POSIXct(Sys.time()), "%Y%m%d%H%M"))
-  legendTitle <- list(yref = "paper", xref = "paper", y = 1.05, x = 1.09, text = 'Veľkosť okna', showarrow = FALSE)
 
   plotData <- data.frame(list(
     Sil = df$Sil,
@@ -187,11 +204,20 @@ visualizeCVIDiffWindow <- function(df, graphName, pathToFile = "/tmp", save = FA
     tmp <- plotData[c(index, "metric")]
     names(tmp) <- c("val", "metric")
     tmp$index <- index
-    plot <- plot_ly(data = tmp, x = ~metric, y = ~val, color = ~metric, type = "bar") %>%
-      layout(xaxis = list(title = 'Použitá metrika'), yaxis = list(title = 'Hodnota indexu'), title = graphTitles[[index]], showlegend = TRUE, annotations = legendTitle)
+
+    plot <- ggplot(tmp, aes(y = val, fill = metric)) + geom_bar(aes(x = metric), stat = "identity", position=position_dodge()) +
+      xlab("Počet zhlukov") + ylab("Hodnota indexu") + labs(fill = "Veľkosť okna") + ggtitle(graphTitles[[index]]) +
+      theme(
+        plot.title = element_text(hjust = 0.5),
+        panel.grid.major = element_line(colour = "grey", size = 0.5),
+        panel.grid.minor = element_line(color = "grey"),
+        panel.background = element_rect(fill = "white", color = "black"),
+        legend.key = element_rect(colour = "transparent", fill = "white")
+      )
+
     print(plot)
-    Sys.sleep(3)
+    Sys.sleep(2)
     if (save)
-      plotly_IMAGE(plot, format = "png", out_file = paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''))
+      ggsave(paste(pathToFile, '/', actualTime,  '-', index, '-', graphName, '.png', sep = ''), plot, width = 9, height = 3.5)
   }
 }

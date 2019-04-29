@@ -2132,13 +2132,6 @@ vizualizáciu náhodne vybraných odberateľov.
   \end{tabular}
 \end{table}
 
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{sample_plot.png}
-  \caption{Krabicový graf spotreby odberateľov.}
-  \label{fig:whole-plot}
-\end{figure}
-
 \noindent
 Profil spotrebiteľa sa výrazne líši počas pracovných dní a~víkendov, preto je
 celý proces opísaný v~kapitole~\ref{c:solution-design} aplikovaný osobitne na
@@ -2150,21 +2143,12 @@ v~tabuľke~\ref{tab:dataset-statistics}. Štandardná odchýlka pracovných dní
 dňami a~dňami voľna sme vizualizovali spotrebu elektrickej energie rovnakých
 odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
 
-\begin{table}[ht]
+\begin{figure}[htbp]
   \centering
-  \caption{Charakteristiky polohy po rozdelení datasetu.}
-  \label{tab:dataset-statistics}
-  \begin{tabular}{|r|c|c|c|c|}
-    \hline
-					&  \textbf{Pracovné dni}  &	\textbf{Víkendy}	&	\textbf{Sviatky}	&	\textbf{Dni voľna} 	\\ \hline
-		Priemer				&		0.6826072			&		0.6480718				&		0.7035064				&		0.6495951				 	\\ \hline
-		Minimum				&		0							&		0								&		0								&		0								 	\\ \hline
-		Dolný kvantil	&		0.121					&		0.124						&		0.127						&		0.124							\\ \hline
-		Medián				&		0.266					&		0.275						&		0.303						&		0.276							\\ \hline
-		Horný kvantil	&		0.644					&		0.670						&		0.778						&		0.673							\\ \hline
-		Maximum				&		66.815				&		42.326					&		38.530					&		42.326						\\ \hline
-  \end{tabular}
-\end{table}
+  \includegraphics[width=\textwidth]{sample_plot.png}
+  \caption{Krabicový graf spotreby odberateľov.}
+  \label{fig:whole-plot}
+\end{figure}
 
 \begin{figure}[htbp]
   \centering
@@ -2179,6 +2163,22 @@ odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
   \caption{Krabicový graf spotreby odberateľov počas dní voľna.}
   \label{fig:holidays-plot}
 \end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Charakteristiky polohy po rozdelení datasetu.}
+  \label{tab:dataset-statistics}
+  \begin{tabular}{|r|c|c|c|c|}
+    \hline
+					&  \textbf{Pracovné dni}  &	\textbf{Víkendy}	&	\textbf{Sviatky}	&	\textbf{Dni voľna} 	\\ \hline
+		Priemer				&		0.6826072			&		0.6480718				&		0.7035064				&		0.6495951				 	\\ \hline
+		Minimum				&		0							&		0								&		0								&		0								 	\\ \hline
+		Dolný kvantil	&		0.121					&		0.124						&		0.127						&		0.124							\\ \hline
+		Medián				&		0.266					&		0.275						&		0.303						&		0.276							\\ \hline
+		Horný kvantil	&		0.644					&		0.670						&		0.778						&		0.673							\\ \hline
+		Maximum				&		66.815				&		42.326					&		38.530					&		42.326						\\ \hline
+  \end{tabular}
+\end{table}
 
 \subsection{Výber hyperparametrov zhlukovania}
 \label{c:hyperparameter-selection}
@@ -2213,6 +2213,13 @@ priemernú hodnotu Davies-Bouldinovho indexu pre každý zhluk.
   DB = \frac{1}{N} \sum^N_{i = i} max \frac{S_i + S_j}{M_{i, j}} \text{ pre } i \neq j
 \end{equation}
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201904291110-Sil-dtw_basic_workdays_sparse.png}
+  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov pre Silhouetteov index.}
+	\label{fig:cvi-sparse-sil}
+\end{figure}
+
 \noindent
 Hyperparametre sme testovali iba na požadovanom rozmedzí. Veľkosť posuvného okna
 by nemala presahovať 4-5 týždňov, aby okno neobsahovalo sezónnosť jednotlivých
@@ -2226,13 +2233,7 @@ jednotlivými pokusmi je minimálny.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
-  \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov pre Silhouetteov index.}
-	\label{fig:cvi-sparse-sil}
-\end{figure}
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201904291110-DB-dtw_basic_workdays_dense.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov pre Davies-Bouldinov index.}
 	\label{fig:cvi-dense-db}
 \end{figure}
@@ -2246,29 +2247,22 @@ o~kvalite zhlukovania poskytujú práve Silhouetteov index
 a~modifikovaný Davies-Bouldinov index, ktoré autori v~práci~\cite{Arbelaitz2013}
 označili za najkvalitnejšie na základe množstva experimentov na rôznych typoch
 datasetov. Na základe nich sme sa rozhodovali pre najlepšiu vzdialenostnú
-metriku. Metriky sme vizualizovali pomocou grafov~\ref{fig:cvi-metric-sil}
-a~\ref{fig:cvi-metric-dbs}, kde pri Silhouetteovom indexe dosahuje jednoznačne
-najlepšie výsledky GAK a~za ním nasleduje DTW. Pri Davies-Bouldinovom indexe, je
-lepšie zhlukovanie dané nižším skóre, dosahuje lepšie výsledky DTW, tesne za ním
-nasleduje metrika GAK. Medzi najvhodnejšie vzdialenostné metriky pre náš dataset
-preto patrí GAK a~DTW. Pri ďalších experimentoch preto budeme používať najmä
-GAK, ktoré dosahuje pri Silhouetteovom indexe výrazne lepšie výsledky.
-Vzdialenostná metrika je bližšie opísaná
+metriku. Pre Silhouetteov index dosahuje jednoznačne najlepšie výsledky GAK a~za
+ním nasleduje DTW. Pri Davies-Bouldinovom indexe, je lepšie zhlukovanie dané
+nižším skóre, ktoré dosahuje DTW, tesne za ním nasleduje metrika GAK. Medzi
+najvhodnejšie vzdialenostné metriky pre náš dataset preto patrí GAK a~DTW.
+Metriky sme vizualizovali pomocou grafu~\ref{fig:cvi-metric-sil}. Pri ďalších
+experimentoch preto budeme používať najmä GAK, ktoré dosahuje pri Silhouetteovom
+indexe výrazne lepšie výsledky. Vzdialenostná metrika je bližšie opísaná
 v~kapitole~\ref{c:distance-metrics-gak}. Je dôležité poznamenať, že pri rovnakom
 nastavení funkcie, sú výsledky medzi jednotlivými behmi nezávislé a~rôzne.
 Exprimentmi sme však overili, že rozdiely sú štatisticky nevýznamné.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201904291105-Sil-metric_comparison.png}
   \caption{Porovnanie vzdialenostných metrík pomocou Silhouetteovho indexu.}
 	\label{fig:cvi-metric-sil}
-\end{figure}
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
-  \caption{Porovnanie vzdialenostných metrík pomocou Davies-Bouldinovho indexu.}
-	\label{fig:cvi-metric-dbs}
 \end{figure}
 
 \noindent
@@ -2282,9 +2276,9 @@ dňami. Výsledky experimentov nie sú signifikantne rozdielne, preto sme zvolil
 časovo menej náročný výpočet s~posunom po týždňoch. Beh zhlukovania s~dňovým
 posunom trval 5-krát dlhšie oproti týždňovému posunu.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201904291100-Sil-window_comparison.png}
   \caption{Porovnanie veľkostí a~typov posuvných okien pomocou Silhouetteovho indexu.}
 	\label{fig:cvi-window-sil}
 \end{figure}
@@ -2375,14 +2369,14 @@ nachádza extrémne vysoká spotreba. Naopak časový rad na
 obrázku~\ref{fig:results-my-6536} má pomerne pravidelný denný priebeh
 a~anomálnym intervalom je označený deň, ktorého priebeh nie je štandardný.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{results_my_2172.png}
   \caption{Vizualizácia vypočítaného skóre pre odberateľa 2172.}
 	\label{fig:results-my-2172}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=\textwidth]{results_my_6536.png}
   \caption{Vizualizácia vypočítaného skóre pre odberateľa 6536.}
@@ -2494,8 +2488,6 @@ označených ako anomálnych 63.4 odberateľov. Oba časové rady identifikovan�
 metódou S-H-ESD zobrazené na obrázku~\ref{fig:results-twitter} sú označené
 anomálnymi aj FeaClip metódou. Jej nevýhodou však je, že ako anomáliu označí
 celé analyzované posuvné okno.
-
-\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Chapter 5 - Evaluation
@@ -2616,85 +2608,85 @@ najlepšie opisujú kvalitu zhlukovania.
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-Sil-dtw_basic_workdays_sparse.png}
+  \includegraphics[width=0.90\textwidth]{cvi/dtw_basic_workdays_sparse/201904291110-Sil-dtw_basic_workdays_sparse.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-CH-dtw_basic_workdays_sparse.png}
+  \includegraphics[width=0.90\textwidth]{cvi/dtw_basic_workdays_sparse/201904291110-CH-dtw_basic_workdays_sparse.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DB-dtw_basic_workdays_sparse.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201904291110-DB-dtw_basic_workdays_sparse.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201902271850-DBstar-dtw_basic_workdays_sparse.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_sparse/201904291110-DBstar-dtw_basic_workdays_sparse.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-Sil-dtw_basic_workdays_dense.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201904291110-Sil-dtw_basic_workdays_dense.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-CH-dtw_basic_workdays_dense.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201904291110-CH-dtw_basic_workdays_dense.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DB-dtw_basic_workdays_dense.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201904291110-DB-dtw_basic_workdays_dense.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201902271851-DBstar-dtw_basic_workdays_dense.png}
+  \includegraphics[width=\textwidth]{cvi/dtw_basic_workdays_dense/201904291110-DBstar-dtw_basic_workdays_dense.png}
   \caption{Porovnanie veľkosti posuvného okna a~počtu zhlukov (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-Sil-metric_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201904291105-Sil-metric_comparison.png}
   \caption{Porovnanie vzdialenostných metrík (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-CH-metric_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201904291105-CH-metric_comparison.png}
   \caption{Porovnanie vzdialenostných metrík (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DB-metric_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201904291105-DB-metric_comparison.png}
   \caption{Porovnanie vzdialenostných metrík (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/metric_comparison/201902271851-DBstar-metric_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/metric_comparison/201904291105-DBstar-metric_comparison.png}
   \caption{Porovnanie vzdialenostných metrík (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-Sil-window_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201904291100-Sil-window_comparison.png}
   \caption{Porovnanie veľkostí a~typov posuvných okien (Silhouetteov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-CH-window_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201904291100-CH-window_comparison.png}
   \caption{Porovnanie veľkostí a~typov posuvných okien (Calinski-Harabaszov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DBstar-window_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201904291100-DBstar-window_comparison.png}
   \caption{Porovnanie veľkostí a~typov posuvných okien (Davies-Bouldinov index).}
 \end{figure}
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=\textwidth]{cvi/window_comparison/201903072017-DB-window_comparison.png}
+  \includegraphics[width=\textwidth]{cvi/window_comparison/201904291100-DB-window_comparison.png}
   \caption{Porovnanie veľkostí a~typov posuvných okien (Modifikovaný Davies-Bouldinov index).}
 \end{figure}
 
