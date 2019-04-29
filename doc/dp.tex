@@ -531,6 +531,7 @@ problémami~\cite{Chandola2009}:
 	normálne dáta, ktorých identifikácia je následne zložitá.
 \end{description}
 
+\noindent
 Na detekciu anomálií sa bežne používajú algoritmy určené na klasifikáciu, ako je
 napríklad naivný Bayesovský klasifikátor (angl. \textit{Naive Bayes}),
 k-najbližší susedia (angl. \textit{k-nearest neighbors}), rozhodovacie stromy
@@ -569,7 +570,7 @@ susedné inštancie. Nekontextové atribúty, nazývané aj behaviorálne, repre
 meranú veličinu. Napríklad pri meteorologických meraniach, budú informácie
 o~polohe alebo nadmorskej výške predstavovať kontextové atribúty, zatiaľ čo
 množstvo zrážok alebo slnečných hodín budú behaviorálne
-atribúty~\cite{Chandola2009}.
+atribúty~\cite{Song2007}.
 
 Anomálne správanie inštancií je dané behaviorálnymi atribútmi v~určitom kontexte.
 Čiže ak inštancia s~danými behaviorálnymi atribútmi je považovaná za normálnu,
@@ -577,11 +578,10 @@ iná inštancia s~rovnakými behaviorálnymi, ale s~rôznymi kontextovými atrib
 môže byť považovaná za anomáliu. Kontextové anomálie boli najčastejšie
 identifikované v~časových radoch. Príkladom môžu byť opäť transakcie väčšieho
 objemu peňazí, ktoré sú bežné v~období pred Vianocami, ale neštandardné v~inom
-ročnom období~\cite{Chandola2009}.
-
-Zatiaľ čo v~niektorých prípadoch je definovanie kontextu priamočiare, existujú
-domény, kde to jednoduché nie je. Dôležité je aby kontextové atribúty boli
-zmysluplne určené v~cieľovej doméne ich aplikácie~\cite{Chandola2009}.
+ročnom období. Zatiaľ čo v~niektorých prípadoch je definovanie kontextu
+priamočiare, existujú domény, kde to jednoduché nie je. Dôležité je aby
+kontextové atribúty boli zmysluplne určené v~cieľovej doméne ich
+aplikácie~\cite{Chandola2009,Song2007}.
 
 \begin{figure}[htbp]
   \centering
@@ -596,7 +596,7 @@ sekvenciu inštancií, ktorá by pri inom zoradení nepredstavovala anomáliu.
 Taktiež sa jednotlivé inštancie môžu nachádzať v~rozsahu normálnych dát.
 Príkladom môžu byť systémové volania operačného systému, ktoré sú v~prípade
 dodržania určitej postupnosti označené ako činnosť škodlivého
-softvéru~\cite{Chandola2009}.
+softvéru~\cite{Goldberger2000}.
 
 \begin{figure}[H]
   \centering
@@ -613,7 +613,8 @@ v~niektorých datasetoch ani nemusia nachádzať. Problém detekcie bodových
 a~skupinových anomálií je možné transformovať na problém detekcie kontextových
 anomálií, v~prípade, že sa prihliada na kontext jednotlivých inštancií. Techniky
 používané pri detekcii skupinových anomálií sa značne líšia od techník
-používaných pri bodových a~kontextových anomáliách~\cite{Chandola2009}.
+používaných pri bodových a~kontextových
+anomáliách~\cite{Chandola2009,Goldberger2000}.
 
 %-------------------------------------------------------------------------------
 %   Range of occurrences anomalies
@@ -702,13 +703,13 @@ každú dimenziu zvlášť. Metóda je založená na predpoklade, že zatiaľ č
 inštancie sa nachádzajú pri sebe a~sú husto usporiadané, anomálie sú
 vzdialenejšie, prípadne na okraji vzniknutých oblastí. Aplikácia je možná
 pomocou techník založených na relatívnej hustote alebo vzdialenosti najbližších
-\textit{k}~susedných inštancií~\cite{Chandola2009,Tan2005}.
+\textit{k}~susedných inštancií~\cite{Tan2005}.
 
 \subsubsection{Zhlukovanie}
 \label{c:clustering}
 Jedná sa o~učenie bez učiteľa, keďže zhluky inštancií sú vytvorené na základe
 ich vzdialenosti či podobnosti. Techniky ďalej delíme do kategórií na základe
-predpokladu o~dátových inštanciách~\cite{Chandola2009,Tan2005}.
+predpokladu o~dátových inštanciách~\cite{Tan2005}.
 
 Prvá kategória predpokladá, že normálne inštancie patria do zhluku, zatiaľ čo
 anomálne nepatria do žiadneho. Používané sú zhlukovacie algoritmy ako DBSCAN
@@ -1479,6 +1480,7 @@ a~\ref{fig:decrease-total}~\cite{Spiric2015,Trevizan2015}.
 
 \end{figure}
 
+\noindent
 Z~pohľadu výskytu anomálie môžu nastať nasledovné scenáre:
 \begin{itemize}
   \item Anomália vznikne neodborným pripojením odberateľa do energetickej siete alebo existuje ešte pred tým ako, nastane zber dát inteligentnými meračmi.
@@ -2080,6 +2082,7 @@ anomálnosti vyššie, tým je väčšia miera istoty výskytu anomálií.
   \label{fig:heatmap-days}
 \end{figure}
 
+\noindent
 Ako už bolo spomenuté po aplikovaní metódy S-H-ESD na časový rad dostaneme pre
 každé meranie príznak, ktorý označuje anomálie. Časový rad príznakov je často
 zúbkovitý a~označené intervaly obsahujú jediné meranie. Po vyhladení časového
@@ -2238,6 +2241,7 @@ jednotlivými pokusmi je minimálny.
 	\label{fig:cvi-dense-db}
 \end{figure}
 
+\noindent
 Ďalším testovaným hyperparametrom sú použité vzdialenostné metriky, ktoré sú
 implementované v~knižnici
 \textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}.
@@ -2451,6 +2455,7 @@ PCA a~TSNE neposkytuje žiadnu informáciu o~anomálnosti odberateľa.
   \label{fig:twitter-results}
 \end{figure}
 
+\noindent
 Funkcia \textit{AnomalyDetectionTs} očakáva na vstupe časový rad, ktorý obsahuje
 časovú známku a~hodnotu sledovanej veličiny v~danom čase. Nutnou podmienkou je
 dostatočne dlhý časový rad, nad ktorým je spustená identifikácia anomálií. Pri
