@@ -2794,24 +2794,48 @@ Obsah digitálnej časti práce (archív ZIP):
 \dirtree{%
   .1 archív ZIP.
   .2 \textbf{doc}.
+  .3 img.
+  .3 iso-690.
   .3 DP\_MATUS\_CUPER.pdf.
+  .3 dp.tex.
+  .3 bibliography.bib.
   .2 \textbf{src}.
-  .3 aggregators.R.
-  .3 analyzators.R.
-  .3 anomalyDetectors.R.
-  .3 boilerplate.R.
-  .3 filters.R.
-  .3 loaders.R.
-  .3 oneliners.sh.
-  .3 presentation.R.
-  .3 ts-sample-decomposition.R.
+  .3 graphs.
+  .3 server.
+  .3 agg-functions.R.
+  .3 dependencies.R.
+  .3 filter-functions.R.
+  .3 load-functions.R.
+  .3 score-and-visualize-ad.R.
+  .3 score-and-visualize-own.R.
   .3 utilities.R.
-  .3 visualizators.R.
+  .3 utilities.sh.
+  .3 visualize-functions.R.
 }
 
 \begin{description}
-  \item[$\bullet$ doc] dokumentácia, obrázky použité v nej a zdrojové súbory pre LaTeX
-  \item[$\bullet$ src] skripty, prototypy a časti zdrojových kódov, ktoré boli použité pri experimentoch
+  \item[$\bullet$ doc] adresár obsahujúci dokumentáciu k~diplomovej práci
+  \begin{description}
+    \item[-- img] adresár s~obrázkami použitými v~práci
+    \item[-- iso-690] adresár s~formátovaním pre BibTeX
+    \item[-- DP\_MATUS\_CUPER.pdf] PDF dokument diplomovej práce
+    \item[-- dp.tex] zdrojový súbor dokumentácie v~LaTeXu
+    \item[-- bibliography.bib] zdrojový súbor bibliografických odkazov v~BibTeXu
+  \end{description}
+  \item[$\bullet$ src] skripty, vizualizácie a časti zdrojových kódov v~jazyku R použité pri experimentoch
+  \begin{description}
+    \item[-- graphs] adresár obsahujúci skripty vykreslujúce grafy, ktoré sú použité v~práci
+    \item[-- server] adresár obsahuújci skripty, ktoré boli spúšťané na výpočtovom servery
+    \item[-- agg-functions.R] funkcie používané na agregáciu dát
+    \item[-- dependencies.R] skript obsahujúci všetky závislosti projektu
+    \item[-- filter-functions.R] funkcie selektujúce dáta na základe kritérií
+    \item[-- load-functions.R] skripty načítavajúce dáta
+    \item[-- score-and-visualize-ad.R] skript vizualizujúci skórovanie metódy S-H-ESD
+    \item[-- score-and-visualize-own.R] skript vizualizujúci skórovanie nami navrhnutej metódy
+    \item[-- utilities.R] nezaradené funkcie
+    \item[-- utilities.sh] skripty použité pri transformácií vstupných dát
+    \item[-- visualize-functions.R] skript s~vizualizáciami použitými pri experimentoch
+  \end{description}
 \end{description}
 
 Názov odovzdaného archívu: DP\_prilohy\_digital\_cuper.zip

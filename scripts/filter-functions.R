@@ -1,3 +1,4 @@
+# Filter anomalies via suggested method
 filterAnomalies <- function(df, lambda = 1.5) {
   c1 <- quantile(df$sum_1, probs = 0.75) + lambda * IQR(df$sum_1)
   c2 <- quantile(df$sum_1, probs = 0.25) - lambda * IQR(df$sum_1)
@@ -12,6 +13,36 @@ filterAnomalies <- function(df, lambda = 1.5) {
   return(unique(sort(result)))
 }
 
+filterByDay <- function(dataset, selectDays) {
+  if ("day" %in% names(dataset))
+    return(dataset[dataset$day %in% selectDays, ])
+  return(dataset[(as.POSIXlt(dataset$timestamp)$wday + 1) %in% selectDays, ])
+}
+
+filterByHoliday <- function(dataset, isHoliday) {
+  if ("holiday" %in% names(dataset))
+    return(dataset[dataset$holiday == isHoliday, ])
+  return(dataset[(as.POSIXlt(dataset$timestamp)$wday + 1) %in% isHoliday, ])
+}
+
+# Wrapper method for filtering dataset
+filterWeekdays <- function(dataset) {
+  return(filterByDay(dataset, 1:5))
+}
+
+filterWeekends <- function(dataset) {
+  return(filterByDay(dataset, 6:7))
+}
+
+filterWorkdays <- function(dataset) {
+  return(filterByHoliday(dataset, 0))
+}
+
+filterHolidays <- function(dataset) {
+  return(filterByHoliday(dataset, 1))
+}
+
+# Experimental methods
 scoreSuspiciousTS <- function(dataset, minorPenalty = c(0.10)) {
   scores <- list()
   for (i in 1:length(dataset)) {
@@ -45,32 +76,4 @@ filterSuspiciousTS <- function(dataset, columns, q1 = 0.10, q2 = 0.33) {
   quantile2 <- quantile(suspiciousCount, probs = q2)
 
   return(suspiciousTS[table(suspiciousTS) %in% names(suspiciousCount[suspiciousCount < quantile2])])
-}
-
-filterByDay <- function(dataset, selectDays) {
-  if ("day" %in% names(dataset))
-    return(dataset[dataset$day %in% selectDays, ])
-  return(dataset[(as.POSIXlt(dataset$timestamp)$wday + 1) %in% selectDays, ])
-}
-
-filterByHoliday <- function(dataset, isHoliday) {
-  if ("holiday" %in% names(dataset))
-    return(dataset[dataset$holiday == isHoliday, ])
-  return(dataset[(as.POSIXlt(dataset$timestamp)$wday + 1) %in% isHoliday, ])
-}
-
-filterWeekdays <- function(dataset) {
-  return(filterByDay(dataset, 1:5))
-}
-
-filterWeekends <- function(dataset) {
-  return(filterByDay(dataset, 6:7))
-}
-
-filterWorkdays <- function(dataset) {
-  return(filterByHoliday(dataset, 0))
-}
-
-filterHolidays <- function(dataset) {
-  return(filterByHoliday(dataset, 1))
 }
