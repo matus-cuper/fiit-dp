@@ -990,7 +990,6 @@ použitú škálu v~dátach. Pri porovnávaní časových radov nás spravidla z
 zmena krivky časového radu a~rovnaká dĺžka porovnávaných časových
 radov~\cite{Dzeroski2007,WarrenLiao2005}.
 
-% TODO explain different approaches add figure from real dataset
 Metódy používané na meranie vzdialenosti medzi časovými radmi môžeme rozdeliť do
 3~skupín založených na atribútoch, na modeloch a~na tvare krivky. Pri
 atribútových metódach je pre každý časový rad vypočítaný atribútový vektor, na
@@ -1578,7 +1577,6 @@ sa v~rovnakom zhluku pri rôznych zhlukovaniach \textit{X} a~\textit{Y} sa
 nachádzajú v~kategórií \textit{true positive}~\cite{Bilgic2018}.
 
 \begin{table}[htbp]
-  % TODO: move to another page or down
 	\centering
 	\caption{Validačná matica zhlukovania časových radov}
 	\label{tab:validation-matrix}
@@ -1750,11 +1748,6 @@ a~lokalizovať intervaly s~neštandardným správaním odberateľa. Musíme pri 
 brať ohľad najmä na cyklus dní a~týždňov, no zároveň pristupovať k~zvykom
 odberateľov jednotlivo a~zvážiť ich pri označovaní anomálneho intervalu.
 
-% Zvýšiť presnosť odhaľovania anomálií je možné aj osobitným prístupom
-% k~jednotlivým odberateľom. Práve vďaka identifikácií zlomov v~časových radoch je
-% možné presnejšie určiť správanie odberateľa. Zároveň algoritmus poskytuje ďalší
-% mechanizmus na určovanie intervalu, v~ktorom sa mení správanie odberateľa, ktoré
-% môžeme považovať za anomáliu.
 
 Výstupom opísaného procesu sú podozrivé a~anomálne časové rady a~jednotlivé
 merania v~nich, ktoré sú taktiež považované za anomálie. Na výstupe sa môže
@@ -2071,7 +2064,7 @@ spracovať časové rady s~dvojitou sezónnosťou.
 Dosiahnuté výsledky bez aplikovania S-H-ESD sú agregované v~rámci jedného
 posuvného okna, čiže vytvorené skóre okna je rovnaké. Je možné ho spriemerovať
 s~prekrývajúcimi sa oknami, no ak by bola veľkosť prekryvu príliš malá, nárast
-časovej a~pamäťovej zložitosti by bol niekoľko násobný. Pri zmenšení veľkosti
+časovej a~pamäťovej zložitosti by bol niekoľkonásobný. Pri zmenšení veľkosti
 prekryvu na hodiny je výpočet dokonca rádovo náročnejší. Z~toho dôvodu je
 zhlukovanie časových radov realizované pomocou posuvných okien, ktorých veľkosť
 je vždy niekoľko týždňov. Pri vizualizácií výsledkov pomocou tepelnej mapy,
@@ -2187,82 +2180,6 @@ odberateľov grafmi~\ref{fig:workdays-plot} a~\ref{fig:holidays-plot}.
   \label{fig:holidays-plot}
 \end{figure}
 
-\subsection{Porovnanie existujúcich riešení}
-Experimenty, ktoré sme vykonali sme porovnávali s~existujúcou implementáciou
-metódy S-H-ESD, ktorá sa nachádza v~balíčku
-\textit{AnomalyDetection}~\footnote{https://github.com/twitter/AnomalyDetection}.
-Autori ju bližšie opísali v~práci~\cite{Hochenbaum2014}. Rovnako sme výsledky
-porovnávali aj s~metódou FeaClip, ktorú navrhli autori
-v~práci~\cite{Laurinec2018}.
-
-\subsubsection{Identifikácia anomálií metódou S-H-ESD}
-Vstupnými parametrami metódy je hladina významnosti, na ktorej je hypotéza
-o~anomálnosti inštancie zamietaná, typ anomálie (kladná alebo záporná)
-a~maximálny počet anomálií v~danom datasete. Vďaka robustnosti metódy S-H-ESD,
-je možné identifikovať až 50\% anomálií, preto sme sa rozhodli toto nastavenie
-ponechať a~upraviť iba hladinu významnosti na $\alpha = 0.001$. Pri
-experimentoch bola priemerná doba spracovania jedného odberateľa 63.24 sekúnd so
-štandardnou odchýlkou 1.8 sekundy. Najrýchlejšie spracovanie trvalo presne
-minútu, najpomalšie 70 sekúnd. Priemerný počet identifikovaných anomálií je
-14.11\%. V~prípade, že sme ako anomálnych označili tých odberateľov, ktorých
-počet identifikovaných anomálií nespĺňa medzikvartilové pravidlo, čiže nespadá
-do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
-z~celkového počtu odberateľov. Opäť sme uvažovali iba odberateľov, ktorých skóre
-nespĺňa hornú hranicu pravidla, nakoľko nás nezaujímajú štandardný odberatelia.
-Výsledky sme vizualizovali pomocou transformácie FeaClip a~sú zobrazené na
-obrázku~\ref{fig:twitter-results}. V~prvom riadku sú výsledky funkcie
-\textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov, v~druhom riadku sú
-výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov.
-Anomálne inštancie sa obvykle nachádzajú na okraji zhlukov, no nie je to
-pravidlom. Pri vizualizácií vysokodimenzionálnych dát často nie je možné
-jednoznačne určiť dostatočne reprezentatívne atribúty a~z~toho dôvodu nám metóda
-PCA a~TSNE neposkytuje žiadnu informáciu o~anomálnosti odberateľa.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{twitter_visualization.png}
-  \caption[Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD.]{Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD, hore \textit{AnomalyDetectionTs}, dole \textit{AnomalyDetectionVec}}
-  \label{fig:twitter-results}
-\end{figure}
-
-Funkcia \textit{AnomalyDetectionTs} očakáva na vstupe časový rad, ktorý obsahuje
-časovú známku a~hodnotu sledovanej veličiny v~danom čase. Nutnou podmienkou je
-dostatočne dlhý časový rad, nad ktorým je spustená identifikácia anomálií. Pri
-experimentoch, kedy bola analyzovaná iba časť časového radu je kvôli tomu nutné
-zvoliť obdobie aspoň 9~týždňov. Pre funkciu \textit{AnomalyDetectionVec}
-používateľ parametrami definuje krátkodobú a~dlhodobú periódu dát a~spomínané
-obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
-časového radu, tak aj pri čiastkových analýzach, čo môže prispieť k~rýchlosti
-identifikácie anomálií.
-
-Vizualizované výsledky môžeme vidieť na obrázku~\ref{fig:results-twitter}.
-Z~oboch je zrejmé, že anomálnymi meraniami sú označené merania, ktorých hodnota
-je lokálnym extrémom. Pri dolnom obrázku odberateľa 6536 je tak označená časť
-takmer každého dňa pozorovaného intervalu, hoc môžeme vidieť, že existuje určitá
-pravidelnosť v~spotrebe elektrickej energie.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{results_twitter.png}
-  \caption[Vizualizácia S-H-ESD skóre odberateľov.]{Vizualizácia S-H-ESD skóre odberateľov, hore 2172, dole 6536.}
-  \label{fig:results-twitter}
-\end{figure}
-
-\subsubsection{Identifikácia anomálií metódou FeaClip}
-Jediným vstupným parametrom metódy je postupnosť meraní, nad ktorou je vykonaný
-výpočet. Metóda je extrémne rýchla, odberateľa transformuje a~aplikuje
-medzikvartilové pravidlo primerne za 0.0197 sekundy. Za anomálnych je však
-označených až tretina odberateľov na celom pozorovanom intervale. Kvôli tomu je
-nutné vykonať transformáciu iba nad posuvným oknom, ktorého výsledky sú
-agregované a~je naň aplikované medzikvartilové pravidlo na identifikáciu
-anomálií. Výpočet sa tak predĺži na 0.4605 sekundy pre každého odberateľa. Počet
-identifikovaných anomálnych odberateľov sa snížil približne na 2.66\%, pri
-výbere 10\% najčastejšie označovaných odberateľov. Priemerne je v~každom okne
-označených ako anomálnych 63.4 odberateľov. Oba časové rady identifikované
-metódou S-H-ESD zobrazené na obrázku~\ref{fig:results-twitter} sú označené
-anomálnymi aj FeaClip metódou. Jej nevýhodou však je, že ako anomáliu označí
-celé analyzované posuvné okno.
-
 \subsection{Výber hyperparametrov zhlukovania}
 \label{c:hyperparameter-selection}
 Zhlukovacie metódy poskytujú viacero parametrov, ktoré ovplyvňujú výsledné
@@ -2320,7 +2237,6 @@ jednotlivými pokusmi je minimálny.
 	\label{fig:cvi-dense-db}
 \end{figure}
 
-\noindent
 Ďalším testovaným hyperparametrom sú použité vzdialenostné metriky, ktoré sú
 implementované v~knižnici
 \textit{dtwclust}~\footnote{https://CRAN.R-project.org/package=dtwclust}.
@@ -2405,7 +2321,7 @@ správnu voľbu hyperparametrov zhlukovacieho algoritmu.
 	\label{fig:clustering-workdays}
 \end{figure}
 
-\subsection{Porovnanie navrhovanej metódy s~existujúcimi riešeniami}
+\subsection{Vyhodnotenie navrhovanej metódy}
 Prvým krokom nami navrhnutej metódy je predspracovanie a~normalizácia dát, kedy
 sú dáta normalizované a~následne rozdelené na dve skupiny. Prvá skupina obsahuje
 pracovné dni v~týždni, druhá skupiny dni voľna, čiže sviatky a~víkendy.
@@ -2483,7 +2399,101 @@ sekundy dlhšia ako pri metóde S-H-ESD, ktorej to zaberie priemerne 63.24
 sekúnd. Dôležité je poznamenať, že zatiaľ čo pri metóde S-H-ESD je potrebné
 analyzovať všetky časové rady, pri nami navrhovanej metóde je nutné aplikovať
 na celý dataset iba zhlukovanie. Priemerný čas výpočtu na odberateľa je pritom
-iba 14.79 sekundy.
+iba 14.79 sekundy. Z~uvedených výsledkov je možné vyhodnotiť, že metóda je
+schopná identifikovať anomálne intervaly, ktoré sa svojou charakteristikou líšia
+od predchádzajúcich periód. Môže sa pritom jednať o~opakujúce sa anomálie, no
+zároveň predstavuje vhodné riešenie identifikácie skokových anomálií.
+
+\subsection{Porovnanie existujúcich riešení}
+Experimenty, ktoré sme vykonali sme porovnávali s~existujúcou implementáciou
+metódy S-H-ESD, ktorá sa nachádza v~balíčku
+\textit{AnomalyDetection}~\footnote{https://github.com/twitter/AnomalyDetection}.
+Autori ju bližšie opísali v~práci~\cite{Hochenbaum2014}. Rovnako sme výsledky
+porovnávali aj s~metódou FeaClip, ktorú navrhli autori
+v~práci~\cite{Laurinec2018}. Výsledky porovnania sa nachádzajú
+v~tabuľke~\ref{tab:existing-solutions}.
+
+\begin{table}[ht]
+  \centering
+  \caption{Porovnanie výsledkov spracovania existujúcich riešení.}
+  \label{tab:existing-solutions}
+  \begin{tabular}{|l|c|c|}
+    \hline
+    &   \shortstack{\textbf{Priemerná doba} \\ \textbf{spracovania jedného} \\  \textbf{odberateľa}}  &   \shortstack{\textbf{Počet identifikovaných} \\ \textbf{odberateľov}}  \\ \hline
+    S-H-ESD \textit{AnomalyDetectionTs}     &   63.24 sekúnd                      &       3.05 \%        \\ \hline
+    S-H-ESD \textit{AnomalyDetectionVec}    &   12.31 sekúnd                      &       2.27 \%        \\ \hline
+    FeaClip                                 &   0.0197 sekúnd                     &       34.83 \%       \\ \hline
+    FeaClip agregované                      &   0.4605 sekúnd                     &       2.66 \%        \\ \hline
+  \end{tabular}
+\end{table}
+
+\subsubsection{Identifikácia anomálií metódou S-H-ESD}
+Vstupnými parametrami metódy je hladina významnosti, na ktorej je hypotéza
+o~anomálnosti inštancie zamietaná, typ anomálie (kladná alebo záporná)
+a~maximálny počet anomálií v~danom datasete. Vďaka robustnosti metódy S-H-ESD,
+je možné identifikovať až 50\% anomálií, preto sme sa rozhodli toto nastavenie
+ponechať a~upraviť iba hladinu významnosti na $\alpha = 0.001$. Pri
+experimentoch bola priemerná doba spracovania jedného odberateľa 63.24 sekúnd so
+štandardnou odchýlkou 1.8 sekundy. Najrýchlejšie spracovanie trvalo presne
+minútu, najpomalšie 70 sekúnd. Priemerný počet identifikovaných anomálií je
+14.11\%. V~prípade, že sme ako anomálnych označili tých odberateľov, ktorých
+počet identifikovaných anomálií nespĺňa medzikvartilové pravidlo, čiže nespadá
+do intervalu $<Q1 - 1.5 * IQR, Q3 + 1.5 * IQR>$, ich počet bol približne 2-3\%
+z~celkového počtu odberateľov. Opäť sme uvažovali iba odberateľov, ktorých skóre
+nespĺňa hornú hranicu pravidla, nakoľko nás nezaujímajú štandardný odberatelia.
+Výsledky sme vizualizovali pomocou transformácie FeaClip a~sú zobrazené na
+obrázku~\ref{fig:twitter-results}. V~prvom riadku sú výsledky funkcie
+\textit{AnomalyDetectionTs} s~3.05\% anomálnych odberateľov, v~druhom riadku sú
+výsledky funkcie \textit{AnomalyDetectionVec} s~2.27\% anomálnych odberateľov.
+Anomálne inštancie sa obvykle nachádzajú na okraji zhlukov, no nie je to
+pravidlom. Pri vizualizácií vysokodimenzionálnych dát často nie je možné
+jednoznačne určiť dostatočne reprezentatívne atribúty a~z~toho dôvodu nám metóda
+PCA a~TSNE neposkytuje žiadnu informáciu o~anomálnosti odberateľa.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{twitter_visualization.png}
+  \caption[Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD.]{Vizualizácia všetkých odberateľov, anomálie identifikované pomocou S-H-ESD, hore \textit{AnomalyDetectionTs}, dole \textit{AnomalyDetectionVec}}
+  \label{fig:twitter-results}
+\end{figure}
+
+Funkcia \textit{AnomalyDetectionTs} očakáva na vstupe časový rad, ktorý obsahuje
+časovú známku a~hodnotu sledovanej veličiny v~danom čase. Nutnou podmienkou je
+dostatočne dlhý časový rad, nad ktorým je spustená identifikácia anomálií. Pri
+experimentoch, kedy bola analyzovaná iba časť časového radu je kvôli tomu nutné
+zvoliť obdobie aspoň 9~týždňov. Pre funkciu \textit{AnomalyDetectionVec}
+používateľ parametrami definuje krátkodobú a~dlhodobú periódu dát a~spomínané
+obmedzenie neexistuje. Navyše výsledky sú rovnaké ako pri analýze celého
+časového radu, tak aj pri čiastkových analýzach, čo môže prispieť k~rýchlosti
+identifikácie anomálií.
+
+Vizualizované výsledky môžeme vidieť na obrázku~\ref{fig:results-twitter}.
+Z~oboch je zrejmé, že anomálnymi meraniami sú označené merania, ktorých hodnota
+je lokálnym extrémom. Pri dolnom obrázku odberateľa 6536 je tak označená časť
+takmer každého dňa pozorovaného intervalu, hoc môžeme vidieť, že existuje určitá
+pravidelnosť v~spotrebe elektrickej energie.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{results_twitter.png}
+  \caption[Vizualizácia S-H-ESD skóre odberateľov.]{Vizualizácia S-H-ESD skóre odberateľov, hore 2172, dole 6536.}
+  \label{fig:results-twitter}
+\end{figure}
+
+\subsubsection{Identifikácia anomálií metódou FeaClip}
+Jediným vstupným parametrom metódy je postupnosť meraní, nad ktorou je vykonaný
+výpočet. Metóda je extrémne rýchla, odberateľa transformuje a~aplikuje
+medzikvartilové pravidlo primerne za 0.0197 sekundy. Za anomálnych je však
+označených až tretina odberateľov na celom pozorovanom intervale. Kvôli tomu je
+nutné vykonať transformáciu iba nad posuvným oknom, ktorého výsledky sú
+agregované a~je naň aplikované medzikvartilové pravidlo na identifikáciu
+anomálií. Výpočet sa tak predĺži na 0.4605 sekundy pre každého odberateľa. Počet
+identifikovaných anomálnych odberateľov sa snížil približne na 2.66\%, pri
+výbere 10\% najčastejšie označovaných odberateľov. Priemerne je v~každom okne
+označených ako anomálnych 63.4 odberateľov. Oba časové rady identifikované
+metódou S-H-ESD zobrazené na obrázku~\ref{fig:results-twitter} sú označené
+anomálnymi aj FeaClip metódou. Jej nevýhodou však je, že ako anomáliu označí
+celé analyzované posuvné okno.
 
 \newpage\null\thispagestyle{empty}\newpage
 
@@ -2508,7 +2518,7 @@ rýchla adaptácia na zmenu v~prostredí. Zhlukovanie bolo validované pomocou
 zhlukovacích validačných indexov. Anomálnosť intervalu a~merania je určená na
 základe skórovania, ktoré vychádza zo spomínaného zhlukovania a~štatistickej
 metódy S-H-ESD, ktorá je primárne určená na identifikáciu anomálií.
-Pri~experimentoch však nedosahuje postačujúce výsledky a~často dochádza
+Pri~experimentoch však S-H-ESD nedosahuje postačujúce výsledky a~často dochádza
 k~falošne pozitívnym označeniam anomálií. Pridaním zhlukovania sme sa snažili
 zredukovať takéto prípady a~docieliť presnejšiu identifikáciu anomálií.
 
@@ -2525,10 +2535,11 @@ pomocou vhodne aplikovaných grafov.
 
 Experimentmi sme overili nami navrhnuté riešenie a~výsledky sme vhodne
 vizualizovali a~následne porovnali s~existujúcimi metódami. Na základe výberu
-náhodnej vzorky časových radov môžeme zhodnotiť zrýchlenie výpočtu a~pri
-niektorých inštanciách aj dosiahnutie lepších výsledkov. Pod tým môžeme
-rozumieť identifikovanie anomálneho intervalu namiesto jednotlivých hodnôt, ale
-aj zredukovanie falošne pozitívnych hlásení.
+náhodnej vzorky časových radov môžeme zhodnotiť až štvornásobné zrýchlenie
+výpočtu a~zároveň spresnenie výskytu anomálnych intervalov. Pri niektorých
+inštanciách sa jedná aj o~dosiahnutie lepších výsledkov. Pod tým môžeme rozumieť
+identifikovanie anomálneho intervalu namiesto jednotlivých hodnôt, ale aj
+zredukovanie falošne pozitívnych hlásení.
 
 %-------------------------------------------------------------------------------
 %   Chapter 6 - Bibliography
@@ -2538,7 +2549,6 @@ aj zredukovanie falošne pozitívnych hlásení.
 \addcontentsline{toc}{section}{Literatúra}
 \bibliographystyle{iso-690/slovakiso}
 \bibliography{bibliography}
-\newpage\null\thispagestyle{empty}\newpage
 
 %-------------------------------------------------------------------------------
 %   Appendix
@@ -2588,6 +2598,8 @@ Použité knižnice s~verziami sú zobrazené pomocou tabuľky~\ref{tab:librarie
   \end{tabular}
 \end{table}
 
+\newpage\null\thispagestyle{empty}\newpage
+
 %-------------------------------------------------------------------------------
 %   Appendix - Experiments
 %-------------------------------------------------------------------------------
@@ -2597,7 +2609,10 @@ Použité knižnice s~verziami sú zobrazené pomocou tabuľky~\ref{tab:librarie
 \label{c:clustering-hyperparameters-experiments}
 Každý index obsahuje aj informáciu o~jeho optimálnych hodnotách. Pri indexoch,
 ktoré obsahujú $(max.)$ znamenajú väčšie hodnoty lepšie výsledné zhlukovanie.
-Pri indexoch s~$(min.)$ nižšie hodnoty znamenajú lepšie výsledky zhlukovania.
+Pri indexoch s~$(min.)$ sú za lepšie výsledky zhlukovania považované nižšie
+hodnoty. Indexy, ktorých výsledky boli veľmi podobné sme pri rozhodovaní
+vynechali, používali sme najmä Silhouetteov a~Davies-Bouldinov index, ktoré
+najlepšie opisujú kvalitu zhlukovania.
 
 \begin{figure}[htbp]
   \centering
