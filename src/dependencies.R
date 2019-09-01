@@ -15,6 +15,7 @@ if (!require("plotly")) install.packages("plotly")
 if (!require("rngtools")) install.packages("rngtools")
 if (!require("Rtsne")) install.packages("Rtsne")
 if (!require("scales")) install.packages("scales")
+if (!require("smooth")) install.packages("smooth")
 if (!require("stringr")) install.packages("stringr")
 if (!require("tidyquant")) install.packages("tidyquant")
 if (!require("TSrepr")) install.packages("TSrepr")
@@ -34,11 +35,11 @@ MPD <- 48
 WEEK <- 7
 
 
-source("~/r/fiit-dp/scripts/agg-functions.R")
-source("~/r/fiit-dp/scripts/filter-functions.R")
-source("~/r/fiit-dp/scripts/load-functions.R")
-source("~/r/fiit-dp/scripts/utilities.R")
-source("~/r/fiit-dp/scripts/visualize-functions.R")
+source("~/r/fiit-dp/src/agg-functions.R")
+source("~/r/fiit-dp/src/filter-functions.R")
+source("~/r/fiit-dp/src/load-functions.R")
+source("~/r/fiit-dp/src/utilities.R")
+source("~/r/fiit-dp/src/visualize-functions.R")
 
 prepareDataset <- function(dataDir = "~/data/load/") {
   # Prepare dataset
