@@ -38,10 +38,11 @@ for (my.col in 1:(WEEKS - 1)) {
 
 
 my.df <- my.df[my.df$timestamp > "2009-07-31 23:59:59", ]
+my.df <- my.df[my.df$timestamp > "2009-12-31 23:59:59", ]
 
 my.df$weekday <- as.POSIXlt(my.df$timestamp)$wday
-my.df$weekdayFactor <- factor(lubridate::wday(my.df$timestamp, week_start = 1), levels = rev(1:7), labels = rev(c("Po", "Ut", "St", "Št", "Pi", "So", "Ne")), ordered = TRUE)
-my.df$monthFactor <- factor(month(my.df$timestamp), levels = as.character(1:12), labels = c("Jan", "Feb", "Mar", "Apr", "Máj", "Jún", "Júl", "Aug", "Sep", "Okt", "Nov", "Dec"), ordered = TRUE)
+my.df$weekdayFactor <- factor(lubridate::wday(my.df$timestamp, week_start = 1), levels = rev(1:7), labels = rev(c("Mo", "Tu", "We", "Th", "Fr", "Sa", "Su")), ordered = TRUE)
+my.df$monthFactor <- factor(month(my.df$timestamp), levels = as.character(1:12), labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"), ordered = TRUE)
 my.df$yearMonth <- factor(as.yearmon(my.df$timestamp))
 my.df$week <- as.numeric(format(as.POSIXct(my.df$timestamp), "%W"))
 my.plotData <- ddply(my.df, .(yearMonth), transform, monthWeek = 1 + week - min(week))
@@ -50,8 +51,11 @@ ggplot(my.plotData, aes(monthWeek, weekdayFactor, fill = my.plotData$score)) +
   geom_tile(colour = "white") + 
   facet_grid(year(my.plotData$timestamp) ~ monthFactor) + 
   scale_fill_gradient(low = "white", high = "red") + 
-  xlab("Týždeň mesiaca") + ylab("Dni v týždni") + labs(fill = "Skóre") +
+  xlab("Week of the month") + ylab("Day of the week") + labs(fill = "Score") +
   theme(
+    text = element_text(size = 16),
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
     panel.grid.major = element_line(colour = "grey", size = 0.5),
     panel.grid.minor = element_line(color = "grey"),
     panel.background = element_rect(fill = "white", color = "black")

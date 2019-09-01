@@ -50,9 +50,10 @@ my.df$hm <- format(as.POSIXct(my.df$timestamp), "%H:%M")
 my.lab <- with(my.df, paste(format(as.POSIXct(my.df$timestamp), "%H"), "00", sep = ":"))
 
 ggplot(data = my.df[1:2976, ], aes(x = date, y = hm, fill = final)) + geom_tile() +
-  xlab("Dátum") + ylab("Hodina") + labs(fill = "Skóre") +
+  xlab("Date") + ylab("Hour") + labs(fill = "Score") +
   scale_fill_gradient(low = "white", high="red") +
-  scale_y_discrete(breaks = my.lab) +
+  scale_y_discrete(breaks = c("00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00")) +
   theme(
+    text = element_text(size = 14),
     panel.background = element_rect(fill = "white", color = "black")
   )

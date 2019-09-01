@@ -7,7 +7,7 @@ boxPlotData <- data.frame(
   "consumer" = c(rep("3727", nrow(df.3727$dataset)), rep("6998", nrow(df.6998$dataset)), rep("7422", nrow(df.7422$dataset)))
 )
 p1 <- ggboxplot(boxPlotData, x = "consumer", y = "load", color = "consumer") +
-  xlab("Identifikátor spotrebiteľa") + ylab("Spotreba elektrickej energie v kW") +
+  xlab("Consumer ID") + ylab("Electricity consumption in kW") +
   theme(
     legend.position = "none",
     panel.background = element_rect(fill = "white", color = "black")
@@ -24,7 +24,7 @@ p2 <- ggplot(plotData, aes(id - 1)) +
   geom_line(aes(y = X3727, color = hue_pal()(3)[2]), size = 1) +
   geom_line(aes(y = X6998, color = hue_pal()(3)[3]), size = 1) +
   geom_line(aes(y = X7422, color = hue_pal()(3)[1]), size = 1) +
-  xlab("Identifikátor spotrebiteľa") +
+  xlab("Hour of day") +
   theme(
     legend.position = "none",
     axis.title.y = element_blank(),

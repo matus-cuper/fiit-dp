@@ -14,10 +14,14 @@ n <- 4
 # )
 #
 # save(df, file = "./graphs-clustering-score.rda")
-
+load(file = "r/fiit-dp/src/graphs/graphs-clustering-score.rda")
 load(file = "./graphs-clustering-score.rda")
+
+#
+df[df$y > 10, 'y'] <- df[df$y > 10, 'y'] - 10
+
 df.centroids <- aggregate(. ~ groups, df, mean)
-df.centroids$label <- c("Majoritný zhluk", "Majoritný zhluk", "Minoritný zhluk")
+df.centroids$label <- c("Major cluster", "Major cluster", "Minor cluster")
 
 ggplot(df, aes(x = x - 6, y = y - 10, colour = groups)) +
   xlab("PCA1") + ylab("PCA2") + labs(color = "ID zhluku") +
@@ -31,10 +35,12 @@ ggplot(df, aes(x = x - 6, y = y - 10, colour = groups)) +
   geom_segment(x = df[43, "x"] - 6, xend = df[54, "x"] - 6, y = df[43, "y"] - 10, yend = df[54, "y"] - 10, colour = "#777777", arrow = arrow(length = unit(0.3, "cm"), type = "closed", angle = 20), size = 0.2) +
   geom_segment(x = df[43, "x"] - 6, xend = df[46, "x"] - 6, y = df[43, "y"] - 10, yend = df[46, "y"] - 10, colour = "#777777", arrow = arrow(length = unit(0.3, "cm"), type = "closed", angle = 20), size = 0.2) +
   geom_point(size = 2) +
-  geom_label(aes(x = df.centroids$x[1] - 8, y = df.centroids$y[1] - 11, label = df.centroids$label[1])) +
-  geom_label(aes(x = df.centroids$x[2] - 8, y = df.centroids$y[2] - 11, label = df.centroids$label[2])) +
-  geom_label(aes(x = df.centroids$x[3] - 8, y = df.centroids$y[3] - 11, label = df.centroids$label[3])) +
+  geom_label(aes(x = df.centroids$x[1] - 8, y = df.centroids$y[1] - 11, label = df.centroids$label[1], size = 3)) +
+  geom_label(aes(x = df.centroids$x[2] - 8, y = df.centroids$y[2] - 11, label = df.centroids$label[2], size = 3)) +
+  geom_label(aes(x = df.centroids$x[3] - 8, y = df.centroids$y[3] - 11, label = df.centroids$label[3], size = 3)) +
   theme(
+    axis.text = element_text(size = 14),
+    axis.title = element_text(size = 16),
     panel.grid.major = element_line(colour = "grey", size = 0.5),
     panel.grid.minor = element_line(color = "grey"),
     panel.background = element_rect(fill = "white", color = "black"),
